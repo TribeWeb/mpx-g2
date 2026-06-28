@@ -5,18 +5,18 @@ export default defineNuxtConfig({
     '@nuxt/ui'
   ],
 
-  devtools: {
-    enabled: true
-  },
-
-  css: ['~/assets/css/main.css'],
-
   components: [
     {
       path: '~/components',
       pathPrefix: false
     }
   ],
+
+  devtools: {
+    enabled: true
+  },
+
+  css: ['~/assets/css/main.css'],
 
   runtimeConfig: {
   // Server-only: set MPX_G2_MIDI_BRIDGE_PORT to override the WebSocket port

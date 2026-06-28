@@ -27,8 +27,8 @@ shared/
 ## Getting started
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). The MIDI bridge starts automatically on `ws://localhost:3101`.
@@ -37,11 +37,11 @@ Open [http://localhost:3000](http://localhost:3000). The MIDI bridge starts auto
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start Nuxt dev server + MIDI bridge |
-| `npm run build` | Production build |
-| `npm run preview` | Preview production build |
-| `npm run typecheck` | TypeScript check |
-| `npm run lint` | ESLint |
+| `pnpm run dev` | Start Nuxt dev server + MIDI bridge |
+| `pnpm run build` | Production build |
+| `pnpm run preview` | Preview production build |
+| `pnpm run typecheck` | TypeScript check |
+| `pnpm run lint` | ESLint |
 
 ## Architecture
 
