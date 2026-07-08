@@ -5,15 +5,19 @@ useSeoMeta({
   title: `Front Panel · ${config.public.appName}`
 })
 
-const { connect } = useMidiBridge()
+const { connect, mode } = useMidiConnection()
 
 onMounted(() => {
-  connect()
+  if (mode.value === 'simulated') {
+    connect()
+  }
 })
 </script>
 
 <template>
-  <UContainer class="py-8">
-    <MpxG2Panel />
-  </UContainer>
+  <div class="bg-neutral-950 py-8">
+    <UContainer>
+      <PanelWrapper />
+    </UContainer>
+  </div>
 </template>

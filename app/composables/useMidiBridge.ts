@@ -12,6 +12,8 @@ export function useMidiBridge() {
 
   const status = useState<MidiBridgeConnectionStatus>('midi-bridge-status', () => 'disconnected')
   const error = useState<string | null>('midi-bridge-error', () => null)
+  const deviceMode = useState<'simulated' | 'hardware' | null>('midi-device-mode', () => null)
+  const deviceName = useState<string | null>('midi-device-name', () => null)
   const panelState = useState<MpxG2PanelState>('midi-panel-state', () => createEmptyPanelState())
 
   let socket: WebSocket | null = null
@@ -23,6 +25,8 @@ export function useMidiBridge() {
         status.value = 'connected'
         error.value = null
         panelState.value.connected = true
+        deviceMode.value = message.deviceMode ?? null
+        deviceName.value = message.deviceName ?? null
         break
       case 'disconnected':
         status.value = 'disconnected'
@@ -128,6 +132,8 @@ export function useMidiBridge() {
   return {
     status: readonly(status),
     error: readonly(error),
+    deviceMode: readonly(deviceMode),
+    deviceName: readonly(deviceName),
     panelState: readonly(panelState),
     connect,
     disconnect,

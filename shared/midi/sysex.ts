@@ -2,6 +2,7 @@ import {
   DEFAULT_DEVICE_ID,
   LEXICON_MANUFACTURER_ID,
   MPX_G2_PRODUCT_ID,
+  MPX_G2_PRODUCT_IDS,
   type HandshakeCommandValue,
   type SysExMessageTypeValue
 } from '../types/midi'
@@ -36,38 +37,55 @@ export function denibblize(bytes: number[]): number[] {
 
 export interface SysExHeaderOptions {
   deviceId?: number
+  productId?: number
   messageType: SysExMessageTypeValue
 }
 
 /** Build the standard Lexicon MPX-G2 SysEx header. */
 export function buildSysExHeader({
   deviceId = DEFAULT_DEVICE_ID,
+  productId = MPX_G2_PRODUCT_ID,
   messageType
 }: SysExHeaderOptions): number[] {
-  return [SYSEX_START, LEXICON_MANUFACTURER_ID, MPX_G2_PRODUCT_ID, deviceId, messageType]
+  return [SYSEX_START, LEXICON_MANUFACTURER_ID, productId, deviceId, messageType]
+}
+
+export interface MpxG2SysExOptions {
+  deviceId?: number
+  productId?: number
 }
 
 /** Build a handshake SysEx message. */
 export function buildHandshakeMessage(
   command: HandshakeCommandValue,
-  deviceId = DEFAULT_DEVICE_ID
+  options: MpxG2SysExOptions = {}
 ): Uint8Array {
+  const { deviceId = DEFAULT_DEVICE_ID, productId = MPX_G2_PRODUCT_ID } = options
   return new Uint8Array([
-    ...buildSysExHeader({ deviceId, messageType: 0x12 }),
+    ...buildSysExHeader({ deviceId, productId, messageType: 0x12 }),
     command,
     SYSEX_END
   ])
 }
 
-/** Build a panel button press SysEx data message (stub — address mapping TBD). */
+/** Build a panel button press SysEx data message. */
 export function buildPanelButtonMessage(
   buttonValue: number,
-  deviceId = DEFAULT_DEVICE_ID
+  options: MpxG2SysExOptions = {}
 ): Uint8Array {
-  const payload = nibblize([buttonValue])
+  const { deviceId = DEFAULT_DEVICE_ID, productId = MPX_G2_PRODUCT_ID } = options
+  const controlLevels = [1, 8, 0]
+  const numBytes = nibblize([0x01, 0x00])
+  const data = nibblize([buttonValue])
+  const numLevels = nibblize([0x03, 0x00])
+  const address = nibblize(controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff]))
+
   return new Uint8Array([
-    ...buildSysExHeader({ deviceId, messageType: 0x01 }),
-    ...payload,
+    ...buildSysExHeader({ deviceId, productId, messageType: 0x01 }),
+    ...numBytes,
+    ...data,
+    ...numLevels,
+    ...address,
     SYSEX_END
   ])
 }
@@ -83,7 +101,11 @@ export function parseMpxG2SysEx(data: number[] | Uint8Array): {
     return null
   }
 
-  if (bytes[1] !== LEXICON_MANUFACTURER_ID || bytes[2] !== MPX_G2_PRODUCT_ID) {
+  if (bytes[1] !== LEXICON_MANUFACTURER_ID) {
+    return null
+  }
+
+  if (!MPX_G2_PRODUCT_IDS.includes(bytes[2] as typeof MPX_G2_PRODUCT_IDS[number])) {
     return null
   }
 

@@ -15,4 +15,16 @@
   --color-green-800: #016538;
   --color-green-900: #0A5331;
   --color-green-950: #052E16;
+
+  --ui-color-green-500: #a4cc00;
+  --ui-color-green-400: #a4cc00;
+
+
+}
+:root {
+  --ui-success: var(--ui-color-green-500);
+}
+
+.dark {
+  --ui-success: var(--ui-color-green-400);
 }

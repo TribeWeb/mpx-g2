@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
-const { error, connect } = useMidiBridge()
+const { error, connect, mode } = useMidiConnection()
 
 const roadmap = [
   {
@@ -10,8 +10,8 @@ const roadmap = [
   },
   {
     icon: 'i-lucide-radio',
-    title: 'TypeScript MIDI bridge',
-    description: 'WebSocket bridge between the browser and hardware MIDI via SysEx — no Python required.'
+    title: 'Chrome Web MIDI',
+    description: 'Direct SysEx communication with the MPX-G2 via the Web MIDI API — no native bridge required.'
   },
   {
     icon: 'i-lucide-sliders-horizontal',
@@ -21,7 +21,9 @@ const roadmap = [
 ]
 
 onMounted(() => {
-  connect()
+  if (mode.value === 'simulated') {
+    connect()
+  }
 })
 </script>
 
@@ -29,7 +31,7 @@ onMounted(() => {
   <div>
     <UPageHero
       :title="config.public.appName"
-      description="A browser-based MIDI controller for the Lexicon MPX-G2. Start with a virtual front panel, then grow into a full patch editor."
+      description="A browser-based MIDI controller for the Lexicon MPX-G2. Use Chrome Web MIDI for hardware, or the built-in simulator for UI development."
       :links="[{
         label: 'Open front panel',
         to: '/panel',
@@ -43,13 +45,13 @@ onMounted(() => {
       class="mx-auto mb-8 max-w-3xl"
       color="warning"
       icon="i-lucide-triangle-alert"
-      title="MIDI bridge not reachable"
-      :description="`${error}. Start the dev server — the bridge starts automatically on port 3101.`"
+      title="MIDI connection issue"
+      :description="error"
     />
 
     <UPageSection
       title="Project roadmap"
-      description="This scaffold sets up Nuxt 4, Nuxt UI, and a TypeScript MIDI layer ready for hardware integration."
+      description="Nuxt 4 front panel with a TypeScript SysEx protocol layer and Chrome Web MIDI transport."
       :features="roadmap"
     />
 
@@ -61,11 +63,11 @@ onMounted(() => {
           </h3>
         </template>
 
-        <pre class="overflow-x-auto rounded-lg bg-elevated p-4 text-sm text-muted"><code>Browser (Nuxt UI)
-  ↕ WebSocket (JSON)
-Nitro MIDI bridge (TypeScript + ws)
-  ↕ USB MIDI / SysEx
-Lexicon MPX-G2</code></pre>
+        <pre class="overflow-x-auto rounded-lg bg-elevated p-4 text-sm text-muted"><code>Chrome (Web MIDI API + SysEx)
+  ↕ USB MIDI
+Lexicon MPX-G2
+
+Optional: Simulated mode (WebSocket, no hardware)</code></pre>
       </UCard>
     </UPageSection>
   </div>

@@ -5,13 +5,6 @@ export default defineNuxtConfig({
     '@nuxt/ui'
   ],
 
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false
-    }
-  ],
-
   devtools: {
     enabled: true
   },
@@ -23,7 +16,12 @@ export default defineNuxtConfig({
     midiBridgePort: 3101,
     public: {
       appName: 'MPX-G2 Controller',
-      midiBridgeUrl: 'ws://localhost:3101'
+      midiBridgeUrl: 'ws://localhost:3101',
+      midiDefaultMode: 'hardware' as 'hardware' | 'simulated',
+      /** SysEx device ID — must match G2 SYSTEM → MIDI → SysEx Device ID and MIDI Remote. */
+      midiDeviceId: 0,
+      /** SysEx product ID byte (try 0x09 or 0x0f if handshake is rejected). */
+      midiProductId: 0x09
     }
   },
 

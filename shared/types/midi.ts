@@ -1,8 +1,11 @@
 /** Lexicon manufacturer ID in SysEx messages */
 export const LEXICON_MANUFACTURER_ID = 0x06
 
-/** MPX-G2 product ID */
-export const MPX_G2_PRODUCT_ID = 0x0f
+/** Accepted MPX-G2 product IDs (0x09 appears in R1 examples, 0x0f in other docs). */
+export const MPX_G2_PRODUCT_IDS = [0x09, 0x0f] as const
+
+/** MPX-G2 product ID (default outbound; R1 examples use 0x09, config requests use 0x0f). */
+export const MPX_G2_PRODUCT_ID = 0x09
 
 /** Default device ID when not configured */
 export const DEFAULT_DEVICE_ID = 0x00
@@ -30,6 +33,8 @@ export const HandshakeCommand = {
   Busy: 0x03,
   Ready: 0x04,
   Error: 0x05,
+  TurnOnAllMidiOutput: 0x0b,
+  TurnOffAllMidiOutput: 0x0c,
   TurnOnAutoDisplay: 0x0f,
   TurnOffAutoDisplay: 0x10
 } as const
@@ -62,11 +67,11 @@ export const FrontPanelButtons = [
   'bypass',
   'system',
   'tempo',
-  'a',
+  'ab',
+  'tap',
   'softRow',
   'store',
   'midi',
-  'b',
   'option'
 ] as const
 
@@ -100,13 +105,38 @@ export type MidiBridgeClientMessage
     | { type: 'request_display_dump' }
 
 export type MidiBridgeServerMessage
-  = | { type: 'connected', deviceName?: string }
+  = | { type: 'connected', deviceName?: string, deviceMode?: 'simulated' | 'hardware' }
     | { type: 'disconnected', reason?: string }
     | { type: 'panel_state', state: MpxG2PanelState }
     | { type: 'display_dump', characters: string[] }
     | { type: 'led_dump', leds: PanelLedState }
     | { type: 'sysex', data: number[] }
     | { type: 'error', message: string }
+
+export type MidiConnectionMode = 'simulated' | 'hardware'
+
+export interface MidiLogEntry {
+  ts: number
+  direction: 'tx' | 'rx'
+  hex: string
+  note?: string
+  port?: string
+}
+
+export interface MidiRxStats {
+  count: number
+  lastAt: number | null
+  listeningOn: string[]
+}
+
+/** Set when connected but no inbound MIDI after the RX probe window. */
+export type MidiRxPathStatus = 'unknown' | 'ok' | 'no_reply'
+
+export interface MidiPortInfo {
+  id: string
+  name: string
+  manufacturer?: string
+}
 
 export type MidiBridgeConnectionStatus
   = | 'disconnected'

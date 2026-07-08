@@ -46,30 +46,31 @@ Open [http://localhost:3000](http://localhost:3000). The MIDI bridge starts auto
 ## Architecture
 
 ```
-Browser (Nuxt UI)
-  ↕ WebSocket (JSON messages)
-Nitro MIDI bridge (TypeScript)
-  ↕ USB MIDI / SysEx
+Chrome (Web MIDI API + SysEx)
+  ↕ USB MIDI
 Lexicon MPX-G2
 ```
 
-The bridge currently runs in **simulation mode** — it accepts connections and returns stub panel state. Hardware MIDI forwarding (via a library such as `easymidi` or `node-midi`) is the next integration step.
+**Simulated mode** (optional): WebSocket bridge on `ws://localhost:3101` for UI development without hardware.
+
+The default connection mode is **hardware** via Chrome Web MIDI. Open the plug icon in the header to connect, pick MIDI ports, and view the SysEx log.
 
 ## Configuration
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `MPX_G2_MIDI_BRIDGE_PORT` | `3101` | WebSocket bridge port |
+| `MPX_G2_MIDI_BRIDGE_PORT` | `3101` | WebSocket bridge port (simulated mode only) |
+| `NUXT_PUBLIC_MIDI_DEFAULT_MODE` | `hardware` | `hardware` or `simulated` |
 
-Public runtime config (`nuxt.config.ts` → `runtimeConfig.public.midiBridgeUrl`) controls the client WebSocket URL.
+Public runtime config (`nuxt.config.ts` → `runtimeConfig.public`) controls the client WebSocket URL and default MIDI mode.
 
 ## Roadmap
 
-1. **Front panel replica** — virtual LCD, LEDs, buttons, encoder (in progress)
-2. **Hardware MIDI** — SysEx handshake, display/LED dumps, panel button messages
+1. **Front panel replica** — virtual LCD, LEDs, buttons, encoder
+2. **Chrome Web MIDI** — SysEx handshake, display/LED dumps, panel button messages (in progress)
 3. **Modern editor** — parameter tree, program management, routing UI
 
 ## References
 
 - [MPX-G2 MIDI SysEx documentation](https://stecrecords.com/gear/mpxg2/doc/MPXG2_MIDI_Impl.htm)
-- [Web MIDI API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API) — optional direct browser MIDI on Chrome/Edge
+- [Web MIDI API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API) — Chrome / Edge
