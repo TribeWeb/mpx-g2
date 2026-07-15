@@ -1,4 +1,5 @@
 import type { GainEqBand, MpxG2PanelState } from '#shared/types/midi'
+import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
 import { applyGainEqRange } from '#shared/midi/inbound'
 import { primaryObjectRange, type ObjectDescription } from '#shared/midi/object-description'
 import {
@@ -20,7 +21,24 @@ export type GainEqSyncDeps = {
 export function createGainEqSync(deps: GainEqSyncDeps) {
   const { runtime, panelState, status, getSysexOptions, sendSysEx } = deps
 
-  function applyObjectDescriptionToBand(band: GainEqBand, description: ObjectDescription) {
+  function isActiveRangeGeneration(gen = runtime.rangeActiveGen): boolean {
+    return gen > 0 && gen === runtime.rangeRequestGen && gen === runtime.rangeActiveGen
+  }
+
+  function resetGainEqRangesToFallback() {
+    panelState.value.knobs = {
+      ...panelState.value.knobs,
+      gainLowRange: { ...GAIN_EQ_DISPLAY_RANGE.low },
+      gainMidRange: { ...GAIN_EQ_DISPLAY_RANGE.mid },
+      gainHighRange: { ...GAIN_EQ_DISPLAY_RANGE.high }
+    }
+    panelState.value.lastUpdated = Date.now()
+  }
+
+  function applyObjectDescriptionToBand(band: GainEqBand, description: ObjectDescription, gen: number) {
+    if (!isActiveRangeGeneration(gen)) {
+      return
+    }
     const range = primaryObjectRange(description)
     if (!range) {
       return
@@ -41,7 +59,7 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
       }
     }
     console.info(
-      `[mpx-g2] Gain ${band} range ← "${description.name}" ${range.min}…${range.max} (${description.byteCount} byte)`
+      `[mpx-g2] Gain ${band} range ← "${description.name}" ${range.min} <> ${range.max} (${description.byteCount} byte)`
     )
   }
 
@@ -51,8 +69,13 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
     if (!pending || pending.size === 0) {
       return
     }
+    const gen = runtime.rangeActiveGen
+    if (!isActiveRangeGeneration(gen)) {
+      runtime.pendingDescriptionBands.delete(description.objectTypeId)
+      return
+    }
     for (const band of pending) {
-      applyObjectDescriptionToBand(band, description)
+      applyObjectDescriptionToBand(band, description, gen)
     }
     runtime.pendingDescriptionBands.delete(description.objectTypeId)
   }
@@ -70,6 +93,7 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
       return
     }
     runtime.rangeAwaitingBand = band
+    runtime.rangeInFlight = { gen, band, alg }
     const opts = getSysexOptions()
     sendSysEx(
       buildGainEqObjectTypeIdRequest(alg, band, opts.deviceId, opts.productId),
@@ -77,10 +101,14 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
     )
   }
 
-  function resolveGainObjectType(band: GainEqBand, objectTypeId: number) {
+  function resolveGainObjectType(band: GainEqBand, objectTypeId: number, gen: number) {
+    if (!isActiveRangeGeneration(gen)) {
+      return
+    }
+
     const cached = runtime.objectDescriptions.get(objectTypeId)
     if (cached) {
-      applyObjectDescriptionToBand(band, cached)
+      applyObjectDescriptionToBand(band, cached, gen)
       return
     }
 
@@ -97,7 +125,18 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
     pending.add(band)
   }
 
-  function acceptGainObjectTypeId(band: GainEqBand, objectTypeId: number) {
+  function acceptGainObjectTypeId(band: GainEqBand, objectTypeId: number, alg?: number) {
+    const inFlight = runtime.rangeInFlight
+    if (!inFlight || !isActiveRangeGeneration(inFlight.gen)) {
+      return
+    }
+    if (band !== inFlight.band) {
+      return
+    }
+    if (alg != null && (alg !== inFlight.alg || alg !== runtime.rangeAwaitingAlg)) {
+      return
+    }
+
     const pendingIdx = runtime.pendingObjectTypeBands.indexOf(band)
     if (pendingIdx >= 0) {
       runtime.pendingObjectTypeBands.splice(pendingIdx, 1)
@@ -105,8 +144,9 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
     if (runtime.rangeAwaitingBand === band) {
       runtime.rangeAwaitingBand = null
     }
-    resolveGainObjectType(band, objectTypeId)
-    pumpGainRangeRequests('gain ranges')
+    runtime.rangeInFlight = null
+    resolveGainObjectType(band, objectTypeId, inFlight.gen)
+    pumpGainRangeRequests('gain ranges', inFlight.gen)
   }
 
   function requestGainEqRanges(alg: number, note = 'gain ranges') {
@@ -114,9 +154,14 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
       return
     }
     const gen = ++runtime.rangeRequestGen
+    runtime.rangeActiveGen = gen
+    runtime.rangeSyncedAlg = alg
+    runtime.rangeInFlight = null
+    runtime.pendingDescriptionBands.clear()
     runtime.pendingObjectTypeBands = ['low', 'mid', 'high']
     runtime.rangeAwaitingBand = null
     runtime.rangeAwaitingAlg = alg
+    resetGainEqRangesToFallback()
     pumpGainRangeRequests(note, gen)
   }
 
@@ -134,7 +179,9 @@ export function createGainEqSync(deps: GainEqSyncDeps) {
         )
       }, index * 60)
     })
-    requestGainEqRanges(alg, note)
+    if (runtime.rangeSyncedAlg !== alg) {
+      requestGainEqRanges(alg, note)
+    }
   }
 
   function requestGainEqState(note = 'gain sync') {

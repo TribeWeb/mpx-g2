@@ -19,7 +19,14 @@ export type WebMidiRuntime = {
   pendingObjectTypeBands: GainEqBand[]
   rangeAwaitingBand: GainEqBand | null
   rangeAwaitingAlg: number
+  /** Monotonic token; bumped when a new per-algorithm range fetch starts. */
   rangeRequestGen: number
+  /** Generation of the in-flight range pipeline (matches rangeRequestGen until superseded). */
+  rangeActiveGen: number
+  /** Gain algorithm index whose ranges were last requested (0 = none yet). */
+  rangeSyncedAlg: number
+  /** Band/alg for the outstanding Object Type ID request (stale-reply guard). */
+  rangeInFlight: { gen: number, band: GainEqBand, alg: number } | null
   autoReconnectStarted: boolean
   midiClockCount: number
   midiClockActiveUntil: number
@@ -47,6 +54,9 @@ function createDefaultRuntime(): WebMidiRuntime {
     rangeAwaitingBand: null,
     rangeAwaitingAlg: 0,
     rangeRequestGen: 0,
+    rangeActiveGen: 0,
+    rangeSyncedAlg: 0,
+    rangeInFlight: null,
     autoReconnectStarted: false,
     midiClockCount: 0,
     midiClockActiveUntil: 0,
@@ -73,6 +83,10 @@ export function getWebMidiRuntime(): WebMidiRuntime {
     runtime.pendingObjectTypeBands ??= []
     runtime.rangeAwaitingBand ??= null
     runtime.rangeAwaitingAlg ??= 0
+    runtime.rangeRequestGen ??= 0
+    runtime.rangeActiveGen ??= 0
+    runtime.rangeSyncedAlg ??= 0
+    runtime.rangeInFlight ??= null
   }
   return g.__mpxG2WebMidi
 }
@@ -84,5 +98,8 @@ export function resetGainEqSyncState(runtime: WebMidiRuntime) {
   runtime.pendingObjectTypeBands = []
   runtime.rangeAwaitingBand = null
   runtime.rangeAwaitingAlg = 0
+  runtime.rangeActiveGen = 0
+  runtime.rangeSyncedAlg = 0
+  runtime.rangeInFlight = null
   runtime.pendingDescriptionBands.clear()
 }

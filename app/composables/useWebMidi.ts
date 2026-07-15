@@ -231,7 +231,11 @@ export function useWebMidi() {
     }
 
     if (result.gainEqObjectType) {
-      gainEq.acceptGainObjectTypeId(result.gainEqObjectType.band, result.gainEqObjectType.objectTypeId)
+      gainEq.acceptGainObjectTypeId(
+        result.gainEqObjectType.band,
+        result.gainEqObjectType.objectTypeId,
+        result.gainEqObjectType.alg
+      )
     } else if (result.objectTypeId != null) {
       const band = webMidiRuntime.rangeAwaitingBand
       if (band) {
