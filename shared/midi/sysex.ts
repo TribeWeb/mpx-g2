@@ -1,11 +1,13 @@
 import {
   DEFAULT_DEVICE_ID,
+  FrontPanelButtons,
   LEXICON_MANUFACTURER_ID,
   MPX_G2_PRODUCT_ID,
   MPX_G2_PRODUCT_IDS,
   type HandshakeCommandValue,
   type SysExMessageTypeValue
 } from '../types/midi'
+import { emptyDisplayFlashing, emptyLedFlashStable, emptyLedFlashing } from './flash-detect'
 
 const SYSEX_START = 0xf0
 const SYSEX_END = 0xf7
@@ -55,6 +57,22 @@ export interface MpxG2SysExOptions {
   productId?: number
 }
 
+/** Append Lexicon checksum (low 7 bits of sum of bytes after message type). */
+export function withSysExChecksum(message: Uint8Array): Uint8Array {
+  if (message.length < 6 || message[0] !== SYSEX_START || message[message.length - 1] !== SYSEX_END) {
+    return message
+  }
+
+  // Sum bytes after message type (index 4), excluding the existing end marker.
+  let sum = 0
+  for (let i = 5; i < message.length - 1; i++) {
+    sum += message[i] ?? 0
+  }
+  const checksum = sum & 0x7f
+  const withoutEnd = message.slice(0, -1)
+  return new Uint8Array([...withoutEnd, checksum, SYSEX_END])
+}
+
 /** Build a handshake SysEx message. */
 export function buildHandshakeMessage(
   command: HandshakeCommandValue,
@@ -68,26 +86,34 @@ export function buildHandshakeMessage(
   ])
 }
 
+/** Build a generic SysEx data message (type 0x01) at a control-tree address. */
+export function buildDataMessage(
+  data: number[],
+  controlLevels: number[],
+  options: MpxG2SysExOptions = {}
+): Uint8Array {
+  const { deviceId = DEFAULT_DEVICE_ID, productId = MPX_G2_PRODUCT_ID } = options
+  const numBytes = nibblize([data.length & 0xff, (data.length >> 8) & 0xff])
+  const dataNibbles = nibblize(data)
+  const numLevels = nibblize([controlLevels.length & 0xff, (controlLevels.length >> 8) & 0xff])
+  const address = nibblize(controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff]))
+
+  return withSysExChecksum(new Uint8Array([
+    ...buildSysExHeader({ deviceId, productId, messageType: 0x01 }),
+    ...numBytes,
+    ...dataNibbles,
+    ...numLevels,
+    ...address,
+    SYSEX_END
+  ]))
+}
+
 /** Build a panel button press SysEx data message. */
 export function buildPanelButtonMessage(
   buttonValue: number,
   options: MpxG2SysExOptions = {}
 ): Uint8Array {
-  const { deviceId = DEFAULT_DEVICE_ID, productId = MPX_G2_PRODUCT_ID } = options
-  const controlLevels = [1, 8, 0]
-  const numBytes = nibblize([0x01, 0x00])
-  const data = nibblize([buttonValue])
-  const numLevels = nibblize([0x03, 0x00])
-  const address = nibblize(controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff]))
-
-  return new Uint8Array([
-    ...buildSysExHeader({ deviceId, productId, messageType: 0x01 }),
-    ...numBytes,
-    ...data,
-    ...numLevels,
-    ...address,
-    SYSEX_END
-  ])
+  return buildDataMessage([buttonValue], [1, 8, 0], options)
 }
 
 /** Parse raw MIDI bytes; returns SysEx payload if message is MPX-G2 SysEx. */
@@ -125,29 +151,27 @@ export function formatSysExHex(data: number[] | Uint8Array): string {
 
 export function createEmptyPanelLedState() {
   return {
-    buttons: {
-      gain: false,
-      fx1: false,
-      fx2: false,
-      program: false,
-      chorus: false,
-      delay: false,
-      reverb: false,
-      edit: false,
-      eq: false,
-      insert: false,
-      bypass: false,
-      system: false,
-      tempo: false,
-      a: false,
-      softRow: false,
-      store: false,
-      midi: false,
-      b: false,
-      option: false
-    },
+    buttons: Object.fromEntries(
+      FrontPanelButtons.map(button => [button, false])
+    ) as Record<(typeof FrontPanelButtons)[number], boolean>,
+    flashing: emptyLedFlashing(),
+    flashStable: emptyLedFlashStable(),
     segments: [0, 0, 0] as [number, number, number],
     scanBits: [0, 0, 0]
+  }
+}
+
+export function createEmptyPanelKnobState() {
+  // Wide defaults until Object Description replies narrow them per algorithm.
+  return {
+    gainLow: 0,
+    gainMid: 0,
+    gainHigh: 0,
+    gainAlg: 1,
+    gainValueBytes: 2 as 1 | 2,
+    gainLowRange: { min: -25, max: 25 },
+    gainMidRange: { min: -25, max: 25 },
+    gainHighRange: { min: -25, max: 50 }
   }
 }
 
@@ -155,8 +179,10 @@ export function createEmptyPanelState() {
   return {
     leds: createEmptyPanelLedState(),
     display: {
-      characters: Array.from({ length: 32 }, () => ' ')
+      characters: Array.from({ length: 32 }, () => ' '),
+      flashing: emptyDisplayFlashing()
     },
+    knobs: createEmptyPanelKnobState(),
     connected: false,
     lastUpdated: null
   }

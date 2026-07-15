@@ -53,15 +53,21 @@ const sizeClasses = computed(() => {
   }
 })
 
-// Knob sweep: min at 7 o'clock (210°), max at 5 o'clock (150°), through 12 o'clock
+// Knob sweep: min → full CCW (7 o'clock), max → full CW (5 o'clock).
+// Linear in [min, max] — unipolar 0…5 puts 0 at CCW; bipolar −5…+5 puts 0 at noon.
 const KNOB_MIN_ANGLE = 210
 const KNOB_ANGLE_SPAN = 300
 
 const displayAngle = computed(() => {
   if (bounded.value && props.modelValue !== undefined) {
-    const range = props.max - props.min
-    if (range === 0) return KNOB_MIN_ANGLE
-    const t = (props.modelValue - props.min) / range
+    const min = Number(props.min)
+    const max = Number(props.max)
+    const value = Number(props.modelValue)
+    const range = max - min
+    if (!Number.isFinite(range) || range === 0) {
+      return KNOB_MIN_ANGLE
+    }
+    const t = Math.min(1, Math.max(0, (value - min) / range))
     return KNOB_MIN_ANGLE + t * KNOB_ANGLE_SPAN
   }
   return internalAngle.value

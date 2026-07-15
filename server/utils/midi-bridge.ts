@@ -68,6 +68,10 @@ function handleClientMessage(socket: WebSocket, raw: string) {
       send(socket, { type: 'display_dump', characters: simulator.getDisplayCharacters() })
       send(socket, { type: 'led_dump', leds: simulator.getLedState() })
       break
+    case 'gain_knob':
+      simulator.handleGainKnob(message.band, message.value)
+      pushPanelState(socket, simulator)
+      break
   }
 }
 

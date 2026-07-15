@@ -20,7 +20,8 @@ export class MidiSimulator {
         characters: [
           ...SIM_DISPLAY_TOP,
           ...SIM_DISPLAY_BOTTOM
-        ]
+        ],
+        flashing: Array.from({ length: 32 }, () => false)
       },
       leds: {
         ...createEmptyPanelState().leds,
@@ -66,6 +67,19 @@ export class MidiSimulator {
       Number(digits[2])
     ] as [number, number, number]
     this.setDisplayLine(1, `ENCODER: ${this.encoderValue}`.padEnd(16).slice(0, 16))
+    this.state.lastUpdated = Date.now()
+  }
+
+  handleGainKnob(band: 'low' | 'mid' | 'high', value: number) {
+    if (band === 'low') {
+      this.state.knobs.gainLow = value
+    } else if (band === 'mid') {
+      this.state.knobs.gainMid = value
+    } else {
+      this.state.knobs.gainHigh = value
+    }
+    const label = band === 'low' ? 'LOW' : band === 'mid' ? 'MID' : 'HIGH'
+    this.setDisplayLine(1, `GAIN ${label}: ${value}`.padEnd(16).slice(0, 16))
     this.state.lastUpdated = Date.now()
   }
 

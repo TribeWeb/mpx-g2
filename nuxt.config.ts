@@ -20,8 +20,8 @@ export default defineNuxtConfig({
       midiDefaultMode: 'hardware' as 'hardware' | 'simulated',
       /** SysEx device ID — must match G2 SYSTEM → MIDI → SysEx Device ID and MIDI Remote. */
       midiDeviceId: 0,
-      /** SysEx product ID byte (try 0x09 or 0x0f if handshake is rejected). */
-      midiProductId: 0x09
+      /** SysEx product ID (G2 hardware uses 0x0f; R1 examples often use 0x09). */
+      midiProductId: 0x0f
     }
   },
 

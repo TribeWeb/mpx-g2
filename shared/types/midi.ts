@@ -1,11 +1,14 @@
 /** Lexicon manufacturer ID in SysEx messages */
 export const LEXICON_MANUFACTURER_ID = 0x06
 
-/** Accepted MPX-G2 product IDs (0x09 appears in R1 examples, 0x0f in other docs). */
+/** Accepted MPX-G2 product IDs (0x09 appears in R1 examples, 0x0f on the unit itself). */
 export const MPX_G2_PRODUCT_IDS = [0x09, 0x0f] as const
 
-/** MPX-G2 product ID (default outbound; R1 examples use 0x09, config requests use 0x0f). */
-export const MPX_G2_PRODUCT_ID = 0x09
+/**
+ * Default outbound product ID.
+ * Hardware automation from the G2 uses 0x0f; R1 docs often show 0x09.
+ */
+export const MPX_G2_PRODUCT_ID = 0x0f
 
 /** Default device ID when not configured */
 export const DEFAULT_DEVICE_ID = 0x00
@@ -72,13 +75,19 @@ export const FrontPanelButtons = [
   'softRow',
   'store',
   'midi',
-  'option'
+  'option',
+  'left',
+  'right'
 ] as const
 
 export type FrontPanelButtonName = typeof FrontPanelButtons[number]
 
 export interface PanelLedState {
   buttons: Record<FrontPanelButtonName, boolean>
+  /** Highlight blink (Options, Soft Row, …) — app flashes locally when set. */
+  flashing: Record<FrontPanelButtonName, boolean>
+  /** Consecutive non-toggle samples per button (clears highlight flash). */
+  flashStable: Record<FrontPanelButtonName, number>
   segments: [number, number, number]
   scanBits: number[]
 }
@@ -86,11 +95,36 @@ export interface PanelLedState {
 export interface PanelDisplayState {
   /** 32 LCD characters (top-left to bottom-right) */
   characters: string[]
+  /** Per-character highlight blink (active parameter on G2). */
+  flashing: boolean[]
+}
+
+/** Front-panel Gain Low / Mid / High EQ knobs (automation-mirrored). */
+export type GainEqBand = 'low' | 'mid' | 'high'
+
+export interface ParamRange {
+  min: number
+  max: number
+}
+
+export interface PanelKnobState {
+  gainLow: number
+  gainMid: number
+  gainHigh: number
+  /** Current Gain algorithm index from last automation message (1–8). */
+  gainAlg: number
+  /** Wire size for Gain EQ params (audio params are 2 bytes on Lexicon gear). */
+  gainValueBytes: 1 | 2
+  /** Live Lo/Mid/Hi ranges from Object Description (effect-dependent). */
+  gainLowRange: ParamRange
+  gainMidRange: ParamRange
+  gainHighRange: ParamRange
 }
 
 export interface MpxG2PanelState {
   leds: PanelLedState
   display: PanelDisplayState
+  knobs: PanelKnobState
   connected: boolean
   lastUpdated: number | null
 }
@@ -100,6 +134,7 @@ export type MidiBridgeClientMessage
     | { type: 'panel', action: 'press', button: FrontPanelButtonName }
     | { type: 'panel', action: 'release', button: FrontPanelButtonName }
     | { type: 'encoder', delta: number }
+    | { type: 'gain_knob', band: GainEqBand, value: number }
     | { type: 'enable_auto_display' }
     | { type: 'request_led_dump' }
     | { type: 'request_display_dump' }

@@ -1,4 +1,6 @@
 import type { FrontPanelButtonName, PanelLedState } from '../types/midi'
+import { FrontPanelButtons } from '../types/midi'
+import { emptyLedFlashStable, emptyLedFlashing } from './flash-detect'
 
 /** Seven-segment digit images from MPX-G2 firmware (pgfe dcba bit order). */
 const SEGMENT_IMAGES: Record<number, number> = {
@@ -28,13 +30,19 @@ const COLUMN_BUTTON_BITS: Array<{ column: number, bit: number, button: FrontPane
   { column: 5, bit: 5, button: 'bypass' },
   { column: 5, bit: 6, button: 'system' },
   { column: 7, bit: 3, button: 'tempo' },
-  { column: 7, bit: 4, button: 'a' },
+  { column: 7, bit: 4, button: 'ab' },
   { column: 7, bit: 5, button: 'softRow' },
   { column: 7, bit: 6, button: 'store' },
   { column: 9, bit: 3, button: 'midi' },
-  { column: 9, bit: 4, button: 'b' },
   { column: 9, bit: 5, button: 'option' }
 ]
+
+function emptyButtonLeds(): Record<FrontPanelButtonName, boolean> {
+  return Object.fromEntries(FrontPanelButtons.map(button => [button, false])) as Record<
+    FrontPanelButtonName,
+    boolean
+  >
+}
 
 function segmentByteToDigit(byte: number): number | null {
   for (const [digit, image] of Object.entries(SEGMENT_IMAGES)) {
@@ -47,11 +55,11 @@ function segmentByteToDigit(byte: number): number | null {
 
 /** Parse the first 10 bytes of an MPX-G2 All LEDs dump into panel LED state. */
 export function parseLedDumpBytes(bytes: number[]): PanelLedState {
-  const state = {
-    buttons: Object.fromEntries(
-      COLUMN_BUTTON_BITS.map(({ button }) => [button, false])
-    ) as PanelLedState['buttons'],
-    segments: [null, null, null] as unknown as [number, number, number],
+  const state: PanelLedState = {
+    buttons: emptyButtonLeds(),
+    flashing: emptyLedFlashing(),
+    flashStable: emptyLedFlashStable(),
+    segments: [-1, -1, -1],
     scanBits: [0, 0, 0]
   }
 
@@ -65,7 +73,7 @@ export function parseLedDumpBytes(bytes: number[]): PanelLedState {
     segmentByteToDigit(bytes[4] ?? 0) ?? -1,
     segmentByteToDigit(bytes[6] ?? 0) ?? -1,
     segmentByteToDigit(bytes[8] ?? 0) ?? -1
-  ] as [number, number, number]
+  ]
 
   state.scanBits = [
     (bytes[1] ?? 0) & 0x07,

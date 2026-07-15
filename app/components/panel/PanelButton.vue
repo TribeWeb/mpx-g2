@@ -8,6 +8,7 @@ const props = defineProps<{
   name?: FrontPanelButtonName
   variant?: PanelButtonVariant
   active?: boolean
+  flashing?: boolean
   disabled?: boolean
   showLed?: boolean
 }>()
@@ -66,6 +67,7 @@ function onPointerUp() {
         variant="inset"
         class="absolute top-3 left-1/2 -translate-x-1/2"
         :active="active"
+        :flashing="flashing"
       />
       <span class="mt-4">{{ label }}</span>
     </UButton>

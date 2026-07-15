@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import type { FrontPanelButtonName } from '#shared/types/midi'
+import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
 
-const { panelState, status, deviceMode, pressButton, releaseButton, rotateEncoder } = useMidiConnection()
+const { panelState, status, deviceMode, pressButton, releaseButton, rotateEncoder, setGainKnob } = useMidiConnection()
 
 const displayLines = computed(() => {
   const chars = panelState.value.display.characters
-  return [chars.slice(0, 16).join('').trimEnd(), chars.slice(16, 32).join('').trimEnd()]
+  return [chars.slice(0, 16).join(''), chars.slice(16, 32).join('')]
 })
+
+const displayFlashing = computed(() => panelState.value.display.flashing ?? [])
+
+function ledFlashing(name: FrontPanelButtonName): boolean {
+  return Boolean(panelState.value.leds.flashing?.[name])
+}
 
 const effectButtons: Array<{ name: FrontPanelButtonName, label: string }> = [
   { name: 'gain', label: 'Gain' },
@@ -25,8 +32,8 @@ const panelRow: Array<{ name?: FrontPanelButtonName, label: string, showLed?: bo
   { name: 'option', label: 'Options' },
   { name: 'program', label: 'Program' },
   { name: 'edit', label: 'Edit' },
-  { label: 'No<', showLed: false },
-  { label: '>Yes', showLed: false },
+  { name: 'left', label: 'No<', showLed: false },
+  { name: 'right', label: '>Yes', showLed: false },
   { name: 'system', label: 'System' },
   { name: 'store', label: 'Store' }
 ]
@@ -34,34 +41,48 @@ const panelRow: Array<{ name?: FrontPanelButtonName, label: string, showLed?: bo
 const disabled = computed(() => status.value !== 'connected')
 const midiActive = computed(() => panelState.value.leds.buttons.midi || status.value === 'connected')
 
-// Local knob state for visual testing (hardware MIDI later)
+// Local I/O knob state for visual testing (hardware MIDI later)
 const inputLevel = ref(4)
 const outputLevel = ref(6)
-const gainLow = ref(3)
-const gainMid = ref(5)
-const gainHigh = ref(4)
 const levelLed = ref(false)
 const clipLed = ref(false)
+
+const gainLow = computed({
+  get: () => panelState.value.knobs?.gainLow ?? 0,
+  set: (value: number) => setGainKnob('low', value)
+})
+const gainMid = computed({
+  get: () => panelState.value.knobs?.gainMid ?? 0,
+  set: (value: number) => setGainKnob('mid', value)
+})
+const gainHigh = computed({
+  get: () => panelState.value.knobs?.gainHigh ?? 0,
+  set: (value: number) => setGainKnob('high', value)
+})
+
+const gainLowRange = computed(() => panelState.value.knobs?.gainLowRange ?? GAIN_EQ_DISPLAY_RANGE.low)
+const gainMidRange = computed(() => panelState.value.knobs?.gainMidRange ?? GAIN_EQ_DISPLAY_RANGE.mid)
+const gainHighRange = computed(() => panelState.value.knobs?.gainHighRange ?? GAIN_EQ_DISPLAY_RANGE.high)
 
 function onIoKnobRotate() {
   levelLed.value = inputLevel.value > 2 || outputLevel.value > 2
   clipLed.value = inputLevel.value > 9 || outputLevel.value > 9
 }
-
-function onGainKnobRotate() {
-  // visual-only for now
-}
 </script>
 
 <template>
-  <UCard variant="outline">
+  <UCard
+    variant="outline"
+  >
     <!-- Title bar -->
     <template #title>
       MPX G2 Guitar Effects Processor
     </template>
     <template #description>
       <div class="flex flex-row items-center justify-between">
-        Lexicon · Virtual front panel  <span v-if="deviceMode === 'simulated'"> · simulation</span>
+        <span> Lexicon · Virtual front panel
+          <span v-if="deviceMode === 'simulated'"> · simulation</span>
+        </span>
         <UBadge
           :color="disabled ? 'neutral' : 'success'"
           variant="subtle"
@@ -72,7 +93,7 @@ function onGainKnobRotate() {
       </div>
     </template>
 
-    <div class="mb-4 flex min-w-[720px] flex-wrap items-stretch gap-3">
+    <div class="mb-4 flex min-w-0 flex-wrap items-stretch gap-3">
       <!-- Input / Output -->
       <PanelSection>
         <template #top>
@@ -128,27 +149,30 @@ function onGainKnobRotate() {
         <template #bottom>
           <PanelEncoder
             v-model="gainLow"
+            :min="gainLowRange.min"
+            :max="gainLowRange.max"
             indicator
             ticks
             size="sm"
             :disabled="disabled"
-            @rotate="onGainKnobRotate"
           />
           <PanelEncoder
             v-model="gainMid"
+            :min="gainMidRange.min"
+            :max="gainMidRange.max"
             indicator
             ticks
             size="sm"
             :disabled="disabled"
-            @rotate="onGainKnobRotate"
           />
           <PanelEncoder
             v-model="gainHigh"
+            :min="gainHighRange.min"
+            :max="gainHighRange.max"
             indicator
             ticks
             size="sm"
             :disabled="disabled"
-            @rotate="onGainKnobRotate"
           />
         </template>
       </PanelSection>
@@ -156,9 +180,9 @@ function onGainKnobRotate() {
       <!-- Aux / Clip / MIDI + 7-segment -->
       <PanelSection>
         <template #top>
-          <span class="w-full text-xs text-default">Aux In<br><span class="pl-[1px]">|</span></span>
-          <span class="w-full text-xs text-default">Clip<br><span class="pl-[1px]">|</span></span>
-          <span class="w-full text-xs text-default">MIDI<br><span class="pl-[1px]">|</span></span>
+          <span class="w-full text-xs text-default">Aux In<br><span class="pl-[3.5px]">|</span></span>
+          <span class="w-full text-xs text-default">Clip<br><span class="pl-[3.5px]">|</span></span>
+          <span class="w-full text-xs text-default">MIDI<br><span class="pl-[3.5px]">|</span></span>
         </template>
         <template #top-lower>
           <div class="min-w-0 flex-1 flex items-center justify-start">
@@ -199,6 +223,7 @@ function onGainKnobRotate() {
           <div class="">
             <PanelDisplay
               :lines="displayLines"
+              :flashing="displayFlashing"
               class="w-96 h-32"
             />
           </div>
@@ -213,6 +238,7 @@ function onGainKnobRotate() {
             <PanelLed
               variant="bar"
               :active="panelState.leds.buttons.tempo"
+              :flashing="false"
             />
           </div>
           <PanelButton
@@ -231,15 +257,17 @@ function onGainKnobRotate() {
             <div class="flex flex-row items-center gap-x-2">
               <span class="w-10 text-center text-xs text-default">A</span>
               <PanelLed
-                variant="bar"
-                :active="panelState.leds.buttons.ab"
-              />
+              variant="bar"
+              :active="panelState.leds.buttons.ab"
+              :flashing="ledFlashing('ab')"
+            />
             </div>
             <div class="flex flex-row items-center gap-x-2">
               <span class="w-10 text-center text-xs text-default">B</span>
               <PanelLed
                 variant="bar"
                 :active="!panelState.leds.buttons.ab"
+                :flashing="ledFlashing('ab')"
               />
             </div>
           </div>
@@ -267,6 +295,7 @@ function onGainKnobRotate() {
               :label="button.label"
               variant="effect"
               :active="panelState.leds.buttons[button.name]"
+              :flashing="ledFlashing(button.name)"
               :disabled="disabled"
               @press="pressButton"
               @release="releaseButton"
@@ -301,6 +330,7 @@ function onGainKnobRotate() {
               variant="panel"
               :show-led="button.showLed !== false"
               :active="button.name ? panelState.leds.buttons[button.name] : false"
+              :flashing="button.name ? ledFlashing(button.name) : false"
               :disabled="disabled"
               @press="pressButton"
               @release="releaseButton"

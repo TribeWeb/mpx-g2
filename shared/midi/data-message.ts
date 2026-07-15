@@ -1,6 +1,7 @@
 import { denibblize } from './sysex'
-import type { FrontPanelButtonName } from '../types/midi'
 import { PANEL_BUTTON_CONTROL_PATH } from './panel-buttons'
+import { parseGainEqPath } from './control-paths'
+import { decodeParamValue } from './param-value'
 
 export interface ParsedDataMessage {
   data: number[]
@@ -62,6 +63,13 @@ export function describeDataMessage(parsed: ParsedDataMessage): string {
 
   if (isPanelButtonPath(parsed.levels) && parsed.data.length === 1) {
     return `Panel button cmd ${valueHex} @ ${path}`
+  }
+
+  const gainEq = parseGainEqPath(parsed.levels)
+  if (gainEq && parsed.data.length > 0 && parsed.data.length <= 2) {
+    const value = decodeParamValue(parsed.data)
+    const label = gainEq.band === 'low' ? 'Gain Low' : gainEq.band === 'mid' ? 'Gain Mid' : 'Gain High'
+    return `${label} = ${value} (alg ${gainEq.alg}) @ ${path}`
   }
 
   if (parsed.data.length === 1) {

@@ -1,11 +1,14 @@
 <script setup lang="ts">
 const props = withDefaults(defineProps<{
   active?: boolean
+  /** G2 highlight blink — animate locally; phase need not match hardware. */
+  flashing?: boolean
   color?: 'green' | 'red'
   variant?: 'bar' | 'inset' | 'round'
   size?: 'sm' | 'md'
 }>(), {
   active: false,
+  flashing: false,
   color: 'green',
   variant: 'bar',
   size: 'md'
@@ -13,24 +16,27 @@ const props = withDefaults(defineProps<{
 
 const classes = computed(() => {
   const base = ['led']
-  const off = !props.active
+  // Flashing = highlighted: keep the lit style and pulse via CSS.
+  const off = !props.active && !props.flashing
 
   if (props.variant === 'inset') {
-    return [...base, 'led--inset', off ? 'led--off' : '']
+    return [...base, 'led--inset', off ? 'led--off' : '', props.flashing ? 'led--flash' : '']
   }
 
   if (props.variant === 'round') {
     return [
       ...base,
       props.color === 'red' ? 'led--round-red' : 'led--round-green',
-      off ? 'led--off' : ''
+      off ? 'led--off' : '',
+      props.flashing ? 'led--flash' : ''
     ]
   }
 
   return [
     ...base,
     props.color === 'red' ? 'led--bar-red' : 'led--soft',
-    off ? 'led--off' : ''
+    off ? 'led--off' : '',
+    props.flashing ? 'led--flash' : ''
   ]
 })
 </script>
@@ -112,5 +118,20 @@ const classes = computed(() => {
   background: #1a1a1a;
   border-color: #222;
   box-shadow: none;
+}
+
+.led--flash {
+  animation: led-highlight-blink 0.9s steps(1, end) infinite;
+}
+
+@keyframes led-highlight-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.12;
+  }
 }
 </style>

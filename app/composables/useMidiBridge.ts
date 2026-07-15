@@ -1,23 +1,42 @@
 import type {
   FrontPanelButtonName,
+  GainEqBand,
   MidiBridgeClientMessage,
   MidiBridgeConnectionStatus,
   MidiBridgeServerMessage,
   MpxG2PanelState
 } from '#shared/types/midi'
+import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
+import { formatGainEqDisplay } from '#shared/midi/display-format'
 import { createEmptyPanelState } from '#shared/midi/sysex'
+
+/** Shared across all `useMidiBridge()` callers and Vite HMR reloads. */
+function getBridgeRuntime() {
+  const g = globalThis as typeof globalThis & {
+    __mpxG2MidiBridge?: {
+      socket: WebSocket | null
+      reconnectTimer: ReturnType<typeof setTimeout> | null
+    }
+  }
+  if (!g.__mpxG2MidiBridge) {
+    g.__mpxG2MidiBridge = {
+      socket: null,
+      reconnectTimer: null
+    }
+  }
+  return g.__mpxG2MidiBridge
+}
+
+const bridgeRuntime = getBridgeRuntime()
 
 export function useMidiBridge() {
   const config = useRuntimeConfig()
 
-  const status = useState<MidiBridgeConnectionStatus>('midi-bridge-status', () => 'disconnected')
-  const error = useState<string | null>('midi-bridge-error', () => null)
-  const deviceMode = useState<'simulated' | 'hardware' | null>('midi-device-mode', () => null)
-  const deviceName = useState<string | null>('midi-device-name', () => null)
-  const panelState = useState<MpxG2PanelState>('midi-panel-state', () => createEmptyPanelState())
-
-  let socket: WebSocket | null = null
-  let reconnectTimer: ReturnType<typeof setTimeout> | null = null
+  const status = useState<MidiBridgeConnectionStatus>('midi-sim-status', () => 'disconnected')
+  const error = useState<string | null>('midi-sim-error', () => null)
+  const deviceMode = useState<'simulated' | 'hardware' | null>('midi-sim-device-mode', () => null)
+  const deviceName = useState<string | null>('midi-sim-device-name', () => null)
+  const panelState = useState<MpxG2PanelState>('midi-sim-panel-state', () => createEmptyPanelState())
 
   function handleServerMessage(message: MidiBridgeServerMessage) {
     switch (message.type) {
@@ -51,11 +70,11 @@ export function useMidiBridge() {
   }
 
   function send(message: MidiBridgeClientMessage) {
-    if (!socket || socket.readyState !== WebSocket.OPEN) {
+    if (!bridgeRuntime.socket || bridgeRuntime.socket.readyState !== WebSocket.OPEN) {
       return false
     }
 
-    socket.send(JSON.stringify(message))
+    bridgeRuntime.socket.send(JSON.stringify(message))
     return true
   }
 
@@ -68,15 +87,15 @@ export function useMidiBridge() {
     status.value = 'connecting'
     error.value = null
 
-    socket = new WebSocket(url)
+    bridgeRuntime.socket = new WebSocket(url)
 
-    socket.addEventListener('open', () => {
+    bridgeRuntime.socket.addEventListener('open', () => {
       status.value = 'connected'
       send({ type: 'handshake', command: 'im_alive' })
       send({ type: 'enable_auto_display' })
     })
 
-    socket.addEventListener('message', (event) => {
+    bridgeRuntime.socket.addEventListener('message', (event) => {
       try {
         const message = JSON.parse(String(event.data)) as MidiBridgeServerMessage
         handleServerMessage(message)
@@ -86,27 +105,27 @@ export function useMidiBridge() {
       }
     })
 
-    socket.addEventListener('close', () => {
+    bridgeRuntime.socket.addEventListener('close', () => {
       status.value = 'disconnected'
       panelState.value.connected = false
-      reconnectTimer = setTimeout(() => connect(url), 3000)
+      bridgeRuntime.reconnectTimer = setTimeout(() => connect(url), 3000)
     })
 
-    socket.addEventListener('error', () => {
+    bridgeRuntime.socket.addEventListener('error', () => {
       status.value = 'error'
       error.value = 'WebSocket connection failed'
     })
   }
 
   function disconnect() {
-    if (reconnectTimer) {
-      clearTimeout(reconnectTimer)
-      reconnectTimer = null
+    if (bridgeRuntime.reconnectTimer) {
+      clearTimeout(bridgeRuntime.reconnectTimer)
+      bridgeRuntime.reconnectTimer = null
     }
 
-    if (socket) {
-      socket.close()
-      socket = null
+    if (bridgeRuntime.socket) {
+      bridgeRuntime.socket.close()
+      bridgeRuntime.socket = null
     }
 
     status.value = 'disconnected'
@@ -125,9 +144,29 @@ export function useMidiBridge() {
     send({ type: 'encoder', delta })
   }
 
-  onBeforeUnmount(() => {
-    disconnect()
-  })
+  function setGainKnob(band: GainEqBand, value: number) {
+    const range = GAIN_EQ_DISPLAY_RANGE[band]
+    const knobs = panelState.value.knobs
+    const live = band === 'low'
+      ? knobs.gainLowRange
+      : band === 'mid'
+        ? knobs.gainMidRange
+        : knobs.gainHighRange
+    const min = live?.min ?? range.min
+    const max = live?.max ?? range.max
+    const clamped = Math.min(max, Math.max(min, Math.round(value)))
+    const nextKnobs = {
+      ...knobs,
+      gainLow: band === 'low' ? clamped : knobs.gainLow,
+      gainMid: band === 'mid' ? clamped : knobs.gainMid,
+      gainHigh: band === 'high' ? clamped : knobs.gainHigh
+    }
+    panelState.value.knobs = nextKnobs
+    panelState.value.display.characters = formatGainEqDisplay(nextKnobs).split('')
+    panelState.value.lastUpdated = Date.now()
+
+    return send({ type: 'gain_knob', band, value: clamped })
+  }
 
   return {
     status: readonly(status),
@@ -140,6 +179,7 @@ export function useMidiBridge() {
     send,
     pressButton,
     releaseButton,
-    rotateEncoder
+    rotateEncoder,
+    setGainKnob
   }
 }

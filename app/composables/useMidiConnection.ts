@@ -1,4 +1,4 @@
-import type { MidiConnectionMode } from '#shared/types/midi'
+import type { GainEqBand, MidiConnectionMode } from '#shared/types/midi'
 
 export function useMidiConnection() {
   const config = useRuntimeConfig()
@@ -51,6 +51,10 @@ export function useMidiConnection() {
     return active.value.rotateEncoder(delta)
   }
 
+  function setGainKnob(band: GainEqBand, value: number) {
+    return active.value.setGainKnob(band, value)
+  }
+
   const status = computed(() => active.value.status.value)
   const error = computed(() => active.value.error.value)
   const deviceMode = computed(() => active.value.deviceMode.value)
@@ -70,6 +74,7 @@ export function useMidiConnection() {
     pressButton,
     releaseButton,
     rotateEncoder,
+    setGainKnob,
     isWebMidiSupported: hardware.isSupported,
     availableInputs: hardware.availableInputs,
     availableOutputs: hardware.availableOutputs,
@@ -80,6 +85,7 @@ export function useMidiConnection() {
     refreshPorts: hardware.refreshPorts,
     pingDevice: hardware.pingDevice,
     requestPanelDumps: hardware.requestPanelDumps,
+    requestGainEqState: hardware.requestGainEqState,
     clearLog: hardware.clearLog
   }
 }
