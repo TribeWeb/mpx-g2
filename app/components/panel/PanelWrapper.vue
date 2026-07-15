@@ -41,7 +41,15 @@ const panelRow: Array<{ name?: FrontPanelButtonName, label: string, showLed?: bo
 const disabled = computed(() => status.value !== 'connected')
 const midiActive = computed(() => panelState.value.leds.buttons.midi || status.value === 'connected')
 
-// Local I/O knob state for visual testing (hardware MIDI later)
+const connectionBadgeLabel = computed(() => {
+  if (disabled.value) {
+    return deviceMode.value === 'simulated' ? 'Waiting for simulator…' : 'Waiting for MIDI…'
+  }
+  return 'Ready'
+})
+
+// Deferred stage 2: Input/Output level knobs and Aux/Clip meters are visual-only.
+// The G2 does not expose these via the panel LED dump or SysEx paths we mirror today.
 const inputLevel = ref(4)
 const outputLevel = ref(6)
 const levelLed = ref(false)
@@ -88,7 +96,7 @@ function onIoKnobRotate() {
           variant="subtle"
           size="sm"
         >
-          {{ disabled ? 'Waiting for bridge…' : 'Ready' }}
+          {{ connectionBadgeLabel }}
         </UBadge>
       </div>
     </template>
@@ -186,6 +194,7 @@ function onIoKnobRotate() {
         </template>
         <template #top-lower>
           <div class="min-w-0 flex-1 flex items-center justify-start">
+            <!-- Aux In LED: no SysEx mirror path yet (deferred) -->
             <PanelLed
               variant="round"
               size="sm"
@@ -193,6 +202,7 @@ function onIoKnobRotate() {
           </div>
 
           <div class="min-w-0 flex-1 flex items-center justify-start">
+            <!-- Clip LED: no SysEx mirror path yet (deferred) -->
             <PanelLed
               variant="round"
               size="sm"
@@ -339,6 +349,5 @@ function onIoKnobRotate() {
         </template>
       </PanelSection>
     </div>
-    <!-- </div> -->
   </UCard>
 </template>

@@ -35,6 +35,7 @@ const COLUMN_BUTTON_BITS: Array<{ column: number, bit: number, button: FrontPane
   { column: 7, bit: 6, button: 'store' },
   { column: 9, bit: 3, button: 'midi' },
   { column: 9, bit: 5, button: 'option' }
+  // Left/Right (`No<` / `>Yes`) have no LED column bits on the G2 front panel.
 ]
 
 function emptyButtonLeds(): Record<FrontPanelButtonName, boolean> {

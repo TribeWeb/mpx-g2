@@ -4,14 +4,6 @@ const config = useRuntimeConfig()
 useSeoMeta({
   title: `Front Panel · ${config.public.appName}`
 })
-
-const { connect, mode } = useMidiConnection()
-
-onMounted(() => {
-  if (mode.value === 'simulated') {
-    connect()
-  }
-})
 </script>
 
 <template>

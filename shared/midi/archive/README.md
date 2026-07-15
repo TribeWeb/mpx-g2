@@ -13,7 +13,8 @@ Removed from the live app after Soft-page discovery did not yield a Gain-knob UI
 
 **What we use instead**
 
-- App Gain knob changes navigate the G2 UI: Edit → Gain → Right (`>`) via `GAIN_EDIT_PAGE_NAV` in `shared/midi/panel-button-codes.ts`
+- Gain knob writes go directly to the Gain EQ control-tree path (`gainEqControlPath`).
+- The G2 LCD is mirrored only via Auto Display pushes and display dump replies — not by synthesizing Gain page text in the app.
 
 **To revive**
 

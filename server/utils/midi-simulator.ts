@@ -1,4 +1,5 @@
 import type { FrontPanelButtonName, MpxG2PanelState } from '#shared/types/midi'
+import { getPanelButtonSysExValue } from '#shared/midi/panel-buttons'
 import { createEmptyPanelState } from '#shared/midi/sysex'
 
 const SIM_DISPLAY_TOP = 'MPX-G2 READY   '
@@ -48,9 +49,16 @@ export class MidiSimulator {
     })
   }
 
+  /**
+   * Simulates G2 panel-button handling. LEDs follow press (not optimistic toggle)
+   * so the simulator path matches hardware: UI updates via led_dump replies.
+   */
   handlePanel(action: 'press' | 'release', button: FrontPanelButtonName) {
     if (action === 'press') {
-      this.state.leds.buttons[button] = !this.state.leds.buttons[button]
+      const code = getPanelButtonSysExValue(button, 'press')
+      if (code != null) {
+        this.state.leds.buttons[button] = true
+      }
       this.setDisplayLine(1, `${button.toUpperCase()} PRESSED`.padEnd(16).slice(0, 16))
     } else {
       this.setDisplayLine(1, SIM_DISPLAY_BOTTOM)
@@ -78,8 +86,7 @@ export class MidiSimulator {
     } else {
       this.state.knobs.gainHigh = value
     }
-    const label = band === 'low' ? 'LOW' : band === 'mid' ? 'MID' : 'HIGH'
-    this.setDisplayLine(1, `GAIN ${label}: ${value}`.padEnd(16).slice(0, 16))
+    // LCD updates via display_dump from the bridge — not synthesized here.
     this.state.lastUpdated = Date.now()
   }
 

@@ -110,12 +110,6 @@ async function onConnect() {
     open.value = false
   }
 }
-
-onMounted(() => {
-  if (mode.value === 'simulated') {
-    connect()
-  }
-})
 </script>
 
 <template>

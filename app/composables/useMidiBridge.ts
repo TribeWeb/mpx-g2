@@ -7,7 +7,6 @@ import type {
   MpxG2PanelState
 } from '#shared/types/midi'
 import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
-import { formatGainEqDisplay } from '#shared/midi/display-format'
 import { createEmptyPanelState } from '#shared/midi/sysex'
 
 /** Shared across all `useMidiBridge()` callers and Vite HMR reloads. */
@@ -16,12 +15,15 @@ function getBridgeRuntime() {
     __mpxG2MidiBridge?: {
       socket: WebSocket | null
       reconnectTimer: ReturnType<typeof setTimeout> | null
+      /** When false, close events must not schedule auto-reconnect (explicit disconnect). */
+      allowReconnect: boolean
     }
   }
   if (!g.__mpxG2MidiBridge) {
     g.__mpxG2MidiBridge = {
       socket: null,
-      reconnectTimer: null
+      reconnectTimer: null,
+      allowReconnect: false
     }
   }
   return g.__mpxG2MidiBridge
@@ -37,6 +39,10 @@ export function useMidiBridge() {
   const deviceMode = useState<'simulated' | 'hardware' | null>('midi-sim-device-mode', () => null)
   const deviceName = useState<string | null>('midi-sim-device-name', () => null)
   const panelState = useState<MpxG2PanelState>('midi-sim-panel-state', () => createEmptyPanelState())
+
+  function resetPanelState() {
+    panelState.value = createEmptyPanelState()
+  }
 
   function handleServerMessage(message: MidiBridgeServerMessage) {
     switch (message.type) {
@@ -78,12 +84,14 @@ export function useMidiBridge() {
     return true
   }
 
-  function connect(url = config.public.midiBridgeUrl as string) {
+  function connect(_options?: { inputId?: string, outputId?: string }) {
     if (import.meta.server) {
       return
     }
 
+    const url = config.public.midiBridgeUrl as string
     disconnect()
+    bridgeRuntime.allowReconnect = true
     status.value = 'connecting'
     error.value = null
 
@@ -108,7 +116,10 @@ export function useMidiBridge() {
     bridgeRuntime.socket.addEventListener('close', () => {
       status.value = 'disconnected'
       panelState.value.connected = false
-      bridgeRuntime.reconnectTimer = setTimeout(() => connect(url), 3000)
+      bridgeRuntime.socket = null
+      if (bridgeRuntime.allowReconnect) {
+        bridgeRuntime.reconnectTimer = setTimeout(() => connect(), 3000)
+      }
     })
 
     bridgeRuntime.socket.addEventListener('error', () => {
@@ -118,6 +129,8 @@ export function useMidiBridge() {
   }
 
   function disconnect() {
+    bridgeRuntime.allowReconnect = false
+
     if (bridgeRuntime.reconnectTimer) {
       clearTimeout(bridgeRuntime.reconnectTimer)
       bridgeRuntime.reconnectTimer = null
@@ -132,16 +145,16 @@ export function useMidiBridge() {
     panelState.value.connected = false
   }
 
-  function pressButton(button: FrontPanelButtonName) {
-    send({ type: 'panel', action: 'press', button })
+  function pressButton(button: FrontPanelButtonName): boolean {
+    return send({ type: 'panel', action: 'press', button })
   }
 
-  function releaseButton(button: FrontPanelButtonName) {
-    send({ type: 'panel', action: 'release', button })
+  function releaseButton(button: FrontPanelButtonName): boolean {
+    return send({ type: 'panel', action: 'release', button })
   }
 
-  function rotateEncoder(delta: number) {
-    send({ type: 'encoder', delta })
+  function rotateEncoder(delta: number): boolean {
+    return send({ type: 'encoder', delta })
   }
 
   function setGainKnob(band: GainEqBand, value: number) {
@@ -155,14 +168,12 @@ export function useMidiBridge() {
     const min = live?.min ?? range.min
     const max = live?.max ?? range.max
     const clamped = Math.min(max, Math.max(min, Math.round(value)))
-    const nextKnobs = {
+    panelState.value.knobs = {
       ...knobs,
       gainLow: band === 'low' ? clamped : knobs.gainLow,
       gainMid: band === 'mid' ? clamped : knobs.gainMid,
       gainHigh: band === 'high' ? clamped : knobs.gainHigh
     }
-    panelState.value.knobs = nextKnobs
-    panelState.value.display.characters = formatGainEqDisplay(nextKnobs).split('')
     panelState.value.lastUpdated = Date.now()
 
     return send({ type: 'gain_knob', band, value: clamped })
@@ -176,6 +187,7 @@ export function useMidiBridge() {
     panelState: readonly(panelState),
     connect,
     disconnect,
+    resetPanelState,
     send,
     pressButton,
     releaseButton,

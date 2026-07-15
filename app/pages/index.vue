@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const config = useRuntimeConfig()
-const { error, connect, mode } = useMidiConnection()
+const { error } = useMidiConnection()
 
 const roadmap = [
   {
@@ -19,12 +19,6 @@ const roadmap = [
     description: 'Parameter tree browsing, program management, and routing UI built on the same protocol layer.'
   }
 ]
-
-onMounted(() => {
-  if (mode.value === 'simulated') {
-    connect()
-  }
-})
 </script>
 
 <template>
