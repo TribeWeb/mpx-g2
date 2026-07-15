@@ -257,10 +257,10 @@ function onIoKnobRotate() {
             <div class="flex flex-row items-center gap-x-2">
               <span class="w-10 text-center text-xs text-default">A</span>
               <PanelLed
-              variant="bar"
-              :active="panelState.leds.buttons.ab"
-              :flashing="ledFlashing('ab')"
-            />
+                variant="bar"
+                :active="panelState.leds.buttons.ab"
+                :flashing="ledFlashing('ab')"
+              />
             </div>
             <div class="flex flex-row items-center gap-x-2">
               <span class="w-10 text-center text-xs text-default">B</span>
