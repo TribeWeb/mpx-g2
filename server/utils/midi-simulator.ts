@@ -1,7 +1,11 @@
 import type { FrontPanelButtonName, MpxG2PanelState } from '#shared/types/midi'
+import { createDemoPanelKnobState, GAIN_PEDAL_DEMO } from '#shared/constants/gain-pedal-demo'
 import { getPanelButtonSysExValue } from '#shared/midi/panel-buttons'
 import { createEmptyPanelState } from '#shared/midi/sysex'
 
+const EFFECT_TOGGLE_BUTTONS = new Set<FrontPanelButtonName>([
+  'gain', 'fx1', 'fx2', 'chorus', 'delay', 'reverb', 'eq', 'insert', 'bypass'
+])
 const SIM_DISPLAY_TOP = 'MPX-G2 READY   '
 const SIM_DISPLAY_BOTTOM = 'SIM MODE        '
 
@@ -17,6 +21,7 @@ export class MidiSimulator {
     this.state = {
       ...createEmptyPanelState(),
       connected: true,
+      knobs: createDemoPanelKnobState(),
       display: {
         characters: [
           ...SIM_DISPLAY_TOP,
@@ -26,6 +31,10 @@ export class MidiSimulator {
       },
       leds: {
         ...createEmptyPanelState().leds,
+        buttons: {
+          ...createEmptyPanelState().leds.buttons,
+          gain: GAIN_PEDAL_DEMO.enabled
+        },
         segments: [1, 2, 0] as [number, number, number]
       },
       lastUpdated: Date.now()
@@ -56,11 +65,14 @@ export class MidiSimulator {
   handlePanel(action: 'press' | 'release', button: FrontPanelButtonName) {
     if (action === 'press') {
       const code = getPanelButtonSysExValue(button, 'press')
-      if (code != null) {
+      if (code != null && !EFFECT_TOGGLE_BUTTONS.has(button)) {
         this.state.leds.buttons[button] = true
       }
       this.setDisplayLine(1, `${button.toUpperCase()} PRESSED`.padEnd(16).slice(0, 16))
     } else {
+      if (EFFECT_TOGGLE_BUTTONS.has(button)) {
+        this.state.leds.buttons[button] = !this.state.leds.buttons[button]
+      }
       this.setDisplayLine(1, SIM_DISPLAY_BOTTOM)
     }
     this.state.lastUpdated = Date.now()

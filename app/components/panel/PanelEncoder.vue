@@ -8,6 +8,10 @@ const props = withDefaults(defineProps<{
   disabled?: boolean
   indicator?: boolean
   ticks?: boolean
+  /** Let wheel events bubble so a parent scroll container can scroll. */
+  wheelScrollPassthrough?: boolean
+  /** Knob indicator line colour (e.g. pedal accent). */
+  accentColor?: string
 }>(), {
   min: 0,
   max: 11,
@@ -15,7 +19,8 @@ const props = withDefaults(defineProps<{
   size: 'lg',
   disabled: false,
   indicator: false,
-  ticks: false
+  ticks: false,
+  wheelScrollPassthrough: false
 })
 
 const emit = defineEmits<{
@@ -38,18 +43,22 @@ const sizeClasses = computed(() => {
       border: 'border-2',
       indicator: 'top-[0.26rem] h-[1.05rem] w-0.5',
       tickInset: '-inset-[0.2rem]',
-      buttonSize: 'sm' as const
+      buttonSize: 'sm' as const,
+      stepGap: 'gap-0.5',
+      stepButtonUi: { base: 'size-5 justify-center', leadingIcon: 'text-dimmed' }
     }
   }
 
   return {
-    gap: 'gap-4',
+    gap: 'gap-3',
     wheel: 'size-28',
     inset: 'inset-4',
     border: 'border-4',
     indicator: 'top-3 h-11 w-1.5',
     tickInset: '-inset-2',
-    buttonSize: 'xl' as const
+    buttonSize: 'xl' as const,
+    stepGap: 'gap-1',
+    stepButtonUi: { base: 'size-6 justify-center', leadingIcon: 'text-dimmed' }
   }
 })
 
@@ -118,6 +127,9 @@ function onPointerUp(event: PointerEvent) {
 
 function onWheel(event: WheelEvent) {
   if (props.disabled) return
+  if (props.wheelScrollPassthrough) {
+    return
+  }
   event.preventDefault()
   rotate(event.deltaY < 0 ? 1 : -1)
 }
@@ -128,15 +140,6 @@ function onWheel(event: WheelEvent) {
     class="flex flex-col items-center"
     :class="sizeClasses.gap"
   >
-    <UButton
-      :disabled="disabled"
-      color="neutral"
-      variant="subtle"
-      size="xs"
-      icon="i-heroicons-plus"
-      aria-label="Increment"
-      @click="rotate(1)"
-    />
     <div
       class="relative"
       :class="sizeClasses.wheel"
@@ -169,8 +172,9 @@ function onWheel(event: WheelEvent) {
           />
           <span
             v-if="indicator"
-            class="bg-inverted/50 absolute left-1/2 -translate-x-1/2"
-            :class="sizeClasses.indicator"
+            class="absolute left-1/2 -translate-x-1/2"
+            :class="[sizeClasses.indicator, accentColor ? '' : 'bg-inverted/50']"
+            :style="accentColor ? { backgroundColor: accentColor } : undefined"
           />
           <span
             v-else
@@ -202,14 +206,30 @@ function onWheel(event: WheelEvent) {
       />
     </div>
 
-    <UButton
-      :disabled="disabled"
-      color="neutral"
-      variant="subtle"
-      size="xs"
-      icon="i-heroicons-minus"
-      aria-label="Decrement"
-      @click="rotate(-1)"
-    />
+    <div
+      class="flex items-center justify-center"
+      :class="sizeClasses.stepGap"
+    >
+      <UButton
+        :disabled="disabled"
+        color="neutral"
+        variant="subtle"
+        size="xs"
+        icon="i-heroicons-minus"
+        aria-label="Decrement"
+        :ui="sizeClasses.stepButtonUi"
+        @click="rotate(-1)"
+      />
+      <UButton
+        :disabled="disabled"
+        color="neutral"
+        variant="subtle"
+        size="xs"
+        icon="i-heroicons-plus"
+        aria-label="Increment"
+        :ui="sizeClasses.stepButtonUi"
+        @click="rotate(1)"
+      />
+    </div>
   </div>
 </template>

@@ -62,6 +62,7 @@ function handleClientMessage(socket: WebSocket, raw: string) {
       simulator.handlePanel(message.action, message.button)
       send(socket, { type: 'display_dump', characters: simulator.getDisplayCharacters() })
       send(socket, { type: 'led_dump', leds: simulator.getLedState() })
+      pushPanelState(socket, simulator)
       break
     case 'encoder':
       simulator.handleEncoder(message.delta)
@@ -83,11 +84,13 @@ export function startMidiBridge(port: number) {
   wss = new WebSocketServer({ port })
 
   wss.on('connection', (socket) => {
+    const simulator = getSimulator(socket)
     send(socket, {
       type: 'connected',
       deviceName: 'MPX-G2 (simulated)',
       deviceMode: 'simulated'
     })
+    pushPanelState(socket, simulator)
 
     socket.on('message', (data) => {
       handleClientMessage(socket, String(data))

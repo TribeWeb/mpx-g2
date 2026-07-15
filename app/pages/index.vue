@@ -31,6 +31,13 @@ const roadmap = [
         to: '/panel',
         trailingIcon: 'i-lucide-arrow-right',
         size: 'xl'
+      }, {
+        label: 'Gain pedal',
+        to: '/pedals',
+        trailingIcon: 'i-lucide-guitar',
+        size: 'xl',
+        color: 'neutral',
+        variant: 'outline'
       }]"
     />
 
