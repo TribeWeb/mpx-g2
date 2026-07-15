@@ -1,14 +1,18 @@
 import type { GainEqBand, MpxG2PanelState } from '#shared/types/midi'
-import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
+import { gainEqControlPath, GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
 import { applyGainEqRange } from '#shared/midi/inbound'
-import { primaryObjectRange, type ObjectDescription } from '#shared/midi/object-description'
+import { editorObjectRange, objectDescriptionMatchesGainBand, type ObjectDescription } from '#shared/midi/object-description'
 import {
   buildGainAlgRequest,
-  buildGainEqObjectTypeIdRequest,
   buildGainEqRequest,
-  buildObjectDescriptionRequest
+  buildObjectDescriptionRequest,
+  buildObjectTypeIdRequest
 } from '#shared/midi/requests'
-import type { WebMidiRuntime } from './runtime'
+import type { ResolvedParamMeta, WebMidiRuntime } from './runtime'
+
+const BANDS = ['low', 'mid', 'high'] as const
+const TIMEOUT_MS = 2500
+const RESYNC_MS = 450
 
 export type GainEqSyncDeps = {
   runtime: WebMidiRuntime
@@ -20,201 +24,245 @@ export type GainEqSyncDeps = {
 
 export function createGainEqSync(deps: GainEqSyncDeps) {
   const { runtime, panelState, status, getSysexOptions, sendSysEx } = deps
+  const gs = () => runtime.gainSync
+  const rs = () => gs().resolve
 
-  function isActiveRangeGeneration(gen = runtime.rangeActiveGen): boolean {
-    return gen > 0 && gen === runtime.rangeRequestGen && gen === runtime.rangeActiveGen
+  const isLive = (gen = rs().generation) =>
+    gen > 0 && gen === rs().generation
+
+  function clearTimer() {
+    const t = rs().timer
+    if (t) {
+      clearTimeout(t)
+      rs().timer = null
+    }
   }
 
-  function resetGainEqRangesToFallback() {
-    panelState.value.knobs = {
-      ...panelState.value.knobs,
-      gainLowRange: { ...GAIN_EQ_DISPLAY_RANGE.low },
-      gainMidRange: { ...GAIN_EQ_DISPLAY_RANGE.mid },
-      gainHighRange: { ...GAIN_EQ_DISPLAY_RANGE.high }
-    }
-    panelState.value.lastUpdated = Date.now()
+  function finish() {
+    const r = rs()
+    r.readyRevision = r.revision
+    clearTimer()
+    r.inFlight = null
+    const done = r.onComplete
+    r.onComplete = r.onParamResolved = null
+    done?.()
   }
 
-  function applyObjectDescriptionToBand(band: GainEqBand, description: ObjectDescription, gen: number) {
-    if (!isActiveRangeGeneration(gen)) {
-      return
+  function applyMeta(band: GainEqBand, description: ObjectDescription, gen: number) {
+    if (!isLive(gen) || !objectDescriptionMatchesGainBand(band, description.name)) {
+      return false
     }
-    const range = primaryObjectRange(description)
+    const range = editorObjectRange(description)
     if (!range) {
+      return false
+    }
+    const valueBytes: 1 | 2 = description.byteCount === 1 ? 1 : 2
+    rs().onParamResolved?.({ specId: band, range, valueBytes })
+    rs().resolvedIds.add(band)
+    rs().inFlight = null
+    console.info(`[mpx-g2] Gain ${band} range ← "${description.name}" ${range.min} <> ${range.max} (${valueBytes} byte)`)
+    return true
+  }
+
+  function pump(note: string, gen: number) {
+    const r = rs()
+    if (!isLive(gen) || r.inFlight) {
       return
     }
-    applyGainEqRange(
-      panelState.value,
-      band,
-      range,
-      description.byteCount === 1 || description.byteCount === 2 ? description.byteCount : undefined
-    )
-    const knobs = panelState.value.knobs
-    const valueKey = band === 'low' ? 'gainLow' : band === 'mid' ? 'gainMid' : 'gainHigh'
-    const value = knobs[valueKey]
-    if (value < range.min || value > range.max) {
-      panelState.value.knobs = {
-        ...knobs,
-        [valueKey]: Math.min(range.max, Math.max(range.min, value))
+    const band = r.pendingIds[0] as GainEqBand | undefined
+    if (!band) {
+      if (r.resolvedIds.size >= BANDS.length) {
+        finish()
       }
-    }
-    console.info(
-      `[mpx-g2] Gain ${band} range ← "${description.name}" ${range.min} <> ${range.max} (${description.byteCount} byte)`
-    )
-  }
-
-  function applyObjectDescription(description: ObjectDescription) {
-    runtime.objectDescriptions.set(description.objectTypeId, description)
-    const pending = runtime.pendingDescriptionBands.get(description.objectTypeId)
-    if (!pending || pending.size === 0) {
       return
     }
-    const gen = runtime.rangeActiveGen
-    if (!isActiveRangeGeneration(gen)) {
-      runtime.pendingDescriptionBands.delete(description.objectTypeId)
-      return
-    }
-    for (const band of pending) {
-      applyObjectDescriptionToBand(band, description, gen)
-    }
-    runtime.pendingDescriptionBands.delete(description.objectTypeId)
-  }
-
-  function pumpGainRangeRequests(note: string, gen = runtime.rangeRequestGen) {
-    if (runtime.rangeRequestGen !== gen) {
-      return
-    }
-    if (runtime.rangeAwaitingBand) {
-      return
-    }
-    const band = runtime.pendingObjectTypeBands[0]
-    const alg = runtime.rangeAwaitingAlg
-    if (!band || alg < 1) {
-      return
-    }
-    runtime.rangeAwaitingBand = band
-    runtime.rangeInFlight = { gen, band, alg }
+    r.inFlight = { specId: band, stage: 'otid' }
     const opts = getSysexOptions()
+    const alg = gs().alg
     sendSysEx(
-      buildGainEqObjectTypeIdRequest(alg, band, opts.deviceId, opts.productId),
+      buildObjectTypeIdRequest(gainEqControlPath(alg, band), opts.deviceId, opts.productId),
       `Gain ${band} Object Type ID (${note}, alg ${alg})`
     )
+    clearTimer()
+    r.timer = setTimeout(() => {
+      r.timer = null
+      if (!isLive(gen) || r.inFlight?.specId !== band) {
+        return
+      }
+      console.warn(`[mpx-g2] Gain ${band} timed out, retrying`)
+      r.inFlight = null
+      if (!r.pendingIds.includes(band)) {
+        r.pendingIds.unshift(band)
+      }
+      r.pendingDescFor.clear()
+      pump('retry', gen)
+    }, TIMEOUT_MS)
   }
 
-  function resolveGainObjectType(band: GainEqBand, objectTypeId: number, gen: number) {
-    if (!isActiveRangeGeneration(gen)) {
+  function onObjectTypeId(band: GainEqBand, objectTypeId: number) {
+    const r = rs()
+    const flight = r.inFlight
+    if (!flight || !isLive() || flight.specId !== band || flight.stage !== 'otid' || r.resolvedIds.has(band)) {
       return
     }
+    r.pendingIds = r.pendingIds.filter(id => id !== band)
+    flight.stage = 'description'
 
     const cached = runtime.objectDescriptions.get(objectTypeId)
-    if (cached) {
-      applyObjectDescriptionToBand(band, cached, gen)
+    if (cached && applyMeta(band, cached, r.generation)) {
+      if (r.resolvedIds.size >= BANDS.length) {
+        finish()
+      } else {
+        pump('gain ranges', r.generation)
+      }
       return
     }
 
-    let pending = runtime.pendingDescriptionBands.get(objectTypeId)
-    if (!pending) {
-      pending = new Set()
-      runtime.pendingDescriptionBands.set(objectTypeId, pending)
+    if (!r.pendingDescFor.has(objectTypeId)) {
       const opts = getSysexOptions()
       sendSysEx(
         buildObjectDescriptionRequest(objectTypeId, opts.deviceId, opts.productId),
         `Object Description request type=${objectTypeId} (${band})`
       )
     }
-    pending.add(band)
+    r.pendingDescFor.set(objectTypeId, band)
   }
 
-  function acceptGainObjectTypeId(band: GainEqBand, objectTypeId: number, alg?: number) {
-    const inFlight = runtime.rangeInFlight
-    if (!inFlight || !isActiveRangeGeneration(inFlight.gen)) {
+  function startRanges(alg: number, note: string, onComplete: () => void) {
+    const r = rs()
+    if (r.readyRevision === r.revision) {
+      onComplete()
       return
     }
-    if (band !== inFlight.band) {
-      return
+    gs().alg = alg
+    r.generation++
+    clearTimer()
+    r.pendingDescFor.clear()
+    r.pendingIds = [...BANDS]
+    r.resolvedIds = new Set()
+    r.inFlight = null
+    r.onComplete = onComplete
+    r.onParamResolved = (meta: ResolvedParamMeta) => {
+      const band = meta.specId as GainEqBand
+      applyGainEqRange(panelState.value, band, meta.range, meta.valueBytes)
+      const key = band === 'low' ? 'gainLow' : band === 'mid' ? 'gainMid' : 'gainHigh'
+      const v = panelState.value.knobs[key]
+      if (v < meta.range.min || v > meta.range.max) {
+        panelState.value.knobs = {
+          ...panelState.value.knobs,
+          [key]: Math.min(meta.range.max, Math.max(meta.range.min, v))
+        }
+      }
     }
-    if (alg != null && (alg !== inFlight.alg || alg !== runtime.rangeAwaitingAlg)) {
-      return
+    panelState.value.knobs = {
+      ...panelState.value.knobs,
+      gainLowRange: { ...GAIN_EQ_DISPLAY_RANGE.low },
+      gainMidRange: { ...GAIN_EQ_DISPLAY_RANGE.mid },
+      gainHighRange: { ...GAIN_EQ_DISPLAY_RANGE.high }
     }
-
-    const pendingIdx = runtime.pendingObjectTypeBands.indexOf(band)
-    if (pendingIdx >= 0) {
-      runtime.pendingObjectTypeBands.splice(pendingIdx, 1)
-    }
-    if (runtime.rangeAwaitingBand === band) {
-      runtime.rangeAwaitingBand = null
-    }
-    runtime.rangeInFlight = null
-    resolveGainObjectType(band, objectTypeId, inFlight.gen)
-    pumpGainRangeRequests('gain ranges', inFlight.gen)
+    pump(note, r.generation)
   }
 
-  function requestGainEqRanges(alg: number, note = 'gain ranges') {
-    if (alg < 1) {
-      return
-    }
-    const gen = ++runtime.rangeRequestGen
-    runtime.rangeActiveGen = gen
-    runtime.rangeSyncedAlg = alg
-    runtime.rangeInFlight = null
-    runtime.pendingDescriptionBands.clear()
-    runtime.pendingObjectTypeBands = ['low', 'mid', 'high']
-    runtime.rangeAwaitingBand = null
-    runtime.rangeAwaitingAlg = alg
-    resetGainEqRangesToFallback()
-    pumpGainRangeRequests(note, gen)
-  }
-
-  function requestGainEqParams(alg: number, note = 'gain eq sync') {
-    if (alg < 1) {
-      return
-    }
+  function requestValues(alg: number, note: string) {
     const opts = getSysexOptions()
-    const bands = ['low', 'mid', 'high'] as const
-    bands.forEach((band, index) => {
+    BANDS.forEach((band, i) => {
       window.setTimeout(() => {
         sendSysEx(
           buildGainEqRequest(alg, band, opts.deviceId, opts.productId),
-          `Gain ${band} request (${note}, alg ${alg})`
+          `Gain ${band} value request (${note}, alg ${alg})`
         )
-      }, index * 60)
+      }, i * 60)
     })
-    if (runtime.rangeSyncedAlg !== alg) {
-      requestGainEqRanges(alg, note)
-    }
+  }
+
+  function invalidate() {
+    const r = rs()
+    r.revision++
+    r.readyRevision = -1
+    r.generation++
+    clearTimer()
+    r.pendingIds = []
+    r.resolvedIds = new Set()
+    r.inFlight = null
+    r.pendingDescFor.clear()
+    r.onComplete = r.onParamResolved = null
   }
 
   function requestGainEqState(note = 'gain sync') {
+    const g = gs()
+    const requestId = ++g.algSyncId
     const opts = getSysexOptions()
     sendSysEx(buildGainAlgRequest(opts.deviceId, opts.productId), `Gain alg request (${note})`)
-
     window.setTimeout(() => {
+      if (g.algRespondedId >= requestId) {
+        return
+      }
       const alg = panelState.value.knobs.gainAlg
       if (alg >= 1) {
-        requestGainEqParams(alg, `${note} fallback`)
+        startRanges(alg, `${note} fallback`, () => requestValues(alg, `${note} fallback`))
       }
     }, 400)
   }
 
   function scheduleGainEqResync(note: string) {
-    if (runtime.gainResyncTimer) {
-      clearTimeout(runtime.gainResyncTimer)
+    invalidate()
+    if (gs().resyncTimer) {
+      clearTimeout(gs().resyncTimer!)
     }
-    runtime.gainResyncTimer = setTimeout(() => {
-      runtime.gainResyncTimer = null
+    gs().resyncTimer = setTimeout(() => {
+      gs().resyncTimer = null
       if (status.value !== 'connected') {
         return
       }
       console.info(`[mpx-g2] Gain EQ resync (${note})`)
       requestGainEqState(note)
-    }, 450)
+    }, RESYNC_MS)
   }
 
   return {
-    applyObjectDescription,
-    acceptGainObjectTypeId,
-    requestGainEqParams,
+    applyObjectDescription(description: ObjectDescription) {
+      runtime.objectDescriptions.set(description.objectTypeId, description)
+      const r = rs()
+      if (!isLive()) {
+        return
+      }
+      const band = r.pendingDescFor.get(description.objectTypeId) as GainEqBand | undefined
+      if (!band || (r.inFlight && r.inFlight.specId !== band)) {
+        return
+      }
+      r.pendingDescFor.delete(description.objectTypeId)
+      if (applyMeta(band, description, r.generation)) {
+        if (r.resolvedIds.size >= BANDS.length) {
+          finish()
+        } else {
+          pump('gain ranges', r.generation)
+        }
+      }
+    },
+
+    acceptObjectTypeId(band: GainEqBand, objectTypeId: number) {
+      onObjectTypeId(band, objectTypeId)
+    },
+
+    acceptOrphanObjectTypeId(objectTypeId: number) {
+      const band = rs().inFlight?.specId as GainEqBand | undefined
+      if (band) {
+        onObjectTypeId(band, objectTypeId)
+      }
+    },
+
+    requestGainEqParams(alg: number, note = 'gain eq sync') {
+      if (alg < 1) {
+        return
+      }
+      startRanges(alg, note, () => requestValues(alg, note))
+    },
+
     requestGainEqState,
-    scheduleGainEqResync
+    scheduleGainEqResync,
+
+    noteGainAlgResponse() {
+      gs().algRespondedId = gs().algSyncId
+    }
   }
 }

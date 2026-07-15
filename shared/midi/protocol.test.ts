@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { getPanelButtonSysExValue } from './panel-buttons'
+import {
+  editorObjectRange,
+  objectDescriptionMatchesGainBand,
+  parseObjectDescriptionPayload
+} from './object-description'
 import { encodeParamValue, decodeParamValue } from './param-value'
 import { parseLedDumpBytes } from './led-dump'
 
@@ -43,5 +48,40 @@ describe('parseLedDumpBytes', () => {
     const state = parseLedDumpBytes(bytes)
     expect(state.segments).toEqual([0, 1, 2])
     expect(state.buttons.gain).toBe(true)
+  })
+})
+
+describe('object-description gain eq', () => {
+  it('matches band names to descriptions', () => {
+    expect(objectDescriptionMatchesGainBand('low', 'Lo')).toBe(true)
+    expect(objectDescriptionMatchesGainBand('mid', 'Mid')).toBe(true)
+    expect(objectDescriptionMatchesGainBand('high', 'Hi')).toBe(true)
+    expect(objectDescriptionMatchesGainBand('mid', 'Lo')).toBe(false)
+  })
+
+  it('prefers the tightest limit pair for editors', () => {
+    const range = editorObjectRange({
+      objectTypeId: 77,
+      name: 'Lo',
+      byteCount: 1,
+      controlFlags: 0,
+      optionObjectTypeId: null,
+      limits: [
+        { min: -15, max: 15, displayUnits: 0, signed: true },
+        { min: -5, max: 5, displayUnits: 0, signed: true }
+      ]
+    })
+    expect(range).toEqual({ min: -5, max: 5 })
+  })
+
+  it('parses Screamer Lo from hardware capture', () => {
+    const payload = [
+      0x0d, 0x04, 0x00, 0x00, 0x05, 0x00, 0x0c, 0x04, 0x0f, 0x06, 0x00, 0x02, 0x00, 0x02, 0x00, 0x02,
+      0x01, 0x00, 0x00, 0x00, 0x03, 0x04, 0x0f, 0x0f, 0x0f, 0x0f, 0x01, 0x00, 0x0b, 0x0f, 0x0f, 0x0f,
+      0x05, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x08, 0x04
+    ]
+    const description = parseObjectDescriptionPayload(payload)
+    expect(description?.name).toBe('Lo')
+    expect(editorObjectRange(description!)).toEqual({ min: -5, max: 5 })
   })
 })

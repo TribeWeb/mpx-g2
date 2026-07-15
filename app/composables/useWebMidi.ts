@@ -31,7 +31,7 @@ import {
 import { createGainEqSync } from './web-midi/gain-eq-sync'
 import { clearRxProbeTimer, startPanelMirrorPoll, stopPanelMirrorPoll } from './web-midi/panel-mirror'
 import { describeMidiMessage, matchesMpxPort, resolveInputPorts } from './web-midi/port-utils'
-import { getWebMidiRuntime, MODULE_HANDLER_EPOCH, resetGainEqSyncState } from './web-midi/runtime'
+import { getWebMidiRuntime, MODULE_HANDLER_EPOCH, resetGainSyncState } from './web-midi/runtime'
 import {
   clearPersistedPorts,
   readPersistedPorts,
@@ -227,20 +227,17 @@ export function useWebMidi() {
     }
 
     if (result.gainAlg != null && result.gainAlg >= 1) {
+      gainEq.noteGainAlgResponse()
       gainEq.requestGainEqParams(result.gainAlg)
     }
 
     if (result.gainEqObjectType) {
-      gainEq.acceptGainObjectTypeId(
+      gainEq.acceptObjectTypeId(
         result.gainEqObjectType.band,
-        result.gainEqObjectType.objectTypeId,
-        result.gainEqObjectType.alg
+        result.gainEqObjectType.objectTypeId
       )
     } else if (result.objectTypeId != null) {
-      const band = webMidiRuntime.rangeAwaitingBand
-      if (band) {
-        gainEq.acceptGainObjectTypeId(band, result.objectTypeId)
-      }
+      gainEq.acceptOrphanObjectTypeId(result.objectTypeId)
     }
 
     if (result.objectDescription) {
@@ -511,9 +508,9 @@ export function useWebMidi() {
   function disconnect(options?: { forgetSession?: boolean }) {
     clearRxProbeTimer(webMidiRuntime)
     stopPanelMirrorPoll(mirrorDeps)
-    if (webMidiRuntime.gainResyncTimer) {
-      clearTimeout(webMidiRuntime.gainResyncTimer)
-      webMidiRuntime.gainResyncTimer = null
+    if (webMidiRuntime.gainSync.resyncTimer) {
+      clearTimeout(webMidiRuntime.gainSync.resyncTimer)
+      webMidiRuntime.gainSync.resyncTimer = null
     }
     tempoLed.clearTempoLedTimers()
     detachAllInputs()
@@ -527,7 +524,7 @@ export function useWebMidi() {
     webMidiRuntime.connectOptions = undefined
     webMidiRuntime.programDigits = null
     webMidiRuntime.handlerEpoch = null
-    resetGainEqSyncState(webMidiRuntime)
+    resetGainSyncState(webMidiRuntime)
 
     if (options?.forgetSession !== false) {
       clearPersistedPorts()
@@ -618,7 +615,11 @@ export function useWebMidi() {
     const rangeKey = gainEqRangeKey(band)
     const range = knobs[rangeKey] ?? GAIN_EQ_DISPLAY_RANGE[band]
     const clamped = Math.min(range.max, Math.max(range.min, Math.round(value)))
-    const alg = knobs.gainAlg || 1
+    const alg = knobs.gainAlg >= 1
+      ? knobs.gainAlg
+      : webMidiRuntime.gainSync.alg >= 1
+        ? webMidiRuntime.gainSync.alg
+        : 1
     const valueBytes: 1 | 2 = knobs.gainValueBytes === 1 ? 1 : 2
 
     panelState.value.knobs = {

@@ -156,3 +156,40 @@ export function primaryObjectRange(
   }
   return { min: limit.min, max: limit.max }
 }
+
+const GAIN_EQ_BAND_NAME_PREFIX: Record<'low' | 'mid' | 'high', string> = {
+  low: 'lo',
+  mid: 'mid',
+  high: 'hi'
+}
+
+/** True when an Object Description name matches the expected Gain EQ band. */
+export function objectDescriptionMatchesGainBand(
+  band: 'low' | 'mid' | 'high',
+  name: string
+): boolean {
+  const normalized = name.trim().toLowerCase()
+  return normalized.startsWith(GAIN_EQ_BAND_NAME_PREFIX[band])
+}
+
+/**
+ * Pick the tightest limit pair for knob editors when multiple units are present.
+ * Lexicon Object Descriptions often include a wide internal range and a narrower UI range.
+ */
+export function editorObjectRange(
+  description: ObjectDescription
+): { min: number, max: number } | null {
+  if (description.limits.length === 0) {
+    return null
+  }
+  let best = description.limits[0]!
+  let bestSpan = best.max - best.min
+  for (const limit of description.limits.slice(1)) {
+    const span = limit.max - limit.min
+    if (span > 0 && span < bestSpan) {
+      best = limit
+      bestSpan = span
+    }
+  }
+  return { min: best.min, max: best.max }
+}
