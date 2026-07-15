@@ -1,0 +1,121 @@
+import { nibblize, buildSysExHeader } from './sysex'
+import { SysExMessageType } from '../types/midi'
+import {
+  DISPLAY_DUMP_PATH,
+  GAIN_ALG_PATH,
+  LED_DUMP_PATH,
+  LED_DUMP_PATH_ALT,
+  gainEqControlPath
+} from './control-paths'
+
+const SYSEX_END = 0xf7
+
+/** Build a generic MPX-G2 request message (type 06). */
+export function buildRequestMessage(
+  requestType: number,
+  args: number[] = [],
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return new Uint8Array([
+    ...buildSysExHeader({ deviceId, productId, messageType: SysExMessageType.Request }),
+    ...nibblize([requestType]),
+    ...nibblize(args),
+    SYSEX_END
+  ])
+}
+
+/** Request system configuration (no arguments). */
+export function buildSystemConfigRequest(
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return new Uint8Array([
+    ...buildSysExHeader({ deviceId, productId, messageType: SysExMessageType.Request }),
+    ...nibblize([0x00, 0x00, 0x00, 0x00]),
+    SYSEX_END
+  ])
+}
+
+/** Request a data message at a control-tree address (request type 01). */
+export function buildDataRequest(
+  controlLevels: number[],
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  // Raw bytes — buildRequestMessage nibblizes once.
+  const args = [
+    controlLevels.length & 0xff,
+    (controlLevels.length >> 8) & 0xff,
+    ...controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff])
+  ]
+  return buildRequestMessage(SysExMessageType.Data, args, deviceId, productId)
+}
+
+/** Request the active Gain algorithm index. */
+export function buildGainAlgRequest(deviceId = 0x00, productId?: number): Uint8Array {
+  return buildDataRequest([...GAIN_ALG_PATH], deviceId, productId)
+}
+
+/** Request Gain Lo / Mid / Hi for a loaded algorithm. */
+export function buildGainEqRequest(
+  alg: number,
+  band: 'low' | 'mid' | 'high',
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildDataRequest(gainEqControlPath(alg, band), deviceId, productId)
+}
+
+/** Request Object Type ID (03 hex) at a control-tree path. */
+export function buildObjectTypeIdRequest(
+  controlLevels: number[],
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  const args = [
+    controlLevels.length & 0xff,
+    (controlLevels.length >> 8) & 0xff,
+    ...controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff])
+  ]
+  return buildRequestMessage(SysExMessageType.ObjectTypeId, args, deviceId, productId)
+}
+
+/** Request Object Description (04 hex) for an Object Type ID. */
+export function buildObjectDescriptionRequest(
+  objectTypeId: number,
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildRequestMessage(
+    SysExMessageType.ObjectDescription,
+    [objectTypeId & 0xff, (objectTypeId >> 8) & 0xff],
+    deviceId,
+    productId
+  )
+}
+
+/** Request Object Type IDs for Gain Lo / Mid / Hi (used to fetch min/max ranges). */
+export function buildGainEqObjectTypeIdRequest(
+  alg: number,
+  band: 'low' | 'mid' | 'high',
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildObjectTypeIdRequest(gainEqControlPath(alg, band), deviceId, productId)
+}
+
+/** Request the 32-character front-panel LCD contents. */
+export function buildDisplayDumpRequest(deviceId = 0x00, productId?: number): Uint8Array {
+  return buildDataRequest([...DISPLAY_DUMP_PATH], deviceId, productId)
+}
+
+/** Request the 10-byte front-panel LED buffer. */
+export function buildLedDumpRequest(deviceId = 0x00, productId?: number): Uint8Array {
+  return buildDataRequest([...LED_DUMP_PATH], deviceId, productId)
+}
+
+/** Alternate LED dump path (2-level). */
+export function buildLedDumpRequestAlt(deviceId = 0x00, productId?: number): Uint8Array {
+  return buildDataRequest([...LED_DUMP_PATH_ALT], deviceId, productId)
+}
