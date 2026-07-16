@@ -193,6 +193,15 @@ export function objectDescriptionMatchesStandardParam(
 export function editorObjectRange(
   description: ObjectDescription
 ): { min: number, max: number } | null {
+  const limit = editorObjectLimit(description)
+  if (!limit) {
+    return null
+  }
+  return { min: limit.min, max: limit.max }
+}
+
+/** Prefer the tightest Object Description limit (same pick as {@link editorObjectRange}). */
+export function editorObjectLimit(description: ObjectDescription): ObjectLimit | null {
   if (description.limits.length === 0) {
     return null
   }
@@ -205,5 +214,5 @@ export function editorObjectRange(
       bestSpan = span
     }
   }
-  return { min: best.min, max: best.max }
+  return best
 }

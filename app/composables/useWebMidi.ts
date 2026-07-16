@@ -90,13 +90,22 @@ export function useWebMidi() {
     harvestHandler = null
   }
 
-  /** Pause panel mirror / Auto Display so harvest dumps are not stomped. */
+  /** Pause panel mirror / Auto Display / param sync so harvest owns the bus. */
   function beginHarvestQuiet() {
     if (harvestQuiet) {
       return
     }
     harvestQuiet = true
+    webMidiRuntime.harvestPaused = true
     stopPanelMirrorPoll(mirrorDeps)
+    gainEq.clearTimers()
+    chorus.clearTimers()
+    programAlg.clearTimer()
+    // Abort in-flight Gain/Chorus range resolves so their timeouts cannot retry.
+    webMidiRuntime.gainSync.resolve.generation++
+    webMidiRuntime.gainSync.resolve.inFlight = null
+    webMidiRuntime.chorusSync.resolve.generation++
+    webMidiRuntime.chorusSync.resolve.inFlight = null
     const opts = getSysexOptions()
     sendSysEx(
       buildHandshakeMessage(HandshakeCommand.TurnOffAutoDisplay, opts),
@@ -110,6 +119,7 @@ export function useWebMidi() {
       return
     }
     harvestQuiet = false
+    webMidiRuntime.harvestPaused = false
     if (status.value !== 'connected' || deviceMode.value !== 'hardware') {
       return
     }
@@ -177,7 +187,9 @@ export function useWebMidi() {
       return false
     }
 
-    if (!options?.silent) {
+    // Harvest / quiet poll: keep the console and MIDI log clear.
+    const silent = options?.silent ?? harvestQuiet
+    if (!silent) {
       addLog('tx', data, note, webMidiRuntime.midiOutput.name ?? webMidiRuntime.midiOutput.id)
     }
     return true
@@ -250,8 +262,13 @@ export function useWebMidi() {
     webMidiRuntime.sysexBuffers.delete(portId)
     recordRx()
 
+    // Harvest owns the bus — do not log, mirror panel, or kick gain/chorus resync.
     if (harvestHandler) {
+      if (data[0] === 0xf0 && data[2] != null) {
+        webMidiRuntime.productId = data[2]
+      }
       harvestHandler(data)
+      return
     }
 
     if (data[0] !== 0xf0) {
@@ -300,9 +317,7 @@ export function useWebMidi() {
     )
     const quietPoll = (isLedUpdate && !digitsChanged && webMidiRuntime.programDigits != null)
       || (isDisplayUpdate && result.displayChanged === false)
-    // Harvest floods the bus with Object Descriptions / OTID dumps — logging each
-    // message stalls the main thread and can drop the control-tree stream.
-    if (!quietPoll && !harvestHandler) {
+    if (!quietPoll) {
       addLog('rx', data, handshakeNote ?? result.note, portName)
     }
 
@@ -320,27 +335,21 @@ export function useWebMidi() {
     }
 
     if (result.gainEqObjectType) {
-      if (!harvestHandler) {
-        gainEq.acceptObjectTypeId(
-          result.gainEqObjectType.band,
-          result.gainEqObjectType.objectTypeId
-        )
-      }
+      gainEq.acceptObjectTypeId(
+        result.gainEqObjectType.band,
+        result.gainEqObjectType.objectTypeId
+      )
     } else if (result.chorusParamObjectType) {
-      if (!harvestHandler) {
-        chorus.acceptObjectTypeId(
-          result.chorusParamObjectType.param,
-          result.chorusParamObjectType.objectTypeId
-        )
-      }
+      chorus.acceptObjectTypeId(
+        result.chorusParamObjectType.param,
+        result.chorusParamObjectType.objectTypeId
+      )
     } else if (result.objectTypeId != null) {
-      if (!harvestHandler) {
-        gainEq.acceptOrphanObjectTypeId(result.objectTypeId)
-        chorus.acceptOrphanObjectTypeId(result.objectTypeId)
-      }
+      gainEq.acceptOrphanObjectTypeId(result.objectTypeId)
+      chorus.acceptOrphanObjectTypeId(result.objectTypeId)
     }
 
-    if (result.objectDescription && !harvestHandler) {
+    if (result.objectDescription) {
       gainEq.applyObjectDescription(result.objectDescription)
       chorus.applyObjectDescription(result.objectDescription)
     }

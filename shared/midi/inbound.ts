@@ -21,8 +21,9 @@ import {
 } from './object-description'
 import { decodeParamValue } from './param-value'
 import { displayBytesToCharacters } from './display-format'
+import { parseFormattedStringPayload } from './formatted-string'
 import { mergeLcdWithFlashHighlight, updateLedFlashing } from './flash-detect'
-import { createEmptyPanelKnobState, denibblize, parseMpxG2SysEx } from './sysex'
+import { createEmptyPanelKnobState, parseMpxG2SysEx } from './sysex'
 import { parseLedDumpBytes } from './led-dump'
 
 function applyDisplayCharacters(
@@ -377,21 +378,13 @@ function handleDataMessage(payload: number[], panelState: MpxG2PanelState): Inbo
 }
 
 function handleFormattedString(payload: number[], panelState: MpxG2PanelState): InboundSysExResult {
-  if (payload.length < 4) {
+  const parsed = parseFormattedStringPayload(payload)
+  if (!parsed) {
     return { handled: false }
   }
 
-  const sizeBytes = denibblize(payload.slice(0, 4))
-  const charCount = sizeBytes[0]! | ((sizeBytes[1] ?? 0) << 8)
-  const stringNibbles = payload.slice(4, 4 + charCount * 2)
-
-  if (stringNibbles.length < charCount * 2) {
-    return { handled: false }
-  }
-
-  const chars = displayBytesToCharacters(denibblize(stringNibbles))
-
-  if (charCount === 32) {
+  if (parsed.charBytes.length === 32) {
+    const chars = displayBytesToCharacters(parsed.charBytes)
     const { prev, next } = applyDisplayCharacters(panelState, chars)
     return {
       handled: true,
@@ -400,5 +393,8 @@ function handleFormattedString(payload: number[], panelState: MpxG2PanelState): 
     }
   }
 
-  return { handled: true, note: `Formatted string (${charCount} chars)` }
+  return {
+    handled: true,
+    note: `Formatted string "${parsed.text}"${parsed.levels ? ` @ [${parsed.levels.join(', ')}]` : ''}`
+  }
 }

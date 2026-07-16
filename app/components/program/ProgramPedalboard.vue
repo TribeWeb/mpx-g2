@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { gainAdvancedParams } from '#shared/constants/gain-effects'
+import {
+  algorithmColorForBlockAlg,
+  algorithmForBlockAlg,
+  algorithmPedalParams
+} from '#shared/constants/algorithms'
 import {
   demoParamsForBlock,
   demoParamValuesForBlock,
@@ -111,11 +115,19 @@ function gainParams(): EffectPedalParam[] {
     ? (knobs?.gainHighRange ?? GAIN_EQ_DISPLAY_RANGE.high)
     : demoGainKnobs.value.highRange
 
+  const def = algorithmForBlockAlg('gain', blockAlg('gain'))
+  if (def) {
+    return algorithmPedalParams(def, {
+      lo: lowRange,
+      mid: midRange,
+      hi: highRange
+    })
+  }
+
   return [
     { id: 'lo', label: 'Lo', ...lowRange, step: 1 },
     { id: 'mid', label: 'Mid', ...midRange, step: 1 },
-    { id: 'hi', label: 'Hi', ...highRange, step: 1 },
-    ...gainAdvancedParams(blockAlg('gain'))
+    { id: 'hi', label: 'Hi', ...highRange, step: 1 }
   ]
 }
 
@@ -175,6 +187,10 @@ function paramValuesForBlock(blockId: EffectBlockId): Record<string, number> {
 
 function softRowIdsForBlock(blockId: EffectBlockId): string[] {
   return softRowParamIdsForBlock(blockId, blockAlg(blockId))
+}
+
+function pedalColor(blockId: EffectBlockId, fallback: string): string {
+  return algorithmColorForBlockAlg(blockId, blockAlg(blockId), fallback)
 }
 
 function clampDemoGain(band: 'low' | 'mid' | 'high', value: number) {
@@ -304,7 +320,7 @@ const pedalRows = computed(() => {
           :effect-name="block.displayName"
           :model-name="block.metadataForAlg(blockAlg(block.id)).modelName"
           :description="block.metadataForAlg(blockAlg(block.id)).description"
-          :color="block.color"
+          :color="pedalColor(block.id, block.color)"
           :params="paramsForBlock(block.id)"
           :soft-row-param-ids="softRowIdsForBlock(block.id)"
           :param-values="paramValuesForBlock(block.id)"

@@ -20,7 +20,7 @@ export function createProgramAlgSync(deps: ProgramAlgSyncDeps) {
     const opts = getSysexOptions()
     EFFECT_BLOCKS_PEDAL_ORDER.forEach((block, index) => {
       window.setTimeout(() => {
-        if (status.value !== 'connected') {
+        if (runtime.harvestPaused || status.value !== 'connected') {
           return
         }
         sendSysEx(
@@ -32,12 +32,15 @@ export function createProgramAlgSync(deps: ProgramAlgSyncDeps) {
   }
 
   function scheduleResync(note: string) {
+    if (runtime.harvestPaused) {
+      return
+    }
     if (runtime.programAlgResyncTimer) {
       clearTimeout(runtime.programAlgResyncTimer)
     }
     runtime.programAlgResyncTimer = setTimeout(() => {
       runtime.programAlgResyncTimer = null
-      if (status.value !== 'connected') {
+      if (runtime.harvestPaused || status.value !== 'connected') {
         return
       }
       console.info(`[mpx-g2] Program alg resync (${note})`)

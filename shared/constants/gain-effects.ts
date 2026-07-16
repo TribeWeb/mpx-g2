@@ -3,6 +3,7 @@ import {
   algorithmMeta,
   gainAdvancedParamsForAlg
 } from './algorithms'
+import { TUBE_SCREAMER_GREEN } from './gain-pedal-demo'
 
 /** Gain algorithm metadata (manual §7-3–7-6). Index matches G2 `gainAlg` (1-based). */
 export const GAIN_EFFECTS = [
@@ -67,10 +68,15 @@ export function gainEffectForAlg(alg: number) {
       modelName: meta.modelName,
       description: meta.description,
       dspSteps: meta.dspSteps,
-      manualSection: meta.manualSection
+      manualSection: meta.manualSection,
+      color: meta.color
     }
   }
-  return GAIN_EFFECTS.find(effect => effect.alg === alg) ?? GAIN_EFFECTS[0]
+  const fallback = GAIN_EFFECTS.find(effect => effect.alg === alg) ?? GAIN_EFFECTS[0]
+  return {
+    ...fallback,
+    color: TUBE_SCREAMER_GREEN
+  }
 }
 
 /**

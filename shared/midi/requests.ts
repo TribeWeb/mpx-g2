@@ -48,12 +48,7 @@ export function buildDataRequest(
   productId?: number
 ): Uint8Array {
   // Raw bytes — buildRequestMessage nibblizes once.
-  const args = [
-    controlLevels.length & 0xff,
-    (controlLevels.length >> 8) & 0xff,
-    ...controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff])
-  ]
-  return buildRequestMessage(SysExMessageType.Data, args, deviceId, productId)
+  return buildRequestMessage(SysExMessageType.Data, controlPathArgs(controlLevels), deviceId, productId)
 }
 
 /** Request the active Gain algorithm index. */
@@ -92,18 +87,41 @@ export function buildChorusParamRequest(
   return buildDataRequest(chorusParamControlPath(alg, paramIndex), deviceId, productId)
 }
 
+/** Control-path args shared by Data / FormattedString / Object Type ID requests. */
+function controlPathArgs(controlLevels: number[]): number[] {
+  return [
+    controlLevels.length & 0xff,
+    (controlLevels.length >> 8) & 0xff,
+    ...controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff])
+  ]
+}
+
+/** Request Formatted String (02 hex) — G2-rendered display text for a path. */
+export function buildFormattedStringRequest(
+  controlLevels: number[],
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildRequestMessage(
+    SysExMessageType.FormattedString,
+    controlPathArgs(controlLevels),
+    deviceId,
+    productId
+  )
+}
+
 /** Request Object Type ID (03 hex) at a control-tree path. */
 export function buildObjectTypeIdRequest(
   controlLevels: number[],
   deviceId = 0x00,
   productId?: number
 ): Uint8Array {
-  const args = [
-    controlLevels.length & 0xff,
-    (controlLevels.length >> 8) & 0xff,
-    ...controlLevels.flatMap(level => [level & 0xff, (level >> 8) & 0xff])
-  ]
-  return buildRequestMessage(SysExMessageType.ObjectTypeId, args, deviceId, productId)
+  return buildRequestMessage(
+    SysExMessageType.ObjectTypeId,
+    controlPathArgs(controlLevels),
+    deviceId,
+    productId
+  )
 }
 
 /** Request Object Description (04 hex) for an Object Type ID. */

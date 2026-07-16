@@ -7,8 +7,15 @@ const effectParam = z.object({
   label: z.string(),
   min: z.number(),
   max: z.number(),
+  /** Pedal / demo starting value; must fall within min…max. */
+  default: z.number(),
   description: z.string(),
-  bytes: z.union([z.literal(1), z.literal(2)]).optional()
+  bytes: z.union([z.literal(1), z.literal(2)]).optional(),
+  /** Display Units Type id from Object Description (MIDI appendix). */
+  displayUnits: z.number().int().nonnegative().optional()
+}).refine(param => param.default >= param.min && param.default <= param.max, {
+  message: 'default must be within min…max',
+  path: ['default']
 })
 
 const availableIn = z.object({
@@ -36,8 +43,11 @@ export default defineContentConfig({
         dspSteps: z.number().int().nonnegative(),
         manualSection: z.string().optional(),
         availableIn,
-        softRow: z.array(z.string()),
-        params: z.array(effectParam)
+        /** Up to 3 character knobs on the stompbox top row (Mix/Level are always bottom). */
+        softRow: z.array(z.string()).max(3),
+        params: z.array(effectParam),
+        /** Pedal accent colour (hex or CSS colour). */
+        color: z.string().min(1)
       })
     })
   }

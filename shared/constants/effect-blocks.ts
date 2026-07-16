@@ -15,7 +15,11 @@ export const STANDARD_EFFECT_PARAMS: EffectPedalParam[] = [
   { id: 'level', label: 'Level', min: -89, max: 6, step: 1 }
 ]
 
-const BLOCK_COLORS: Record<EffectBlockId, string> = {
+/**
+ * Fallback pedal accent when no algorithm is loaded (or Content lacks `color`).
+ * Loaded effects use frontmatter `color` via {@link algorithmColorForBlockAlg}.
+ */
+export const EFFECT_BLOCK_FALLBACK_COLORS: Record<EffectBlockId, string> = {
   gain: TUBE_SCREAMER_GREEN,
   fx1: '#7c3aed',
   fx2: '#a855f7',
@@ -84,7 +88,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0006,
     panelButton: 'gain',
     displayName: 'Gain',
-    color: BLOCK_COLORS.gain,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.gain,
     pedalOrder: 0,
     metadataForAlg: gainMeta
   },
@@ -93,7 +97,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0000,
     panelButton: 'fx1',
     displayName: 'FX 1',
-    color: BLOCK_COLORS.fx1,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.fx1,
     pedalOrder: 1,
     metadataForAlg: alg => genericMeta('FX 1', alg)
   },
@@ -102,7 +106,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0001,
     panelButton: 'fx2',
     displayName: 'FX 2',
-    color: BLOCK_COLORS.fx2,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.fx2,
     pedalOrder: 2,
     metadataForAlg: alg => genericMeta('FX 2', alg)
   },
@@ -111,7 +115,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0002,
     panelButton: 'chorus',
     displayName: 'Chorus',
-    color: BLOCK_COLORS.chorus,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.chorus,
     pedalOrder: 3,
     metadataForAlg: chorusMeta
   },
@@ -120,7 +124,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0003,
     panelButton: 'delay',
     displayName: 'Delay',
-    color: BLOCK_COLORS.delay,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.delay,
     pedalOrder: 4,
     metadataForAlg: alg => genericMeta('Delay', alg)
   },
@@ -129,7 +133,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0004,
     panelButton: 'reverb',
     displayName: 'Reverb',
-    color: BLOCK_COLORS.reverb,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.reverb,
     pedalOrder: 5,
     metadataForAlg: alg => genericMeta('Reverb', alg)
   },
@@ -138,7 +142,7 @@ export const EFFECT_BLOCK_REGISTRY: EffectBlockDef[] = [
     effectType: 0x0005,
     panelButton: 'eq',
     displayName: 'EQ',
-    color: BLOCK_COLORS.eq,
+    color: EFFECT_BLOCK_FALLBACK_COLORS.eq,
     pedalOrder: 6,
     metadataForAlg: alg => genericMeta('EQ', alg)
   }
@@ -183,12 +187,13 @@ export function demoParamValuesForBlock(blockId: EffectBlockId): Record<string, 
 export function softRowParamIdsForBlock(blockId: EffectBlockId, alg?: number): string[] {
   if (alg != null && alg > 0) {
     const fromLibrary = algorithmForBlockAlg(blockId, alg)
-    if (fromLibrary?.softRow.length) {
+    if (fromLibrary) {
       return [...fromLibrary.softRow]
     }
   }
   if (blockId === 'gain') {
     return ['lo', 'mid', 'hi']
   }
-  return ['mix']
+  // Mix/Level are always on the bottom row; unknown blocks start with an empty top row.
+  return []
 }

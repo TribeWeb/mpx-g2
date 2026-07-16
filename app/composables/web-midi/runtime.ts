@@ -50,6 +50,8 @@ export type WebMidiRuntime = {
   gainSync: EffectParamSyncState
   chorusSync: EffectParamSyncState
   programAlgResyncTimer: ReturnType<typeof setTimeout> | null
+  /** When true, param sync / resync must not TX or log (harvest owns the bus). */
+  harvestPaused: boolean
   autoReconnectStarted: boolean
   midiClockCount: number
   midiClockActiveUntil: number
@@ -99,6 +101,7 @@ function createDefaultRuntime(): WebMidiRuntime {
     gainSync: createEffectParamSyncState(),
     chorusSync: createEffectParamSyncState(),
     programAlgResyncTimer: null,
+    harvestPaused: false,
     autoReconnectStarted: false,
     midiClockCount: 0,
     midiClockActiveUntil: 0,
@@ -126,6 +129,7 @@ export function getWebMidiRuntime(): WebMidiRuntime {
     runtime.chorusSync ??= createEffectParamSyncState()
     runtime.chorusSync.resolve ??= createParamResolveState()
     runtime.programAlgResyncTimer ??= null
+    runtime.harvestPaused ??= false
   }
   return g.__mpxG2WebMidi
 }

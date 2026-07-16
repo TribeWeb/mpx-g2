@@ -5,7 +5,8 @@ defineProps<{
   modelName: string
   effectName: string
   color: string
-  softRowParams: EffectPedalParam[]
+  topRowParams: EffectPedalParam[]
+  bottomRowParams: EffectPedalParam[]
   paramValues: Record<string, number>
   enabled: boolean
   disabled: boolean
@@ -15,8 +16,8 @@ defineProps<{
 
 const emit = defineEmits<{
   'update:param': [id: string, value: number]
-  press: []
-  release: []
+  'press': []
+  'release': []
   'toggle-advanced': []
 }>()
 
@@ -47,7 +48,7 @@ function onFootswitchUp() {
       :style="{ background: `linear-gradient(90deg, ${color}, color-mix(in srgb, ${color} 60%, white))` }"
     />
 
-    <div class="flex items-start justify-between gap-2 px-4 pt-3 pb-2">
+    <div class="flex items-start justify-between gap-2 px-3 pt-3 pb-1">
       <div class="min-w-0">
         <h3 class="truncate text-sm font-bold tracking-wide text-highlighted uppercase">
           {{ modelName }}
@@ -68,17 +69,39 @@ function onFootswitchUp() {
       />
     </div>
 
-    <div class="flex flex-1 items-end justify-center gap-7 px-4 py-4">
-      <EffectPedalParamKnob
-        v-for="param in softRowParams"
-        :key="param.id"
-        :param="param"
-        :model-value="paramValue(paramValues, param.id)"
-        label-style="lcd"
-        :accent-color="color"
-        :disabled="disabled"
-        @update:model-value="emit('update:param', param.id, $event)"
-      />
+    <div class="flex flex-1 flex-col items-center justify-end gap-3 px-2 pt-2 pb-3">
+      <div
+        v-if="topRowParams.length"
+        class="flex w-full items-end justify-center gap-2"
+      >
+        <EffectPedalParamKnob
+          v-for="param in topRowParams"
+          :key="param.id"
+          :param="param"
+          :model-value="paramValue(paramValues, param.id)"
+          label-style="lcd"
+          compact
+          :accent-color="color"
+          :disabled="disabled"
+          @update:model-value="emit('update:param', param.id, $event)"
+        />
+      </div>
+      <div
+        v-if="bottomRowParams.length"
+        class="flex w-full items-end justify-center gap-6"
+      >
+        <EffectPedalParamKnob
+          v-for="param in bottomRowParams"
+          :key="param.id"
+          :param="param"
+          :model-value="paramValue(paramValues, param.id)"
+          label-style="lcd"
+          compact
+          :accent-color="color"
+          :disabled="disabled"
+          @update:model-value="emit('update:param', param.id, $event)"
+        />
+      </div>
     </div>
 
     <div class="flex flex-col items-center gap-2 border-t border-default bg-neutral-950/60 px-4 py-4">

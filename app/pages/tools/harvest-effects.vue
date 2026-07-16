@@ -215,6 +215,13 @@ const canStart = computed(
         <code class="text-xs">content/effects/&lt;slug&gt;.md</code>,
         fill prose / <code class="text-xs">dspSteps</code> / diagrams from the manual,
         then run <code class="text-xs">pnpm run generate:algorithms</code>.
+        For display-unit string tables, use
+        <NuxtLink
+          to="/tools/harvest-units"
+          class="text-highlighted underline"
+        >
+          Harvest units
+        </NuxtLink>.
       </p>
     </section>
   </UContainer>

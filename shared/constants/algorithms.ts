@@ -45,7 +45,7 @@ export function algorithmFallbackRange(param: AlgorithmParamDef): ParamRange {
 }
 
 export function normalizeAlgorithmDescriptionName(name: string): string {
-  return name.trim().toLowerCase().replace(/[\s_\-]+/g, '')
+  return name.trim().toLowerCase().replace(/[\s_-]+/g, '')
 }
 
 /** Match an Object Description LCD name against param id / label. */
@@ -80,18 +80,61 @@ export function algorithmMeta(def: AlgorithmDef) {
     modelName: def.modelName,
     description: def.summary,
     dspSteps: def.dspSteps,
-    manualSection: def.manualSection
+    manualSection: def.manualSection,
+    color: def.color
   }
 }
 
-/** Advanced (non soft-row) params for a Gain algorithm, when defined. */
+/** Mix / Level always sit on the stompbox bottom row when the algorithm has them. */
+export const ALGORITHM_FACE_BOTTOM_IDS = ['mix', 'level'] as const
+
+export type AlgorithmFaceParamIds = {
+  /** Character knobs on the top row (≤3). */
+  top: string[]
+  /** Mix and/or Level on the bottom row. */
+  bottom: string[]
+  /** Union of face ids (top + bottom). */
+  all: string[]
+}
+
+/**
+ * Resolve stompbox face knobs: curated softRow on top, Mix/Level on bottom.
+ * softRow entries that are mix/level (or missing) are skipped.
+ */
+export function algorithmFaceParamIds(
+  params: readonly { id: string }[],
+  softRow: readonly string[]
+): AlgorithmFaceParamIds {
+  const paramIds = new Set(params.map(param => param.id))
+  const bottom = ALGORITHM_FACE_BOTTOM_IDS.filter(id => paramIds.has(id))
+  const bottomSet = new Set<string>(bottom)
+  const top = softRow
+    .filter(id => paramIds.has(id) && !bottomSet.has(id))
+    .slice(0, 3)
+  return {
+    top,
+    bottom,
+    all: [...top, ...bottom]
+  }
+}
+
+/** Pedal accent for a loaded algorithm; falls back when unloaded / unknown. */
+export function algorithmColorForBlockAlg(
+  block: EffectBlockId,
+  alg: number,
+  fallback: string
+): string {
+  return algorithmForBlockAlg(block, alg)?.color ?? fallback
+}
+
+/** Advanced (non-face) params for a Gain algorithm, when defined. */
 export function gainAdvancedParamsForAlg(alg: number): EffectPedalParam[] {
   const def = algorithmForBlockAlg('gain', alg)
   if (!def) {
     return []
   }
-  const soft = new Set(def.softRow)
-  return algorithmPedalParams(def).filter(param => !soft.has(param.id))
+  const face = new Set(algorithmFaceParamIds(def.params, def.softRow).all)
+  return algorithmPedalParams(def).filter(param => !face.has(param.id))
 }
 
 export function isGeneratedAlgorithmId(id: string): id is GeneratedAlgorithmId {

@@ -57,7 +57,7 @@ describe('effect-harvest', () => {
     expect(chorus.name).toBe('Chorus')
     expect(chorus.slug).toBe('chorus')
     expect(chorus.availableIn).toEqual({ chorus: 1 })
-    expect(chorus.softRow).toEqual(['mix'])
+    expect(chorus.softRow).toEqual([])
     expect(chorus.params.map(p => p.id)).toEqual(['mix', 'level', 'rate1'])
     expect(chorus.params[0]).toMatchObject({ index: 0, min: 0, max: 100, softRow: true })
   })
@@ -104,16 +104,19 @@ describe('effect-harvest', () => {
         description: '',
         softRow: true,
         bytes: 1,
-        objectTypeId: 11
+        objectTypeId: 11,
+        displayUnits: 0
       }],
       primaryBlock: 'chorus',
       primaryAlg: 1
     })
 
     expect(md).toContain('name: Chorus')
+    expect(md).toContain('color: "#0ea5e9"')
     expect(md).toContain('dspSteps: 0  # TODO')
     expect(md).toContain('chorus: 1')
     expect(md).toContain('id: mix')
+    expect(md).toContain('default: 0')
     expect(md).toContain('/effects/chorus.png')
   })
 })

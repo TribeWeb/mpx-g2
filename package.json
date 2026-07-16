@@ -5,6 +5,8 @@
   "packageManager": "pnpm@11.9.0",
   "scripts": {
     "generate:algorithms": "node scripts/generate-algorithms.mjs",
+    "generate:units-strings": "node scripts/generate-units-strings.mjs",
+    "stamp:display-units": "node scripts/stamp-display-units.mjs",
     "build": "pnpm run generate:algorithms && nuxt build",
     "dev": "pnpm run generate:algorithms && nuxt dev",
     "preview": "nuxt preview",

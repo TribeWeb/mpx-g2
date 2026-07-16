@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { gainAdvancedParams, gainEffectForAlg } from '#shared/constants/gain-effects'
-import { GAIN_PEDAL_DEMO, TUBE_SCREAMER_GREEN } from '#shared/constants/gain-pedal-demo'
+import { algorithmForBlockAlg, algorithmPedalParams } from '#shared/constants/algorithms'
+import { gainEffectForAlg } from '#shared/constants/gain-effects'
+import { GAIN_PEDAL_DEMO } from '#shared/constants/gain-pedal-demo'
 import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
 import type { EffectPedalParam } from '#shared/types/effect-pedal'
 
@@ -50,7 +51,12 @@ const gainAlg = computed(() =>
 
 const gainMeta = computed(() => gainEffectForAlg(gainAlg.value))
 
-const softRowParamIds = ['lo', 'mid', 'hi'] as const
+const gainColor = computed(() => gainMeta.value.color)
+
+const softRowParamIds = computed(() => {
+  const def = algorithmForBlockAlg('gain', gainAlg.value)
+  return def ? [...def.softRow] : ['lo', 'mid', 'hi']
+})
 
 const gainParams = computed<EffectPedalParam[]>(() => {
   const knobs = panelState.value.knobs
@@ -64,11 +70,19 @@ const gainParams = computed<EffectPedalParam[]>(() => {
     ? (knobs?.gainHighRange ?? GAIN_EQ_DISPLAY_RANGE.high)
     : demoKnobs.value.highRange
 
+  const def = algorithmForBlockAlg('gain', gainAlg.value)
+  if (def) {
+    return algorithmPedalParams(def, {
+      lo: lowRange,
+      mid: midRange,
+      hi: highRange
+    })
+  }
+
   return [
     { id: 'lo', label: 'Lo', ...lowRange, step: 1 },
     { id: 'mid', label: 'Mid', ...midRange, step: 1 },
-    { id: 'hi', label: 'Hi', ...highRange, step: 1 },
-    ...gainAdvancedParams(gainAlg.value)
+    { id: 'hi', label: 'Hi', ...highRange, step: 1 }
   ]
 })
 
@@ -174,8 +188,9 @@ function onGainRelease() {
           Gain pedal
         </h1>
         <p class="max-w-2xl text-muted">
-          Stompbox editor with soft-row Lo / Mid / Hi on the face. Advanced
-          parameters slide out in a side wing — use the sliders icon to open.
+          Stompbox editor with character knobs on top and Mix/Level on the
+          bottom row. Advanced parameters slide out in a side wing — use the
+          sliders icon to open.
         </p>
         <UBadge
           :color="isLive ? 'success' : 'warning'"
@@ -190,9 +205,9 @@ function onGainRelease() {
           effect-name="Gain"
           :model-name="gainMeta.modelName"
           :description="gainMeta.description"
-          :color="TUBE_SCREAMER_GREEN"
+          :color="gainColor"
           :params="gainParams"
-          :soft-row-param-ids="[...softRowParamIds]"
+          :soft-row-param-ids="softRowParamIds"
           :param-values="gainParamValues"
           :enabled="gainEnabled"
           @update:param-values="onGainParamUpdate"

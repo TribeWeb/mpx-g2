@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import { formatDisplayUnitRange } from '#shared/midi/display-units-format'
+import { DISPLAY_UNIT_BY_ID } from '#shared/constants/units-map'
+import { algorithmFaceParamIds } from '#shared/constants/algorithms'
+import { EFFECT_BLOCKS_BY_ID } from '#shared/constants/effect-blocks'
+import type { EffectBlockId } from '#shared/types/effect-blocks'
+import type { EffectPedalParam } from '#shared/types/effect-pedal'
+
 const config = useRuntimeConfig()
 const route = useRoute()
 
@@ -22,8 +29,80 @@ useSeoMeta({
 const availableBlocks = computed(() =>
   Object.entries(effect.value?.availableIn ?? {})
     .filter(([, index]) => typeof index === 'number')
-    .map(([block, index]) => ({ block, index: index as number }))
+    .map(([block, index]) => ({ block: block as EffectBlockId, index: index as number }))
 )
+
+const availableBlockLabel = computed(() =>
+  availableBlocks.value
+    .map(({ block }) => EFFECT_BLOCKS_BY_ID[block]?.displayName ?? block)
+    .join(' · ')
+)
+
+const pedalParams = computed<EffectPedalParam[]>(() =>
+  (effect.value?.params ?? []).map(param => ({
+    id: param.id,
+    label: param.label,
+    min: param.min,
+    max: param.max,
+    step: 1
+  }))
+)
+
+const faceParamIds = computed(() =>
+  algorithmFaceParamIds(effect.value?.params ?? [], effect.value?.softRow ?? [])
+)
+
+function faceRole(paramId: string) {
+  if (faceParamIds.value.top.includes(paramId)) {
+    return 'Top'
+  }
+  if (faceParamIds.value.bottom.includes(paramId)) {
+    return 'Bottom'
+  }
+  return '—'
+}
+
+function defaultsFromParams(params: { id: string, default: number }[]) {
+  return Object.fromEntries(params.map(param => [param.id, param.default]))
+}
+
+const paramValues = ref<Record<string, number>>(
+  defaultsFromParams(effect.value.params)
+)
+const pedalEnabled = ref(true)
+
+watch(
+  () => effect.value?.params,
+  (params) => {
+    if (params) {
+      paramValues.value = defaultsFromParams(params)
+      pedalEnabled.value = true
+    }
+  }
+)
+
+function onParamValuesUpdate(values: Record<string, number>) {
+  paramValues.value = values
+}
+
+function onPedalPress() {
+  pedalEnabled.value = !pedalEnabled.value
+}
+
+function paramRangeLabel(param: { min: number, max: number, displayUnits?: number | null }) {
+  if (param.displayUnits == null) {
+    return `${param.min}…${param.max}`
+  }
+  return formatDisplayUnitRange(param.displayUnits, param.min, param.max)
+}
+
+function paramUnitHint(param: { displayUnits?: number | null }) {
+  if (param.displayUnits == null) {
+    return null
+  }
+  return DISPLAY_UNIT_BY_ID.get(param.displayUnits & 0x7fff)?.name
+    ?? `unit 0x${(param.displayUnits & 0x7fff).toString(16)}`
+}
 </script>
 
 <template>
@@ -58,7 +137,7 @@ const availableBlocks = computed(() =>
       >
     </div>
 
-    <div class="mb-10 grid gap-6 lg:grid-cols-[1fr_18rem]">
+    <div class="mb-10 grid gap-6 lg:grid-cols-[1fr_minmax(16rem,18rem)]">
       <section>
         <h2 class="text-sm font-medium uppercase tracking-wide text-muted">
           Parameters
@@ -83,7 +162,7 @@ const availableBlocks = computed(() =>
                   Description
                 </th>
                 <th class="py-2 font-medium">
-                  Soft row
+                  Face
                 </th>
               </tr>
             </thead>
@@ -102,14 +181,20 @@ const availableBlocks = computed(() =>
                 <td class="py-2 pr-3">
                   {{ param.label }}
                 </td>
-                <td class="py-2 pr-3 tabular-nums">
-                  {{ param.min }}…{{ param.max }}
+                <td class="py-2 pr-3">
+                  <span class="tabular-nums">{{ paramRangeLabel(param) }}</span>
+                  <span
+                    v-if="paramUnitHint(param)"
+                    class="mt-0.5 block text-xs text-muted"
+                  >
+                    {{ paramUnitHint(param) }}
+                  </span>
                 </td>
                 <td class="py-2 pr-3 text-muted">
                   {{ param.description }}
                 </td>
                 <td class="py-2">
-                  {{ effect.softRow.includes(param.id) ? 'Yes' : '—' }}
+                  {{ faceRole(param.id) }}
                 </td>
               </tr>
             </tbody>
@@ -117,7 +202,22 @@ const availableBlocks = computed(() =>
         </div>
       </section>
 
-      <aside class="space-y-4">
+      <aside class="space-y-6 overflow-visible">
+        <div class="flex justify-center overflow-visible py-2">
+          <EffectPedal
+            :effect-name="availableBlockLabel"
+            :model-name="effect.name"
+            :description="effect.summary"
+            :color="effect.color"
+            :params="pedalParams"
+            :soft-row-param-ids="effect.softRow"
+            :param-values="paramValues"
+            :enabled="pedalEnabled"
+            @update:param-values="onParamValuesUpdate"
+            @press="onPedalPress"
+          />
+        </div>
+
         <section class="rounded-lg border border-default p-4">
           <h2 class="text-sm font-medium uppercase tracking-wide text-muted">
             Available in

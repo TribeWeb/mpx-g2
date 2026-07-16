@@ -11,10 +11,14 @@ export type AlgorithmParamDef = {
   label: string
   min: number
   max: number
+  /** Pedal / demo starting value (within min…max). */
+  default: number
   /** Short description from the manual parameter table. */
   description: string
   /** Value width when writing SysEx; Object Description may override. */
   bytes?: 1 | 2
+  /** Display Units Type id (MIDI appendix) for formatting / docs. */
+  displayUnits?: number
 }
 
 /** Compiled algorithm definition used by MIDI sync + pedal UI. */
@@ -34,7 +38,9 @@ export type AlgorithmDef = {
   manualSection?: string
   /** Block → 1-based algorithm index where this effect can be loaded. */
   availableIn: Partial<Record<EffectBlockId, number>>
-  /** Param ids shown on the soft-row / pedal face. */
+  /** Param ids for the stompbox top row (up to 3 character knobs). Mix/Level always sit on the bottom row when present. */
   softRow: string[]
   params: AlgorithmParamDef[]
+  /** Pedal accent colour from Content frontmatter. */
+  color: string
 }

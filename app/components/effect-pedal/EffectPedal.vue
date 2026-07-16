@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { algorithmFaceParamIds } from '#shared/constants/algorithms'
 import type { EffectPedalParam } from '#shared/types/effect-pedal'
 
 const props = withDefaults(defineProps<{
@@ -8,6 +9,7 @@ const props = withDefaults(defineProps<{
   /** Accent colour (hex or CSS colour) used for borders, LEDs and highlights. */
   color: string
   params: EffectPedalParam[]
+  /** Character knobs for the top row (≤3). Mix/Level are placed on the bottom automatically. */
   softRowParamIds: string[]
   paramValues: Record<string, number>
   enabled?: boolean
@@ -25,15 +27,23 @@ const emit = defineEmits<{
 
 const advancedOpen = ref(false)
 
-const softRowParams = computed(() =>
-  props.softRowParamIds
-    .map(id => props.params.find(param => param.id === id))
-    .filter((param): param is EffectPedalParam => Boolean(param))
+const faceIds = computed(() =>
+  algorithmFaceParamIds(props.params, props.softRowParamIds)
 )
 
-const advancedParams = computed(() =>
-  props.params.filter(param => !props.softRowParamIds.includes(param.id))
-)
+function paramsByIds(ids: string[]) {
+  return ids
+    .map(id => props.params.find(param => param.id === id))
+    .filter((param): param is EffectPedalParam => Boolean(param))
+}
+
+const topRowParams = computed(() => paramsByIds(faceIds.value.top))
+const bottomRowParams = computed(() => paramsByIds(faceIds.value.bottom))
+
+const advancedParams = computed(() => {
+  const onFace = new Set(faceIds.value.all)
+  return props.params.filter(param => !onFace.has(param.id))
+})
 
 const hasAdvancedParams = computed(() => advancedParams.value.length > 0)
 
@@ -151,7 +161,8 @@ onUnmounted(() => {
         :model-name="modelName"
         :effect-name="effectName"
         :color="color"
-        :soft-row-params="softRowParams"
+        :top-row-params="topRowParams"
+        :bottom-row-params="bottomRowParams"
         :param-values="paramValues"
         :enabled="enabled"
         :disabled="disabled"

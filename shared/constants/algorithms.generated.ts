@@ -18,16 +18,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 7
     },
     softRow: [
-      "mix",
-      "level",
       "gl",
       "fcl",
-      "ql",
-      "ml",
-      "gr",
-      "fcr",
-      "qr",
-      "mr"
+      "ql"
     ],
     params: [
       {
@@ -36,7 +29,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -44,7 +39,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "gl",
@@ -52,7 +49,9 @@ export const GENERATED_ALGORITHMS = {
         label: "G-L",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fcl",
@@ -60,7 +59,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc-L",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "ql",
@@ -68,7 +69,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q-L",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "ml",
@@ -76,7 +79,9 @@ export const GENERATED_ALGORITHMS = {
         label: "M-L",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gr",
@@ -84,7 +89,9 @@ export const GENERATED_ALGORITHMS = {
         label: "G-R",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fcr",
@@ -92,7 +99,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc-R",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "qr",
@@ -100,7 +109,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q-R",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mr",
@@ -108,9 +119,12 @@ export const GENERATED_ALGORITHMS = {
         label: "M-R",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "1-band-m": {
     id: "1-band-m",
@@ -124,12 +138,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 1
     },
     softRow: [
-      "mix",
-      "level",
       "gain",
       "fc",
-      "q",
-      "mode"
+      "q"
     ],
     params: [
       {
@@ -138,7 +149,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -146,7 +159,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "gain",
@@ -154,7 +169,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc",
@@ -162,7 +179,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q",
@@ -170,7 +189,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode",
@@ -178,9 +199,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "1-band-s": {
     id: "1-band-s",
@@ -193,11 +217,8 @@ export const GENERATED_ALGORITHMS = {
       eq: 5
     },
     softRow: [
-      "mix",
-      "level",
       "gain",
       "fc",
-      "mix2",
       "mode"
     ],
     params: [
@@ -207,7 +228,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -215,7 +238,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "gain",
@@ -223,7 +248,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "Tone is a set of analog Tone"
+        default: 0,
+        description: "Tone is a set of analog Tone",
+        displayUnits: 3
       },
       {
         id: "fc",
@@ -231,7 +258,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "mix2",
@@ -239,7 +268,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "mode",
@@ -247,9 +278,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "2-band-d": {
     id: "2-band-d",
@@ -262,24 +296,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 8
     },
     softRow: [
-      "mix",
-      "level",
       "gl1",
       "fcl1",
-      "ql1",
-      "ml1",
-      "gl2",
-      "fcl2",
-      "ql2",
-      "ml2",
-      "gr1",
-      "fcr1",
-      "qr1",
-      "mr1",
-      "gr2",
-      "fcr2",
-      "qr2",
-      "mr2"
+      "gl2"
     ],
     params: [
       {
@@ -288,7 +307,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -296,7 +317,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 0
       },
       {
         id: "gl1",
@@ -304,7 +327,9 @@ export const GENERATED_ALGORITHMS = {
         label: "G-L1",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fcl1",
@@ -312,7 +337,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc-L1",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "ql1",
@@ -320,7 +347,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q-L1",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "ml1",
@@ -328,7 +357,9 @@ export const GENERATED_ALGORITHMS = {
         label: "M-L1",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gl2",
@@ -336,7 +367,9 @@ export const GENERATED_ALGORITHMS = {
         label: "G-L2",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fcl2",
@@ -344,7 +377,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc-L2",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "ql2",
@@ -352,7 +387,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q-L2",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "ml2",
@@ -360,7 +397,9 @@ export const GENERATED_ALGORITHMS = {
         label: "M-L2",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gr1",
@@ -368,7 +407,9 @@ export const GENERATED_ALGORITHMS = {
         label: "G-R1",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fcr1",
@@ -376,7 +417,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc-R1",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "qr1",
@@ -384,7 +427,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q-R1",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mr1",
@@ -392,7 +437,9 @@ export const GENERATED_ALGORITHMS = {
         label: "M-R1",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gr2",
@@ -400,7 +447,9 @@ export const GENERATED_ALGORITHMS = {
         label: "G-R2",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fcr2",
@@ -408,7 +457,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc-R2",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "qr2",
@@ -416,7 +467,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q-R2",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mr2",
@@ -424,9 +477,12 @@ export const GENERATED_ALGORITHMS = {
         label: "M-R2",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "2-band-m": {
     id: "2-band-m",
@@ -439,16 +495,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 2
     },
     softRow: [
-      "mix",
-      "level",
       "gain1",
       "fc1",
-      "q1",
-      "mode1",
-      "gain2",
-      "fc2",
-      "q2",
-      "mode2"
+      "gain2"
     ],
     params: [
       {
@@ -457,7 +506,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -465,7 +516,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "gain1",
@@ -473,7 +526,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain1",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc1",
@@ -481,7 +536,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 1",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q1",
@@ -489,7 +546,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 1",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode1",
@@ -497,7 +556,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode1",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain2",
@@ -505,7 +566,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain2",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc2",
@@ -513,7 +576,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 2",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q2",
@@ -521,7 +586,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 2",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode2",
@@ -529,9 +596,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode2",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "2-band-s": {
     id: "2-band-s",
@@ -544,16 +614,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 6
     },
     softRow: [
-      "mix",
-      "level",
       "gain1",
       "fc1",
-      "q1",
-      "mode1",
-      "gain2",
-      "fc2",
-      "q2",
-      "mode2"
+      "gain2"
     ],
     params: [
       {
@@ -562,7 +625,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -570,7 +635,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "gain1",
@@ -578,7 +645,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain1",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc1",
@@ -586,7 +655,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 1",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q1",
@@ -594,7 +665,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 1",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode1",
@@ -602,7 +675,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode1",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain2",
@@ -610,7 +685,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain2",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc2",
@@ -618,7 +695,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 2",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q2",
@@ -626,7 +705,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 2",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode2",
@@ -634,9 +715,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode2",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "3-band-m": {
     id: "3-band-m",
@@ -648,20 +732,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 3
     },
     softRow: [
-      "mix",
-      "level",
       "gain1",
-      "fc1",
-      "q1",
-      "mode1",
       "gain2",
-      "fc2",
-      "q2",
-      "mode2",
-      "gain3",
-      "fc3",
-      "q3",
-      "mode3"
+      "gain3"
     ],
     params: [
       {
@@ -670,7 +743,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -678,7 +753,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "gain1",
@@ -686,7 +763,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain1",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc1",
@@ -694,7 +773,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 1",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q1",
@@ -702,7 +783,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 1",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode1",
@@ -710,7 +793,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode1",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain2",
@@ -718,7 +803,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain2",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc2",
@@ -726,7 +813,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 2",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q2",
@@ -734,7 +823,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 2",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode2",
@@ -742,7 +833,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode2",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain3",
@@ -750,7 +843,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain3",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc3",
@@ -758,7 +853,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 3",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q3",
@@ -766,7 +863,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 3",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode3",
@@ -774,9 +873,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode3",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "4-band-m": {
     id: "4-band-m",
@@ -789,24 +891,9 @@ export const GENERATED_ALGORITHMS = {
       eq: 4
     },
     softRow: [
-      "mix",
-      "level",
       "gain1",
-      "fc1",
-      "q1",
-      "mode1",
       "gain2",
-      "fc2",
-      "q2",
-      "mode2",
-      "gain3",
-      "fc3",
-      "q3",
-      "mode3",
-      "gain4",
-      "fc4",
-      "q4",
-      "mode4"
+      "gain3"
     ],
     params: [
       {
@@ -815,7 +902,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -823,7 +912,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "gain1",
@@ -831,7 +922,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain1",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc1",
@@ -839,7 +932,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 1",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q1",
@@ -847,7 +942,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 1",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode1",
@@ -855,7 +952,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode1",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain2",
@@ -863,7 +962,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain2",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc2",
@@ -871,7 +972,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 2",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q2",
@@ -879,7 +982,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 2",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode2",
@@ -887,7 +992,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode2",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain3",
@@ -895,7 +1002,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain3",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc3",
@@ -903,7 +1012,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 3",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q3",
@@ -911,7 +1022,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 3",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode3",
@@ -919,7 +1032,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode3",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       },
       {
         id: "gain4",
@@ -927,7 +1042,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain4",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "fc4",
@@ -935,7 +1052,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc 4",
         min: 20,
         max: 20000,
-        description: "TODO"
+        default: 10010,
+        description: "TODO",
+        displayUnits: 9
       },
       {
         id: "q4",
@@ -943,7 +1062,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Q 4",
         min: 1,
         max: 100,
-        description: "TODO"
+        default: 51,
+        description: "TODO",
+        displayUnits: 10
       },
       {
         id: "mode4",
@@ -951,9 +1072,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mode4",
         min: 0,
         max: 2,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 47
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   aerosol: {
     id: "aerosol",
@@ -966,16 +1090,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 7
     },
     softRow: [
-      "mix",
-      "level",
       "rate1",
-      "pw1",
       "dpth1",
-      "rate2",
-      "pw2",
-      "dpth2",
-      "res1",
-      "res2"
+      "rate2"
     ],
     params: [
       {
@@ -984,7 +1101,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -992,7 +1111,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate1",
@@ -1000,7 +1121,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate1",
         min: 0,
         max: 5000,
-        description: "Left Mod rate or period ratio."
+        default: 0,
+        description: "Left Mod rate or period ratio.",
+        displayUnits: 23
       },
       {
         id: "pw1",
@@ -1008,7 +1131,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 1",
         min: 0,
         max: 100,
-        description: "Left Mod pulse width"
+        default: 0,
+        description: "Left Mod pulse width",
+        displayUnits: 3
       },
       {
         id: "dpth1",
@@ -1016,7 +1141,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth1",
         min: 0,
         max: 100,
-        description: "Left Mod depth (tremolo)"
+        default: 0,
+        description: "Left Mod depth (tremolo)",
+        displayUnits: 3
       },
       {
         id: "rate2",
@@ -1024,7 +1151,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate2",
         min: 0,
         max: 5000,
-        description: "Right Mod rate or period ratio."
+        default: 0,
+        description: "Right Mod rate or period ratio.",
+        displayUnits: 23
       },
       {
         id: "pw2",
@@ -1032,7 +1161,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 2",
         min: 0,
         max: 100,
-        description: "Right Mod pulse width"
+        default: 0,
+        description: "Right Mod pulse width",
+        displayUnits: 3
       },
       {
         id: "dpth2",
@@ -1040,7 +1171,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth2",
         min: 0,
         max: 100,
-        description: "Right Mod depth (tremolo)"
+        default: 0,
+        description: "Right Mod depth (tremolo)",
+        displayUnits: 3
       },
       {
         id: "res1",
@@ -1048,7 +1181,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res 1",
         min: -100,
         max: 100,
-        description: "Cross resonance"
+        default: 0,
+        description: "Cross resonance",
+        displayUnits: 3
       },
       {
         id: "res2",
@@ -1056,9 +1191,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Res 2",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   "all-params": {
     id: "all-params",
@@ -1071,22 +1209,9 @@ export const GENERATED_ALGORITHMS = {
       gain: 8
     },
     softRow: [
-      "lo",
-      "mid",
-      "hi",
-      "locut",
-      "feel",
       "drive",
-      "hicut",
-      "bass",
-      "trebl",
-      "level",
-      "cvol",
-      "gtone",
-      "ctone",
-      "gain",
-      "cbyp",
-      "send"
+      "feel",
+      "gtone"
     ],
     params: [
       {
@@ -1095,7 +1220,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -25,
         max: 25,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -1103,7 +1230,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -25,
         max: 25,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -1111,7 +1240,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 50,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "locut",
@@ -1119,7 +1250,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 0,
         max: 50,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "feel",
@@ -1127,7 +1260,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Feel",
         min: 0,
         max: 64,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "drive",
@@ -1135,7 +1270,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 64,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "hicut",
@@ -1143,7 +1280,9 @@ export const GENERATED_ALGORITHMS = {
         label: "HiCut",
         min: 0,
         max: 35,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -1151,7 +1290,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: -25,
         max: 25,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "trebl",
@@ -1159,7 +1300,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Trebl",
         min: -25,
         max: 25,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "level",
@@ -1167,7 +1310,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "cvol",
@@ -1175,7 +1320,9 @@ export const GENERATED_ALGORITHMS = {
         label: "C-Vol",
         min: -64,
         max: 0,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "gtone",
@@ -1183,7 +1330,9 @@ export const GENERATED_ALGORITHMS = {
         label: "GTone",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 78
       },
       {
         id: "ctone",
@@ -1191,7 +1340,9 @@ export const GENERATED_ALGORITHMS = {
         label: "CTone",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 78
       },
       {
         id: "gain",
@@ -1199,7 +1350,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 79
       },
       {
         id: "cbyp",
@@ -1207,7 +1360,9 @@ export const GENERATED_ALGORITHMS = {
         label: "C Byp",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 80
       },
       {
         id: "send",
@@ -1215,7 +1370,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Send",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 82
       },
       {
         id: "itype",
@@ -1223,9 +1380,12 @@ export const GENERATED_ALGORITHMS = {
         label: "IType",
         min: 0,
         max: 3,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 100
       }
-    ]
+    ],
+    color: "#009739"
   },
   ambience: {
     id: "ambience",
@@ -1238,15 +1398,9 @@ export const GENERATED_ALGORITHMS = {
       reverb: 4
     },
     softRow: [
-      "mix",
-      "level",
       "size",
-      "link",
-      "diff",
       "pdly",
-      "mix2",
-      "dlvl",
-      "rthc"
+      "dlvl"
     ],
     params: [
       {
@@ -1255,7 +1409,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1263,7 +1419,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "size",
@@ -1271,7 +1429,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Size",
         min: 0,
         max: 144,
-        description: "Length of room"
+        default: 0,
+        description: "Length of room",
+        displayUnits: 53
       },
       {
         id: "link",
@@ -1279,7 +1439,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Link",
         min: 0,
         max: 1,
-        description: "Scales DTime with Size"
+        default: 0,
+        description: "Scales DTime with Size",
+        displayUnits: 4
       },
       {
         id: "diff",
@@ -1287,7 +1449,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Diff",
         min: 0,
         max: 50,
-        description: "Increase of initial echo density over time"
+        default: 0,
+        description: "Increase of initial echo density over time",
+        displayUnits: 58
       },
       {
         id: "pdly",
@@ -1295,7 +1459,9 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 250,
-        description: "Delay inserted before the onset of reverberation"
+        default: 0,
+        description: "Delay inserted before the onset of reverberation",
+        displayUnits: 72
       },
       {
         id: "mix2",
@@ -1303,7 +1469,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "dlvl",
@@ -1311,7 +1479,9 @@ export const GENERATED_ALGORITHMS = {
         label: "D Lvl",
         min: 0,
         max: 25,
-        description: "Level of the ambience tail"
+        default: 0,
+        description: "Level of the ambience tail",
+        displayUnits: 63
       },
       {
         id: "rthc",
@@ -1319,9 +1489,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Rt HC",
         min: 0,
         max: 14,
-        description: "High frequency content of DTime"
+        default: 0,
+        description: "High frequency content of DTime",
+        displayUnits: 66
       }
-    ]
+    ],
+    color: "#6366f1"
   },
   "auto-pan": {
     id: "auto-pan",
@@ -1335,10 +1508,7 @@ export const GENERATED_ALGORITHMS = {
       fx2: 2
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
-      "pw",
       "depth",
       "phase"
     ],
@@ -1349,7 +1519,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1357,7 +1529,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -1365,7 +1539,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Pan rate or period ratio"
+        default: 0,
+        description: "Pan rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -1373,7 +1549,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "Pan pulse width"
+        default: 0,
+        description: "Pan pulse width",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -1381,7 +1559,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "Pan depth"
+        default: 0,
+        description: "Pan depth",
+        displayUnits: 3
       },
       {
         id: "phase",
@@ -1389,9 +1569,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Phase",
         min: 0,
         max: 3,
-        description: "Phase difference between right and left pan"
+        default: 0,
+        description: "Phase difference between right and left pan",
+        displayUnits: 71
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "blue-comp": {
     id: "blue-comp",
@@ -1403,13 +1586,9 @@ export const GENERATED_ALGORITHMS = {
       fx1: 17
     },
     softRow: [
-      "mix",
-      "level",
       "sense",
       "thrsh",
-      "gain",
-      "atime",
-      "rtime"
+      "gain"
     ],
     params: [
       {
@@ -1418,7 +1597,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1426,7 +1607,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "sense",
@@ -1434,7 +1617,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sense",
         min: -72,
         max: 24,
-        description: "Sensitivity (Pre-Compressor level)"
+        default: 0,
+        description: "Sensitivity (Pre-Compressor level)",
+        displayUnits: 10
       },
       {
         id: "thrsh",
@@ -1442,7 +1627,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Thrsh",
         min: -83,
         max: 0,
-        description: "Gain reduction threshold"
+        default: 0,
+        description: "Gain reduction threshold",
+        displayUnits: 9
       },
       {
         id: "gain",
@@ -1450,7 +1637,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "Post-Compressor level"
+        default: 0,
+        description: "Post-Compressor level",
+        displayUnits: 10
       },
       {
         id: "atime",
@@ -1458,7 +1647,9 @@ export const GENERATED_ALGORITHMS = {
         label: "ATime",
         min: 0,
         max: 2000,
-        description: "Attack time"
+        default: 0,
+        description: "Attack time",
+        displayUnits: 59
       },
       {
         id: "rtime",
@@ -1466,9 +1657,12 @@ export const GENERATED_ALGORITHMS = {
         label: "RTime",
         min: 0,
         max: 2000,
-        description: "Release time"
+        default: 0,
+        description: "Release time",
+        displayUnits: 59
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   centrifuge1: {
     id: "centrifuge1",
@@ -1481,17 +1675,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 9
     },
     softRow: [
-      "mix",
-      "level",
       "rate1",
-      "pw1",
-      "sync1",
       "dpth1",
-      "rate2",
-      "pw2",
-      "sync2",
-      "dpth2",
-      "res"
+      "rate2"
     ],
     params: [
       {
@@ -1500,7 +1686,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1508,7 +1696,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate1",
@@ -1516,7 +1706,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate1",
         min: 0,
         max: 5000,
-        description: "Left Mod and Pan rate or period ratio"
+        default: 0,
+        description: "Left Mod and Pan rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw1",
@@ -1524,7 +1716,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 1",
         min: 0,
         max: 100,
-        description: "Left Mod and Pan pulse width"
+        default: 0,
+        description: "Left Mod and Pan pulse width",
+        displayUnits: 3
       },
       {
         id: "sync1",
@@ -1532,7 +1726,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sync1",
         min: -120,
         max: 120,
-        description: "Phase difference between left LFO Mod and Pan"
+        default: 0,
+        description: "Phase difference between left LFO Mod and Pan",
+        displayUnits: 3
       },
       {
         id: "dpth1",
@@ -1540,7 +1736,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth1",
         min: 0,
         max: 100,
-        description: "Left Mod and Pan depth"
+        default: 0,
+        description: "Left Mod and Pan depth",
+        displayUnits: 3
       },
       {
         id: "rate2",
@@ -1548,7 +1746,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate2",
         min: 0,
         max: 5000,
-        description: "Right Mod and Pan rate or period ratio"
+        default: 0,
+        description: "Right Mod and Pan rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw2",
@@ -1556,7 +1756,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 2",
         min: 0,
         max: 100,
-        description: "Right Mod and Pan pulse width"
+        default: 0,
+        description: "Right Mod and Pan pulse width",
+        displayUnits: 3
       },
       {
         id: "sync2",
@@ -1564,7 +1766,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sync2",
         min: -120,
         max: 120,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "dpth2",
@@ -1572,7 +1776,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth2",
         min: 0,
         max: 100,
-        description: "Right Mod and Pan depth"
+        default: 0,
+        description: "Right Mod and Pan depth",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -1580,9 +1786,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 2
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   centrifuge2: {
     id: "centrifuge2",
@@ -1595,17 +1804,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 10
     },
     softRow: [
-      "mix",
-      "level",
       "rate1",
-      "pw1",
-      "sync1",
       "dpth1",
-      "rate2",
-      "pw2",
-      "sync2",
-      "dpth2",
-      "res"
+      "rate2"
     ],
     params: [
       {
@@ -1614,7 +1815,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1622,7 +1825,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate1",
@@ -1630,7 +1835,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate1",
         min: 0,
         max: 5000,
-        description: "Mod/pan rate"
+        default: 0,
+        description: "Mod/pan rate",
+        displayUnits: 23
       },
       {
         id: "pw1",
@@ -1638,7 +1845,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 1",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "sync1",
@@ -1646,7 +1855,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sync1",
         min: -120,
         max: 120,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "dpth1",
@@ -1654,7 +1865,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth1",
         min: 0,
         max: 100,
-        description: "Mod/pan depth"
+        default: 0,
+        description: "Mod/pan depth",
+        displayUnits: 3
       },
       {
         id: "rate2",
@@ -1662,7 +1875,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate2",
         min: 0,
         max: 5000,
-        description: "Secondary rate"
+        default: 0,
+        description: "Secondary rate",
+        displayUnits: 23
       },
       {
         id: "pw2",
@@ -1670,7 +1885,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 2",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "sync2",
@@ -1678,7 +1895,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sync2",
         min: -120,
         max: 120,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "dpth2",
@@ -1686,7 +1905,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth2",
         min: 0,
         max: 100,
-        description: "Secondary depth"
+        default: 0,
+        description: "Secondary depth",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -1694,9 +1915,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   chamber: {
     id: "chamber",
@@ -1708,18 +1932,9 @@ export const GENERATED_ALGORITHMS = {
       reverb: 1
     },
     softRow: [
-      "mix",
-      "level",
       "size",
-      "link",
-      "diff",
-      "pdly",
-      "bass",
       "decay",
-      "xovr",
-      "rthc",
-      "shape",
-      "spred"
+      "shape"
     ],
     params: [
       {
@@ -1728,7 +1943,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1736,7 +1953,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "size",
@@ -1744,7 +1963,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Size",
         min: 0,
         max: 62,
-        description: "Length of Chamber"
+        default: 0,
+        description: "Length of Chamber",
+        displayUnits: 53
       },
       {
         id: "link",
@@ -1752,7 +1973,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Link",
         min: 0,
         max: 1,
-        description: "Scales Decay and Spred with Size"
+        default: 0,
+        description: "Scales Decay and Spred with Size",
+        displayUnits: 4
       },
       {
         id: "diff",
@@ -1760,7 +1983,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Diff",
         min: 0,
         max: 50,
-        description: "Increase of initial echo density over time"
+        default: 0,
+        description: "Increase of initial echo density over time",
+        displayUnits: 58
       },
       {
         id: "pdly",
@@ -1768,7 +1993,9 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 250,
-        description: "Delay inserted before the onset of reverberation"
+        default: 0,
+        description: "Delay inserted before the onset of reverberation",
+        displayUnits: 72
       },
       {
         id: "bass",
@@ -1776,7 +2003,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 9,
-        description: "Reverb time for low frequency signals"
+        default: 0,
+        description: "Reverb time for low frequency signals",
+        displayUnits: 55
       },
       {
         id: "decay",
@@ -1784,7 +2013,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Decay",
         min: 0,
         max: 63,
-        description: "Reverb time for mid frequency signals"
+        default: 0,
+        description: "Reverb time for mid frequency signals",
+        displayUnits: 57
       },
       {
         id: "xovr",
@@ -1792,7 +2023,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Xovr",
         min: 0,
         max: 60,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 56
       },
       {
         id: "rthc",
@@ -1800,7 +2033,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rt HC",
         min: 0,
         max: 48,
-        description: "High frequency content of Decay"
+        default: 0,
+        description: "High frequency content of Decay",
+        displayUnits: 54
       },
       {
         id: "shape",
@@ -1808,7 +2043,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Shape",
         min: 0,
         max: 255,
-        description: "Contour of the reverberation envelope"
+        default: 0,
+        description: "Contour of the reverberation envelope",
+        displayUnits: 61
       },
       {
         id: "spred",
@@ -1816,9 +2053,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Spred",
         min: 0,
         max: 255,
-        description: "Sustain of reverberation after initial build up"
+        default: 0,
+        description: "Sustain of reverberation after initial build up",
+        displayUnits: 60
       }
-    ]
+    ],
+    color: "#6366f1"
   },
   click: {
     id: "click",
@@ -1831,10 +2071,7 @@ export const GENERATED_ALGORITHMS = {
       fx1: 33,
       fx2: 26
     },
-    softRow: [
-      "mix",
-      "level"
-    ],
+    softRow: [],
     params: [
       {
         id: "mix",
@@ -1842,7 +2079,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Click ratio"
+        default: 0,
+        description: "Dry/Click ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1850,9 +2089,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of Click in processsed signal"
+        default: 0,
+        description: "Amount of Click in processsed signal",
+        displayUnits: 0
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "comb-1": {
     id: "comb-1",
@@ -1865,12 +2107,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 11
     },
     softRow: [
-      "mix",
-      "level",
-      "locut",
-      "hicut",
       "comb",
-      "notch"
+      "notch",
+      "locut"
     ],
     params: [
       {
@@ -1879,7 +2118,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1887,7 +2128,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "locut",
@@ -1895,7 +2138,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 100,
         max: 10000,
-        description: "Corner frequency of the low cut filter"
+        default: 5050,
+        description: "Corner frequency of the low cut filter",
+        displayUnits: 9
       },
       {
         id: "hicut",
@@ -1903,7 +2148,9 @@ export const GENERATED_ALGORITHMS = {
         label: "HiCut",
         min: 100,
         max: 10000,
-        description: "Corner frequency of the high cut filter"
+        default: 5050,
+        description: "Corner frequency of the high cut filter",
+        displayUnits: 9
       },
       {
         id: "comb",
@@ -1911,7 +2158,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Comb",
         min: 0,
         max: 100,
-        description: "and High pass filters are included"
+        default: 0,
+        description: "and High pass filters are included",
+        displayUnits: 1
       },
       {
         id: "notch",
@@ -1919,9 +2168,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Notch",
         min: -100,
         max: 100,
-        description: "Increases the audibility of the notch"
+        default: 0,
+        description: "Increases the audibility of the notch",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   "comb-2": {
     id: "comb-2",
@@ -1934,16 +2186,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 12
     },
     softRow: [
-      "mix",
-      "level",
-      "locut",
-      "mix2",
       "notch",
       "rate",
-      "pw",
-      "depth",
-      "res",
-      "phase"
+      "depth"
     ],
     params: [
       {
@@ -1952,7 +2197,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -1960,7 +2207,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 0
       },
       {
         id: "locut",
@@ -1968,7 +2217,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 100,
         max: 10000,
-        description: "Clean low frequency boost/cut"
+        default: 5050,
+        description: "Clean low frequency boost/cut",
+        displayUnits: 9
       },
       {
         id: "mix2",
@@ -1976,7 +2227,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "notch",
@@ -1984,7 +2237,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Notch",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "rate",
@@ -1992,7 +2247,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -2000,7 +2257,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -2008,7 +2267,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -2016,7 +2277,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       },
       {
         id: "phase",
@@ -2024,9 +2287,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Phase",
         min: 0,
         max: 3,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 71
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   crossover: {
     id: "crossover",
@@ -2038,8 +2304,6 @@ export const GENERATED_ALGORITHMS = {
       eq: 10
     },
     softRow: [
-      "mix",
-      "level",
       "fc",
       "bal"
     ],
@@ -2050,7 +2314,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2058,7 +2324,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "fc",
@@ -2066,7 +2334,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc",
         min: 100,
         max: 10000,
-        description: "Crossover frequency"
+        default: 5050,
+        description: "Crossover frequency",
+        displayUnits: 9
       },
       {
         id: "bal",
@@ -2074,9 +2344,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Bal",
         min: -50,
         max: 50,
-        description: "Relative level of the low and high band"
+        default: 0,
+        description: "Relative level of the low and high band",
+        displayUnits: 8
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   crunch: {
     id: "crunch",
@@ -2091,9 +2364,7 @@ export const GENERATED_ALGORITHMS = {
     softRow: [
       "lo",
       "mid",
-      "hi",
-      "inlvl",
-      "level"
+      "hi"
     ],
     params: [
       {
@@ -2102,7 +2373,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -25,
         max: 25,
-        description: "Low frequency Drive"
+        default: 0,
+        description: "Low frequency Drive",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -2110,7 +2383,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -25,
         max: 25,
-        description: "Mid frequency Drive"
+        default: 0,
+        description: "Mid frequency Drive",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -2118,7 +2393,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 50,
-        description: "High frequency Drive"
+        default: 0,
+        description: "High frequency Drive",
+        displayUnits: 1
       },
       {
         id: "inlvl",
@@ -2126,7 +2403,9 @@ export const GENERATED_ALGORITHMS = {
         label: "InLvl",
         min: -64,
         max: 0,
-        description: "Input level (Drive sensitivity)"
+        default: 0,
+        description: "Input level (Drive sensitivity)",
+        displayUnits: 3
       },
       {
         id: "level",
@@ -2134,9 +2413,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#009739"
   },
   "custom-vybe": {
     id: "custom-vybe",
@@ -2149,8 +2431,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 6
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
       "pw",
       "depth"
@@ -2162,7 +2442,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2170,7 +2452,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -2178,7 +2462,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Custom Vybe rate or period ratio"
+        default: 0,
+        description: "Custom Vybe rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -2186,7 +2472,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "Custom Vybe pulse width"
+        default: 0,
+        description: "Custom Vybe pulse width",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -2194,9 +2482,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "Custom Vybe depth"
+        default: 0,
+        description: "Custom Vybe depth",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "delay-d": {
     id: "delay-d",
@@ -2208,19 +2499,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 3
     },
     softRow: [
-      "mix",
-      "level",
       "time1",
       "time2",
-      "lvl1",
-      "lvl2",
-      "pan1",
-      "pan2",
-      "fbk1",
-      "fbk2",
-      "xfbk1",
-      "xfbk2",
-      "clear"
+      "fbk1"
     ],
     params: [
       {
@@ -2229,7 +2510,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2237,7 +2520,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "time1",
@@ -2245,7 +2530,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time1",
         min: 0,
         max: 3440,
-        description: "Delay time"
+        default: 0,
+        description: "Delay time",
+        displayUnits: 59
       },
       {
         id: "time2",
@@ -2253,7 +2540,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time2",
         min: 0,
         max: 3440,
-        description: "Delay time"
+        default: 0,
+        description: "Delay time",
+        displayUnits: 59
       },
       {
         id: "lvl1",
@@ -2261,7 +2550,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lvl 1",
         min: -96,
         max: 0,
-        description: "In Delay (D), controls left delay output level"
+        default: 0,
+        description: "In Delay (D), controls left delay output level",
+        displayUnits: 0
       },
       {
         id: "lvl2",
@@ -2269,7 +2560,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lvl 2",
         min: -96,
         max: 0,
-        description: "In Delay (D), controls right delay output level"
+        default: 0,
+        description: "In Delay (D), controls right delay output level",
+        displayUnits: 0
       },
       {
         id: "pan1",
@@ -2277,7 +2570,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Pan 1",
         min: -50,
         max: 50,
-        description: "In Delay (D), controls left delay output panner"
+        default: 0,
+        description: "In Delay (D), controls left delay output panner",
+        displayUnits: 4
       },
       {
         id: "pan2",
@@ -2285,7 +2580,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Pan 2",
         min: -50,
         max: 50,
-        description: "In Delay (D), controls right delay output panner"
+        default: 0,
+        description: "In Delay (D), controls right delay output panner",
+        displayUnits: 4
       },
       {
         id: "fbk1",
@@ -2293,7 +2590,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk 1",
         min: -100,
         max: 100,
-        description: "Left feedback level"
+        default: 0,
+        description: "Left feedback level",
+        displayUnits: 2
       },
       {
         id: "fbk2",
@@ -2301,7 +2600,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk 2",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       },
       {
         id: "xfbk1",
@@ -2309,7 +2610,9 @@ export const GENERATED_ALGORITHMS = {
         label: "XFbk1",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       },
       {
         id: "xfbk2",
@@ -2317,7 +2620,9 @@ export const GENERATED_ALGORITHMS = {
         label: "XFbk2",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       },
       {
         id: "clear",
@@ -2325,9 +2630,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   "delay-m": {
     id: "delay-m",
@@ -2339,11 +2647,8 @@ export const GENERATED_ALGORITHMS = {
       delay: 1
     },
     softRow: [
-      "mix",
-      "level",
       "time",
-      "fbk",
-      "clear"
+      "fbk"
     ],
     params: [
       {
@@ -2352,7 +2657,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2360,7 +2667,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -2368,7 +2677,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 257,
         max: 6168,
-        description: "TODO"
+        default: 3213,
+        description: "TODO",
+        displayUnits: 59
       },
       {
         id: "fbk",
@@ -2376,7 +2687,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk",
         min: -100,
         max: 100,
-        description: "Right feedback level"
+        default: 0,
+        description: "Right feedback level",
+        displayUnits: 2
       },
       {
         id: "clear",
@@ -2384,9 +2697,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "When On, mutes and resets the delay"
+        default: 0,
+        description: "When On, mutes and resets the delay",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   "delay-s": {
     id: "delay-s",
@@ -2398,11 +2714,8 @@ export const GENERATED_ALGORITHMS = {
       delay: 2
     },
     softRow: [
-      "mix",
-      "level",
       "time",
-      "fbk",
-      "clear"
+      "fbk"
     ],
     params: [
       {
@@ -2411,7 +2724,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2419,7 +2734,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -2427,7 +2744,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 0,
         max: 3440,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 59
       },
       {
         id: "fbk",
@@ -2435,7 +2754,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       },
       {
         id: "clear",
@@ -2443,9 +2764,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "When On, mutes and resets the delay"
+        default: 0,
+        description: "When On, mutes and resets the delay",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   "detune-d": {
     id: "detune-d",
@@ -2457,8 +2781,6 @@ export const GENERATED_ALGORITHMS = {
       fx1: 3
     },
     softRow: [
-      "mix",
-      "level",
       "tune1",
       "tune2",
       "pdly"
@@ -2470,7 +2792,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2478,7 +2802,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "tune1",
@@ -2486,7 +2812,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune1",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "tune2",
@@ -2494,7 +2822,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune2",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "pdly",
@@ -2502,9 +2832,12 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 70,
-        description: "Amount of delay before the onset of the effect"
+        default: 0,
+        description: "Amount of delay before the onset of the effect",
+        displayUnits: 72
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "detune-m": {
     id: "detune-m",
@@ -2518,8 +2851,6 @@ export const GENERATED_ALGORITHMS = {
       chorus: 2
     },
     softRow: [
-      "mix",
-      "level",
       "tune",
       "pdly"
     ],
@@ -2530,7 +2861,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2538,7 +2871,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "tune",
@@ -2546,7 +2881,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune",
         min: 0,
         max: 100,
-        description: "Pitch shift"
+        default: 0,
+        description: "Pitch shift",
+        displayUnits: 1
       },
       {
         id: "pdly",
@@ -2554,9 +2891,12 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 70,
-        description: "Amount of delay before the onset of the effect"
+        default: 0,
+        description: "Amount of delay before the onset of the effect",
+        displayUnits: 72
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "detune-s": {
     id: "detune-s",
@@ -2568,8 +2908,6 @@ export const GENERATED_ALGORITHMS = {
       fx1: 2
     },
     softRow: [
-      "mix",
-      "level",
       "tune",
       "pdly"
     ],
@@ -2580,7 +2918,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2588,7 +2928,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "tune",
@@ -2596,7 +2938,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "pdly",
@@ -2604,9 +2948,12 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 25,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 72
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   diatonichmy: {
     id: "diatonichmy",
@@ -2619,12 +2966,9 @@ export const GENERATED_ALGORITHMS = {
       fx1: 7
     },
     softRow: [
-      "mix",
-      "level",
       "key",
       "scale",
-      "int",
-      "thrsh"
+      "int"
     ],
     params: [
       {
@@ -2633,7 +2977,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2641,7 +2987,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processed signal"
+        default: 0,
+        description: "Amount of effect in processed signal",
+        displayUnits: 0
       },
       {
         id: "key",
@@ -2649,7 +2997,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Key",
         min: 0,
         max: 11,
-        description: "Pitch root of scale"
+        default: 0,
+        description: "Pitch root of scale",
+        displayUnits: 96
       },
       {
         id: "scale",
@@ -2657,7 +3007,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Scale",
         min: 0,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 97
       },
       {
         id: "int",
@@ -2665,7 +3017,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Int",
         min: 0,
         max: 25,
-        description: "Harmony Interval"
+        default: 0,
+        description: "Harmony Interval",
+        displayUnits: 98
       },
       {
         id: "thrsh",
@@ -2673,9 +3027,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Thrsh",
         min: -83,
         max: 0,
-        description: "Sets the level above which the pitch detector tracks"
+        default: 0,
+        description: "Sets the level above which the pitch detector tracks",
+        displayUnits: 9
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   digidrive1: {
     id: "digidrive1",
@@ -2688,12 +3045,9 @@ export const GENERATED_ALGORITHMS = {
       fx2: 11
     },
     softRow: [
-      "mix",
-      "level",
       "drive",
       "low",
-      "mid",
-      "high"
+      "mid"
     ],
     params: [
       {
@@ -2702,7 +3056,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2710,7 +3066,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "drive",
@@ -2718,7 +3076,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "low",
@@ -2726,7 +3086,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Low",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -2734,7 +3096,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "high",
@@ -2742,9 +3106,12 @@ export const GENERATED_ALGORITHMS = {
         label: "High",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   digidrive2: {
     id: "digidrive2",
@@ -2758,12 +3125,9 @@ export const GENERATED_ALGORITHMS = {
       fx2: 12
     },
     softRow: [
-      "mix",
-      "level",
       "drive",
       "low",
-      "mid",
-      "high"
+      "mid"
     ],
     params: [
       {
@@ -2772,7 +3136,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2780,7 +3146,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "drive",
@@ -2788,7 +3156,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "low",
@@ -2796,7 +3166,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Low",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -2804,7 +3176,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "high",
@@ -2812,9 +3186,12 @@ export const GENERATED_ALGORITHMS = {
         label: "High",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   distortion: {
     id: "distortion",
@@ -2827,14 +3204,9 @@ export const GENERATED_ALGORITHMS = {
       gain: 5
     },
     softRow: [
-      "lo",
-      "mid",
-      "hi",
       "drive",
       "tone",
-      "bass",
-      "trebl",
-      "level"
+      "bass"
     ],
     params: [
       {
@@ -2843,7 +3215,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -25,
         max: 18,
-        description: "Low frequency Drive"
+        default: 0,
+        description: "Low frequency Drive",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -2851,7 +3225,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -25,
         max: 18,
-        description: "Mid frequency Drive"
+        default: 0,
+        description: "Mid frequency Drive",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -2859,7 +3235,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 18,
-        description: "High frequency Drive"
+        default: 0,
+        description: "High frequency Drive",
+        displayUnits: 1
       },
       {
         id: "drive",
@@ -2867,7 +3245,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 50,
-        description: "Amount of distortion"
+        default: 0,
+        description: "Amount of distortion",
+        displayUnits: 1
       },
       {
         id: "tone",
@@ -2875,7 +3255,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tone",
         min: 0,
         max: 25,
-        description: "High frequency roll-off"
+        default: 0,
+        description: "High frequency roll-off",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -2883,7 +3265,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: -25,
         max: 25,
-        description: "Post-Drive bass control"
+        default: 0,
+        description: "Post-Drive bass control",
+        displayUnits: 3
       },
       {
         id: "trebl",
@@ -2891,7 +3275,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Trebl",
         min: -25,
         max: 25,
-        description: "Post-Drive treble control"
+        default: 0,
+        description: "Post-Drive treble control",
+        displayUnits: 3
       },
       {
         id: "level",
@@ -2899,9 +3285,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#009739"
   },
   ducker: {
     id: "ducker",
@@ -2914,13 +3303,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 9
     },
     softRow: [
-      "mix",
-      "level",
       "time",
       "fbk",
-      "sense",
-      "rls",
-      "clear"
+      "sense"
     ],
     params: [
       {
@@ -2929,7 +3314,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -2937,7 +3324,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -2945,7 +3334,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 257,
         max: 6168,
-        description: "Delay time"
+        default: 3213,
+        description: "Delay time",
+        displayUnits: 59
       },
       {
         id: "fbk",
@@ -2953,7 +3344,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk",
         min: -100,
         max: 100,
-        description: "Feedback level"
+        default: 0,
+        description: "Feedback level",
+        displayUnits: 2
       },
       {
         id: "sense",
@@ -2961,7 +3354,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sense",
         min: 0,
         max: 100,
-        description: "Amount of ducking"
+        default: 0,
+        description: "Amount of ducking",
+        displayUnits: 1
       },
       {
         id: "rls",
@@ -2969,7 +3364,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rls",
         min: 0,
         max: 100,
-        description: "Envelope release time constant"
+        default: 0,
+        description: "Envelope release time constant",
+        displayUnits: 1
       },
       {
         id: "clear",
@@ -2977,9 +3374,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "When On, mutes and resets the delay"
+        default: 0,
+        description: "When On, mutes and resets the delay",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   "echo-d": {
     id: "echo-d",
@@ -2992,17 +3392,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 6
     },
     softRow: [
-      "mix",
-      "level",
       "time1",
       "time2",
-      "lvl1",
-      "lvl2",
-      "fbk1",
-      "fbk2",
-      "damp1",
-      "damp2",
-      "clear"
+      "fbk1"
     ],
     params: [
       {
@@ -3011,7 +3403,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3019,7 +3413,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "time1",
@@ -3027,7 +3423,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time1",
         min: 0,
         max: 3440,
-        description: "Delay time in mono version"
+        default: 0,
+        description: "Delay time in mono version",
+        displayUnits: 59
       },
       {
         id: "time2",
@@ -3035,7 +3433,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time2",
         min: 0,
         max: 3440,
-        description: "Delay time in mono version"
+        default: 0,
+        description: "Delay time in mono version",
+        displayUnits: 59
       },
       {
         id: "lvl1",
@@ -3043,7 +3443,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lvl 1",
         min: -96,
         max: 0,
-        description: "In Echo (D) controls left delay output level"
+        default: 0,
+        description: "In Echo (D) controls left delay output level",
+        displayUnits: 0
       },
       {
         id: "lvl2",
@@ -3051,7 +3453,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lvl 2",
         min: -96,
         max: 0,
-        description: "In Echo (D) controls right delay output level"
+        default: 0,
+        description: "In Echo (D) controls right delay output level",
+        displayUnits: 0
       },
       {
         id: "fbk1",
@@ -3059,7 +3463,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk 1",
         min: -100,
         max: 100,
-        description: "Left feedback level"
+        default: 0,
+        description: "Left feedback level",
+        displayUnits: 2
       },
       {
         id: "fbk2",
@@ -3067,7 +3473,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk 2",
         min: -100,
         max: 100,
-        description: "Right feedback level"
+        default: 0,
+        description: "Right feedback level",
+        displayUnits: 2
       },
       {
         id: "damp1",
@@ -3075,7 +3483,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Damp1",
         min: 0,
         max: 100,
-        description: "Cutoff frequency of low-pass filter in left feedback path"
+        default: 0,
+        description: "Cutoff frequency of low-pass filter in left feedback path",
+        displayUnits: 3
       },
       {
         id: "damp2",
@@ -3083,7 +3493,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Damp2",
         min: 0,
         max: 100,
-        description: "Cutoff frequency of low-pass filter in right feedback path"
+        default: 0,
+        description: "Cutoff frequency of low-pass filter in right feedback path",
+        displayUnits: 3
       },
       {
         id: "clear",
@@ -3091,9 +3503,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "When On, mutes and resets the delay"
+        default: 0,
+        description: "When On, mutes and resets the delay",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   "echo-m": {
     id: "echo-m",
@@ -3105,12 +3520,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 4
     },
     softRow: [
-      "mix",
-      "level",
       "time",
       "fbk",
-      "damp",
-      "clear"
+      "damp"
     ],
     params: [
       {
@@ -3119,7 +3531,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3127,7 +3541,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -3135,7 +3551,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 257,
         max: 6168,
-        description: "Delay time in mono version"
+        default: 3213,
+        description: "Delay time in mono version",
+        displayUnits: 59
       },
       {
         id: "fbk",
@@ -3143,7 +3561,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk",
         min: -100,
         max: 100,
-        description: "Left feedback level"
+        default: 0,
+        description: "Left feedback level",
+        displayUnits: 2
       },
       {
         id: "damp",
@@ -3151,7 +3571,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Damp",
         min: 0,
         max: 100,
-        description: "Cutoff frequency of low-pass filter in left feedback path"
+        default: 0,
+        description: "Cutoff frequency of low-pass filter in left feedback path",
+        displayUnits: 3
       },
       {
         id: "clear",
@@ -3159,9 +3581,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "When On, mutes and resets the delay"
+        default: 0,
+        description: "When On, mutes and resets the delay",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   "echo-s": {
     id: "echo-s",
@@ -3174,12 +3599,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 5
     },
     softRow: [
-      "mix",
-      "level",
       "time",
       "fbk",
-      "damp",
-      "clear"
+      "damp"
     ],
     params: [
       {
@@ -3188,7 +3610,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3196,7 +3620,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -3204,7 +3630,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 0,
         max: 3440,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 59
       },
       {
         id: "fbk",
@@ -3212,7 +3640,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk",
         min: -100,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 2
       },
       {
         id: "damp",
@@ -3220,7 +3650,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Damp",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "clear",
@@ -3228,9 +3660,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   extpedalvol: {
     id: "extpedalvol",
@@ -3245,10 +3680,7 @@ export const GENERATED_ALGORITHMS = {
       chorus: 17,
       eq: 15
     },
-    softRow: [
-      "mix",
-      "level"
-    ],
+    softRow: [],
     params: [
       {
         id: "mix",
@@ -3256,7 +3688,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3264,9 +3698,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "fc-splitter": {
     id: "fc-splitter",
@@ -3279,8 +3716,6 @@ export const GENERATED_ALGORITHMS = {
       eq: 9
     },
     softRow: [
-      "mix",
-      "level",
       "locut",
       "hicut",
       "bal"
@@ -3292,7 +3727,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3300,7 +3737,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "locut",
@@ -3308,7 +3747,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 100,
         max: 10000,
-        description: "Corner frequency for the low cut (highpass)band"
+        default: 5050,
+        description: "Corner frequency for the low cut (highpass)band",
+        displayUnits: 9
       },
       {
         id: "hicut",
@@ -3316,7 +3757,9 @@ export const GENERATED_ALGORITHMS = {
         label: "HiCut",
         min: 100,
         max: 10000,
-        description: "Corner frequency for the high cut (lowpass) band"
+        default: 5050,
+        description: "Corner frequency for the high cut (lowpass) band",
+        displayUnits: 9
       },
       {
         id: "bal",
@@ -3324,9 +3767,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Bal",
         min: -50,
         max: 50,
-        description: "Relative level of the low and high band"
+        default: 0,
+        description: "Relative level of the low and high band",
+        displayUnits: 8
       }
-    ]
+    ],
+    color: "#14b8a6"
   },
   "flange24-m": {
     id: "flange24-m",
@@ -3339,14 +3785,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 4
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
-      "pw",
       "depth",
-      "res",
-      "glide",
-      "blend"
+      "res"
     ],
     params: [
       {
@@ -3355,7 +3796,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3363,7 +3806,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -3371,7 +3816,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Drum rate or period ratio"
+        default: 0,
+        description: "Drum rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -3379,7 +3826,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "Left Mod pulse width"
+        default: 0,
+        description: "Left Mod pulse width",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -3387,7 +3836,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "Drum depth (tremolo)"
+        default: 0,
+        description: "Drum depth (tremolo)",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -3395,7 +3846,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 2
       },
       {
         id: "glide",
@@ -3403,7 +3856,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Glide",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "blend",
@@ -3411,9 +3866,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Blend",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   "flanger-m": {
     id: "flanger-m",
@@ -3426,13 +3884,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 3
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
-      "pw",
       "depth",
-      "res",
-      "blend"
+      "res"
     ],
     params: [
       {
@@ -3441,7 +3895,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3449,7 +3905,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -3457,7 +3915,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Drum rate or period ratio"
+        default: 0,
+        description: "Drum rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -3465,7 +3925,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "Left Mod pulse width"
+        default: 0,
+        description: "Left Mod pulse width",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -3473,7 +3935,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "Drum depth (tremolo)"
+        default: 0,
+        description: "Drum depth (tremolo)",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -3481,7 +3945,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 2
       },
       {
         id: "blend",
@@ -3489,9 +3955,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Blend",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   "flanger-s": {
     id: "flanger-s",
@@ -3503,14 +3972,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 5
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
-      "mix2",
       "depth",
-      "phase",
-      "res",
-      "blend"
+      "res"
     ],
     params: [
       {
@@ -3519,7 +3983,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3527,7 +3993,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -3535,7 +4003,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Flange rate or period ratio"
+        default: 0,
+        description: "Flange rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "mix2",
@@ -3543,7 +4013,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "depth",
@@ -3551,7 +4023,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "Flange depth"
+        default: 0,
+        description: "Flange depth",
+        displayUnits: 3
       },
       {
         id: "phase",
@@ -3559,7 +4033,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Phase",
         min: 0,
         max: 3,
-        description: "In Flanger (S) sets the phase difference between the right"
+        default: 0,
+        description: "In Flanger (S) sets the phase difference between the right",
+        displayUnits: 71
       },
       {
         id: "res",
@@ -3567,7 +4043,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 2
       },
       {
         id: "blend",
@@ -3575,9 +4053,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Blend",
         min: 0,
         max: 100,
-        description: "Amount of fixed tape mixed with moving tape"
+        default: 0,
+        description: "Amount of fixed tape mixed with moving tape",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   gate: {
     id: "gate",
@@ -3590,16 +4071,7 @@ export const GENERATED_ALGORITHMS = {
       reverb: 5
     },
     softRow: [
-      "mix",
-      "level",
       "time",
-      "link",
-      "diff",
-      "pdly",
-      "loslp",
-      "hislp",
-      "xovr",
-      "rthc",
       "shape",
       "spred"
     ],
@@ -3610,7 +4082,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3618,7 +4092,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -3626,7 +4102,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 0,
         max: 112,
-        description: "Reverb time for mid and low frequency signals"
+        default: 0,
+        description: "Reverb time for mid and low frequency signals",
+        displayUnits: 64
       },
       {
         id: "link",
@@ -3634,7 +4112,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Link",
         min: 0,
         max: 1,
-        description: "Scales Spred with Size"
+        default: 0,
+        description: "Scales Spred with Size",
+        displayUnits: 4
       },
       {
         id: "diff",
@@ -3642,7 +4122,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Diff",
         min: 0,
         max: 50,
-        description: "Increase of initial echo density over time"
+        default: 0,
+        description: "Increase of initial echo density over time",
+        displayUnits: 58
       },
       {
         id: "pdly",
@@ -3650,7 +4132,9 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 250,
-        description: "Delay inserted before the onset of reverberation"
+        default: 0,
+        description: "Delay inserted before the onset of reverberation",
+        displayUnits: 72
       },
       {
         id: "loslp",
@@ -3658,7 +4142,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoSlp",
         min: 0,
         max: 32,
-        description: "Determines low frequency envelope shape"
+        default: 0,
+        description: "Determines low frequency envelope shape",
+        displayUnits: 62
       },
       {
         id: "hislp",
@@ -3666,7 +4152,9 @@ export const GENERATED_ALGORITHMS = {
         label: "HiSlp",
         min: 0,
         max: 32,
-        description: "Determines mid and high frequency envelope shape"
+        default: 0,
+        description: "Determines mid and high frequency envelope shape",
+        displayUnits: 62
       },
       {
         id: "xovr",
@@ -3674,7 +4162,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Xovr",
         min: 0,
         max: 60,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 56
       },
       {
         id: "rthc",
@@ -3682,7 +4172,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rt HC",
         min: 0,
         max: 48,
-        description: "High frequency content of Slope"
+        default: 0,
+        description: "High frequency content of Slope",
+        displayUnits: 54
       },
       {
         id: "shape",
@@ -3690,7 +4182,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Shape",
         min: 0,
         max: 255,
-        description: "Contour of the reverberation envelope"
+        default: 0,
+        description: "Contour of the reverberation envelope",
+        displayUnits: 61
       },
       {
         id: "spred",
@@ -3698,9 +4192,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Spred",
         min: 0,
         max: 255,
-        description: "Sustain of reverberation after initial build up"
+        default: 0,
+        description: "Sustain of reverberation after initial build up",
+        displayUnits: 60
       }
-    ]
+    ],
+    color: "#6366f1"
   },
   hall: {
     id: "hall",
@@ -3713,18 +4210,9 @@ export const GENERATED_ALGORITHMS = {
       reverb: 2
     },
     softRow: [
-      "mix",
-      "level",
       "size",
-      "link",
-      "diff",
-      "pdly",
-      "bass",
       "decay",
-      "xovr",
-      "rthc",
-      "shape",
-      "spred"
+      "shape"
     ],
     params: [
       {
@@ -3733,7 +4221,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3741,7 +4231,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "size",
@@ -3749,7 +4241,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Size",
         min: 32,
         max: 144,
-        description: "Length of Hall"
+        default: 88,
+        description: "Length of Hall",
+        displayUnits: 53
       },
       {
         id: "link",
@@ -3757,7 +4251,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Link",
         min: 0,
         max: 1,
-        description: "Scales Decay and Spred with Size"
+        default: 0,
+        description: "Scales Decay and Spred with Size",
+        displayUnits: 4
       },
       {
         id: "diff",
@@ -3765,7 +4261,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Diff",
         min: 0,
         max: 50,
-        description: "Increase of initial echo density over time"
+        default: 0,
+        description: "Increase of initial echo density over time",
+        displayUnits: 58
       },
       {
         id: "pdly",
@@ -3773,7 +4271,9 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 250,
-        description: "Delay inserted before the onset of reverberation"
+        default: 0,
+        description: "Delay inserted before the onset of reverberation",
+        displayUnits: 72
       },
       {
         id: "bass",
@@ -3781,7 +4281,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 9,
-        description: "Reverb time for low frequency signals"
+        default: 0,
+        description: "Reverb time for low frequency signals",
+        displayUnits: 55
       },
       {
         id: "decay",
@@ -3789,7 +4291,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Decay",
         min: 0,
         max: 63,
-        description: "Length of the reverb tail"
+        default: 0,
+        description: "Length of the reverb tail",
+        displayUnits: 57
       },
       {
         id: "xovr",
@@ -3797,7 +4301,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Xovr",
         min: 0,
         max: 60,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 56
       },
       {
         id: "rthc",
@@ -3805,7 +4311,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rt HC",
         min: 0,
         max: 48,
-        description: "High frequency content of Decay"
+        default: 0,
+        description: "High frequency content of Decay",
+        displayUnits: 54
       },
       {
         id: "shape",
@@ -3813,7 +4321,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Shape",
         min: 0,
         max: 255,
-        description: "Contour of the reverberation envelope"
+        default: 0,
+        description: "Contour of the reverberation envelope",
+        displayUnits: 61
       },
       {
         id: "spred",
@@ -3821,9 +4331,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Spred",
         min: 0,
         max: 255,
-        description: "Sustain of reverberation after initial build up"
+        default: 0,
+        description: "Sustain of reverberation after initial build up",
+        displayUnits: 60
       }
-    ]
+    ],
+    color: "#6366f1"
   },
   jamman: {
     id: "jamman",
@@ -3836,15 +4349,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 8
     },
     softRow: [
-      "mix",
-      "level",
       "size",
       "fbk",
-      "clear",
-      "layer",
-      "replc",
-      "delay",
-      "mutes"
+      "delay"
     ],
     params: [
       {
@@ -3853,7 +4360,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3861,7 +4370,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "size",
@@ -3869,7 +4380,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Size",
         min: 0,
         max: 20000,
-        description: "Loop size in ms (display only, this is set by pressing Tap)"
+        default: 0,
+        description: "Loop size in ms (display only, this is set by pressing Tap)",
+        displayUnits: 59
       },
       {
         id: "fbk",
@@ -3877,7 +4390,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fbk",
         min: -100,
         max: 100,
-        description: "Feedback level (defaults to 100% while looping)"
+        default: 0,
+        description: "Feedback level (defaults to 100% while looping)",
+        displayUnits: 2
       },
       {
         id: "clear",
@@ -3885,7 +4400,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "Mutes and resets the loop when On"
+        default: 0,
+        description: "Mutes and resets the loop when On",
+        displayUnits: 4
       },
       {
         id: "layer",
@@ -3893,7 +4410,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Layer",
         min: 0,
         max: 1,
-        description: "Adds new material on top of loop while On"
+        default: 0,
+        description: "Adds new material on top of loop while On",
+        displayUnits: 4
       },
       {
         id: "replc",
@@ -3901,7 +4420,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Replc",
         min: 0,
         max: 1,
-        description: "Replaces existing loop with new material while On"
+        default: 0,
+        description: "Replaces existing loop with new material while On",
+        displayUnits: 4
       },
       {
         id: "delay",
@@ -3909,7 +4430,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Delay",
         min: 0,
         max: 1,
-        description: "Turns looper into mono delay while On"
+        default: 0,
+        description: "Turns looper into mono delay while On",
+        displayUnits: 4
       },
       {
         id: "mutes",
@@ -3917,9 +4440,12 @@ export const GENERATED_ALGORITHMS = {
         label: "MuteS",
         min: 0,
         max: 1,
-        description: "Mutes loop while On, restarts from beginning when Off"
+        default: 0,
+        description: "Mutes loop while On, restarts from beginning when Off",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   looper: {
     id: "looper",
@@ -3932,15 +4458,9 @@ export const GENERATED_ALGORITHMS = {
       delay: 7
     },
     softRow: [
-      "mix",
-      "level",
       "time",
-      "inmix",
       "sense",
-      "pan",
-      "rls",
-      "atk",
-      "clear"
+      "pan"
     ],
     params: [
       {
@@ -3949,7 +4469,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -3957,7 +4479,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "time",
@@ -3965,7 +4489,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Time",
         min: 257,
         max: 6168,
-        description: "Delay time"
+        default: 3213,
+        description: "Delay time",
+        displayUnits: 59
       },
       {
         id: "inmix",
@@ -3973,7 +4499,9 @@ export const GENERATED_ALGORITHMS = {
         label: "InMix",
         min: 0,
         max: 100,
-        description: "Ratio of input to feedback going into the delay"
+        default: 0,
+        description: "Ratio of input to feedback going into the delay",
+        displayUnits: 3
       },
       {
         id: "sense",
@@ -3981,7 +4509,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sense",
         min: 0,
         max: 100,
-        description: "Sensitivity of InMix to input amplitude"
+        default: 0,
+        description: "Sensitivity of InMix to input amplitude",
+        displayUnits: 1
       },
       {
         id: "pan",
@@ -3989,7 +4519,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Pan",
         min: -50,
         max: 50,
-        description: "Output panner"
+        default: 0,
+        description: "Output panner",
+        displayUnits: 4
       },
       {
         id: "rls",
@@ -3997,7 +4529,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rls",
         min: 0,
         max: 100,
-        description: "Envelope release time constant"
+        default: 0,
+        description: "Envelope release time constant",
+        displayUnits: 1
       },
       {
         id: "atk",
@@ -4005,7 +4539,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Atk",
         min: 0,
         max: 100,
-        description: "Envelope attack time constant"
+        default: 0,
+        description: "Envelope attack time constant",
+        displayUnits: 1
       },
       {
         id: "clear",
@@ -4013,9 +4549,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Clear",
         min: 0,
         max: 1,
-        description: "When On, mutes and resets the delay"
+        default: 0,
+        description: "When On, mutes and resets the delay",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#f59e0b"
   },
   octabuzz: {
     id: "octabuzz",
@@ -4028,10 +4567,7 @@ export const GENERATED_ALGORITHMS = {
       fx1: 20,
       fx2: 13
     },
-    softRow: [
-      "mix",
-      "level"
-    ],
+    softRow: [],
     params: [
       {
         id: "mix",
@@ -4039,7 +4575,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4047,9 +4585,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   orangephase: {
     id: "orangephase",
@@ -4062,8 +4603,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 8
     },
     softRow: [
-      "mix",
-      "level",
       "rate"
     ],
     params: [
@@ -4073,7 +4612,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4081,7 +4622,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -4089,9 +4632,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 100,
-        description: "OrangePhase rate"
+        default: 0,
+        description: "OrangePhase rate",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   orbits: {
     id: "orbits",
@@ -4104,17 +4650,8 @@ export const GENERATED_ALGORITHMS = {
       chorus: 8
     },
     softRow: [
-      "mix",
-      "level",
       "rate1",
-      "pw1",
-      "sync1",
       "dpth1",
-      "rate2",
-      "pw2",
-      "sync2",
-      "dpth2",
-      "res",
       "width"
     ],
     params: [
@@ -4124,7 +4661,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4132,7 +4671,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate1",
@@ -4140,7 +4681,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate1",
         min: 0,
         max: 5000,
-        description: "Left Mod and Pan rate or period ratio"
+        default: 0,
+        description: "Left Mod and Pan rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw1",
@@ -4148,7 +4691,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 1",
         min: 0,
         max: 100,
-        description: "Left Mod and Pan pulse width"
+        default: 0,
+        description: "Left Mod and Pan pulse width",
+        displayUnits: 3
       },
       {
         id: "sync1",
@@ -4156,7 +4701,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sync1",
         min: -120,
         max: 120,
-        description: "Phase difference between left LFO Mod and Pan"
+        default: 0,
+        description: "Phase difference between left LFO Mod and Pan",
+        displayUnits: 3
       },
       {
         id: "dpth1",
@@ -4164,7 +4711,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth1",
         min: 0,
         max: 100,
-        description: "Left Mod and Pan depth"
+        default: 0,
+        description: "Left Mod and Pan depth",
+        displayUnits: 3
       },
       {
         id: "rate2",
@@ -4172,7 +4721,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate2",
         min: 0,
         max: 5000,
-        description: "Right Mod and Pan rate or period ratio"
+        default: 0,
+        description: "Right Mod and Pan rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw2",
@@ -4180,7 +4731,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 2",
         min: 0,
         max: 100,
-        description: "Right Mod and Pan pulse width"
+        default: 0,
+        description: "Right Mod and Pan pulse width",
+        displayUnits: 3
       },
       {
         id: "sync2",
@@ -4188,7 +4741,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sync2",
         min: -120,
         max: 120,
-        description: "Phase difference between right LFO Mod and Pan"
+        default: 0,
+        description: "Phase difference between right LFO Mod and Pan",
+        displayUnits: 3
       },
       {
         id: "dpth2",
@@ -4196,7 +4751,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth2",
         min: 0,
         max: 100,
-        description: "Right Mod and Pan depth"
+        default: 0,
+        description: "Right Mod and Pan depth",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -4204,7 +4761,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 2
       },
       {
         id: "width",
@@ -4212,9 +4771,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Width",
         min: 0,
         max: 100,
-        description: "Panning width"
+        default: 0,
+        description: "Panning width",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   overdrive: {
     id: "overdrive",
@@ -4227,15 +4789,9 @@ export const GENERATED_ALGORITHMS = {
       gain: 4
     },
     softRow: [
-      "lo",
-      "mid",
-      "hi",
-      "inlvl",
-      "locut",
-      "feel",
       "drive",
-      "tone",
-      "level"
+      "feel",
+      "tone"
     ],
     params: [
       {
@@ -4244,7 +4800,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -15,
         max: 15,
-        description: "Low frequency boost/cut"
+        default: 0,
+        description: "Low frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -4252,7 +4810,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -15,
         max: 15,
-        description: "Mid frequency boost/cut"
+        default: 0,
+        description: "Mid frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -4260,7 +4820,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 15,
-        description: "High frequency boost"
+        default: 0,
+        description: "High frequency boost",
+        displayUnits: 1
       },
       {
         id: "inlvl",
@@ -4268,7 +4830,9 @@ export const GENERATED_ALGORITHMS = {
         label: "InLvl",
         min: -64,
         max: 0,
-        description: "Input level (Drive sensitivity)"
+        default: 0,
+        description: "Input level (Drive sensitivity)",
+        displayUnits: 3
       },
       {
         id: "locut",
@@ -4276,7 +4840,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 0,
         max: 20,
-        description: "Low frequency boost/cut"
+        default: 0,
+        description: "Low frequency boost/cut",
+        displayUnits: 1
       },
       {
         id: "feel",
@@ -4284,7 +4850,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Feel",
         min: 0,
         max: 64,
-        description: "Overdrive dynamics"
+        default: 0,
+        description: "Overdrive dynamics",
+        displayUnits: 1
       },
       {
         id: "drive",
@@ -4292,7 +4860,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 40,
-        description: "Amount of overdrive"
+        default: 0,
+        description: "Amount of overdrive",
+        displayUnits: 1
       },
       {
         id: "tone",
@@ -4300,7 +4870,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tone",
         min: 0,
         max: 25,
-        description: "High frequency roll-off (Post-Overdrive)"
+        default: 0,
+        description: "High frequency roll-off (Post-Overdrive)",
+        displayUnits: 1
       },
       {
         id: "level",
@@ -4308,9 +4880,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#009739"
   },
   panner: {
     id: "panner",
@@ -4323,8 +4898,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 1
     },
     softRow: [
-      "mix",
-      "level",
       "pan1",
       "pan2"
     ],
@@ -4335,7 +4908,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4343,7 +4918,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "pan1",
@@ -4351,7 +4928,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Pan 1",
         min: -50,
         max: 50,
-        description: "Left input panner"
+        default: 0,
+        description: "Left input panner",
+        displayUnits: 4
       },
       {
         id: "pan2",
@@ -4359,9 +4938,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Pan 2",
         min: -50,
         max: 50,
-        description: "Right input panner"
+        default: 0,
+        description: "Right input panner",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "pedal-vol": {
     id: "pedal-vol",
@@ -4376,10 +4958,7 @@ export const GENERATED_ALGORITHMS = {
       chorus: 16,
       eq: 14
     },
-    softRow: [
-      "mix",
-      "level"
-    ],
+    softRow: [],
     params: [
       {
         id: "mix",
@@ -4387,7 +4966,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4395,9 +4976,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 0
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "pedal-wah-1": {
     id: "pedal-wah-1",
@@ -4411,8 +4995,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 18
     },
     softRow: [
-      "mix",
-      "level",
       "bass",
       "resp",
       "gain"
@@ -4424,7 +5006,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4432,7 +5016,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "bass",
@@ -4440,7 +5026,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "resp",
@@ -4448,7 +5036,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Resp",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "gain",
@@ -4456,9 +5046,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "Tone is a set of analog Tone"
+        default: 0,
+        description: "Tone is a set of analog Tone",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "pedal-wah-2": {
     id: "pedal-wah-2",
@@ -4472,8 +5065,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 19
     },
     softRow: [
-      "mix",
-      "level",
       "bass",
       "resp",
       "gain"
@@ -4485,7 +5076,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4493,7 +5086,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "bass",
@@ -4501,7 +5096,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "resp",
@@ -4509,7 +5106,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Resp",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "gain",
@@ -4517,9 +5116,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "Tone is a set of analog Tone"
+        default: 0,
+        description: "Tone is a set of analog Tone",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   phaser: {
     id: "phaser",
@@ -4533,11 +5135,8 @@ export const GENERATED_ALGORITHMS = {
       fx2: 7
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
       "pw",
-      "mix2",
       "res"
     ],
     params: [
@@ -4547,7 +5146,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4555,7 +5156,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -4563,7 +5166,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Phaser rate or period ratio"
+        default: 0,
+        description: "Phaser rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -4571,7 +5176,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "Phaser pulse width"
+        default: 0,
+        description: "Phaser pulse width",
+        displayUnits: 3
       },
       {
         id: "mix2",
@@ -4579,7 +5186,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "res",
@@ -4587,9 +5196,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Amount of feedback from output of filters to inputs"
+        default: 0,
+        description: "Amount of feedback from output of filters to inputs",
+        displayUnits: 2
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   plate: {
     id: "plate",
@@ -4601,18 +5213,9 @@ export const GENERATED_ALGORITHMS = {
       reverb: 3
     },
     softRow: [
-      "mix",
-      "level",
       "size",
-      "link",
-      "diff",
-      "pdly",
-      "bass",
       "decay",
-      "xovr",
-      "rthc",
-      "shape",
-      "spred"
+      "shape"
     ],
     params: [
       {
@@ -4621,7 +5224,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4629,7 +5234,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "size",
@@ -4637,7 +5244,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Size",
         min: 0,
         max: 144,
-        description: "Length of room"
+        default: 0,
+        description: "Length of room",
+        displayUnits: 53
       },
       {
         id: "link",
@@ -4645,7 +5254,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Link",
         min: 0,
         max: 1,
-        description: "Scales Decay and Spred with Size"
+        default: 0,
+        description: "Scales Decay and Spred with Size",
+        displayUnits: 4
       },
       {
         id: "diff",
@@ -4653,7 +5264,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Diff",
         min: 0,
         max: 50,
-        description: "Increase of initial echo density over time"
+        default: 0,
+        description: "Increase of initial echo density over time",
+        displayUnits: 58
       },
       {
         id: "pdly",
@@ -4661,7 +5274,9 @@ export const GENERATED_ALGORITHMS = {
         label: "P Dly",
         min: 0,
         max: 250,
-        description: "Delay inserted before the onset of reverberation"
+        default: 0,
+        description: "Delay inserted before the onset of reverberation",
+        displayUnits: 72
       },
       {
         id: "bass",
@@ -4669,7 +5284,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 9,
-        description: "Reverb time for low frequency signals"
+        default: 0,
+        description: "Reverb time for low frequency signals",
+        displayUnits: 55
       },
       {
         id: "decay",
@@ -4677,7 +5294,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Decay",
         min: 0,
         max: 63,
-        description: "Length of the reverb tail"
+        default: 0,
+        description: "Length of the reverb tail",
+        displayUnits: 57
       },
       {
         id: "xovr",
@@ -4685,7 +5304,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Xovr",
         min: 0,
         max: 60,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 56
       },
       {
         id: "rthc",
@@ -4693,7 +5314,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rt HC",
         min: 0,
         max: 48,
-        description: "High frequency content of Decay"
+        default: 0,
+        description: "High frequency content of Decay",
+        displayUnits: 54
       },
       {
         id: "shape",
@@ -4701,7 +5324,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Shape",
         min: 0,
         max: 255,
-        description: "Contour of the reverberation envelope"
+        default: 0,
+        description: "Contour of the reverberation envelope",
+        displayUnits: 61
       },
       {
         id: "spred",
@@ -4709,9 +5334,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Spred",
         min: 0,
         max: 255,
-        description: "Sustain of reverberation after initial build up"
+        default: 0,
+        description: "Sustain of reverberation after initial build up",
+        displayUnits: 60
       }
-    ]
+    ],
+    color: "#6366f1"
   },
   preamp: {
     id: "preamp",
@@ -4724,17 +5352,9 @@ export const GENERATED_ALGORITHMS = {
       gain: 6
     },
     softRow: [
-      "lo",
-      "mid",
-      "hi",
-      "inlvl",
-      "locut",
-      "feel",
       "drive",
-      "tone",
-      "bass",
-      "trebl",
-      "level"
+      "feel",
+      "tone"
     ],
     params: [
       {
@@ -4743,7 +5363,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -25,
         max: 25,
-        description: "Low frequency boost/cut"
+        default: 0,
+        description: "Low frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -4751,7 +5373,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -25,
         max: 25,
-        description: "Mid frequency boost/cut"
+        default: 0,
+        description: "Mid frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -4759,7 +5383,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 50,
-        description: "High frequency boost"
+        default: 0,
+        description: "High frequency boost",
+        displayUnits: 1
       },
       {
         id: "inlvl",
@@ -4767,7 +5393,9 @@ export const GENERATED_ALGORITHMS = {
         label: "InLvl",
         min: -64,
         max: 0,
-        description: "Input level (Drive sensitivity)"
+        default: 0,
+        description: "Input level (Drive sensitivity)",
+        displayUnits: 3
       },
       {
         id: "locut",
@@ -4775,7 +5403,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 0,
         max: 20,
-        description: "Pre-Drive low frequency roll off"
+        default: 0,
+        description: "Pre-Drive low frequency roll off",
+        displayUnits: 1
       },
       {
         id: "feel",
@@ -4783,7 +5413,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Feel",
         min: 0,
         max: 64,
-        description: "Overdrive dynamics"
+        default: 0,
+        description: "Overdrive dynamics",
+        displayUnits: 1
       },
       {
         id: "drive",
@@ -4791,7 +5423,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 60,
-        description: "Amount of overdrive"
+        default: 0,
+        description: "Amount of overdrive",
+        displayUnits: 1
       },
       {
         id: "tone",
@@ -4799,7 +5433,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tone",
         min: 0,
         max: 35,
-        description: "High frequency roll-off"
+        default: 0,
+        description: "High frequency roll-off",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -4807,7 +5443,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: -25,
         max: 25,
-        description: "Post-Drive bass control"
+        default: 0,
+        description: "Post-Drive bass control",
+        displayUnits: 3
       },
       {
         id: "trebl",
@@ -4815,7 +5453,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Trebl",
         min: -25,
         max: 25,
-        description: "Post-Drive treble control"
+        default: 0,
+        description: "Post-Drive treble control",
+        displayUnits: 3
       },
       {
         id: "level",
@@ -4823,9 +5463,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#009739"
   },
   "red-comp": {
     id: "red-comp",
@@ -4839,8 +5482,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 9
     },
     softRow: [
-      "mix",
-      "level",
       "sense"
     ],
     params: [
@@ -4850,7 +5491,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4858,7 +5501,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "sense",
@@ -4866,9 +5511,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Sense",
         min: 0,
         max: 100,
-        description: "Sensitivity (Pre-Compressor level)"
+        default: 0,
+        description: "Sensitivity (Pre-Compressor level)",
+        displayUnits: 10
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "rotary-cab": {
     id: "rotary-cab",
@@ -4880,14 +5528,8 @@ export const GENERATED_ALGORITHMS = {
       chorus: 6
     },
     softRow: [
-      "mix",
-      "level",
       "rate1",
-      "dpth1",
       "rate2",
-      "dpth2",
-      "res",
-      "width",
       "bal"
     ],
     params: [
@@ -4897,7 +5539,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4905,7 +5549,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate1",
@@ -4913,7 +5559,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate1",
         min: 0,
         max: 5000,
-        description: "Drum rate or period ratio"
+        default: 0,
+        description: "Drum rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "dpth1",
@@ -4921,7 +5569,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth1",
         min: 0,
         max: 100,
-        description: "Drum depth (tremolo)"
+        default: 0,
+        description: "Drum depth (tremolo)",
+        displayUnits: 3
       },
       {
         id: "rate2",
@@ -4929,7 +5579,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate2",
         min: 0,
         max: 5000,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 23
       },
       {
         id: "dpth2",
@@ -4937,7 +5589,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth2",
         min: 0,
         max: 100,
-        description: "Horn depth (tremolo)"
+        default: 0,
+        description: "Horn depth (tremolo)",
+        displayUnits: 3
       },
       {
         id: "res",
@@ -4945,7 +5599,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res",
         min: -100,
         max: 100,
-        description: "Resonance"
+        default: 0,
+        description: "Resonance",
+        displayUnits: 2
       },
       {
         id: "width",
@@ -4953,7 +5609,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Width",
         min: 0,
         max: 100,
-        description: "Panning width for horn and drum"
+        default: 0,
+        description: "Panning width for horn and drum",
+        displayUnits: 3
       },
       {
         id: "bal",
@@ -4961,9 +5619,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Bal",
         min: -50,
         max: 50,
-        description: "Relative level of horn and drum"
+        default: 0,
+        description: "Relative level of horn and drum",
+        displayUnits: 8
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   "shift-d": {
     id: "shift-d",
@@ -4975,8 +5636,6 @@ export const GENERATED_ALGORITHMS = {
       fx1: 6
     },
     softRow: [
-      "mix",
-      "level",
       "tune1",
       "tune2",
       "glide"
@@ -4988,7 +5647,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -4996,7 +5657,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "tune1",
@@ -5004,7 +5667,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune1",
         min: -4800,
         max: 1900,
-        description: "Pitch shift"
+        default: 0,
+        description: "Pitch shift",
+        displayUnits: 1
       },
       {
         id: "tune2",
@@ -5012,7 +5677,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune2",
         min: -4800,
         max: 1900,
-        description: "Pitch shift"
+        default: 0,
+        description: "Pitch shift",
+        displayUnits: 1
       },
       {
         id: "glide",
@@ -5020,9 +5687,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Glide",
         min: 0,
         max: 1,
-        description: "Coarse, fine resolution of pitch shift"
+        default: 0,
+        description: "Coarse, fine resolution of pitch shift",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "shift-m": {
     id: "shift-m",
@@ -5035,8 +5705,6 @@ export const GENERATED_ALGORITHMS = {
       fx1: 4
     },
     softRow: [
-      "mix",
-      "level",
       "tune",
       "glide"
     ],
@@ -5047,7 +5715,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5055,7 +5725,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "tune",
@@ -5063,7 +5735,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune",
         min: -4800,
         max: 1900,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "glide",
@@ -5071,9 +5745,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Glide",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "shift-s": {
     id: "shift-s",
@@ -5085,8 +5762,6 @@ export const GENERATED_ALGORITHMS = {
       fx1: 5
     },
     softRow: [
-      "mix",
-      "level",
       "tune",
       "glide"
     ],
@@ -5097,7 +5772,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5105,7 +5782,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "tune",
@@ -5113,7 +5792,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tune",
         min: -4800,
         max: 1900,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "glide",
@@ -5121,9 +5802,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Glide",
         min: 0,
         max: 1,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   splitpreamp: {
     id: "splitpreamp",
@@ -5136,17 +5820,9 @@ export const GENERATED_ALGORITHMS = {
       gain: 7
     },
     softRow: [
-      "lo",
-      "mid",
-      "hi",
-      "inlvl",
-      "locut",
-      "feel",
       "drive",
-      "tone",
-      "bass",
-      "trebl",
-      "level"
+      "feel",
+      "tone"
     ],
     params: [
       {
@@ -5155,7 +5831,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -25,
         max: 25,
-        description: "Clean low frequency boost/cut"
+        default: 0,
+        description: "Clean low frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -5163,7 +5841,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -25,
         max: 25,
-        description: "Clean mid frequency boost/cut"
+        default: 0,
+        description: "Clean mid frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -5171,7 +5851,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 50,
-        description: "Clean high frequency boost/cut"
+        default: 0,
+        description: "Clean high frequency boost/cut",
+        displayUnits: 1
       },
       {
         id: "inlvl",
@@ -5179,7 +5861,9 @@ export const GENERATED_ALGORITHMS = {
         label: "InLvl",
         min: -64,
         max: 0,
-        description: "Input level (Drive sensitivity)"
+        default: 0,
+        description: "Input level (Drive sensitivity)",
+        displayUnits: 3
       },
       {
         id: "locut",
@@ -5187,7 +5871,9 @@ export const GENERATED_ALGORITHMS = {
         label: "LoCut",
         min: 0,
         max: 20,
-        description: "Clean low frequency boost/cut"
+        default: 0,
+        description: "Clean low frequency boost/cut",
+        displayUnits: 1
       },
       {
         id: "feel",
@@ -5195,7 +5881,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Feel",
         min: 0,
         max: 64,
-        description: "Overdrive dynamics"
+        default: 0,
+        description: "Overdrive dynamics",
+        displayUnits: 1
       },
       {
         id: "drive",
@@ -5203,7 +5891,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 60,
-        description: "Amount of overdrive"
+        default: 0,
+        description: "Amount of overdrive",
+        displayUnits: 1
       },
       {
         id: "tone",
@@ -5211,7 +5901,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tone",
         min: 0,
         max: 25,
-        description: "High frequency roll-off"
+        default: 0,
+        description: "High frequency roll-off",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -5219,7 +5911,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: -25,
         max: 25,
-        description: "Post-Drive bass control"
+        default: 0,
+        description: "Post-Drive bass control",
+        displayUnits: 3
       },
       {
         id: "trebl",
@@ -5227,7 +5921,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Trebl",
         min: -25,
         max: 25,
-        description: "Post-Drive treble control"
+        default: 0,
+        description: "Post-Drive treble control",
+        displayUnits: 3
       },
       {
         id: "level",
@@ -5235,9 +5931,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#009739"
   },
   "stereo-chorus": {
     id: "stereo-chorus",
@@ -5250,7 +5949,9 @@ export const GENERATED_ALGORITHMS = {
       chorus: 1
     },
     softRow: [
-      "mix"
+      "rate1",
+      "dpth1",
+      "rate2"
     ],
     params: [
       {
@@ -5259,7 +5960,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5267,7 +5970,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate1",
@@ -5275,7 +5980,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate1",
         min: 0,
         max: 5000,
-        description: "Left and right A rate"
+        default: 0,
+        description: "Left and right A rate",
+        displayUnits: 23
       },
       {
         id: "pw1",
@@ -5283,7 +5990,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 1",
         min: 0,
         max: 100,
-        description: "Left and right A pulse width"
+        default: 0,
+        description: "Left and right A pulse width",
+        displayUnits: 3
       },
       {
         id: "dpth1",
@@ -5291,7 +6000,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth1",
         min: 0,
         max: 100,
-        description: "Left and right A depth"
+        default: 0,
+        description: "Left and right A depth",
+        displayUnits: 3
       },
       {
         id: "rate2",
@@ -5299,7 +6010,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate2",
         min: 0,
         max: 5000,
-        description: "Left and right B rate"
+        default: 0,
+        description: "Left and right B rate",
+        displayUnits: 23
       },
       {
         id: "pw2",
@@ -5307,7 +6020,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW 2",
         min: 0,
         max: 100,
-        description: "Left and right B pulse width"
+        default: 0,
+        description: "Left and right B pulse width",
+        displayUnits: 3
       },
       {
         id: "dpth2",
@@ -5315,7 +6030,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Dpth2",
         min: 0,
         max: 100,
-        description: "Left and right B depth"
+        default: 0,
+        description: "Left and right B depth",
+        displayUnits: 3
       },
       {
         id: "res1",
@@ -5323,7 +6040,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Res 1",
         min: -100,
         max: 100,
-        description: "Left to right resonance"
+        default: 0,
+        description: "Left to right resonance",
+        displayUnits: 3
       },
       {
         id: "res2",
@@ -5331,9 +6050,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Res 2",
         min: -100,
         max: 100,
-        description: "Right to left resonance"
+        default: 0,
+        description: "Right to left resonance",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#0ea5e9"
   },
   sweepfilter: {
     id: "sweepfilter",
@@ -5347,13 +6069,9 @@ export const GENERATED_ALGORITHMS = {
       fx2: 14
     },
     softRow: [
-      "mix",
-      "level",
       "fc",
       "fres",
-      "mod",
-      "scale",
-      "pan"
+      "mod"
     ],
     params: [
       {
@@ -5362,7 +6080,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5370,7 +6090,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "fc",
@@ -5378,7 +6100,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Fc",
         min: 20,
         max: 20000,
-        description: "Corner frequency offset of filter"
+        default: 10010,
+        description: "Corner frequency offset of filter",
+        displayUnits: 9
       },
       {
         id: "fres",
@@ -5386,7 +6110,9 @@ export const GENERATED_ALGORITHMS = {
         label: "FRes",
         min: 1,
         max: 100,
-        description: "Filter resonance: 7=a maximally flat filter"
+        default: 51,
+        description: "Filter resonance: 7=a maximally flat filter",
+        displayUnits: 1
       },
       {
         id: "mod",
@@ -5394,7 +6120,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mod",
         min: 20,
         max: 20000,
-        description: "added to corner frequency offset to produce corner frequency"
+        default: 10010,
+        description: "added to corner frequency offset to produce corner frequency",
+        displayUnits: 9
       },
       {
         id: "scale",
@@ -5402,7 +6130,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Scale",
         min: -100,
         max: 100,
-        description: "scales Mod"
+        default: 0,
+        description: "scales Mod",
+        displayUnits: 3
       },
       {
         id: "pan",
@@ -5410,9 +6140,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Pan",
         min: -50,
         max: 50,
-        description: "Left/right pan control"
+        default: 0,
+        description: "Left/right pan control",
+        displayUnits: 4
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "test-tone": {
     id: "test-tone",
@@ -5425,8 +6158,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 25
     },
     softRow: [
-      "mix",
-      "level",
       "note",
       "bal"
     ],
@@ -5437,7 +6168,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5445,7 +6178,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "note",
@@ -5453,7 +6188,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Note",
         min: 0,
         max: 127,
-        description: "Sine wave pitch, expressed as MIDI notes"
+        default: 0,
+        description: "Sine wave pitch, expressed as MIDI notes",
+        displayUnits: 65
       },
       {
         id: "bal",
@@ -5461,9 +6198,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Bal",
         min: -50,
         max: 50,
-        description: "Relative level of left and right output attenuation"
+        default: 0,
+        description: "Relative level of left and right output attenuation",
+        displayUnits: 8
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   tone: {
     id: "tone",
@@ -5477,9 +6217,7 @@ export const GENERATED_ALGORITHMS = {
     softRow: [
       "lo",
       "mid",
-      "hi",
-      "inlvl",
-      "mix"
+      "hi"
     ],
     params: [
       {
@@ -5488,7 +6226,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -25,
         max: 25,
-        description: "Clean low frequency boost/cut"
+        default: 0,
+        description: "Clean low frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -5496,7 +6236,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -25,
         max: 12,
-        description: "Clean mid frequency boost/cut"
+        default: 0,
+        description: "Clean mid frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -5504,7 +6246,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: -25,
         max: 25,
-        description: "Clean high frequency boost/cut"
+        default: 0,
+        description: "Clean high frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "inlvl",
@@ -5512,7 +6256,9 @@ export const GENERATED_ALGORITHMS = {
         label: "InLvl",
         min: -64,
         max: 0,
-        description: "Input level (headroom)"
+        default: 0,
+        description: "Input level (headroom)",
+        displayUnits: 3
       },
       {
         id: "mix",
@@ -5520,9 +6266,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       }
-    ]
+    ],
+    color: "#009739"
   },
   "tremolo-m": {
     id: "tremolo-m",
@@ -5536,8 +6285,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 3
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
       "pw",
       "depth"
@@ -5549,7 +6296,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5557,7 +6306,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -5565,7 +6316,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -5573,7 +6326,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -5581,9 +6336,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "tremolo-s": {
     id: "tremolo-s",
@@ -5596,10 +6354,7 @@ export const GENERATED_ALGORITHMS = {
       fx2: 4
     },
     softRow: [
-      "mix",
-      "level",
       "rate",
-      "pw",
       "depth",
       "phase"
     ],
@@ -5610,7 +6365,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5618,7 +6375,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -5626,7 +6385,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 5000,
-        description: "Tremolo rate or period ratio"
+        default: 0,
+        description: "Tremolo rate or period ratio",
+        displayUnits: 23
       },
       {
         id: "pw",
@@ -5634,7 +6395,9 @@ export const GENERATED_ALGORITHMS = {
         label: "PW",
         min: 0,
         max: 100,
-        description: "Tremolo pulse width"
+        default: 0,
+        description: "Tremolo pulse width",
+        displayUnits: 3
       },
       {
         id: "depth",
@@ -5642,7 +6405,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Depth",
         min: 0,
         max: 100,
-        description: "Tremolo depth"
+        default: 0,
+        description: "Tremolo depth",
+        displayUnits: 3
       },
       {
         id: "phase",
@@ -5650,9 +6415,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Phase",
         min: 0,
         max: 3,
-        description: "In Tremolo (S), controls the phase difference between the"
+        default: 0,
+        description: "In Tremolo (S), controls the phase difference between the",
+        displayUnits: 71
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "tube-screamer": {
     id: "tube-screamer",
@@ -5665,9 +6433,9 @@ export const GENERATED_ALGORITHMS = {
       gain: 3
     },
     softRow: [
-      "lo",
-      "mid",
-      "hi"
+      "drive",
+      "tone",
+      "mid"
     ],
     params: [
       {
@@ -5676,7 +6444,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Lo",
         min: -5,
         max: 5,
-        description: "Low frequency boost/cut"
+        default: 0,
+        description: "Low frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "mid",
@@ -5684,7 +6454,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mid",
         min: -5,
         max: 5,
-        description: "Mid frequency boost/cut"
+        default: 0,
+        description: "Mid frequency boost/cut",
+        displayUnits: 3
       },
       {
         id: "hi",
@@ -5692,7 +6464,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Hi",
         min: 0,
         max: 5,
-        description: "High frequency boost"
+        default: 0,
+        description: "High frequency boost",
+        displayUnits: 1
       },
       {
         id: "drive",
@@ -5700,7 +6474,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Drive",
         min: 0,
         max: 40,
-        description: "Amount of overdrive"
+        default: 0,
+        description: "Amount of overdrive",
+        displayUnits: 1
       },
       {
         id: "tone",
@@ -5708,7 +6484,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Tone",
         min: 0,
         max: 25,
-        description: "High frequency roll-off"
+        default: 0,
+        description: "High frequency roll-off",
+        displayUnits: 1
       },
       {
         id: "level",
@@ -5716,9 +6494,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: 0,
         max: 64,
-        description: "Output level"
+        default: 0,
+        description: "Output level",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#009739"
   },
   univybe: {
     id: "univybe",
@@ -5732,8 +6513,6 @@ export const GENERATED_ALGORITHMS = {
       fx2: 5
     },
     softRow: [
-      "mix",
-      "level",
       "rate"
     ],
     params: [
@@ -5743,7 +6522,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5751,7 +6532,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "rate",
@@ -5759,9 +6542,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Rate",
         min: 0,
         max: 100,
-        description: "Univybe rate"
+        default: 0,
+        description: "Univybe rate",
+        displayUnits: 1
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "volume-d": {
     id: "volume-d",
@@ -5777,8 +6563,6 @@ export const GENERATED_ALGORITHMS = {
       eq: 13
     },
     softRow: [
-      "mix",
-      "level",
       "voll",
       "volr"
     ],
@@ -5789,7 +6573,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5797,7 +6583,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 0
       },
       {
         id: "voll",
@@ -5805,7 +6593,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Vol-L",
         min: 0,
         max: 100,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 3
       },
       {
         id: "volr",
@@ -5813,9 +6603,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Vol-R",
         min: 0,
         max: 100,
-        description: "Amount of effect in the processed signal"
+        default: 0,
+        description: "Amount of effect in the processed signal",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "volume-m": {
     id: "volume-m",
@@ -5831,8 +6624,6 @@ export const GENERATED_ALGORITHMS = {
       eq: 11
     },
     softRow: [
-      "mix",
-      "level",
       "vol"
     ],
     params: [
@@ -5842,7 +6633,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5850,7 +6643,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "vol",
@@ -5858,9 +6653,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Vol",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "volume-s": {
     id: "volume-s",
@@ -5876,8 +6674,6 @@ export const GENERATED_ALGORITHMS = {
       eq: 12
     },
     softRow: [
-      "mix",
-      "level",
       "vol"
     ],
     params: [
@@ -5887,7 +6683,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5895,7 +6693,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "vol",
@@ -5903,9 +6703,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Vol",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "wah-1-2": {
     id: "wah-1-2",
@@ -5918,12 +6721,9 @@ export const GENERATED_ALGORITHMS = {
       fx2: 16
     },
     softRow: [
-      "mix",
-      "level",
       "sweep",
       "bass",
-      "resp",
-      "gain"
+      "resp"
     ],
     params: [
       {
@@ -5932,7 +6732,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -5940,7 +6742,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "sweep",
@@ -5948,7 +6752,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sweep",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -5956,7 +6762,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "resp",
@@ -5964,7 +6772,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Resp",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "gain",
@@ -5972,9 +6782,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#a855f7"
   },
   "wah-1": {
     id: "wah-1",
@@ -5987,12 +6800,9 @@ export const GENERATED_ALGORITHMS = {
       fx1: 23
     },
     softRow: [
-      "mix",
-      "level",
       "sweep",
       "bass",
-      "resp",
-      "gain"
+      "resp"
     ],
     params: [
       {
@@ -6001,7 +6811,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -6009,7 +6821,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 0
       },
       {
         id: "sweep",
@@ -6017,7 +6831,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sweep",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -6025,7 +6841,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "resp",
@@ -6033,7 +6851,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Resp",
         min: 0,
         max: 100,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 1
       },
       {
         id: "gain",
@@ -6041,9 +6861,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "TODO"
+        default: 0,
+        description: "TODO",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   },
   "wah-2": {
     id: "wah-2",
@@ -6057,12 +6880,9 @@ export const GENERATED_ALGORITHMS = {
       fx2: 17
     },
     softRow: [
-      "mix",
-      "level",
       "sweep",
       "bass",
-      "resp",
-      "gain"
+      "resp"
     ],
     params: [
       {
@@ -6071,7 +6891,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Mix",
         min: 0,
         max: 100,
-        description: "Dry/Wet ratio"
+        default: 0,
+        description: "Dry/Wet ratio",
+        displayUnits: 0
       },
       {
         id: "level",
@@ -6079,7 +6901,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Level",
         min: -90,
         max: 6,
-        description: "Amount of effect in processsed signal"
+        default: 0,
+        description: "Amount of effect in processsed signal",
+        displayUnits: 0
       },
       {
         id: "sweep",
@@ -6087,7 +6911,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Sweep",
         min: 0,
         max: 100,
-        description: "Wah center frequency (available only in Wah 1 & Wah 2)"
+        default: 0,
+        description: "Wah center frequency (available only in Wah 1 & Wah 2)",
+        displayUnits: 1
       },
       {
         id: "bass",
@@ -6095,7 +6921,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Bass",
         min: 0,
         max: 100,
-        description: "Adds low frequency boost to the wah"
+        default: 0,
+        description: "Adds low frequency boost to the wah",
+        displayUnits: 1
       },
       {
         id: "resp",
@@ -6103,7 +6931,9 @@ export const GENERATED_ALGORITHMS = {
         label: "Resp",
         min: 0,
         max: 100,
-        description: "Responsiveness to changes in sweep"
+        default: 0,
+        description: "Responsiveness to changes in sweep",
+        displayUnits: 1
       },
       {
         id: "gain",
@@ -6111,9 +6941,12 @@ export const GENERATED_ALGORITHMS = {
         label: "Gain",
         min: -72,
         max: 24,
-        description: "Post-Wah cut/boost"
+        default: 0,
+        description: "Post-Wah cut/boost",
+        displayUnits: 3
       }
-    ]
+    ],
+    color: "#7c3aed"
   }
 } as const satisfies Record<string, AlgorithmDef>
 

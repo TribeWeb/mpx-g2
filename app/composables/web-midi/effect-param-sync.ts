@@ -124,7 +124,7 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
 
   function pump(note: string, gen: number) {
     const r = rs()
-    if (!isLive(gen) || r.inFlight) {
+    if (runtime.harvestPaused || !isLive(gen) || r.inFlight) {
       return
     }
     const specId = r.pendingIds[0]
@@ -151,7 +151,7 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
     clearTimer()
     r.timer = setTimeout(() => {
       r.timer = null
-      if (!isLive(gen) || r.inFlight?.specId !== specId) {
+      if (runtime.harvestPaused || !isLive(gen) || r.inFlight?.specId !== specId) {
         return
       }
       console.warn(`[mpx-g2] ${blockLabel} ${spec.label} timed out, retrying`)
@@ -198,6 +198,9 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
     const specs = loadSpecs(alg)
     specs.forEach((spec, i) => {
       window.setTimeout(() => {
+        if (runtime.harvestPaused || status.value !== 'connected') {
+          return
+        }
         sendSysEx(
           buildDataRequest(spec.controlPath(alg), opts.deviceId, opts.productId),
           `${blockLabel} ${spec.label} value request (${note}, alg ${alg})`
@@ -251,13 +254,16 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
   }
 
   function requestState(note = `${blockLabel.toLowerCase()} sync`) {
+    if (runtime.harvestPaused) {
+      return
+    }
     const state = getState()
     const requestId = ++state.algSyncId
     if (requestAlg) {
       requestAlg(note)
     }
     window.setTimeout(() => {
-      if (state.algRespondedId >= requestId) {
+      if (runtime.harvestPaused || state.algRespondedId >= requestId) {
         return
       }
       const alg = getCurrentAlg?.() ?? state.alg
@@ -268,6 +274,9 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
   }
 
   function scheduleResync(note: string) {
+    if (runtime.harvestPaused) {
+      return
+    }
     invalidate()
     const state = getState()
     if (state.resyncTimer) {
@@ -275,7 +284,7 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
     }
     state.resyncTimer = setTimeout(() => {
       state.resyncTimer = null
-      if (status.value !== 'connected') {
+      if (runtime.harvestPaused || status.value !== 'connected') {
         return
       }
       console.info(`[mpx-g2] ${blockLabel} param resync (${note})`)
@@ -330,6 +339,11 @@ export function createEffectParamSync(deps: EffectParamSyncDeps, options: Effect
         state.resyncTimer = null
       }
       clearTimer()
+      // Invalidate in-flight resolve so a late timeout cannot retry.
+      state.resolve.generation++
+      state.resolve.inFlight = null
+      state.resolve.pendingIds = []
+      state.resolve.pendingDescFor.clear()
     }
   }
 }

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
+  algorithmFaceParamIds,
   algorithmForBlockAlg,
   GENERATED_ALGORITHMS,
   GENERATED_ALGORITHM_BY_BLOCK_ALG
@@ -37,13 +38,20 @@ describe('algorithm content library', () => {
     const meta = gainEffectForAlg(3)
     expect(meta.name).toBe('Screamer')
     expect(meta.modelName).toBe('Tube Screamer')
+    expect(meta.color).toBe('#009739')
     expect('dspSteps' in meta && meta.dspSteps).toBe(0)
 
     const advanced = gainAdvancedParams(3)
     expect(advanced.map(param => param.id)).toEqual([
-      'drive',
-      'tone',
-      'level'
+      'lo',
+      'hi'
     ])
+  })
+
+  it('places Mix/Level on the face bottom and softRow on top', () => {
+    const def = GENERATED_ALGORITHMS.hall
+    const face = algorithmFaceParamIds(def.params, def.softRow)
+    expect(face.top).toEqual(['size', 'decay', 'shape'])
+    expect(face.bottom).toEqual(['mix', 'level'])
   })
 })

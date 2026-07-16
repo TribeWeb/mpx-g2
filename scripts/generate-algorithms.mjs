@@ -17,8 +17,13 @@ const algorithmParam = z.object({
   label: z.string().min(1),
   min: z.number(),
   max: z.number(),
+  default: z.number(),
   description: z.string().min(1),
-  bytes: z.union([z.literal(1), z.literal(2)]).optional()
+  bytes: z.union([z.literal(1), z.literal(2)]).optional(),
+  displayUnits: z.number().int().nonnegative().optional()
+}).refine(param => param.default >= param.min && param.default <= param.max, {
+  message: 'default must be within min…max',
+  path: ['default']
 })
 
 const availableIn = z
@@ -43,8 +48,9 @@ const algorithmFrontmatter = z.object({
   dspSteps: z.number().int().nonnegative(),
   manualSection: z.string().optional(),
   availableIn,
-  softRow: z.array(z.string().min(1)).min(1),
-  params: z.array(algorithmParam).min(1)
+  softRow: z.array(z.string().min(1)).max(3),
+  params: z.array(algorithmParam).min(1),
+  color: z.string().min(1)
 })
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -136,9 +142,12 @@ for (const file of files) {
       label: param.label,
       min: param.min,
       max: param.max,
+      default: param.default,
       description: param.description,
-      ...(param.bytes ? { bytes: param.bytes } : {})
-    }))
+      ...(param.bytes ? { bytes: param.bytes } : {}),
+      ...(param.displayUnits != null ? { displayUnits: param.displayUnits } : {})
+    })),
+    color: parsed.color
   })
 }
 

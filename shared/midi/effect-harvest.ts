@@ -1,7 +1,22 @@
 import { EFFECT_TYPE_BY_BLOCK } from './control-paths'
-import { editorObjectRange, type ObjectDescription } from './object-description'
+import { editorObjectLimit, editorObjectRange, type ObjectDescription } from './object-description'
 import type { EffectBlockId } from '../types/effect-blocks'
 import { EFFECT_BLOCK_IDS } from '../types/effect-blocks'
+
+/** Seed colour for harvested drafts (override in Content frontmatter). */
+const HARVEST_FALLBACK_COLORS: Record<EffectBlockId, string> = {
+  gain: '#009739',
+  fx1: '#7c3aed',
+  fx2: '#a855f7',
+  chorus: '#0ea5e9',
+  delay: '#f59e0b',
+  reverb: '#6366f1',
+  eq: '#14b8a6'
+}
+
+function fallbackColorForBlock(block: EffectBlockId): string {
+  return HARVEST_FALLBACK_COLORS[block]
+}
 
 /** Object Description control-flag bits (MIDI impl doc). */
 export const ObjectControlFlag = {
@@ -29,6 +44,8 @@ export type HarvestParamDraft = {
   softRow: boolean
   bytes: 1 | 2
   objectTypeId: number
+  /** Display Units Type id from Object Description (for docs / formatting). */
+  displayUnits: number
 }
 
 export type HarvestEffectDraft = {
@@ -87,6 +104,13 @@ export function isProgramEffectParamPath(levels: number[]): boolean {
 
 export function isProgramEffectAlgPath(levels: number[]): boolean {
   return levels.length === 3 && isProgramEffectPath(levels)
+}
+
+function curatedSoftRowIds(params: HarvestParamDraft[]): string[] {
+  return params
+    .filter(param => param.softRow && param.id !== 'mix' && param.id !== 'level')
+    .map(param => param.id)
+    .slice(0, 3)
 }
 
 /**
@@ -168,6 +192,7 @@ export function buildEffectDraftsFromHarvest(
     }
 
     const range = editorObjectRange(description) ?? { min: 0, max: 127 }
+    const limit = editorObjectLimit(description)
     const label = description.name.trim() || `Param ${paramIndex}`
     const entry = ensureAlg(block, alg)
     const softRow = (description.controlFlags & ObjectControlFlag.SoftRowAssignable) !== 0
@@ -180,7 +205,8 @@ export function buildEffectDraftsFromHarvest(
       description: '', // fill from manual
       softRow,
       bytes: description.byteCount === 1 ? 1 : 2,
-      objectTypeId: node.objectTypeId
+      objectTypeId: node.objectTypeId,
+      displayUnits: limit?.displayUnits ?? 0
     })
   }
 
@@ -206,7 +232,7 @@ export function buildEffectDraftsFromHarvest(
       // Prefer the richer param list if lengths differ.
       if (entry.params.length > existing.params.length) {
         existing.params = entry.params
-        existing.softRow = entry.params.filter(p => p.softRow).map(p => p.id)
+        existing.softRow = curatedSoftRowIds(entry.params)
         existing.primaryBlock = entry.block
         existing.primaryAlg = entry.alg
       }
@@ -221,7 +247,7 @@ export function buildEffectDraftsFromHarvest(
       dspSteps: null,
       manualSection: '',
       availableIn: { [entry.block]: entry.alg },
-      softRow: entry.params.filter(p => p.softRow).map(p => p.id),
+      softRow: curatedSoftRowIds(entry.params),
       params: entry.params,
       primaryBlock: entry.block,
       primaryAlg: entry.alg
@@ -243,11 +269,27 @@ export function buildEffectDraftsFromHarvest(
   return drafts
 }
 
+/**
+ * Pedal / demo starting value within min…max.
+ * Prefer 0 when in range (flat EQ / off), otherwise the rounded midpoint.
+ */
+export function defaultParamValue(min: number, max: number): number {
+  if (min > max) {
+    return min
+  }
+  if (min <= 0 && 0 <= max) {
+    return 0
+  }
+  const mid = Math.round((min + max) / 2)
+  return Math.min(max, Math.max(min, mid))
+}
+
 /** Serialize one draft as Content-ready Markdown frontmatter (+ TODO body). */
 export function harvestDraftToMarkdown(draft: HarvestEffectDraft): string {
   const lines: string[] = ['---']
   lines.push(`name: ${yamlString(draft.name)}`)
   lines.push(`modelName: ${yamlString(draft.modelName)}`)
+  lines.push(`color: ${JSON.stringify(fallbackColorForBlock(draft.primaryBlock))}`)
   lines.push(`summary: ${yamlString(draft.summary)}`)
   lines.push(`dspSteps: ${draft.dspSteps ?? 0}  # TODO: confirm from manual bar (of 190)`)
   if (draft.manualSection) {
@@ -276,7 +318,11 @@ export function harvestDraftToMarkdown(draft: HarvestEffectDraft): string {
     lines.push(`    label: ${yamlString(param.label)}`)
     lines.push(`    min: ${param.min}`)
     lines.push(`    max: ${param.max}`)
+    lines.push(`    default: ${defaultParamValue(param.min, param.max)}`)
     lines.push(`    description: ${yamlString(param.description || 'TODO')}`)
+    if (param.displayUnits != null) {
+      lines.push(`    displayUnits: ${param.displayUnits}`)
+    }
   }
   lines.push('---')
   lines.push('')

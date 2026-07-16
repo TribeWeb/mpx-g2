@@ -41,7 +41,11 @@ export type EffectHarvestStatus = {
   error: string | null
 }
 
-const DESC_STAGGER_MS = 40
+const DESC_STAGGER_MS = 80
+/** Skip / retry if an Object Description never arrives (prevents 3/717 stalls). */
+const DESC_REPLY_MS = 2500
+/** If BUSY never followed by READY, force-continue. */
+const BUSY_WATCHDOG_MS = 4000
 /** Wait after last Object Description before walking Program paths. */
 const POST_DESC_SETTLE_MS = 800
 /**
@@ -94,6 +98,8 @@ export function useEffectHarvest() {
   let treeNodes: HarvestTreeNode[] = []
   let descQueue: number[] = []
   let descTimer: ReturnType<typeof setTimeout> | null = null
+  let descReplyTimer: ReturnType<typeof setTimeout> | null = null
+  let busyTimer: ReturnType<typeof setTimeout> | null = null
   let settleTimer: ReturnType<typeof setTimeout> | null = null
   let treeFirstTimer: ReturnType<typeof setTimeout> | null = null
   let treeIdleTimer: ReturnType<typeof setTimeout> | null = null
@@ -103,6 +109,7 @@ export function useEffectHarvest() {
   let walkQueue: number[][] = []
   let walkPendingPath: number[] | null = null
   let walkMisses = 0
+  let pendingDescId: number | null = null
 
   function setStatus(partial: Partial<EffectHarvestStatus>) {
     harvestStatus.value = { ...harvestStatus.value, ...partial }
@@ -112,6 +119,14 @@ export function useEffectHarvest() {
     if (descTimer) {
       clearTimeout(descTimer)
       descTimer = null
+    }
+    if (descReplyTimer) {
+      clearTimeout(descReplyTimer)
+      descReplyTimer = null
+    }
+    if (busyTimer) {
+      clearTimeout(busyTimer)
+      busyTimer = null
     }
     if (settleTimer) {
       clearTimeout(settleTimer)
@@ -184,9 +199,15 @@ export function useEffectHarvest() {
     }
     const next = descQueue[0]
     if (next == null) {
+      pendingDescId = null
+      if (descReplyTimer) {
+        clearTimeout(descReplyTimer)
+        descReplyTimer = null
+      }
       scheduleControlTreeDump()
       return
     }
+    pendingDescId = next
     const opts = getSysexOptions()
     sendSysEx(
       buildObjectDescriptionRequest(next, opts.deviceId, opts.productId),
@@ -196,6 +217,22 @@ export function useEffectHarvest() {
       phase: 'descriptions',
       note: `Requesting Object Description ${next} / ${harvestStatus.value.objectTypeCount - 1}`
     })
+    if (descReplyTimer) {
+      clearTimeout(descReplyTimer)
+    }
+    descReplyTimer = setTimeout(() => {
+      descReplyTimer = null
+      if (!active || harvestStatus.value.phase !== 'descriptions') {
+        return
+      }
+      if (pendingDescId !== next) {
+        return
+      }
+      console.warn(`[mpx-g2 harvest] OD timeout for type ${next} — skipping`)
+      descQueue = descQueue.filter(id => id !== next)
+      pendingDescId = null
+      scheduleNextDescription()
+    }, DESC_REPLY_MS)
   }
 
   function scheduleNextDescription() {
@@ -428,9 +465,31 @@ export function useEffectHarvest() {
       const command = parsed.payload[0] ?? HandshakeCommand.Nop
       if (command === HandshakeCommand.Busy) {
         setStatus({ waitingForReady: true, note: 'G2 BUSY — waiting for READY…' })
+        if (busyTimer) {
+          clearTimeout(busyTimer)
+        }
+        busyTimer = setTimeout(() => {
+          busyTimer = null
+          if (!active || !harvestStatus.value.waitingForReady) {
+            return
+          }
+          console.warn('[mpx-g2 harvest] BUSY watchdog — forcing continue')
+          setStatus({ waitingForReady: false, note: 'BUSY timed out — continuing…' })
+          if (harvestStatus.value.phase === 'descriptions') {
+            scheduleNextDescription()
+          } else if (harvestStatus.value.phase === 'control-tree' && treeNodes.length > 0) {
+            bumpTreeIdle()
+          } else if (harvestStatus.value.phase === 'program-walk') {
+            scheduleWalkNext()
+          }
+        }, BUSY_WATCHDOG_MS)
         return
       }
       if (command === HandshakeCommand.Ready) {
+        if (busyTimer) {
+          clearTimeout(busyTimer)
+          busyTimer = null
+        }
         setStatus({ waitingForReady: false, note: 'G2 READY — continuing…' })
         if (harvestStatus.value.phase === 'descriptions') {
           scheduleNextDescription()
@@ -473,11 +532,31 @@ export function useEffectHarvest() {
     if (parsed.messageType === SysExMessageType.ObjectDescription) {
       const description = parseObjectDescriptionPayload(parsed.payload)
       if (!description) {
+        // Unparseable reply for the pending id — skip so we do not stall forever.
+        if (pendingDescId != null) {
+          console.warn(`[mpx-g2 harvest] OD parse failed for type ${pendingDescId} — skipping`)
+          descQueue = descQueue.filter(id => id !== pendingDescId)
+          pendingDescId = null
+          if (descReplyTimer) {
+            clearTimeout(descReplyTimer)
+            descReplyTimer = null
+          }
+          if (!harvestStatus.value.waitingForReady) {
+            scheduleNextDescription()
+          }
+        }
         return
       }
       descriptions.set(description.objectTypeId, description)
       rawDescriptionCount.value = descriptions.size
       descQueue = descQueue.filter(id => id !== description.objectTypeId)
+      if (pendingDescId === description.objectTypeId) {
+        pendingDescId = null
+      }
+      if (descReplyTimer) {
+        clearTimeout(descReplyTimer)
+        descReplyTimer = null
+      }
       setStatus({
         descriptionsLoaded: descriptions.size,
         note: `Descriptions ${descriptions.size} / ${harvestStatus.value.objectTypeCount}`
