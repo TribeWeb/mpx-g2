@@ -19,8 +19,8 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
   'update:paramValues': [values: Record<string, number>]
-  press: []
-  release: []
+  'press': []
+  'release': []
 }>()
 
 const advancedOpen = ref(false)
@@ -140,11 +140,12 @@ onUnmounted(() => {
 <template>
   <div
     class="effect-pedal-unit effect-pedal-unit--wing relative w-64"
+    :class="advancedOpen ? 'z-30' : 'z-0'"
     :style="pedalStyle"
   >
     <article
       ref="wingPedalRef"
-      class="effect-pedal effect-pedal--stompbox relative z-50 flex w-64 flex-col overflow-hidden rounded-xl border-2 border-default bg-neutral-900 shadow-xl"
+      class="effect-pedal effect-pedal--stompbox relative z-20 flex w-64 flex-col overflow-hidden rounded-xl border-2 border-default bg-neutral-900 shadow-xl"
     >
       <EffectPedalStompboxFace
         :model-name="modelName"
@@ -165,7 +166,7 @@ onUnmounted(() => {
 
     <aside
       v-if="hasAdvancedParams"
-      class="effect-pedal-wing absolute top-0 z-40 w-52 overflow-x-hidden overflow-y-auto overscroll-y-contain border-2 border-default bg-neutral-900 shadow-xl"
+      class="effect-pedal-wing absolute top-0 z-10 w-52 overflow-x-hidden overflow-y-auto overscroll-y-contain border-2 border-default bg-neutral-900 shadow-xl"
       :class="[
         advancedOpen ? 'pointer-events-auto effect-pedal-wing--open' : 'pointer-events-none',
         wingPlacement === 'right' ? 'rounded-r-xl' : 'rounded-l-xl effect-pedal-wing--left'

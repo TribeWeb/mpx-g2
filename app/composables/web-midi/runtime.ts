@@ -1,5 +1,4 @@
 import type { ObjectDescription } from '#shared/midi/object-description'
-import type { GainEqBand } from '#shared/types/midi'
 
 export type ResolvedParamMeta = {
   specId: string
@@ -21,13 +20,19 @@ export type ParamResolveState = {
   onComplete: (() => void) | null
 }
 
-export type GainSyncState = {
+/** Per-block (or per-feature) algorithm + param-range sync state. */
+export type EffectParamSyncState = {
   alg: number
   resyncTimer: ReturnType<typeof setTimeout> | null
   algSyncId: number
   algRespondedId: number
   resolve: ParamResolveState
 }
+
+/** @deprecated Prefer EffectParamSyncState — kept for existing Gain wiring. */
+export type GainSyncState = EffectParamSyncState
+
+export type EffectParamSyncSlot = 'gainSync' | 'chorusSync'
 
 export type WebMidiRuntime = {
   midiAccess: MIDIAccess | null
@@ -42,7 +47,9 @@ export type WebMidiRuntime = {
   programDigits: string | null
   handlerEpoch: string | null
   objectDescriptions: Map<number, ObjectDescription>
-  gainSync: GainSyncState
+  gainSync: EffectParamSyncState
+  chorusSync: EffectParamSyncState
+  programAlgResyncTimer: ReturnType<typeof setTimeout> | null
   autoReconnectStarted: boolean
   midiClockCount: number
   midiClockActiveUntil: number
@@ -50,7 +57,7 @@ export type WebMidiRuntime = {
   tempoLedOffTimer: ReturnType<typeof setTimeout> | null
 }
 
-function createParamResolveState(): ParamResolveState {
+export function createParamResolveState(): ParamResolveState {
   return {
     revision: 0,
     readyRevision: -1,
@@ -65,7 +72,7 @@ function createParamResolveState(): ParamResolveState {
   }
 }
 
-function createGainSyncState(): GainSyncState {
+export function createEffectParamSyncState(): EffectParamSyncState {
   return {
     alg: 0,
     resyncTimer: null,
@@ -89,7 +96,9 @@ function createDefaultRuntime(): WebMidiRuntime {
     programDigits: null,
     handlerEpoch: null,
     objectDescriptions: new Map(),
-    gainSync: createGainSyncState(),
+    gainSync: createEffectParamSyncState(),
+    chorusSync: createEffectParamSyncState(),
+    programAlgResyncTimer: null,
     autoReconnectStarted: false,
     midiClockCount: 0,
     midiClockActiveUntil: 0,
@@ -112,21 +121,32 @@ export function getWebMidiRuntime(): WebMidiRuntime {
     runtime.tempoLedLit ??= false
     runtime.tempoLedOffTimer ??= null
     runtime.objectDescriptions ??= new Map()
-    runtime.gainSync ??= createGainSyncState()
+    runtime.gainSync ??= createEffectParamSyncState()
     runtime.gainSync.resolve ??= createParamResolveState()
+    runtime.chorusSync ??= createEffectParamSyncState()
+    runtime.chorusSync.resolve ??= createParamResolveState()
+    runtime.programAlgResyncTimer ??= null
   }
   return g.__mpxG2WebMidi
 }
 
 export const MODULE_HANDLER_EPOCH = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
 
+export function resetEffectParamSyncState(
+  runtime: WebMidiRuntime,
+  key: EffectParamSyncSlot = 'gainSync'
+) {
+  const state = runtime[key]
+  if (state.resyncTimer) {
+    clearTimeout(state.resyncTimer)
+  }
+  if (state.resolve.timer) {
+    clearTimeout(state.resolve.timer)
+  }
+  runtime[key] = createEffectParamSyncState()
+}
+
+/** @deprecated Prefer resetEffectParamSyncState */
 export function resetGainSyncState(runtime: WebMidiRuntime) {
-  const gs = runtime.gainSync
-  if (gs.resyncTimer) {
-    clearTimeout(gs.resyncTimer)
-  }
-  if (gs.resolve.timer) {
-    clearTimeout(gs.resolve.timer)
-  }
-  runtime.gainSync = createGainSyncState()
+  resetEffectParamSyncState(runtime, 'gainSync')
 }

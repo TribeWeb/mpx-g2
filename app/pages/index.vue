@@ -38,6 +38,13 @@ const roadmap = [
         size: 'xl',
         color: 'neutral',
         variant: 'outline'
+      }, {
+        label: 'Pedalboard',
+        to: '/pedalboard',
+        trailingIcon: 'i-lucide-layout-grid',
+        size: 'xl',
+        color: 'neutral',
+        variant: 'outline'
       }]"
     />
 

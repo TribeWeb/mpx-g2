@@ -1,3 +1,9 @@
+import {
+  algorithmForBlockAlg,
+  algorithmMeta,
+  gainAdvancedParamsForAlg
+} from './algorithms'
+
 /** Gain algorithm metadata (manual §7-3–7-6). Index matches G2 `gainAlg` (1-based). */
 export const GAIN_EFFECTS = [
   {
@@ -52,13 +58,37 @@ export const GAIN_EFFECTS = [
 ] as const
 
 export function gainEffectForAlg(alg: number) {
+  const fromLibrary = algorithmForBlockAlg('gain', alg)
+  if (fromLibrary) {
+    const meta = algorithmMeta(fromLibrary)
+    return {
+      alg,
+      name: meta.name,
+      modelName: meta.modelName,
+      description: meta.description,
+      dspSteps: meta.dspSteps,
+      manualSection: meta.manualSection
+    }
+  }
   return GAIN_EFFECTS.find(effect => effect.alg === alg) ?? GAIN_EFFECTS[0]
 }
 
-/** Placeholder advanced Gain params (not on soft row) for slideout UI demos. */
+/**
+ * Advanced Gain params (not on soft row).
+ * Tube Screamer (alg 3) comes from content/effects/tube-screamer.md;
+ * other algs keep the previous placeholder set until authored.
+ */
 export const GAIN_ADVANCED_PARAMS = [
   { id: 'drive', label: 'Drive', min: 0, max: 40, step: 1 },
   { id: 'tone', label: 'Tone', min: 0, max: 25, step: 1 },
   { id: 'inLvl', label: 'In Lvl', min: -64, max: 0, step: 1 },
   { id: 'level', label: 'Level', min: 0, max: 64, step: 1 }
 ] as const
+
+export function gainAdvancedParams(alg: number) {
+  const fromLibrary = gainAdvancedParamsForAlg(alg)
+  if (fromLibrary.length > 0) {
+    return fromLibrary
+  }
+  return GAIN_ADVANCED_PARAMS.map(param => ({ ...param }))
+}

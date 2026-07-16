@@ -5,13 +5,14 @@ Browser-based MIDI controller for the [Lexicon MPX-G2](https://www.lexiconpro.co
 ## Roadmap and goals
 
 [x] **Front panel replica** — virtual LCD, LEDs, buttons, encoder
-[ ] **Chrome Web MIDI** — SysEx handshake, display/LED dumps, panel button messages (almost complete)
+[x] **Chrome Web MIDI** — SysEx handshake, display/LED dumps, panel button messages (almost complete)
 [ ] **Modern editor** — A modern GUI for the lexicon MPXG2. The ability to view and edit the MPXG2 settings using a drag n drop interface showing each effect as a pedal with visual routing.
 
 ## Stack
 
 - [Nuxt 4](https://nuxt.com) — application framework
 - [Nuxt UI 4](https://ui.nuxt.com) — component library
+- [Nuxt Content](https://content.nuxt.com) — effect / manual source of truth
 - TypeScript — shared SysEx protocol layer (`shared/midi/`)
 - [Web MIDI API](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API) — direct browser ↔ hardware (Chrome / Edge)
 - WebSocket + in-process simulator — optional dev mode without hardware
@@ -22,14 +23,23 @@ Browser-based MIDI controller for the [Lexicon MPX-G2](https://www.lexiconpro.co
 app/
   components/       # UI components (front panel replica)
   composables/      # useMidiConnection(), useWebMidi(), useMidiBridge()
-  pages/            # Routes: / and /panel
+  pages/            # Routes: /, /panel, /pedalboard, /manual/...
+content/
+  effects/          # Effect manual source of truth (YAML frontmatter + Markdown)
 server/
   plugins/          # Nitro plugin — starts WebSocket simulator (dev)
   utils/            # MIDI bridge + simulator (simulated mode only)
 shared/
+  constants/        # Includes algorithms.generated.ts (from Content effects)
   midi/             # SysEx encode/decode utilities
   types/            # Shared TypeScript types
+scripts/
+  generate-algorithms.mjs
 ```
+
+Effect reference pages: [/manual/effects](http://localhost:3000/manual/effects). Edit `content/effects/*.md`, then `pnpm run generate:algorithms` (also runs on `dev` / `build` / `postinstall`).
+
+MIDI harvest (hardware): [/tools/harvest-effects](http://localhost:3000/tools/harvest-effects) — System Config + Object Descriptions + control tree dump → draft effect Markdown/JSON.
 
 ## Getting started
 
@@ -46,8 +56,9 @@ Open [http://localhost:3000](http://localhost:3000) in **Google Chrome** (deskto
 
 | Command | Description |
 |---------|-------------|
-| `pnpm run dev` | Start Nuxt dev server (and WebSocket simulator for simulated mode) |
-| `pnpm run build` | Production build |
+| `pnpm run generate:algorithms` | Compile `content/effects/*.md` → `shared/constants/algorithms.generated.ts` |
+| `pnpm run dev` | Generate effect library, then start Nuxt (and WebSocket simulator) |
+| `pnpm run build` | Generate effect library, then production build |
 | `pnpm run preview` | Preview production build |
 | `pnpm run typecheck` | TypeScript check |
 | `pnpm run lint` | ESLint |

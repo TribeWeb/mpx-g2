@@ -172,6 +172,20 @@ export function objectDescriptionMatchesGainBand(
   return normalized.startsWith(GAIN_EQ_BAND_NAME_PREFIX[band])
 }
 
+const STANDARD_PARAM_NAME_PREFIX: Record<'mix' | 'level', string> = {
+  mix: 'mix',
+  level: 'level'
+}
+
+/** True when an Object Description name matches Mix or Level. */
+export function objectDescriptionMatchesStandardParam(
+  param: 'mix' | 'level',
+  name: string
+): boolean {
+  const normalized = name.trim().toLowerCase()
+  return normalized.startsWith(STANDARD_PARAM_NAME_PREFIX[param])
+}
+
 /**
  * Pick the tightest limit pair for knob editors when multiple units are present.
  * Lexicon Object Descriptions often include a wide internal range and a narrower UI range.

@@ -1,13 +1,16 @@
-import type { MpxG2PanelState, GainEqBand, ParamRange } from '../types/midi'
+import type { EffectBlockId } from '../types/effect-blocks'
+import type { MpxG2PanelState, GainEqBand, ParamRange, ChorusParam } from '../types/midi'
 import { HandshakeCommand, SysExMessageType } from '../types/midi'
+import { chorusParamDefByIndex } from '../constants/chorus-params'
 import { describeDataMessage, parseDataMessagePayload } from './data-message'
 import {
   gainEqRangeKey,
   isDisplayDumpPath,
-  isGainAlgPath,
   isLedDumpPath,
   isLikelyLedDumpData,
   ledDumpBytes,
+  parseChorusParamPath,
+  parseEffectAlgPath,
   parseGainEqPath
 } from './control-paths'
 import {
@@ -44,8 +47,14 @@ export interface InboundSysExResult {
   note?: string
   /** Set when the active Gain algorithm index was updated from a data reply. */
   gainAlg?: number
+  /** Algorithm index for any effect block (L:0002 A:0000 B:{type}). */
+  effectAlg?: { block: EffectBlockId, alg: number }
   /** Object Type ID reply for a Gain EQ path (used to fetch ranges). */
   gainEqObjectType?: { band: GainEqBand, alg: number, objectTypeId: number }
+  /** Object Type ID reply for a Chorus Mix/Level path. */
+  chorusParamObjectType?: { param: ChorusParam, alg: number, objectTypeId: number }
+  /** True when a Chorus Mix/Level value was applied from a data message. */
+  chorusParamUpdated?: boolean
   /** Object Type ID when path was omitted (use pending FIFO). */
   objectTypeId?: number
   /** Parsed Object Description (min/max source). */
@@ -108,6 +117,22 @@ function handleHandshake(payload: number[], panelState: MpxG2PanelState): Inboun
   }
 }
 
+function applyEffectAlg(panelState: MpxG2PanelState, block: EffectBlockId, alg: number) {
+  const clamped = Math.max(0, alg)
+  panelState.program = {
+    ...panelState.program,
+    algByBlock: {
+      ...panelState.program.algByBlock,
+      [block]: clamped
+    }
+  }
+  if (block === 'gain') {
+    const knobs = panelState.knobs ?? createEmptyPanelKnobState()
+    panelState.knobs = { ...knobs, gainAlg: clamped }
+  }
+  panelState.lastUpdated = Date.now()
+}
+
 function applyGainEqValue(
   panelState: MpxG2PanelState,
   band: 'low' | 'mid' | 'high',
@@ -123,6 +148,13 @@ function applyGainEqValue(
     gainLow: band === 'low' ? value : knobs.gainLow,
     gainMid: band === 'mid' ? value : knobs.gainMid,
     gainHigh: band === 'high' ? value : knobs.gainHigh
+  }
+  panelState.program = {
+    ...panelState.program,
+    algByBlock: {
+      ...panelState.program.algByBlock,
+      gain: alg
+    }
   }
   // Do not overwrite LCD here — Auto Display / display dumps own the panel text.
   panelState.lastUpdated = Date.now()
@@ -144,6 +176,57 @@ export function applyGainEqRange(
   panelState.lastUpdated = Date.now()
 }
 
+function applyChorusParamValue(
+  panelState: MpxG2PanelState,
+  param: ChorusParam,
+  alg: number,
+  value: number,
+  valueBytes: 1 | 2
+) {
+  const knobs = panelState.knobs ?? createEmptyPanelKnobState()
+  const nextValues = { ...knobs.chorusValues, [param]: value }
+  const nextBytes = { ...knobs.chorusValueBytesById, [param]: valueBytes }
+  panelState.knobs = {
+    ...knobs,
+    chorusValues: nextValues,
+    chorusValueBytesById: nextBytes,
+    chorusValueBytes: valueBytes,
+    chorusMix: param === 'mix' ? value : (nextValues.mix ?? knobs.chorusMix),
+    chorusLevel: param === 'level' ? value : (nextValues.level ?? knobs.chorusLevel)
+  }
+  panelState.program = {
+    ...panelState.program,
+    algByBlock: {
+      ...panelState.program.algByBlock,
+      chorus: alg
+    }
+  }
+  panelState.lastUpdated = Date.now()
+}
+
+export function applyChorusParamRange(
+  panelState: MpxG2PanelState,
+  param: ChorusParam,
+  range: ParamRange,
+  valueBytes?: number
+) {
+  const knobs = panelState.knobs ?? createEmptyPanelKnobState()
+  const nextRanges = { ...knobs.chorusRanges, [param]: range }
+  const nextBytes: Record<string, 1 | 2> = { ...knobs.chorusValueBytesById }
+  if (valueBytes === 1 || valueBytes === 2) {
+    nextBytes[param] = valueBytes
+  }
+  panelState.knobs = {
+    ...knobs,
+    chorusRanges: nextRanges,
+    chorusValueBytesById: nextBytes,
+    ...(param === 'mix' ? { chorusMixRange: range } : {}),
+    ...(param === 'level' ? { chorusLevelRange: range } : {}),
+    ...(valueBytes === 1 || valueBytes === 2 ? { chorusValueBytes: valueBytes } : {})
+  }
+  panelState.lastUpdated = Date.now()
+}
+
 function handleObjectTypeId(payload: number[], _panelState: MpxG2PanelState): InboundSysExResult {
   const parsed = parseObjectTypeIdPayload(payload)
   if (!parsed) {
@@ -160,6 +243,23 @@ function handleObjectTypeId(payload: number[], _panelState: MpxG2PanelState): In
         band: gainEq.band,
         alg: gainEq.alg,
         objectTypeId: parsed.objectTypeId
+      }
+    }
+  }
+
+  const chorusParam = parsed.levels ? parseChorusParamPath(parsed.levels) : null
+  if (chorusParam) {
+    const def = chorusParamDefByIndex(chorusParam.alg, chorusParam.paramIndex)
+    if (def) {
+      return {
+        handled: true,
+        note: `Object Type ID ${parsed.objectTypeId} (Chorus ${def.id}, alg ${chorusParam.alg})`,
+        objectTypeId: parsed.objectTypeId,
+        chorusParamObjectType: {
+          param: def.id,
+          alg: chorusParam.alg,
+          objectTypeId: parsed.objectTypeId
+        }
       }
     }
   }
@@ -223,16 +323,20 @@ function handleDataMessage(payload: number[], panelState: MpxG2PanelState): Inbo
     }
   }
 
-  if (isGainAlgPath(parsed.levels) && data.length > 0 && data.length <= 2) {
-    const alg = decodeParamValue(data)
-    const knobs = panelState.knobs ?? createEmptyPanelKnobState()
-    panelState.knobs = { ...knobs, gainAlg: Math.max(0, alg) }
-    panelState.lastUpdated = Date.now()
-    return {
+  const effectAlg = parseEffectAlgPath(parsed.levels)
+  if (effectAlg && data.length > 0 && data.length <= 2) {
+    const alg = Math.max(0, decodeParamValue(data))
+    applyEffectAlg(panelState, effectAlg.block, alg)
+    const blockLabel = effectAlg.block.toUpperCase()
+    const result: InboundSysExResult = {
       handled: true,
-      note: `Gain alg = ${alg}`,
-      gainAlg: Math.max(0, alg)
+      note: `${blockLabel} alg = ${alg}`,
+      effectAlg: { block: effectAlg.block, alg }
     }
+    if (effectAlg.block === 'gain') {
+      result.gainAlg = alg
+    }
+    return result
   }
 
   const gainEq = parseGainEqPath(parsed.levels)
@@ -245,6 +349,21 @@ function handleDataMessage(payload: number[], panelState: MpxG2PanelState): Inbo
       handled: true,
       note: `${label} = ${value} (alg ${gainEq.alg}, ${valueBytes} byte) @ ${describeDataMessage(parsed).split('@')[1]?.trim() ?? ''}`,
       gainEqUpdated: true
+    }
+  }
+
+  const chorusParam = parseChorusParamPath(parsed.levels)
+  if (chorusParam && data.length > 0 && data.length <= 2) {
+    const def = chorusParamDefByIndex(chorusParam.alg, chorusParam.paramIndex)
+    if (def) {
+      const value = decodeParamValue(data)
+      const valueBytes: 1 | 2 = data.length >= 2 ? 2 : 1
+      applyChorusParamValue(panelState, def.id, chorusParam.alg, value, valueBytes)
+      return {
+        handled: true,
+        note: `Chorus ${def.label} = ${value} (alg ${chorusParam.alg}, ${valueBytes} byte)`,
+        chorusParamUpdated: true
+      }
     }
   }
 

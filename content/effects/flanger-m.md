@@ -1,0 +1,66 @@
+---
+name: "Flanger (M)"
+modelName: "Flanger (M)"
+summary: "Flanger24 (M) Flanger (S) ===== PAGE 115 ===== Rotary Cab This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair\u2026"
+dspSteps: 76
+manualSection: 7-23
+availableIn:
+  chorus: 3
+softRow:
+  - mix
+  - level
+  - rate
+  - pw
+  - depth
+  - res
+  - blend
+params:
+  - id: mix
+    index: 0
+    label: Mix
+    min: 0
+    max: 100
+    description: "Dry/Wet ratio"
+  - id: level
+    index: 1
+    label: Level
+    min: -90
+    max: 6
+    description: "Amount of effect in the processed signal"
+  - id: rate
+    index: 2
+    label: Rate
+    min: 0
+    max: 5000
+    description: "Drum rate or period ratio"
+  - id: pw
+    index: 3
+    label: PW
+    min: 0
+    max: 100
+    description: "Left Mod pulse width"
+  - id: depth
+    index: 4
+    label: Depth
+    min: 0
+    max: 100
+    description: "Drum depth (tremolo)"
+  - id: res
+    index: 5
+    label: Res
+    min: -100
+    max: 100
+    description: Resonance
+  - id: blend
+    index: 6
+    label: Blend
+    min: 0
+    max: 100
+    description: TODO
+---
+
+Flanger24 (M) Flanger (S) ===== PAGE 115 ===== Rotary Cab This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair on the rotating high-frequency horn. Bal sets the relative mix of Drum and Horn mics. Width controls the stereo spread of both pairs of mics. Rate and Depth 1 control the speed and depth of the rotating low-frequency drum. Rate 2 and Depth 2 control the speed and depth of the rotating high-frequency horn. The preset, Rotary Cab, is set up so that A/B switches the speed from fast to 1:24-24:1 cycles/beat (Rate1 Units) Selects frequency or cycles/beat of drum slow. Different A and B rates are used to simulate the inertia of the Horn rate or period ratio 1:24-24:1 cycles/beat (Rate2 Units) Selects frequency or cycles/beat of horn Aerosol Aerosol is a true stereo chorus/ flanger with dual rate, depth and resonance controls. It can produce very deep resonant flange sweeps, subtle multi-vibrato, stereo image enhancement and a wide variety of other chorus and flanger-like effects. Apair of single-tap modulated delays is each modulated by a separate LFO. Pulse Width allows independentadjustment of left and right LFOs from full left to full right skew. (At 0, the sinewavebecomes a sawtooth with a fast rise and slow fall.) Depth controls provide 1:24-24:1 cycles/beat (Rate 1 Units) Selects frequency or cycles/beat adjustment of modulated depth from 0-100%. 1:24-24:1 cycles/beat (Rate 2 Units) Selects frequency or cycles/beat
+
+![Flanger (M) signal flow](/effects/flanger-m.png)
+
+This effect uses **76 of 190** processing steps.

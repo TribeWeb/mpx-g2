@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
+    '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/ui'
   ],
@@ -10,6 +11,13 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  content: {
+    // Node 22+ built-in sqlite — avoids native better-sqlite3 builds under pnpm.
+    experimental: {
+      sqliteConnector: 'native'
+    }
+  },
 
   runtimeConfig: {
   // Server-only: set MPX_G2_MIDI_BRIDGE_PORT to override the WebSocket port

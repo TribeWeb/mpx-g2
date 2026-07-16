@@ -1,4 +1,5 @@
 import type {
+  ChorusParam,
   FrontPanelButtonName,
   GainEqBand,
   MidiBridgeConnectionStatus,
@@ -9,7 +10,13 @@ import type {
   MpxG2PanelState
 } from '#shared/types/midi'
 import { HandshakeCommand, SysExMessageType } from '#shared/types/midi'
-import { gainEqControlPath, gainEqRangeKey, GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
+import {
+  chorusParamControlPath,
+  gainEqControlPath,
+  gainEqRangeKey,
+  GAIN_EQ_DISPLAY_RANGE,
+  STANDARD_EFFECT_DISPLAY_RANGE
+} from '#shared/midi/control-paths'
 import { handleInboundSysEx } from '#shared/midi/inbound'
 import { applyCcToPanelState } from '#shared/midi/midi-cc'
 import { splitMidiRealtime } from '#shared/midi/midi-clock'
@@ -28,10 +35,17 @@ import {
   formatSysExHex,
   parseMpxG2SysEx
 } from '#shared/midi/sysex'
+import { createChorusSync } from './web-midi/chorus-sync'
 import { createGainEqSync } from './web-midi/gain-eq-sync'
+import { createProgramAlgSync } from './web-midi/program-alg-sync'
 import { clearRxProbeTimer, startPanelMirrorPoll, stopPanelMirrorPoll } from './web-midi/panel-mirror'
 import { describeMidiMessage, matchesMpxPort, resolveInputPorts } from './web-midi/port-utils'
-import { getWebMidiRuntime, MODULE_HANDLER_EPOCH, resetGainSyncState } from './web-midi/runtime'
+import {
+  getWebMidiRuntime,
+  MODULE_HANDLER_EPOCH,
+  resetEffectParamSyncState
+} from './web-midi/runtime'
+import { chorusParamDefById } from '#shared/constants/chorus-params'
 import {
   clearPersistedPorts,
   readPersistedPorts,
@@ -63,6 +77,49 @@ export function useWebMidi() {
   const remoteDetected = useState<boolean>('midi-hw-remote-detected', () => false)
   const availableInputs = useState<MidiPortInfo[]>('midi-hw-available-inputs', () => [])
   const availableOutputs = useState<MidiPortInfo[]>('midi-hw-available-outputs', () => [])
+
+  let harvestHandler: ((data: Uint8Array) => void) | null = null
+  /** When true: panel poll stopped, Auto Display off, RX log quieted. */
+  let harvestQuiet = false
+
+  function setHarvestHandler(handler: (data: Uint8Array) => void) {
+    harvestHandler = handler
+  }
+
+  function clearHarvestHandler() {
+    harvestHandler = null
+  }
+
+  /** Pause panel mirror / Auto Display so harvest dumps are not stomped. */
+  function beginHarvestQuiet() {
+    if (harvestQuiet) {
+      return
+    }
+    harvestQuiet = true
+    stopPanelMirrorPoll(mirrorDeps)
+    const opts = getSysexOptions()
+    sendSysEx(
+      buildHandshakeMessage(HandshakeCommand.TurnOffAutoDisplay, opts),
+      'TurnOffAutoDisplay (harvest)'
+    )
+  }
+
+  /** Restore Auto Display + panel mirror after harvest. */
+  function endHarvestQuiet() {
+    if (!harvestQuiet) {
+      return
+    }
+    harvestQuiet = false
+    if (status.value !== 'connected' || deviceMode.value !== 'hardware') {
+      return
+    }
+    const opts = getSysexOptions()
+    sendSysEx(
+      buildHandshakeMessage(HandshakeCommand.TurnOnAutoDisplay, opts),
+      'TurnOnAutoDisplay (after harvest)'
+    )
+    startPanelMirrorPoll(mirrorDeps)
+  }
 
   function getSysexOptions() {
     return {
@@ -136,6 +193,21 @@ export function useWebMidi() {
     sendSysEx
   })
 
+  const chorus = createChorusSync({
+    runtime: webMidiRuntime,
+    panelState,
+    status,
+    getSysexOptions,
+    sendSysEx
+  })
+
+  const programAlg = createProgramAlgSync({
+    runtime: webMidiRuntime,
+    status,
+    getSysexOptions,
+    sendSysEx
+  })
+
   const tempoLed = createTempoLedController({ runtime: webMidiRuntime, panelState })
 
   function refreshPortLists() {
@@ -178,12 +250,18 @@ export function useWebMidi() {
     webMidiRuntime.sysexBuffers.delete(portId)
     recordRx()
 
+    if (harvestHandler) {
+      harvestHandler(data)
+    }
+
     if (data[0] !== 0xf0) {
       const statusByte = data[0] ?? 0
       if ((statusByte & 0xf0) === 0xc0) {
         const program = data[1] ?? 0
         addLog('rx', data, `Program change ch${(statusByte & 0x0f) + 1} = ${program}`, portName)
         gainEq.scheduleGainEqResync('program change')
+        chorus.scheduleChorusResync('program change')
+        programAlg.scheduleResync('program change')
         return
       }
 
@@ -222,26 +300,49 @@ export function useWebMidi() {
     )
     const quietPoll = (isLedUpdate && !digitsChanged && webMidiRuntime.programDigits != null)
       || (isDisplayUpdate && result.displayChanged === false)
-    if (!quietPoll) {
+    // Harvest floods the bus with Object Descriptions / OTID dumps — logging each
+    // message stalls the main thread and can drop the control-tree stream.
+    if (!quietPoll && !harvestHandler) {
       addLog('rx', data, handshakeNote ?? result.note, portName)
     }
 
     if (result.gainAlg != null && result.gainAlg >= 1) {
       gainEq.noteGainAlgResponse()
       gainEq.requestGainEqParams(result.gainAlg)
+    } else if (result.effectAlg?.block === 'gain' && result.effectAlg.alg >= 1) {
+      gainEq.noteGainAlgResponse()
+      gainEq.requestGainEqParams(result.effectAlg.alg)
+    }
+
+    if (result.effectAlg?.block === 'chorus' && result.effectAlg.alg >= 1) {
+      chorus.noteChorusAlgResponse()
+      chorus.requestChorusParams(result.effectAlg.alg)
     }
 
     if (result.gainEqObjectType) {
-      gainEq.acceptObjectTypeId(
-        result.gainEqObjectType.band,
-        result.gainEqObjectType.objectTypeId
-      )
+      if (!harvestHandler) {
+        gainEq.acceptObjectTypeId(
+          result.gainEqObjectType.band,
+          result.gainEqObjectType.objectTypeId
+        )
+      }
+    } else if (result.chorusParamObjectType) {
+      if (!harvestHandler) {
+        chorus.acceptObjectTypeId(
+          result.chorusParamObjectType.param,
+          result.chorusParamObjectType.objectTypeId
+        )
+      }
     } else if (result.objectTypeId != null) {
-      gainEq.acceptOrphanObjectTypeId(result.objectTypeId)
+      if (!harvestHandler) {
+        gainEq.acceptOrphanObjectTypeId(result.objectTypeId)
+        chorus.acceptOrphanObjectTypeId(result.objectTypeId)
+      }
     }
 
-    if (result.objectDescription) {
+    if (result.objectDescription && !harvestHandler) {
       gainEq.applyObjectDescription(result.objectDescription)
+      chorus.applyObjectDescription(result.objectDescription)
     }
 
     if (isLedUpdate && tempoLed.isMidiClockDrivingTempo()) {
@@ -251,11 +352,15 @@ export function useWebMidi() {
     if (isLedUpdate) {
       if (digitsChanged) {
         gainEq.scheduleGainEqResync(`program digits ${webMidiRuntime.programDigits} → ${nextDigits}`)
+        chorus.scheduleChorusResync(`program digits ${webMidiRuntime.programDigits} → ${nextDigits}`)
+        programAlg.scheduleResync(`program digits ${webMidiRuntime.programDigits} → ${nextDigits}`)
       }
       webMidiRuntime.programDigits = nextDigits
     } else if (prevDigits !== nextDigits) {
       if (webMidiRuntime.programDigits != null && webMidiRuntime.programDigits !== nextDigits) {
         gainEq.scheduleGainEqResync(`program digits ${webMidiRuntime.programDigits} → ${nextDigits}`)
+        chorus.scheduleChorusResync(`program digits ${webMidiRuntime.programDigits} → ${nextDigits}`)
+        programAlg.scheduleResync(`program digits ${webMidiRuntime.programDigits} → ${nextDigits}`)
       }
       webMidiRuntime.programDigits = nextDigits
     }
@@ -322,7 +427,9 @@ export function useWebMidi() {
       requestPanelDumps('after handshake')
     }, 900)
     window.setTimeout(() => {
+      programAlg.requestAll('after handshake')
       gainEq.requestGainEqState('after handshake')
+      chorus.requestChorusState('after handshake')
     }, 1100)
     window.setTimeout(() => {
       sendSysEx(
@@ -508,10 +615,9 @@ export function useWebMidi() {
   function disconnect(options?: { forgetSession?: boolean }) {
     clearRxProbeTimer(webMidiRuntime)
     stopPanelMirrorPoll(mirrorDeps)
-    if (webMidiRuntime.gainSync.resyncTimer) {
-      clearTimeout(webMidiRuntime.gainSync.resyncTimer)
-      webMidiRuntime.gainSync.resyncTimer = null
-    }
+    gainEq.clearTimers()
+    chorus.clearTimers()
+    programAlg.clearTimer()
     tempoLed.clearTempoLedTimers()
     detachAllInputs()
 
@@ -524,7 +630,8 @@ export function useWebMidi() {
     webMidiRuntime.connectOptions = undefined
     webMidiRuntime.programDigits = null
     webMidiRuntime.handlerEpoch = null
-    resetGainSyncState(webMidiRuntime)
+    resetEffectParamSyncState(webMidiRuntime, 'gainSync')
+    resetEffectParamSyncState(webMidiRuntime, 'chorusSync')
 
     if (options?.forgetSession !== false) {
       clearPersistedPorts()
@@ -643,6 +750,52 @@ export function useWebMidi() {
     )
   }
 
+  function setChorusParam(param: ChorusParam, value: number) {
+    const knobs = panelState.value.knobs
+    const alg = panelState.value.program.algByBlock.chorus >= 1
+      ? panelState.value.program.algByBlock.chorus
+      : webMidiRuntime.chorusSync.alg >= 1
+        ? webMidiRuntime.chorusSync.alg
+        : 1
+    const def = chorusParamDefById(alg, param)
+    const range = knobs.chorusRanges[param]
+      ?? def?.fallbackRange
+      ?? (param === 'level' ? STANDARD_EFFECT_DISPLAY_RANGE.level : STANDARD_EFFECT_DISPLAY_RANGE.mix)
+    const clamped = Math.min(range.max, Math.max(range.min, Math.round(value)))
+    const valueBytes: 1 | 2 = knobs.chorusValueBytesById[param] === 2
+      ? 2
+      : knobs.chorusValueBytes === 2 ? 2 : 1
+    const paramIndex = def?.index ?? (param === 'level' ? 1 : 0)
+
+    const nextValues = { ...knobs.chorusValues, [param]: clamped }
+    panelState.value.knobs = {
+      ...knobs,
+      chorusValues: nextValues,
+      chorusValueBytes: valueBytes,
+      chorusValueBytesById: { ...knobs.chorusValueBytesById, [param]: valueBytes },
+      chorusMix: param === 'mix' ? clamped : (nextValues.mix ?? knobs.chorusMix),
+      chorusLevel: param === 'level' ? clamped : (nextValues.level ?? knobs.chorusLevel)
+    }
+    panelState.value.program = {
+      ...panelState.value.program,
+      algByBlock: {
+        ...panelState.value.program.algByBlock,
+        chorus: alg
+      }
+    }
+    panelState.value.lastUpdated = Date.now()
+
+    const opts = getSysexOptions()
+    return sendSysEx(
+      buildDataMessage(
+        encodeParamValue(clamped, valueBytes),
+        chorusParamControlPath(alg, paramIndex),
+        opts
+      ),
+      `Chorus ${param} = ${clamped} (alg ${alg})`
+    )
+  }
+
   function clearLog() {
     midiLog.value = []
   }
@@ -679,8 +832,14 @@ export function useWebMidi() {
     releaseButton,
     rotateEncoder,
     setGainKnob,
+    setChorusParam,
     clearLog,
     sendSysEx,
+    getSysexOptions,
+    setHarvestHandler,
+    clearHarvestHandler,
+    beginHarvestQuiet,
+    endHarvestQuiet,
     trySessionReconnect
   }
 }

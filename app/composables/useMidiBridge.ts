@@ -1,4 +1,5 @@
 import type {
+  ChorusParam,
   FrontPanelButtonName,
   GainEqBand,
   MidiBridgeClientMessage,
@@ -6,7 +7,7 @@ import type {
   MidiBridgeServerMessage,
   MpxG2PanelState
 } from '#shared/types/midi'
-import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
+import { GAIN_EQ_DISPLAY_RANGE, STANDARD_EFFECT_DISPLAY_RANGE } from '#shared/midi/control-paths'
 import { createEmptyPanelState } from '#shared/midi/sysex'
 
 /** Shared across all `useMidiBridge()` callers and Vite HMR reloads. */
@@ -179,6 +180,23 @@ export function useMidiBridge() {
     return send({ type: 'gain_knob', band, value: clamped })
   }
 
+  function setChorusParam(param: ChorusParam, value: number) {
+    const knobs = panelState.value.knobs
+    const defRange = knobs.chorusRanges[param]
+      ?? (param === 'level' ? STANDARD_EFFECT_DISPLAY_RANGE.level : STANDARD_EFFECT_DISPLAY_RANGE.mix)
+    const clamped = Math.min(defRange.max, Math.max(defRange.min, Math.round(value)))
+    const nextValues = { ...knobs.chorusValues, [param]: clamped }
+    panelState.value.knobs = {
+      ...knobs,
+      chorusValues: nextValues,
+      chorusMix: param === 'mix' ? clamped : (nextValues.mix ?? knobs.chorusMix),
+      chorusLevel: param === 'level' ? clamped : (nextValues.level ?? knobs.chorusLevel)
+    }
+    panelState.value.lastUpdated = Date.now()
+
+    return send({ type: 'chorus_param', param, value: clamped })
+  }
+
   return {
     status: readonly(status),
     error: readonly(error),
@@ -192,6 +210,7 @@ export function useMidiBridge() {
     pressButton,
     releaseButton,
     rotateEncoder,
-    setGainKnob
+    setGainKnob,
+    setChorusParam
   }
 }

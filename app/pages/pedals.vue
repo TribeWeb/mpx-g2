@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GAIN_ADVANCED_PARAMS, gainEffectForAlg } from '#shared/constants/gain-effects'
+import { gainAdvancedParams, gainEffectForAlg } from '#shared/constants/gain-effects'
 import { GAIN_PEDAL_DEMO, TUBE_SCREAMER_GREEN } from '#shared/constants/gain-pedal-demo'
 import { GAIN_EQ_DISPLAY_RANGE } from '#shared/midi/control-paths'
 import type { EffectPedalParam } from '#shared/types/effect-pedal'
@@ -50,7 +50,7 @@ const gainAlg = computed(() =>
 
 const gainMeta = computed(() => gainEffectForAlg(gainAlg.value))
 
-const softRowParamIds = ['low', 'mid', 'high'] as const
+const softRowParamIds = ['lo', 'mid', 'hi'] as const
 
 const gainParams = computed<EffectPedalParam[]>(() => {
   const knobs = panelState.value.knobs
@@ -65,10 +65,10 @@ const gainParams = computed<EffectPedalParam[]>(() => {
     : demoKnobs.value.highRange
 
   return [
-    { id: 'low', label: 'Lo', ...lowRange, step: 1 },
+    { id: 'lo', label: 'Lo', ...lowRange, step: 1 },
     { id: 'mid', label: 'Mid', ...midRange, step: 1 },
-    { id: 'high', label: 'Hi', ...highRange, step: 1 },
-    ...GAIN_ADVANCED_PARAMS.map(param => ({ ...param }))
+    { id: 'hi', label: 'Hi', ...highRange, step: 1 },
+    ...gainAdvancedParams(gainAlg.value)
   ]
 })
 
@@ -76,9 +76,9 @@ const gainParamValues = computed(() => {
   if (isLive.value) {
     const knobs = panelState.value.knobs
     return {
-      low: knobs?.gainLow ?? 0,
+      lo: knobs?.gainLow ?? 0,
       mid: knobs?.gainMid ?? 0,
-      high: knobs?.gainHigh ?? 0,
+      hi: knobs?.gainHigh ?? 0,
       drive: demoAdvanced.value.drive,
       tone: demoAdvanced.value.tone,
       inLvl: demoAdvanced.value.inLvl,
@@ -87,9 +87,9 @@ const gainParamValues = computed(() => {
   }
 
   return {
-    low: demoKnobs.value.low,
+    lo: demoKnobs.value.low,
     mid: demoKnobs.value.mid,
-    high: demoKnobs.value.high,
+    hi: demoKnobs.value.high,
     ...demoAdvanced.value
   }
 })
@@ -109,31 +109,31 @@ function clampDemo(band: 'low' | 'mid' | 'high', value: number) {
 
 function onGainParamUpdate(values: Record<string, number>) {
   const current = gainParamValues.value
-  const low = values.low
+  const lo = values.lo
   const mid = values.mid
-  const high = values.high
+  const hi = values.hi
 
   if (isLive.value) {
-    if (low !== undefined && low !== current.low) {
-      setGainKnob('low', low)
+    if (lo !== undefined && lo !== current.lo) {
+      setGainKnob('low', lo)
     }
     if (mid !== undefined && mid !== current.mid) {
       setGainKnob('mid', mid)
     }
-    if (high !== undefined && high !== current.high) {
-      setGainKnob('high', high)
+    if (hi !== undefined && hi !== current.hi) {
+      setGainKnob('high', hi)
     }
     return
   }
 
-  if (low !== undefined) {
-    demoKnobs.value.low = clampDemo('low', low)
+  if (lo !== undefined) {
+    demoKnobs.value.low = clampDemo('low', lo)
   }
   if (mid !== undefined) {
     demoKnobs.value.mid = clampDemo('mid', mid)
   }
-  if (high !== undefined) {
-    demoKnobs.value.high = clampDemo('high', high)
+  if (hi !== undefined) {
+    demoKnobs.value.high = clampDemo('high', hi)
   }
   if (values.drive !== undefined) {
     demoAdvanced.value.drive = values.drive

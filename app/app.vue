@@ -52,6 +52,24 @@ useSeoMeta({
             color="neutral"
             variant="ghost"
           />
+          <UButton
+            to="/pedalboard"
+            label="Pedalboard"
+            color="neutral"
+            variant="ghost"
+          />
+          <UButton
+            to="/manual/effects"
+            label="Manual"
+            color="neutral"
+            variant="ghost"
+          />
+          <UButton
+            to="/tools/harvest-effects"
+            label="Harvest"
+            color="neutral"
+            variant="ghost"
+          />
         </nav>
       </template>
 

@@ -73,6 +73,10 @@ function handleClientMessage(socket: WebSocket, raw: string) {
       simulator.handleGainKnob(message.band, message.value)
       pushPanelState(socket, simulator)
       break
+    case 'chorus_param':
+      simulator.handleChorusParam(message.param, message.value)
+      pushPanelState(socket, simulator)
+      break
   }
 }
 

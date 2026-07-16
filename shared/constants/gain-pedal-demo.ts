@@ -1,5 +1,4 @@
-import type { MpxG2PanelState } from '../types/midi'
-import { createEmptyPanelKnobState, createEmptyPanelLedState, createEmptyPanelState } from '../midi/sysex'
+import { createEmptyPanelKnobState } from '../midi/sysex'
 
 /** Classic Ibanez Tube Screamer enclosure green. */
 export const TUBE_SCREAMER_GREEN = '#009739'
@@ -34,19 +33,5 @@ export function createDemoPanelKnobState() {
     gainLowRange: { ...GAIN_PEDAL_DEMO.knobs.gainLowRange },
     gainMidRange: { ...GAIN_PEDAL_DEMO.knobs.gainMidRange },
     gainHighRange: { ...GAIN_PEDAL_DEMO.knobs.gainHighRange }
-  }
-}
-
-/** Panel state seed for simulator / offline pedal previews. */
-export function createDemoPanelState(): MpxG2PanelState {
-  const leds = createEmptyPanelLedState()
-  leds.buttons.gain = GAIN_PEDAL_DEMO.enabled
-
-  return {
-    ...createEmptyPanelState(),
-    connected: true,
-    leds,
-    knobs: createDemoPanelKnobState(),
-    lastUpdated: Date.now()
   }
 }

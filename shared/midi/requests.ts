@@ -1,10 +1,14 @@
 import { nibblize, buildSysExHeader } from './sysex'
 import { SysExMessageType } from '../types/midi'
+import type { EffectBlockId } from '../types/effect-blocks'
+import { chorusParamDefById } from '../constants/chorus-params'
 import {
   DISPLAY_DUMP_PATH,
+  effectAlgControlPath,
   GAIN_ALG_PATH,
   LED_DUMP_PATH,
   LED_DUMP_PATH_ALT,
+  chorusParamControlPath,
   gainEqControlPath
 } from './control-paths'
 
@@ -57,6 +61,15 @@ export function buildGainAlgRequest(deviceId = 0x00, productId?: number): Uint8A
   return buildDataRequest([...GAIN_ALG_PATH], deviceId, productId)
 }
 
+/** Request the active algorithm for any program effect block. */
+export function buildEffectAlgRequest(
+  block: EffectBlockId,
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildDataRequest(effectAlgControlPath(block), deviceId, productId)
+}
+
 /** Request Gain Lo / Mid / Hi for a loaded algorithm. */
 export function buildGainEqRequest(
   alg: number,
@@ -65,6 +78,18 @@ export function buildGainEqRequest(
   productId?: number
 ): Uint8Array {
   return buildDataRequest(gainEqControlPath(alg, band), deviceId, productId)
+}
+
+/** Request a Chorus parameter for a loaded algorithm. */
+export function buildChorusParamRequest(
+  alg: number,
+  paramId: string,
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  const def = chorusParamDefById(alg, paramId)
+  const paramIndex = def?.index ?? (paramId === 'level' ? 1 : 0)
+  return buildDataRequest(chorusParamControlPath(alg, paramIndex), deviceId, productId)
 }
 
 /** Request Object Type ID (03 hex) at a control-tree path. */

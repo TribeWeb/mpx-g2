@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { CHORUS_EFFECT_TYPE, GAIN_EFFECT_TYPE, parseEffectAlgPath } from './control-paths'
 import { getPanelButtonSysExValue } from './panel-buttons'
 import {
   editorObjectRange,
@@ -83,5 +84,38 @@ describe('object-description gain eq', () => {
     const description = parseObjectDescriptionPayload(payload)
     expect(description?.name).toBe('Lo')
     expect(editorObjectRange(description!)).toEqual({ min: -5, max: 5 })
+  })
+})
+
+describe('control-paths effect alg', () => {
+  it('parses algorithm-select paths for program effect blocks', () => {
+    expect(parseEffectAlgPath([0x0000, GAIN_EFFECT_TYPE])).toEqual({
+      effectType: GAIN_EFFECT_TYPE,
+      block: 'gain'
+    })
+    expect(parseEffectAlgPath([0x0000, CHORUS_EFFECT_TYPE])).toEqual({
+      effectType: CHORUS_EFFECT_TYPE,
+      block: 'chorus'
+    })
+    expect(parseEffectAlgPath([0x0000, 0x0099])).toBeNull()
+  })
+})
+
+describe('gain eq control paths for generic param sync', () => {
+  it('builds L:0004 program/gain/alg/param paths', async () => {
+    const { gainEqControlPath } = await import('./control-paths')
+    expect(gainEqControlPath(3, 'low')).toEqual([0x0000, 0x0006, 3, 0])
+    expect(gainEqControlPath(3, 'mid')).toEqual([0x0000, 0x0006, 3, 1])
+    expect(gainEqControlPath(3, 'high')).toEqual([0x0000, 0x0006, 3, 2])
+  })
+})
+
+describe('chorus param control paths', () => {
+  it('builds and parses Mix/Level and Stereo Chorus modulator paths', async () => {
+    const { chorusParamControlPath, parseChorusParamPath } = await import('./control-paths')
+    expect(chorusParamControlPath(1, 0)).toEqual([0x0000, 0x0002, 1, 0])
+    expect(chorusParamControlPath(1, 4)).toEqual([0x0000, 0x0002, 1, 4])
+    expect(parseChorusParamPath([0x0000, 0x0002, 1, 0])).toEqual({ alg: 1, paramIndex: 0 })
+    expect(parseChorusParamPath([0x0000, 0x0002, 1, 8])).toEqual({ alg: 1, paramIndex: 8 })
   })
 })

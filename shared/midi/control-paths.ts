@@ -8,8 +8,25 @@ export const SYSTEM_BRANCH = 0x0001
 /** Program branch root (first control level). */
 export const PROGRAM_BRANCH = 0x0000
 
+/** Effect-type indices in the program control tree (B level under L:0002 A:0000). */
+export const FX1_EFFECT_TYPE = 0x0000
+export const FX2_EFFECT_TYPE = 0x0001
+export const CHORUS_EFFECT_TYPE = 0x0002
+export const DELAY_EFFECT_TYPE = 0x0003
+export const REVERB_EFFECT_TYPE = 0x0004
+export const EQ_EFFECT_TYPE = 0x0005
 /** Effect-type index for Gain in the program control tree. */
 export const GAIN_EFFECT_TYPE = 0x0006
+
+export const EFFECT_TYPE_BY_BLOCK = {
+  fx1: FX1_EFFECT_TYPE,
+  fx2: FX2_EFFECT_TYPE,
+  chorus: CHORUS_EFFECT_TYPE,
+  delay: DELAY_EFFECT_TYPE,
+  reverb: REVERB_EFFECT_TYPE,
+  eq: EQ_EFFECT_TYPE,
+  gain: GAIN_EFFECT_TYPE
+} as const
 
 /** Param index within a Gain algorithm for front-panel Lo / Mid / Hi knobs. */
 export const GAIN_EQ_PARAM_INDEX = {
@@ -18,8 +35,35 @@ export const GAIN_EQ_PARAM_INDEX = {
   high: 2
 } as const
 
-/** Program → Gain algorithm select (L:0002 A:0000 B:0006). */
+/**
+ * Mix / Level are param 0 / 1 for every effect algorithm (MIDI impl doc).
+ * Soft-row / advanced knobs for Chorus start here; alg-specific params follow.
+ */
+export const STANDARD_EFFECT_PARAM_INDEX = {
+  mix: 0,
+  level: 1
+} as const
+
+export type StandardEffectParam = keyof typeof STANDARD_EFFECT_PARAM_INDEX
+
+/** Fallback Mix/Level ranges until Object Description replies arrive. */
+export const STANDARD_EFFECT_DISPLAY_RANGE = {
+  mix: { min: 0, max: 100 },
+  /** Manual: Off, −89…+6 dB — Object Description tightens this per algorithm. */
+  level: { min: -89, max: 6 }
+} as const
+
+/** Program → algorithm select (L:0002 A:0000 B:{effectType}). */
 export const GAIN_ALG_PATH = [PROGRAM_BRANCH, GAIN_EFFECT_TYPE] as const
+export const CHORUS_ALG_PATH = [PROGRAM_BRANCH, CHORUS_EFFECT_TYPE] as const
+
+export function effectAlgPath(effectType: number): number[] {
+  return [PROGRAM_BRANCH, effectType]
+}
+
+export function effectAlgControlPath(block: keyof typeof EFFECT_TYPE_BY_BLOCK): number[] {
+  return effectAlgPath(EFFECT_TYPE_BY_BLOCK[block])
+}
 
 /**
  * Fallback Gain Lo/Mid/Hi ranges until Object Description replies arrive.
@@ -73,6 +117,22 @@ export function isGainAlgPath(levels: number[]): boolean {
   return pathsEqual(levels, GAIN_ALG_PATH)
 }
 
+/** Parse L:0002 A:0000 B:{effectType} algorithm-select replies. */
+export function parseEffectAlgPath(levels: number[]): {
+  effectType: number
+  block: keyof typeof EFFECT_TYPE_BY_BLOCK
+} | null {
+  if (levels.length !== 2 || levels[0] !== PROGRAM_BRANCH) {
+    return null
+  }
+  const effectType = levels[1] ?? -1
+  const entry = Object.entries(EFFECT_TYPE_BY_BLOCK).find(([, type]) => type === effectType)
+  if (!entry) {
+    return null
+  }
+  return { effectType, block: entry[0] as keyof typeof EFFECT_TYPE_BY_BLOCK }
+}
+
 /**
  * Front-panel Gain Low/Mid/High knobs write Gain-effect EQ params:
  * L:0004 A:0000 B:0006 C:{alg} D:0000|0001|0002
@@ -113,6 +173,44 @@ export function gainEqControlPath(alg: number, band: 'low' | 'mid' | 'high'): nu
 
 export function gainAlgControlPath(): number[] {
   return [...GAIN_ALG_PATH]
+}
+
+/** L:0004 A:0000 B:{effectType} C:{alg} D:{paramIndex} */
+export function effectParamControlPath(
+  effectType: number,
+  alg: number,
+  paramIndex: number
+): number[] {
+  return [PROGRAM_BRANCH, effectType, alg, paramIndex]
+}
+
+export function chorusParamControlPath(alg: number, paramIndex: number): number[] {
+  return effectParamControlPath(CHORUS_EFFECT_TYPE, alg, paramIndex)
+}
+
+/**
+ * Parse Chorus param path: L:0004 A:0000 B:0002 C:{alg} D:{paramIndex}
+ * Returns raw alg + param index; callers map index → id via chorus-params.
+ */
+export function parseChorusParamPath(levels: number[]): {
+  alg: number
+  paramIndex: number
+} | null {
+  if (
+    levels.length !== 4
+    || levels[0] !== PROGRAM_BRANCH
+    || levels[1] !== CHORUS_EFFECT_TYPE
+  ) {
+    return null
+  }
+
+  const alg = levels[2] ?? 0
+  const paramIndex = levels[3] ?? -1
+  if (alg < 1 || paramIndex < 0) {
+    return null
+  }
+
+  return { alg, paramIndex }
 }
 
 /**

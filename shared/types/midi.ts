@@ -1,4 +1,5 @@
-/** Lexicon manufacturer ID in SysEx messages */
+import type { EffectBlockId } from './effect-blocks'
+import { EFFECT_BLOCK_IDS } from './effect-blocks'
 export const LEXICON_MANUFACTURER_ID = 0x06
 
 /** Accepted MPX-G2 product IDs (0x09 appears in R1 examples, 0x0f on the unit itself). */
@@ -39,7 +40,9 @@ export const HandshakeCommand = {
   TurnOnAllMidiOutput: 0x0b,
   TurnOffAllMidiOutput: 0x0c,
   TurnOnAutoDisplay: 0x0f,
-  TurnOffAutoDisplay: 0x10
+  TurnOffAutoDisplay: 0x10,
+  /** Dump Object Type ID (with path) for every control-tree node. */
+  TransmitControlTree: 0x08
 } as const
 
 export type HandshakeCommandValue = typeof HandshakeCommand[keyof typeof HandshakeCommand]
@@ -119,12 +122,38 @@ export interface PanelKnobState {
   gainLowRange: ParamRange
   gainMidRange: ParamRange
   gainHighRange: ParamRange
+  /** Chorus Mix (0–100%) and Level (−89…+6 dB typical). */
+  chorusMix: number
+  chorusLevel: number
+  chorusValueBytes: 1 | 2
+  chorusMixRange: ParamRange
+  chorusLevelRange: ParamRange
+  /** All Chorus params for the active algorithm (Mix/Level + modulators…). */
+  chorusValues: Record<string, number>
+  chorusRanges: Record<string, ParamRange>
+  chorusValueBytesById: Record<string, 1 | 2>
+}
+
+export type ChorusParam = string
+
+export interface ProgramState {
+  /** Active algorithm per effect block (0 = no effect loaded). */
+  algByBlock: Record<EffectBlockId, number>
+}
+
+export function createEmptyProgramState(): ProgramState {
+  return {
+    algByBlock: Object.fromEntries(
+      EFFECT_BLOCK_IDS.map(id => [id, id === 'gain' ? 1 : 0])
+    ) as Record<EffectBlockId, number>
+  }
 }
 
 export interface MpxG2PanelState {
   leds: PanelLedState
   display: PanelDisplayState
   knobs: PanelKnobState
+  program: ProgramState
   connected: boolean
   lastUpdated: number | null
 }
@@ -135,6 +164,7 @@ export type MidiBridgeClientMessage
     | { type: 'panel', action: 'release', button: FrontPanelButtonName }
     | { type: 'encoder', delta: number }
     | { type: 'gain_knob', band: GainEqBand, value: number }
+    | { type: 'chorus_param', param: ChorusParam, value: number }
     | { type: 'enable_auto_display' }
     | { type: 'request_led_dump' }
     | { type: 'request_display_dump' }

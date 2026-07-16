@@ -1,4 +1,4 @@
-import type { GainEqBand, MidiConnectionMode } from '#shared/types/midi'
+import type { GainEqBand, ChorusParam, MidiConnectionMode } from '#shared/types/midi'
 import type { MidiTransport } from '#shared/types/midi-transport'
 
 let hardwareTransport: ReturnType<typeof useWebMidi> | null = null
@@ -78,6 +78,10 @@ export function useMidiConnection() {
     return active.value.setGainKnob(band, value)
   }
 
+  function setChorusParam(param: ChorusParam, value: number) {
+    return active.value.setChorusParam(param, value)
+  }
+
   const status = computed(() => active.value.status.value)
   const error = computed(() => active.value.error.value)
   const deviceMode = computed(() => active.value.deviceMode.value)
@@ -129,6 +133,30 @@ export function useMidiConnection() {
     getHardware().clearLog()
   }
 
+  function sendSysEx(data: Uint8Array, note?: string) {
+    return getHardware().sendSysEx(data, note)
+  }
+
+  function getSysexOptions() {
+    return getHardware().getSysexOptions()
+  }
+
+  function setHarvestHandler(handler: (data: Uint8Array) => void) {
+    getHardware().setHarvestHandler(handler)
+  }
+
+  function clearHarvestHandler() {
+    getHardware().clearHarvestHandler()
+  }
+
+  function beginHarvestQuiet() {
+    getHardware().beginHarvestQuiet()
+  }
+
+  function endHarvestQuiet() {
+    getHardware().endHarvestQuiet()
+  }
+
   if (import.meta.client) {
     onMounted(() => {
       if (clientAutoInitDone) {
@@ -161,6 +189,7 @@ export function useMidiConnection() {
     releaseButton,
     rotateEncoder,
     setGainKnob,
+    setChorusParam,
     isWebMidiSupported,
     availableInputs,
     availableOutputs,
@@ -172,6 +201,12 @@ export function useMidiConnection() {
     pingDevice,
     requestPanelDumps,
     requestGainEqState,
-    clearLog
+    clearLog,
+    sendSysEx,
+    getSysexOptions,
+    setHarvestHandler,
+    clearHarvestHandler,
+    beginHarvestQuiet,
+    endHarvestQuiet
   }
 }

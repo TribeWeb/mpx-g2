@@ -1,5 +1,6 @@
 import type { DeepReadonly, Ref } from 'vue'
 import type {
+  ChorusParam,
   FrontPanelButtonName,
   GainEqBand,
   MidiBridgeConnectionStatus,
@@ -19,6 +20,7 @@ export interface MidiTransport {
   releaseButton(button: FrontPanelButtonName): boolean
   rotateEncoder(delta: number): boolean
   setGainKnob(band: GainEqBand, value: number): boolean
+  setChorusParam(param: ChorusParam, value: number): boolean
   resetPanelState(): void
 }
 

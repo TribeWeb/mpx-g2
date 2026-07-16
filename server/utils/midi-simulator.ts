@@ -1,5 +1,5 @@
 import type { FrontPanelButtonName, MpxG2PanelState } from '#shared/types/midi'
-import { createDemoPanelKnobState, GAIN_PEDAL_DEMO } from '#shared/constants/gain-pedal-demo'
+import { createDemoPanelState } from '#shared/constants/program-pedal-demo'
 import { getPanelButtonSysExValue } from '#shared/midi/panel-buttons'
 import { createEmptyPanelState } from '#shared/midi/sysex'
 
@@ -18,10 +18,9 @@ export class MidiSimulator {
   }
 
   reset() {
+    const demo = createDemoPanelState()
     this.state = {
-      ...createEmptyPanelState(),
-      connected: true,
-      knobs: createDemoPanelKnobState(),
+      ...demo,
       display: {
         characters: [
           ...SIM_DISPLAY_TOP,
@@ -30,11 +29,7 @@ export class MidiSimulator {
         flashing: Array.from({ length: 32 }, () => false)
       },
       leds: {
-        ...createEmptyPanelState().leds,
-        buttons: {
-          ...createEmptyPanelState().leds.buttons,
-          gain: GAIN_PEDAL_DEMO.enabled
-        },
+        ...demo.leds,
         segments: [1, 2, 0] as [number, number, number]
       },
       lastUpdated: Date.now()
@@ -99,6 +94,19 @@ export class MidiSimulator {
       this.state.knobs.gainHigh = value
     }
     // LCD updates via display_dump from the bridge — not synthesized here.
+    this.state.lastUpdated = Date.now()
+  }
+
+  handleChorusParam(param: string, value: number) {
+    this.state.knobs.chorusValues = {
+      ...this.state.knobs.chorusValues,
+      [param]: value
+    }
+    if (param === 'mix') {
+      this.state.knobs.chorusMix = value
+    } else if (param === 'level') {
+      this.state.knobs.chorusLevel = value
+    }
     this.state.lastUpdated = Date.now()
   }
 

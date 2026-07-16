@@ -4,9 +4,15 @@ import {
   LEXICON_MANUFACTURER_ID,
   MPX_G2_PRODUCT_ID,
   MPX_G2_PRODUCT_IDS,
+  createEmptyProgramState,
   type HandshakeCommandValue,
   type SysExMessageTypeValue
 } from '../types/midi'
+import {
+  createEmptyChorusRanges,
+  createEmptyChorusValueBytes,
+  createEmptyChorusValues
+} from '../constants/chorus-params'
 import { emptyDisplayFlashing, emptyLedFlashStable, emptyLedFlashing } from './flash-detect'
 
 const SYSEX_START = 0xf0
@@ -171,7 +177,15 @@ export function createEmptyPanelKnobState() {
     gainValueBytes: 2 as 1 | 2,
     gainLowRange: { min: -25, max: 25 },
     gainMidRange: { min: -25, max: 25 },
-    gainHighRange: { min: -25, max: 50 }
+    gainHighRange: { min: -25, max: 50 },
+    chorusMix: 50,
+    chorusLevel: 0,
+    chorusValueBytes: 1 as 1 | 2,
+    chorusMixRange: { min: 0, max: 100 },
+    chorusLevelRange: { min: -89, max: 6 },
+    chorusValues: createEmptyChorusValues(),
+    chorusRanges: createEmptyChorusRanges(),
+    chorusValueBytesById: createEmptyChorusValueBytes()
   }
 }
 
@@ -183,6 +197,7 @@ export function createEmptyPanelState() {
       flashing: emptyDisplayFlashing()
     },
     knobs: createEmptyPanelKnobState(),
+    program: createEmptyProgramState(),
     connected: false,
     lastUpdated: null
   }

@@ -1,6 +1,7 @@
 import { denibblize } from './sysex'
 import { PANEL_BUTTON_CONTROL_PATH } from './panel-buttons'
-import { parseGainEqPath } from './control-paths'
+import { chorusParamDefByIndex } from '../constants/chorus-params'
+import { parseChorusParamPath, parseGainEqPath } from './control-paths'
 import { decodeParamValue } from './param-value'
 
 export interface ParsedDataMessage {
@@ -70,6 +71,14 @@ export function describeDataMessage(parsed: ParsedDataMessage): string {
     const value = decodeParamValue(parsed.data)
     const label = gainEq.band === 'low' ? 'Gain Low' : gainEq.band === 'mid' ? 'Gain Mid' : 'Gain High'
     return `${label} = ${value} (alg ${gainEq.alg}) @ ${path}`
+  }
+
+  const chorusParam = parseChorusParamPath(parsed.levels)
+  if (chorusParam && parsed.data.length > 0 && parsed.data.length <= 2) {
+    const value = decodeParamValue(parsed.data)
+    const def = chorusParamDefByIndex(chorusParam.alg, chorusParam.paramIndex)
+    const label = def ? `Chorus ${def.label}` : `Chorus D:${chorusParam.paramIndex}`
+    return `${label} = ${value} (alg ${chorusParam.alg}) @ ${path}`
   }
 
   if (parsed.data.length === 1) {
