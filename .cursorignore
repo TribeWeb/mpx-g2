@@ -1,0 +1,9 @@
+# Keep Cursor / Source Control from indexing huge local trees
+.venv-docling/
+.venv*/
+tmp/
+node_modules/
+.nuxt/
+.output/
+.data/
+.pnpm-store/

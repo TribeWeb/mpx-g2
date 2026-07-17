@@ -15,7 +15,9 @@ const effectParam = z.object({
   displayUnits: z.number().int().nonnegative().optional()
 }).refine(param => param.default >= param.min && param.default <= param.max, {
   message: 'default must be within min…max',
-  path: ['default']
+  path: ['default'],
+  /** Whether the param can be interpolated between min and max by a controller. */
+  canInterpolate: z.boolean().optional()
 })
 
 const availableIn = z.object({
@@ -26,6 +28,16 @@ const availableIn = z.object({
   delay: z.number().int().positive().optional(),
   reverb: z.number().int().positive().optional(),
   eq: z.number().int().positive().optional()
+})
+
+const programBlock = z.object({
+  id: z.enum(['gain', 'fx1', 'fx2', 'chorus', 'delay', 'reverb', 'eq']),
+  /** 1-based algorithm index in this block; 0 = unloaded. */
+  alg: z.number().int().nonnegative(),
+  /** content/effects slug when known. */
+  effect: z.string().nullable(),
+  /** Raw wire param values keyed by effect param id. */
+  params: z.record(z.string(), z.number())
 })
 
 export default defineContentConfig({
@@ -48,6 +60,18 @@ export default defineContentConfig({
         params: z.array(effectParam),
         /** Pedal accent colour (hex or CSS colour). */
         color: z.string().min(1)
+      })
+    }),
+    programs: defineCollection({
+      type: 'page',
+      source: 'programs/*.md',
+      schema: z.object({
+        group: z.enum(['Amp Input + FX Loop', 'Amp Input Only', 'Stand Alone']),
+        subGroup: z.enum(['Top Nineteen', 'Vintage Rig', 'Chorus Delay Rig', 'Pitch Rig', 'Tremelo + Filter FX', 'FX Collection', 'Analog Gain', 'JamMan', 'Top Ten', 'Bass FX', 'Artist/Song', 'Amp Collection', 'Studio Spaces', 'Studio FX', 'Styles', 'Live Rigs', 'Tremelo/Pitch', 'Utility']),
+        /** G2 LCD program name from MIDI dump (12-char label). */
+        dumpName: z.string().optional(),
+        /** Loaded effect blocks + param values from program dump. */
+        parameters: z.array(programBlock)
       })
     })
   }

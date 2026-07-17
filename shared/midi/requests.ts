@@ -11,6 +11,7 @@ import {
   chorusParamControlPath,
   gainEqControlPath
 } from './control-paths'
+import { programDumpControlPath, ACTIVE_PROGRAM_DUMP_PATH } from './program-dump'
 
 const SYSEX_END = 0xf7
 
@@ -146,6 +147,23 @@ export function buildGainEqObjectTypeIdRequest(
   productId?: number
 ): Uint8Array {
   return buildObjectTypeIdRequest(gainEqControlPath(alg, band), deviceId, productId)
+}
+
+/** Request a stored program dump (1–300) via System → Programs path. */
+export function buildProgramDumpRequest(
+  programNumber: number,
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildDataRequest(programDumpControlPath(programNumber), deviceId, productId)
+}
+
+/** Request the currently running program dump (Active Program slot). */
+export function buildActiveProgramDumpRequest(
+  deviceId = 0x00,
+  productId?: number
+): Uint8Array {
+  return buildDataRequest([...ACTIVE_PROGRAM_DUMP_PATH], deviceId, productId)
 }
 
 /** Request the 32-character front-panel LCD contents. */

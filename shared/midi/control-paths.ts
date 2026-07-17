@@ -8,6 +8,15 @@ export const SYSTEM_BRANCH = 0x0001
 /** Program branch root (first control level). */
 export const PROGRAM_BRANCH = 0x0000
 
+/**
+ * System → Programs branch (MIDI doc: Program Dump addresses).
+ * L:0004 A:0001 B:000A C:{bank 0–2} D:{0–99 within bank}
+ */
+export const SYSTEM_PROGRAMS_TYPE = 0x000a
+
+/** Object Type ID for an MPXG2_PROGRAM dump blob. */
+export const OBJECT_TYPE_PROGRAM_DUMP = 0x01df
+
 /** Effect-type indices in the program control tree (B level under L:0002 A:0000). */
 export const FX1_EFFECT_TYPE = 0x0000
 export const FX2_EFFECT_TYPE = 0x0001

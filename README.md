@@ -1,12 +1,20 @@
 # MPX-G2 Controller
 
-Browser-based MIDI controller for the [Lexicon MPX-G2](https://www.lexiconpro.com) effects processor. Built with **Nuxt 4**, **Nuxt UI**, and **TypeScript**.
+Browser-based MIDI controller for the [Lexicon MPX-G2](https://www.lexiconpro.com) effects processor. Built with **Nuxt 4**, **Nuxt Content**, **Nuxt UI**, and **TypeScript**.
 
 ## Roadmap and goals
 
 [x] **Front panel replica** — virtual LCD, LEDs, buttons, encoder
-[x] **Chrome Web MIDI** — SysEx handshake, display/LED dumps, panel button messages (almost complete)
-[ ] **Modern editor** — A modern GUI for the lexicon MPXG2. The ability to view and edit the MPXG2 settings using a drag n drop interface showing each effect as a pedal with visual routing.
+[x] **Chrome Web MIDI** — SysEx handshake, display/LED dumps, panel button messages
+[ ] **Modern editor** — A modern GUI for the lexicon MPXG2. The ability to view and edit the MPXG2 settings using a drag n drop interface showing each effect as a pedal with visual routing
+[ ] **LLM effect authoring** - Text → G2 settings. Use the machine readable catalog of algorithms, params & units, the effect markdown & param descriptions and SysEx write path to allow users to describe a sound that the LLM can write to the MPXG2
+
+### Tasks
+
+[ ] Complete digitising of the MPXG2 manual pdf for each effect
+[ ] Create a "programs" content collection that matches midi dumps of parameter settings from MPXG2 programs with each program description from the manual
+[ ] Create an LLM friendly ingestion of the app including recipes and examples. (Use https://nuxt.com/modules/llms?)
+[ ] LLM integration
 
 ## Stack
 
@@ -39,7 +47,10 @@ scripts/
 
 Effect reference pages: [/manual/effects](http://localhost:3000/manual/effects). Edit `content/effects/*.md`, then `pnpm run generate:algorithms` (also runs on `dev` / `build` / `postinstall`).
 
-MIDI harvest (hardware): [/tools/harvest-effects](http://localhost:3000/tools/harvest-effects) — System Config + Object Descriptions + control tree dump → draft effect Markdown/JSON.
+MIDI harvest (hardware):
+[/tools/harvest-effects](http://localhost:3000/tools/harvest-effects) — System Config + Object Descriptions + control tree dump → draft effect Markdown/JSON.
+[/tools/harvest-programs](http://localhost:3000/tools/harvest-programs) — request stored program dumps one-at-a-time (avoids broken All Programs bulk dump).
+Apply harvest → Content: `pnpm run apply:program-harvest` (or pass a JSON path).
 
 ## Getting started
 

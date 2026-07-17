@@ -187,7 +187,29 @@ export function useWebMidi() {
       return false
     }
 
-    // Harvest / quiet poll: keep the console and MIDI log clear.
+    // Harvest / quiet poll: keep the console and MIDI log clear unless forced.
+    const silent = options?.silent ?? harvestQuiet
+    if (!silent) {
+      addLog('tx', data, note, webMidiRuntime.midiOutput.name ?? webMidiRuntime.midiOutput.id)
+    }
+    return true
+  }
+
+  /** Send raw MIDI (Program Change, CC, …). Honours the same silent/harvestQuiet logging. */
+  function sendMidi(data: Uint8Array, note?: string, options?: { silent?: boolean }): boolean {
+    ensureMidiHandlersBound()
+    if (!webMidiRuntime.midiOutput) {
+      scheduleAutoReconnect('tx')
+      return false
+    }
+    try {
+      webMidiRuntime.midiOutput.send(data)
+    } catch (cause) {
+      console.warn('[mpx-g2] MIDI send failed — clearing output and reconnecting', cause)
+      webMidiRuntime.midiOutput = null
+      scheduleAutoReconnect('send-error')
+      return false
+    }
     const silent = options?.silent ?? harvestQuiet
     if (!silent) {
       addLog('tx', data, note, webMidiRuntime.midiOutput.name ?? webMidiRuntime.midiOutput.id)
@@ -262,10 +284,17 @@ export function useWebMidi() {
     webMidiRuntime.sysexBuffers.delete(portId)
     recordRx()
 
-    // Harvest owns the bus — do not log, mirror panel, or kick gain/chorus resync.
+    // Harvest owns the bus — still answer AreYouThere so the G2 keeps MIDI output alive.
     if (harvestHandler) {
       if (data[0] === 0xf0 && data[2] != null) {
         webMidiRuntime.productId = data[2]
+      }
+      const parsedHarvest = data[0] === 0xf0 ? parseMpxG2SysEx(data) : null
+      if (
+        parsedHarvest?.messageType === SysExMessageType.Handshake
+        && parsedHarvest.payload[0] === HandshakeCommand.AreYouThere
+      ) {
+        respondImAlive()
       }
       harvestHandler(data)
       return
@@ -844,6 +873,7 @@ export function useWebMidi() {
     setChorusParam,
     clearLog,
     sendSysEx,
+    sendMidi,
     getSysexOptions,
     setHarvestHandler,
     clearHarvestHandler,

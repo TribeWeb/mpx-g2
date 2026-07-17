@@ -3,6 +3,11 @@ import { PANEL_BUTTON_CONTROL_PATH } from './panel-buttons'
 import { chorusParamDefByIndex } from '../constants/chorus-params'
 import { parseChorusParamPath, parseGainEqPath } from './control-paths'
 import { decodeParamValue } from './param-value'
+import {
+  isLikelyProgramDumpData,
+  parseProgramDumpName,
+  parseProgramDumpPath
+} from './program-dump'
 
 export interface ParsedDataMessage {
   data: number[]
@@ -83,6 +88,12 @@ export function describeDataMessage(parsed: ParsedDataMessage): string {
 
   if (parsed.data.length === 1) {
     return `Param ${valueHex} @ ${path}`
+  }
+
+  const programDump = parseProgramDumpPath(parsed.levels)
+  if (programDump && isLikelyProgramDumpData(parsed.data)) {
+    const name = parseProgramDumpName(parsed.data)
+    return `Program ${String(programDump.programNumber).padStart(3, '0')} dump (${parsed.data.length} bytes)${name ? ` “${name}”` : ''} @ ${path}`
   }
 
   if (parsed.data.length === 32) {

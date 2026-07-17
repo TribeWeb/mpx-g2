@@ -133,8 +133,12 @@ export function useMidiConnection() {
     getHardware().clearLog()
   }
 
-  function sendSysEx(data: Uint8Array, note?: string) {
-    return getHardware().sendSysEx(data, note)
+  function sendSysEx(data: Uint8Array, note?: string, options?: { silent?: boolean }) {
+    return getHardware().sendSysEx(data, note, options)
+  }
+
+  function sendMidi(data: Uint8Array, note?: string, options?: { silent?: boolean }) {
+    return getHardware().sendMidi(data, note, options)
   }
 
   function getSysexOptions() {
@@ -203,6 +207,7 @@ export function useMidiConnection() {
     requestGainEqState,
     clearLog,
     sendSysEx,
+    sendMidi,
     getSysexOptions,
     setHarvestHandler,
     clearHarvestHandler,

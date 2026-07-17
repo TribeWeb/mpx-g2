@@ -222,6 +222,13 @@ const canStart = computed(
         >
           Harvest units
         </NuxtLink>.
+        To capture program dumps one-at-a-time, use
+        <NuxtLink
+          to="/tools/harvest-programs"
+          class="text-highlighted underline"
+        >
+          Harvest programs
+        </NuxtLink>.
       </p>
     </section>
   </UContainer>
