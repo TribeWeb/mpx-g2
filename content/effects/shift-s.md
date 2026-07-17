@@ -3,7 +3,7 @@ name: "Shift (S)"
 modelName: "Shift (S)"
 color: "#7c3aed"
 summary: "The pitch shift effects are designed to provide both fine (1 cent resolution) and coarse (semitone resolution) pitch shift effects."
-dspSteps: 0
+dspSteps: 96
 availableIn:
   fx1: 5
 softRow:
@@ -16,33 +16,38 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
-    description: TODO
+    description: "Dry/Wet ratio"
   - id: level
     index: 1
     label: Level
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
-    description: TODO
+    description: "Amount of effect in the processed signal"
   - id: tune
     index: 2
     label: Tune
     min: -4800
     max: 1900
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 1
-    description: TODO
+    description: "Pitch shift"
   - id: glide
     index: 3
     label: Glide
     min: 0
     max: 1
     default: 0
+    bytes: 1
     displayUnits: 4
-    description: TODO
+    description: "Coarse, fine resolution of pitch shift"
 ---
-The pitch shift effects are designed to provide both fine (1 cent resolution) and coarse (semitone resolution) pitch shift effects. Use them to create harmonizations, detuning, or special effects. The Tune parameters can be glided smoothly across their entire
+The pitch shift effects are designed to provide both fine (1 cent resolution) and coarse (semitone resolution) pitch shift effects. Use them to create harmonizations, detuning, or special effects. The Tune parameters can be glided smoothly across their entire range. Shift (S) is a stereo version of Shift (M) with synchronized crossfades.
 
 ![Shift (S) signal flow](/effects/shift-s.png)

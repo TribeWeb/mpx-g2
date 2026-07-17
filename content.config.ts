@@ -11,13 +11,15 @@ const effectParam = z.object({
   default: z.number(),
   description: z.string(),
   bytes: z.union([z.literal(1), z.literal(2)]).optional(),
+  /** Option bytes packed after the value in program dumps (Rate units, etc.). */
+  optionBytes: z.union([z.literal(0), z.literal(1)]).optional(),
   /** Display Units Type id from Object Description (MIDI appendix). */
-  displayUnits: z.number().int().nonnegative().optional()
-}).refine(param => param.default >= param.min && param.default <= param.max, {
-  message: 'default must be within min…max',
-  path: ['default'],
+  displayUnits: z.number().int().nonnegative().optional(),
   /** Whether the param can be interpolated between min and max by a controller. */
   canInterpolate: z.boolean().optional()
+}).refine(param => param.default >= param.min && param.default <= param.max, {
+  message: 'default must be within min…max',
+  path: ['default']
 })
 
 const availableIn = z.object({

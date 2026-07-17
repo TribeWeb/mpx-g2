@@ -19,6 +19,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -27,6 +28,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate
@@ -35,6 +37,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Pan rate or period ratio"
   - id: pw
@@ -43,6 +47,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Pan pulse width"
   - id: depth
@@ -51,6 +56,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Pan depth"
   - id: phase
@@ -59,11 +65,10 @@ params:
     min: 0
     max: 3
     default: 0
+    bytes: 1
     displayUnits: 71
     description: "Phase difference between right and left pan"
 ---
-Auto Pan effect from the MPX G2 manual. Parameter layout harvested from the unit via MIDI.
+Auto Pan is a version of Panner with the pans controlled by a local LFO. The left input is panned by the LFO’s sine output. The right input is panned by the cosine output, which is offset by 0°, 90°, 180° or 270° by the Phase parameter.
 
 ![Auto Pan signal flow](/effects/auto-pan.png)
-
-This effect uses **25 of 190** processing steps.

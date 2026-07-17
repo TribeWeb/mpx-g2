@@ -17,6 +17,11 @@ export type AlgorithmParamDef = {
   description: string
   /** Value width when writing SysEx; Object Description may override. */
   bytes?: 1 | 2
+  /**
+   * Extra option bytes packed after the value in program PARAM_DATA blobs
+   * (e.g. Rate units). 0-byte options live in the value MSB instead.
+   */
+  optionBytes?: 0 | 1
   /** Display Units Type id (MIDI appendix) for formatting / docs. */
   displayUnits?: number
 }

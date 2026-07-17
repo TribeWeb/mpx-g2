@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate1
@@ -34,6 +36,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Left Mod and Pan rate or period ratio"
   - id: pw1
@@ -42,6 +46,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left Mod and Pan pulse width"
   - id: sync1
@@ -50,6 +55,7 @@ params:
     min: -120
     max: 120
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Phase difference between left LFO Mod and Pan"
   - id: dpth1
@@ -58,6 +64,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left Mod and Pan depth"
   - id: rate2
@@ -66,6 +73,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Right Mod and Pan rate or period ratio"
   - id: pw2
@@ -74,6 +83,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Right Mod and Pan pulse width"
   - id: sync2
@@ -82,14 +92,16 @@ params:
     min: -120
     max: 120
     default: 0
+    bytes: 1
     displayUnits: 3
-    description: TODO
+    description: "Phase difference between right LFO Mod and Pan"
   - id: dpth2
     index: 9
     label: Dpth2
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Right Mod and Pan depth"
   - id: res
@@ -98,11 +110,10 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 2
     description: Resonance
 ---
-The Centrifuge effects have a pair of modulated left and right delays routed into a single auto panner. Mod and pan rate and depth (Rate1, Depth1) are modulated by an additional set of rate and depth controls (Rate2, Depth2). These can create unique chorus and flanger effects with complex, undulating modulation rhythms.
+The Centrifuge effects have a pair of modulated left and right delays routed into a single auto panner. In these effects, mod and pan rate and depth (Rate1, Depth1) are modulated by an additional set of rate and depth controls (Rate2, Depth2). These can create unique chorus and flanger effects with complex, undulating modulation rhythms.
 
 ![Centrifuge1 signal flow](/effects/centrifuge1.png)
-
-This effect uses **43 of 190** processing steps.

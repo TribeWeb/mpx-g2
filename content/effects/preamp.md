@@ -2,7 +2,7 @@
 name: Preamp
 modelName: "Amp model"
 color: "#009739"
-summary: "Unlike the other MPX G2 Gain effects, Preamp was not designed to function as a stomp box to use in front of your amp."
+summary: "Unlike the other MPX G2 Gain effects, Preamp was not designed to function as a stomp box to use in front of your amplifier."
 dspSteps: 0
 manualSection: 7-6
 availableIn:
@@ -18,6 +18,7 @@ params:
     min: -25
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Low frequency boost/cut"
   - id: mid
@@ -26,6 +27,7 @@ params:
     min: -25
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Mid frequency boost/cut"
   - id: hi
@@ -34,6 +36,7 @@ params:
     min: 0
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "High frequency boost"
   - id: inlvl
@@ -42,6 +45,7 @@ params:
     min: -64
     max: 0
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Input level (Drive sensitivity)"
   - id: locut
@@ -50,6 +54,7 @@ params:
     min: 0
     max: 20
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Pre-Drive low frequency roll off"
   - id: feel
@@ -58,6 +63,7 @@ params:
     min: 0
     max: 64
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Overdrive dynamics"
   - id: drive
@@ -66,6 +72,7 @@ params:
     min: 0
     max: 60
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Amount of overdrive"
   - id: tone
@@ -74,6 +81,7 @@ params:
     min: 0
     max: 35
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "High frequency roll-off"
   - id: bass
@@ -82,6 +90,7 @@ params:
     min: -25
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Post-Drive bass control"
   - id: trebl
@@ -90,6 +99,7 @@ params:
     min: -25
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Post-Drive treble control"
   - id: level
@@ -98,11 +108,10 @@ params:
     min: 0
     max: 64
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Output level"
 ---
-Unlike the other MPX G2 Gain effects, Preamp was not designed to function as a stomp box to use in front of your amp. It is a highly editable preamp for DI recording or amp simulation. InLvl determines clean headroom — as a guideline, set it near -15dB for clean or crunch sounds. This preamp can produce well over 120dB of analog gain. LoCut rolls off low end before the drive section; Feel mimics power-supply dynamics; Drive sets overall gain; Tone is a post-distortion high-frequency rolloff; Level is the master volume.
+Unlike the other MPX G2 Gain effects, Preamp was not designed to function as a stomp box to use in front of your amplifier. It is a fully featured, programmable analog guitar preamp. Use Preamp for stand-alone applications (direct recording without an amp, or to drive a power amp and cabs). When using Preamp for direct recording, be sure to turn on the Speaker Simulator (Edit Select, Speaker Sim, Simulator: On). InLvl (Input Level) determines the amount of clean headroom the preamp has. The setting of this single control will have a great impact on the overall behavior and sound of the preamp. At higher values, the preamp will distort very easily — for example, with a Mid tone control boost of only 5dB. At lower levels, the tone controls behave more like EQ controls — making low, mid and high guitar frequencies louder (or softer) without adding distortion. As a general guideline, set InLvl to approximately -15dB when working on clean or crunch sounds. Use higher values when you’re going for more over-the-top distortion. Be aware that this preamp can produce well over 120dB of analog gain.
 
 ![Preamp signal flow](/effects/preamp.png)
-
-Gain/analog effects like this use dedicated processing and do not consume the shared DSP step budget (shown as **0 of 190** / “NO PROCESSING STEPS USED” in the manual).

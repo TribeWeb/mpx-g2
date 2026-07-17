@@ -19,7 +19,7 @@ params:
     max: 25
     default: 0
     displayUnits: 3
-    description: TODO
+    description: "Low frequency boost/cut"
   - id: mid
     index: 1
     label: Mid
@@ -27,7 +27,7 @@ params:
     max: 25
     default: 0
     displayUnits: 3
-    description: TODO
+    description: "Mid frequency boost/cut"
   - id: hi
     index: 2
     label: Hi
@@ -35,7 +35,7 @@ params:
     max: 50
     default: 0
     displayUnits: 1
-    description: TODO
+    description: "High frequency boost"
   - id: locut
     index: 3
     label: LoCut
@@ -43,7 +43,7 @@ params:
     max: 50
     default: 0
     displayUnits: 1
-    description: TODO
+    description: "Pre-Drive low frequency roll off"
   - id: feel
     index: 4
     label: Feel
@@ -51,7 +51,7 @@ params:
     max: 64
     default: 0
     displayUnits: 1
-    description: TODO
+    description: "Overdrive dynamics"
   - id: drive
     index: 5
     label: Drive
@@ -59,7 +59,7 @@ params:
     max: 64
     default: 0
     displayUnits: 1
-    description: TODO
+    description: "Amount of overdrive"
   - id: hicut
     index: 6
     label: HiCut
@@ -67,7 +67,7 @@ params:
     max: 35
     default: 0
     displayUnits: 1
-    description: TODO
+    description: "High frequency roll-off"
   - id: bass
     index: 7
     label: Bass
@@ -75,7 +75,7 @@ params:
     max: 25
     default: 0
     displayUnits: 3
-    description: TODO
+    description: "Post-Drive bass control"
   - id: trebl
     index: 8
     label: Trebl
@@ -83,7 +83,7 @@ params:
     max: 25
     default: 0
     displayUnits: 3
-    description: TODO
+    description: "Post-Drive treble control"
   - id: level
     index: 9
     label: Level
@@ -91,7 +91,7 @@ params:
     max: 64
     default: 0
     displayUnits: 1
-    description: TODO
+    description: "Output level"
   - id: cvol
     index: 10
     label: C-Vol
@@ -99,7 +99,7 @@ params:
     max: 0
     default: 0
     displayUnits: 3
-    description: TODO
+    description: "Clean path volume / input trim"
   - id: gtone
     index: 11
     label: GTone
@@ -107,7 +107,7 @@ params:
     max: 1
     default: 0
     displayUnits: 78
-    description: TODO
+    description: "Guitar tone path enable"
   - id: ctone
     index: 12
     label: CTone
@@ -115,7 +115,7 @@ params:
     max: 1
     default: 0
     displayUnits: 78
-    description: TODO
+    description: "Clean tone path enable"
   - id: gain
     index: 13
     label: Gain
@@ -123,7 +123,7 @@ params:
     max: 1
     default: 0
     displayUnits: 79
-    description: TODO
+    description: "Gain enable"
   - id: cbyp
     index: 14
     label: "C Byp"
@@ -131,7 +131,7 @@ params:
     max: 1
     default: 0
     displayUnits: 80
-    description: TODO
+    description: "Compressor bypass"
   - id: send
     index: 15
     label: Send
@@ -139,7 +139,7 @@ params:
     max: 1
     default: 0
     displayUnits: 82
-    description: TODO
+    description: "Effects send enable"
   - id: itype
     index: 16
     label: IType
@@ -147,10 +147,8 @@ params:
     max: 3
     default: 0
     displayUnits: 100
-    description: TODO
+    description: "Input type"
 ---
 All Params is a Gain-block utility layout that exposes the full editable parameter set used across the analog preamp-style algorithms. Prefer Tone, Crunch, Screamer, Overdrive, Distortion, Preamp, or SplitPreamp as musical starting points.
 
 ![All Params signal flow](/effects/all-params.png)
-
-Gain/analog effects like this use dedicated processing and do not consume the shared DSP step budget (shown as **0 of 190** / “NO PROCESSING STEPS USED” in the manual).

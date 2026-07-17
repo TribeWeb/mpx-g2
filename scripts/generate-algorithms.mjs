@@ -20,6 +20,7 @@ const algorithmParam = z.object({
   default: z.number(),
   description: z.string().min(1),
   bytes: z.union([z.literal(1), z.literal(2)]).optional(),
+  optionBytes: z.union([z.literal(0), z.literal(1)]).optional(),
   displayUnits: z.number().int().nonnegative().optional()
 }).refine(param => param.default >= param.min && param.default <= param.max, {
   message: 'default must be within min…max',
@@ -145,6 +146,7 @@ for (const file of files) {
       default: param.default,
       description: param.description,
       ...(param.bytes ? { bytes: param.bytes } : {}),
+      ...(param.optionBytes ? { optionBytes: param.optionBytes } : {}),
       ...(param.displayUnits != null ? { displayUnits: param.displayUnits } : {})
     })),
     color: parsed.color

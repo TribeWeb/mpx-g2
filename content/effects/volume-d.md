@@ -2,8 +2,8 @@
 name: "Volume (D)"
 modelName: "Volume (D)"
 color: "#7c3aed"
-summary: "effect), stereo to mono mixer, cross fade controls, volume pedal, etc."
-dspSteps: 13
+summary: "The Volume effects can be placed in front of, or behind, other effect blocks to provide smooth level control through a 95dB range."
+dspSteps: 18
 manualSection: 7-29
 availableIn:
   fx1: 29
@@ -20,6 +20,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -28,6 +29,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: voll
@@ -36,6 +38,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Amount of effect in the processed signal"
   - id: volr
@@ -44,11 +47,10 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Amount of effect in the processed signal"
 ---
-effect), stereo to mono mixer, cross fade controls, volume pedal, etc. In Volume(M) the left and right inputs are mixed together, then sent to both outputs through a volume control. In Volume (S) the left and right inputs are sent through a ganged pair of volume controls. In Volume (D) the left and right inputs are sent through independent volume controls. Voume (M)
+The Volume effects can be placed in front of, or behind, other effect blocks to provide smooth level control through a 95dB range. You can use them for dynamic input or output control, EQ input trim, stereo to mono mixer, cross fade controls, volume pedal, etc. In Volume (D) the left and right inputs are sent through independent volume controls.
 
 ![Volume (D) signal flow](/effects/volume-d.png)
-
-This effect uses **13 of 190** processing steps.

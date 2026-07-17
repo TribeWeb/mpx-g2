@@ -18,6 +18,7 @@ params:
     min: -25
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Low frequency Drive"
   - id: mid
@@ -26,6 +27,7 @@ params:
     min: -25
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Mid frequency Drive"
   - id: hi
@@ -34,6 +36,7 @@ params:
     min: 0
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "High frequency Drive"
   - id: inlvl
@@ -42,6 +45,7 @@ params:
     min: -64
     max: 0
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Input level (Drive sensitivity)"
   - id: level
@@ -50,11 +54,10 @@ params:
     min: 0
     max: 64
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Output level"
 ---
-Crunch effect from the MPX G2 manual. Parameter layout harvested from the unit via MIDI.
+Crunch is an overdrive effect with separate drive controls for low, mid and high frequencies. Designed to be used like a stomp box (in front of your amp), Crunch works well in combination with other pre-gain effects like wah, phase shift, compression, and octave fuzz.
 
 ![Crunch signal flow](/effects/crunch.png)
-
-Gain/analog effects like this use dedicated processing and do not consume the shared DSP step budget (shown as **0 of 190** / “NO PROCESSING STEPS USED” in the manual).

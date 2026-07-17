@@ -2,8 +2,8 @@
 name: "1-Band (M)"
 modelName: "1-Band (M)"
 color: "#7c3aed"
-summary: "Crunch Detune (S) Detune (M) Delay (S) Detune (D) OctaBuzz Tremolo (M) Wah 1 Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S)\u2026"
-dspSteps: 70
+summary: "The 1-Band (M) effect provides a single band of double-precision parametric EQ with adjustable center frequency, Q, boost/cut and filter type (low shelf,…"
+dspSteps: 50
 availableIn:
   fx1: 22
   fx2: 15
@@ -19,51 +19,55 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
-    description: TODO
+    description: "Dry/Wet ratio"
   - id: level
     index: 1
     label: Level
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
-    description: TODO
+    description: "Amount of effect in the processed signal"
   - id: gain
     index: 2
     label: Gain
     min: -72
     max: 24
     default: 0
+    bytes: 1
     displayUnits: 3
-    description: TODO
+    description: "Boost/cut gain of filter"
   - id: fc
     index: 3
     label: Fc
     min: 20
     max: 20000
     default: 10010
+    bytes: 2
     displayUnits: 9
-    description: TODO
+    description: "Center or corner frequency of filter"
   - id: q
     index: 4
     label: Q
     min: 1
     max: 100
     default: 51
+    bytes: 1
     displayUnits: 10
-    description: TODO
+    description: "Q of filter"
   - id: mode
     index: 5
     label: Mode
     min: 0
     max: 2
     default: 0
+    bytes: 1
     displayUnits: 47
-    description: TODO
+    description: "Determines EQ type"
 ---
-Crunch Detune (S) Detune (M) Delay (S) Detune (D) OctaBuzz Tremolo (M) Wah 1 Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Looper 1-Band (D) Volume (S) Orbits Pedal Wah2 RedComp Volume (D) Centrifuge1 Ducker Fc Splitter Tremolo (M) Volume (M) BlueComp Tremolo (S) Volume (S) DigiDrive1 UniVybe Volume (D) DigiDrive2 CustomVybe PedalVol OctaBuzz Click Volume (M) Volume (D) Phaser ExtPedalVol Volume (S) PedalVol ExtPedalVol RedComp
+The 1-Band (M) effect provides a single band of double-precision parametric EQ with adjustable center frequency, Q, boost/cut and filter type (low shelf, band, high shelf).
 
 ![1-Band (M) signal flow](/effects/1-band-m.png)
-
-This effect uses **70 of 190** processing steps.

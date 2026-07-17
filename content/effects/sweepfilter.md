@@ -2,8 +2,8 @@
 name: SweepFilter
 modelName: SweepFilter
 color: "#7c3aed"
-summary: "SweepFilter simulates a Moogtype resonant low-pass filter."
-dspSteps: 50
+summary: "SweepFilter simulates a Moog-type resonant low-pass filter."
+dspSteps: 92
 manualSection: 7-17
 availableIn:
   fx1: 21
@@ -19,6 +19,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -27,6 +28,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: fc
@@ -35,6 +37,7 @@ params:
     min: 20
     max: 20000
     default: 10010
+    bytes: 2
     displayUnits: 9
     description: "Corner frequency offset of filter"
   - id: fres
@@ -43,6 +46,7 @@ params:
     min: 1
     max: 100
     default: 51
+    bytes: 1
     displayUnits: 1
     description: "Filter resonance: 7=a maximally flat filter"
   - id: mod
@@ -51,6 +55,7 @@ params:
     min: 20
     max: 20000
     default: 10010
+    bytes: 2
     displayUnits: 9
     description: "added to corner frequency offset to produce corner frequency"
   - id: scale
@@ -59,6 +64,7 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "scales Mod"
   - id: pan
@@ -67,11 +73,10 @@ params:
     min: -50
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "Left/right pan control"
 ---
-SweepFilter simulates a Moogtype resonant low-pass filter. Cutoff frequency and output level are interpolated, and can be swept. The performance of this filter is high enough that it can be used as a lowpass filter for hiss reduction. The parameters were designed to allow synthesizer-like control of the filter. For example: Use FC like the manual “cutoff” knob of an analog synth – set it to the filter frequency desired when all modulation sources are at minimum. Use Mod as the patch destination for as many as five modulation sources (LFO, Rand, Env, LastNote, etc.). Use Scale as a master depth control for all modulation sources. 1-Band (M) The 1-Band (M) effect provides a single band of double-precision parametric EQ with adjustable center frequency, Q, boost/cut and filter type (low shelf, band, high shelf). 0.1-10.0 Q of filter Mode LShlf, Band, HShlf Determines EQ type ===== PAGE 109 ===== Wah 1, Wah 2 and PedalWah1, PedalWah2 Lexicon MPX G2 guide Wah 1, Wah 2 and PedalWah1, PedalWah2 Wah is a mono wah filter modeled after two classic wah-wah Wah 1
+SweepFilter simulates a Moog-type resonant low-pass filter. Cutoff frequency and output level are interpolated, and can be swept. The performance of this filter is high enough that it can be used as a lowpass filter for hiss reduction. The parameters were designed to allow synthesizer-like control of the filter. For example: Use FC like the manual “cutoff” knob of an analog synth – set it to the filter frequency desired when all modulation sources are at minimum. Use Mod as the patch destination for as many as five modulation sources (LFO, Rand, Env, LastNote, etc.). Use Scale as a master depth control for all modulation sources.
 
 ![SweepFilter signal flow](/effects/sweepfilter.png)
-
-This effect uses **50 of 190** processing steps.

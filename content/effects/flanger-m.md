@@ -2,8 +2,8 @@
 name: "Flanger (M)"
 modelName: "Flanger (M)"
 color: "#0ea5e9"
-summary: "Flanger24 (M) Flanger (S) ===== PAGE 115 ===== Rotary Cab This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair\u2026"
-dspSteps: 76
+summary: "Originally, flanging effects were created by simultaneously playing two identical programs on two tape recorders, then using hand pressure against the flange…"
+dspSteps: 42
 manualSection: 7-23
 availableIn:
   chorus: 3
@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate
@@ -34,30 +36,35 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
-    description: "Drum rate or period ratio"
+    description: "Flange rate or period ratio"
   - id: pw
     index: 3
     label: PW
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
-    description: "Left Mod pulse width"
+    description: "Flange pulse width"
   - id: depth
     index: 4
     label: Depth
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
-    description: "Drum depth (tremolo)"
+    description: "Flange depth"
   - id: res
     index: 5
     label: Res
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 2
     description: Resonance
   - id: blend
@@ -66,11 +73,10 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 1
-    description: TODO
+    description: "Amount of fixed tape mixed with moving tape"
 ---
-Flanger24 (M) Flanger (S) ===== PAGE 115 ===== Rotary Cab This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair on the rotating high-frequency horn. Bal sets the relative mix of Drum and Horn mics. Width controls the stereo spread of both pairs of mics. Rate and Depth 1 control the speed and depth of the rotating low-frequency drum. Rate 2 and Depth 2 control the speed and depth of the rotating high-frequency horn. The preset, Rotary Cab, is set up so that A/B switches the speed from fast to 1:24-24:1 cycles/beat (Rate1 Units) Selects frequency or cycles/beat of drum slow. Different A and B rates are used to simulate the inertia of the Horn rate or period ratio 1:24-24:1 cycles/beat (Rate2 Units) Selects frequency or cycles/beat of horn Aerosol Aerosol is a true stereo chorus/ flanger with dual rate, depth and resonance controls. It can produce very deep resonant flange sweeps, subtle multi-vibrato, stereo image enhancement and a wide variety of other chorus and flanger-like effects. Apair of single-tap modulated delays is each modulated by a separate LFO. Pulse Width allows independentadjustment of left and right LFOs from full left to full right skew. (At 0, the sinewavebecomes a sawtooth with a fast rise and slow fall.) Depth controls provide 1:24-24:1 cycles/beat (Rate 1 Units) Selects frequency or cycles/beat adjustment of modulated depth from 0-100%. 1:24-24:1 cycles/beat (Rate 2 Units) Selects frequency or cycles/beat
+Originally, flanging effects were created by simultaneously playing two identical programs on two tape recorders, then using hand pressure against the flange of the tape reels to slow down first one machine, then the other. The result was a series of changing phase cancellations and reinforcements, providing a comb filter and a characteristic swishing, tunneling and fading sound. In the MPX G2, the Flanger effects are two-tap delays. The first tap is fixed, and the second sweeps past it. Mixing the two taps together creates a flanging effect. In Flanger (M), the moving tap is swept with an internal LFO.
 
 ![Flanger (M) signal flow](/effects/flanger-m.png)
-
-This effect uses **76 of 190** processing steps.

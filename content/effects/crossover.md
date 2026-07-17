@@ -16,6 +16,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -24,6 +25,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: fc
@@ -32,6 +34,7 @@ params:
     min: 100
     max: 10000
     default: 5050
+    bytes: 2
     displayUnits: 9
     description: "Crossover frequency"
   - id: bal
@@ -40,11 +43,10 @@ params:
     min: -50
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 8
     description: "Relative level of the low and high band"
 ---
-Crossover effect from the MPX G2 manual. Parameter layout harvested from the unit via MIDI.
+The Crossover effect is similar to Fc Splitter, but with only one crossover frequency, shared by low and high. In this effect, Level and Bal are not interpolated.
 
 ![Crossover signal flow](/effects/crossover.png)
-
-This effect uses **29 of 190** processing steps.

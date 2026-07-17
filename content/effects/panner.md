@@ -17,6 +17,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -25,6 +26,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: pan1
@@ -33,6 +35,7 @@ params:
     min: -50
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "Left input panner"
   - id: pan2
@@ -41,11 +44,10 @@ params:
     min: -50
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "Right input panner"
 ---
 The Panner effect has the left input panned to outputs with Pan 1, right input with Pan 2. Because all the parameters of this effect are interpolated, this can be used to add interpolated outputs to effects which have non-interpolated output levels.
 
 ![Panner signal flow](/effects/panner.png)
-
-This effect uses **25 of 190** processing steps.

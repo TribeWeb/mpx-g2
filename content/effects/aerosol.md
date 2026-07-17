@@ -2,7 +2,7 @@
 name: Aerosol
 modelName: Aerosol
 color: "#0ea5e9"
-summary: "Aerosol is a true stereo chorus/ flanger with dual rate, depth and resonance controls."
+summary: "Aerosol is a true stereo chorus/flanger with dual rate, depth and resonance controls."
 dspSteps: 59
 manualSection: 7-24
 availableIn:
@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate1
@@ -34,6 +36,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Left Mod rate or period ratio."
   - id: pw1
@@ -42,6 +46,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left Mod pulse width"
   - id: dpth1
@@ -50,6 +55,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left Mod depth (tremolo)"
   - id: rate2
@@ -58,6 +64,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Right Mod rate or period ratio."
   - id: pw2
@@ -66,6 +74,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Right Mod pulse width"
   - id: dpth2
@@ -74,6 +83,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Right Mod depth (tremolo)"
   - id: res1
@@ -82,6 +92,7 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Cross resonance"
   - id: res2
@@ -90,13 +101,10 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: Resonance
 ---
-Aerosol is a true stereo chorus/flanger with dual rate, depth and resonance controls. It can produce very deep resonant flange sweeps, subtle multi-vibrato, stereo image enhancement and a wide variety of other chorus and flanger-like effects.
-
-A pair of single-tap modulated delays is each modulated by a separate LFO. Pulse Width allows independentadjustment of left and right LOs from full left to full right skew. (At O, the sinewave becomes a sawtooth with a fast rise and slow fall.) Depth controls provide adjustment of modulated depth from 0-100%.
+Aerosol is a true stereo chorus/flanger with dual rate, depth and resonance controls. It can produce very deep resonant flange sweeps, subtle multi-vibrato, stereo image enhancement and a wide variety of other chorus and flanger-like effects. A pair of single-tap modulated delays is each modulated by a separate LFO. Pulse Width allows independent adjustment of left and right LFOs from full left to full right skew. (At 0, the sinewave becomes a sawtooth with a fast rise and slow fall.) Depth controls provide adjustment of modulated depth from 0-100%.
 
 ![Aerosol signal flow](/effects/aerosol.png)
-
-This effect uses **59 of 190** processing steps.

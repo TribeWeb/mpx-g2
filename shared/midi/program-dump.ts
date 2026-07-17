@@ -135,15 +135,36 @@ export function parseProgramDumpAlgs(data: number[]): Record<ProgramDumpAlgBlock
   return result
 }
 
-/** Prefer explicit `bytes`; otherwise infer from min/max span. */
+/**
+ * Prefer explicit `bytes`; otherwise infer from min/max.
+ * Unsigned 0–255 fits in one byte (Size 0–144, P Dly 0–250, etc.).
+ */
 export function inferParamByteCount(param: AlgorithmParamDef): 1 | 2 {
   if (param.bytes === 1 || param.bytes === 2) {
     return param.bytes
+  }
+  if (param.min >= 0 && param.max <= 255) {
+    return 1
   }
   if (param.min >= -128 && param.max <= 127) {
     return 1
   }
   return 2
+}
+
+/**
+ * Extra bytes packed after the value in PARAM_DATA (Rate units, signed Tune, …).
+ * Prefer explicit `optionBytes` stamped from Object Descriptions.
+ */
+export function inferOptionByteCount(param: AlgorithmParamDef): 0 | 1 {
+  if (param.optionBytes === 0 || param.optionBytes === 1) {
+    return param.optionBytes
+  }
+  // Fallback when content hasn't been stamped yet: signed 2-byte words carry an option.
+  if (inferParamByteCount(param) === 2 && param.min < 0) {
+    return 1
+  }
+  return 0
 }
 
 export function decodePackedParamValue(bytes: number[], signed: boolean): number {
@@ -166,7 +187,8 @@ export function decodePackedParamValue(bytes: number[], signed: boolean): number
 
 /**
  * Unpack one effect's 32-byte param blob using the algorithm's param index order.
- * Option bytes (rate units, etc.) are not modelled yet — values may drift for algs that use them.
+ * Multi-unit Rate params and signed Tune words include a trailing option byte;
+ * Time/delay words keep the unit in the value MSB (no extra byte).
  */
 export function decodeProgramParamBlob(
   blob: number[],
@@ -178,13 +200,14 @@ export function decodeProgramParamBlob(
 
   for (const param of ordered) {
     const width = inferParamByteCount(param)
+    const optionBytes = inferOptionByteCount(param)
     if (offset + width > blob.length) {
       break
     }
     const slice = blob.slice(offset, offset + width)
     const signed = param.min < 0
     params[param.id] = decodePackedParamValue(slice, signed)
-    offset += width
+    offset += width + optionBytes
   }
 
   return params

@@ -19,6 +19,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -27,6 +28,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate
@@ -35,6 +37,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Phaser rate or period ratio"
   - id: pw
@@ -43,6 +47,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Phaser pulse width"
   - id: mix2
@@ -51,6 +56,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: res
@@ -59,11 +65,10 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 2
     description: "Amount of feedback from output of filters to inputs"
 ---
-The Phaser effect is a simulated Mutron phaser. 1:24-24:1 cycles/beat (Rate Units) Selects frequency or cycles/beat ===== PAGE 105 =====
+The Phaser effect is a simulated Mutron phaser.
 
 ![Phaser signal flow](/effects/phaser.png)
-
-This effect uses **77 of 190** processing steps.

@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: time
@@ -34,6 +36,7 @@ params:
     min: 257
     max: 6168
     default: 3213
+    bytes: 2
     displayUnits: 59
     description: "Delay time"
   - id: inmix
@@ -42,6 +45,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Ratio of input to feedback going into the delay"
   - id: sense
@@ -50,6 +54,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Sensitivity of InMix to input amplitude"
   - id: pan
@@ -58,6 +63,7 @@ params:
     min: -50
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "Output panner"
   - id: rls
@@ -66,6 +72,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Envelope release time constant"
   - id: atk
@@ -74,6 +81,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Envelope attack time constant"
   - id: clear
@@ -82,11 +90,10 @@ params:
     min: 0
     max: 1
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "When On, mutes and resets the delay"
 ---
-In the Looper effect InMix controls the ratio of input to feedback into the delay. This parameter is ducked by the input level, so that louder signals route the input signal into the delay, and softer signals route the feedback signal into the delay. When Sense is at 0, no ducking will occur. At 100 the input will be ducked by even the lowest input levels. 1:24-24:1echo/beat 0-22600 ft, 0-6880 M (Time Units) Selects ms, note, feet, meters, or Tap ms (Fbk insert) Effect1, Effect2,Chorus, The left output of the selected source is scaled by Fbk Delay, Reverb,EQ ===== PAGE 124 ===== JamMan Lexicon MPX G2 guide
+In the Looper effect InMix controls the ratio of input to feedback into the delay. This parameter is ducked by the input level, so that louder signals route the input signal into the delay, and softer signals route the feedback signal into the delay. When Sense is at 0, no ducking will occur. At 100 the input will be ducked by even the lowest input levels.
 
 ![Looper signal flow](/effects/looper.png)
-
-This effect uses **29 of 190** processing steps.

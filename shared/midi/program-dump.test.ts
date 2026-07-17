@@ -5,6 +5,8 @@ import {
   PROGRAM_DUMP_BYTE_COUNT,
   decodeProgramDumpBlocks,
   decodeProgramParamBlob,
+  inferOptionByteCount,
+  inferParamByteCount,
   parseProgramDumpAlgs,
   parseProgramDumpName,
   parseProgramDumpPath,
@@ -128,6 +130,73 @@ describe('decodeProgramParamBlob', () => {
       drive: 22,
       tone: 25,
       level: 57
+    })
+  })
+
+  it('uses 1-byte Size for Ambience (max 144 is still a single byte)', async () => {
+    const { algorithmById } = await import('../constants/algorithms')
+    const def = algorithmById('ambience')!
+    const size = def.params.find(p => p.id === 'size')!
+    expect(inferParamByteCount(size)).toBe(1)
+    expect(inferOptionByteCount(size)).toBe(0)
+
+    // Live G2 Blue reverb blob (first 11 bytes)
+    const blob = [
+      18, 0, 41, 1, 30, 7, 51, 0, 12, 34, 62,
+      ...Array.from({ length: 21 }, () => 0)
+    ]
+    expect(decodeProgramParamBlob(blob, def)).toMatchObject({
+      mix: 18,
+      level: 0,
+      size: 41,
+      link: 1,
+      diff: 30,
+      pdly: 7,
+      mix2: 51,
+      dlvl: 0,
+      rthc: 12
+    })
+  })
+
+  it('skips Rate option bytes for Stereo Chorus', async () => {
+    const { algorithmById } = await import('../constants/algorithms')
+    const def = algorithmById('stereo-chorus')!
+    expect(inferOptionByteCount(def.params.find(p => p.id === 'rate1')!)).toBe(1)
+    expect(inferOptionByteCount(def.params.find(p => p.id === 'rate2')!)).toBe(1)
+
+    // Live Cordovox chorus blob
+    const blob = [
+      100, 0, 62, 0, 0, 45, 30, 56, 0, 0, 54, 0, 237,
+      ...Array.from({ length: 19 }, () => 0)
+    ]
+    expect(decodeProgramParamBlob(blob, def)).toMatchObject({
+      mix: 100,
+      level: 0,
+      rate1: 62,
+      pw1: 45,
+      dpth1: 30,
+      rate2: 56,
+      pw2: 54,
+      dpth2: 0,
+      res1: -19,
+      res2: 0
+    })
+  })
+
+  it('skips option bytes after signed Tune words for Shift (D)', async () => {
+    const { algorithmById } = await import('../constants/algorithms')
+    const def = algorithmById('shift-d')!
+    // P4 fx1 raw
+    const blob = [
+      100, 6, 80, 251, 10, 12, 254, 1,
+      ...Array.from({ length: 24 }, () => 0)
+    ]
+    expect(decodeProgramParamBlob(blob, def)).toMatchObject({
+      mix: 100,
+      level: 6,
+      tune1: -1200,
+      tune2: -500,
+      glide: 0
     })
   })
 })

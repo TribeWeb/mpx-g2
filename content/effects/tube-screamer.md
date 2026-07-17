@@ -2,7 +2,7 @@
 name: Screamer
 modelName: "Tube Screamer"
 color: "#009739"
-summary: "Analog model of a vintage Tube Screamer overdrive with extended Lo / Mid / Hi tone controls."
+summary: "Screamer is an analog model of a vintage Tube Screamer overdrive (powered by a fresh carbon-zinc battery)."
 dspSteps: 0
 manualSection: 7-4
 availableIn:
@@ -18,6 +18,7 @@ params:
     min: -5
     max: 5
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Low frequency boost/cut"
   - id: mid
@@ -26,6 +27,7 @@ params:
     min: -5
     max: 5
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Mid frequency boost/cut"
   - id: hi
@@ -34,6 +36,7 @@ params:
     min: 0
     max: 5
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "High frequency boost"
   - id: drive
@@ -42,6 +45,7 @@ params:
     min: 0
     max: 40
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Amount of overdrive"
   - id: tone
@@ -50,6 +54,7 @@ params:
     min: 0
     max: 25
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "High frequency roll-off"
   - id: level
@@ -58,11 +63,10 @@ params:
     min: 0
     max: 64
     default: 0
+    bytes: 1
     displayUnits: 1
     description: "Output level"
 ---
-Screamer is an analog model of a vintage Tube Screamer overdrive (powered by a fresh carbon-zinc battery). Care has been taken to make the behavior of this effect accurate both sonically and electronically. The ranges of Drive and Tone match those of the vintage effect and it will push your amp into high gear just like the original. We've also added Lo, Mid and Hi tone controls. For truly authentic sounds, leave them set flat (zero), but feel free to dial in some additional colors unobtainable with the original.
+Screamer is an analog model of a vintage Tube Screamer overdrive (powered by a fresh carbon-zinc battery). Care has been taken to make the behavior of this effect accurate both sonically and electronically. The ranges of Drive and Tone match those of the vintage effect and it will push your amp into high gear just like the original. We’ve also added Lo, Mid and Hi tone controls. For truly authentic sounds, leave them set flat (zero), but feel free to dial in some additional colors unobtainable with the original.
 
 ![Screamer signal flow](/effects/tube-screamer.png)
-
-Gain effects use dedicated analog processing and do not consume the shared DSP step budget (shown as **0 of 190** / “NO PROCESSING STEPS USED” in the manual).

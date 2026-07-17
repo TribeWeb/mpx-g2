@@ -50,7 +50,8 @@ Effect reference pages: [/manual/effects](http://localhost:3000/manual/effects).
 MIDI harvest (hardware):
 [/tools/harvest-effects](http://localhost:3000/tools/harvest-effects) — System Config + Object Descriptions + control tree dump → draft effect Markdown/JSON.
 [/tools/harvest-programs](http://localhost:3000/tools/harvest-programs) — request stored program dumps one-at-a-time (avoids broken All Programs bulk dump).
-Apply harvest → Content: `pnpm run apply:program-harvest` (or pass a JSON path).
+Stamp param wire widths: `pnpm run stamp:param-bytes -- "tmp/mpx-g2-effect-harvest (1).json"` then `pnpm run generate:algorithms`.
+Re-decode + apply: `pnpm run redecode:program-harvest` then `pnpm run apply:program-harvest`.
 
 ## Getting started
 

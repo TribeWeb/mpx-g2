@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: size
@@ -34,6 +36,7 @@ params:
     min: 32
     max: 144
     default: 88
+    bytes: 1
     displayUnits: 53
     description: "Length of Hall"
   - id: link
@@ -42,6 +45,7 @@ params:
     min: 0
     max: 1
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "Scales Decay and Spred with Size"
   - id: diff
@@ -50,6 +54,7 @@ params:
     min: 0
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 58
     description: "Increase of initial echo density over time"
   - id: pdly
@@ -58,6 +63,7 @@ params:
     min: 0
     max: 250
     default: 0
+    bytes: 1
     displayUnits: 72
     description: "Delay inserted before the onset of reverberation"
   - id: bass
@@ -66,6 +72,7 @@ params:
     min: 0
     max: 9
     default: 0
+    bytes: 1
     displayUnits: 55
     description: "Reverb time for low frequency signals"
   - id: decay
@@ -74,6 +81,7 @@ params:
     min: 0
     max: 63
     default: 0
+    bytes: 1
     displayUnits: 57
     description: "Length of the reverb tail"
   - id: xovr
@@ -82,14 +90,16 @@ params:
     min: 0
     max: 60
     default: 0
+    bytes: 1
     displayUnits: 56
-    description: TODO
+    description: "Frequency of transition from Decay to Bass"
   - id: rthc
     index: 9
     label: "Rt HC"
     min: 0
     max: 48
     default: 0
+    bytes: 1
     displayUnits: 54
     description: "High frequency content of Decay"
   - id: shape
@@ -98,6 +108,7 @@ params:
     min: 0
     max: 255
     default: 0
+    bytes: 1
     displayUnits: 61
     description: "Contour of the reverberation envelope"
   - id: spred
@@ -106,9 +117,10 @@ params:
     min: 0
     max: 255
     default: 0
+    bytes: 1
     displayUnits: 60
     description: "Sustain of reverberation after initial build up"
 ---
-Hall effect from the MPX G2 manual. Parameter layout harvested from the unit via MIDI.
+The Hall effect emulates a real concert hall. The reverberation is very clean, and designed to remain behind the direct sound — adding ambience, but leaving the source unchanged. This effect has a relatively low initial density which builds up gradually over time.
 
 ![Hall signal flow](/effects/hall.png)

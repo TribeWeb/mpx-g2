@@ -11,8 +11,8 @@ export const GENERATED_ALGORITHMS = {
     id: "1-band-d",
     name: "1-Band (D)",
     modelName: "1-Band (D)",
-    summary: "Volume (S) Orbits Pedal Wah2 RedComp Volume (D) Centrifuge1 Ducker Fc Splitter Tremolo (M) Volume (M) BlueComp Tremolo (S) Volume (S) DigiDrive1 UniVybe Volume (D) DigiDrive2 Cust…",
-    dspSteps: 0,
+    summary: "1-Band (D) has two bands of double-precision parametric EQ, one on each channel.",
+    dspSteps: 68,
     manualSection: "7-2",
     availableIn: {
       eq: 7
@@ -30,7 +30,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -40,7 +41,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -50,7 +52,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of left filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -60,7 +63,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of left filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -70,7 +74,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of left filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -80,7 +85,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -90,7 +96,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of right filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -100,7 +107,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of right filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -110,7 +118,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of right filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -120,7 +129,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -130,8 +140,8 @@ export const GENERATED_ALGORITHMS = {
     id: "1-band-m",
     name: "1-Band (M)",
     modelName: "1-Band (M)",
-    summary: "Crunch Detune (S) Detune (M) Delay (S) Detune (D) OctaBuzz Tremolo (M) Wah 1 Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S)…",
-    dspSteps: 70,
+    summary: "The 1-Band (M) effect provides a single band of double-precision parametric EQ with adjustable center frequency, Q, boost/cut and filter type (low shelf,…",
+    dspSteps: 50,
     availableIn: {
       fx1: 22,
       fx2: 15,
@@ -150,7 +160,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -160,7 +171,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -170,7 +182,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -180,7 +193,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -190,7 +204,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -200,7 +215,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -210,8 +226,8 @@ export const GENERATED_ALGORITHMS = {
     id: "1-band-s",
     name: "1-Band (S)",
     modelName: "1-Band (S)",
-    summary: "Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Looper 1-Band (D) Volume (S) Orbits Pedal Wah2 RedComp Volume (D) Centrifug…",
-    dspSteps: 0,
+    summary: "1-Band (S) has two bands of double-precision parametric EQ, one on each channel.",
+    dspSteps: 68,
     manualSection: "7-2",
     availableIn: {
       eq: 5
@@ -229,7 +245,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -239,7 +256,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -249,7 +267,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "Tone is a set of analog Tone",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -259,7 +278,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -269,7 +289,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -279,7 +300,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -289,8 +311,8 @@ export const GENERATED_ALGORITHMS = {
     id: "2-band-d",
     name: "2-Band (D)",
     modelName: "2-Band (D)",
-    summary: "Auto Pan Pedal Wah2 RedComp Volume (D) Centrifuge1 Ducker Fc Splitter Tremolo (M) Volume (M) BlueComp Tremolo (S) Volume (S) DigiDrive1 UniVybe Volume (D) DigiDrive2 CustomVybe Pe…",
-    dspSteps: 0,
+    summary: "2-Band (D) has four bands of double-precision parametric EQ, two on each channel.",
+    dspSteps: 109,
     manualSection: "7-2",
     availableIn: {
       eq: 8
@@ -308,7 +330,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -319,6 +342,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -328,7 +352,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of left filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -338,7 +363,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of left filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -348,7 +374,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of left filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -358,7 +385,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -368,7 +396,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of left filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -378,7 +407,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of left filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -388,7 +418,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of left filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -398,7 +429,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -408,7 +440,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of right filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -418,7 +451,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of right filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -428,7 +462,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of right filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -438,7 +473,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -448,7 +484,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of right filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -458,7 +495,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of right filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -468,7 +506,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of right filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -478,7 +517,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -488,8 +528,8 @@ export const GENERATED_ALGORITHMS = {
     id: "2-band-m",
     name: "2-Band (M)",
     modelName: "2-Band (M)",
-    summary: "Screamer Detune (D) OctaBuzz Tremolo (M) Wah 1 Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Ec…",
-    dspSteps: 90,
+    summary: "2-Band (M) provides two bands of double-precision parametric EQ.",
+    dspSteps: 70,
     manualSection: "7-1",
     availableIn: {
       eq: 2
@@ -507,7 +547,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -517,7 +558,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -527,7 +569,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -537,7 +580,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -547,7 +591,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -557,7 +602,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -567,7 +613,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -577,7 +624,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -587,7 +635,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -597,7 +646,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -607,7 +657,7 @@ export const GENERATED_ALGORITHMS = {
     id: "2-band-s",
     name: "2-Band (S)",
     modelName: "2-Band (S)",
-    summary: "===== PAGE 132 ===== Band D and 2-Band D, Fc Splitter Lexicon MPX G2 specification 1-Band (D) and 2-Band (D) 1-Band (D) has two bands of double-precision parametric EQ, one on eac…",
+    summary: "2-Band (S) has four bands of double-precision parametric EQ, two on each channel.",
     dspSteps: 109,
     manualSection: "7-40",
     availableIn: {
@@ -627,6 +677,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -637,6 +688,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -646,7 +698,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -656,7 +709,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -666,7 +720,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -676,7 +731,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -686,7 +742,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -696,7 +753,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -706,7 +764,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -716,7 +775,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -726,8 +786,8 @@ export const GENERATED_ALGORITHMS = {
     id: "3-band-m",
     name: "3-Band (M)",
     modelName: "3-Band (M)",
-    summary: "Gain (1-4) -72 to +24dB Boost/cut gain of filter(s) Fc (1-4) 20-20000Hz Center or corner frequency of filter(s) Q (1-4) 0.1-10.0 Q of filter(s) Mode (1-4) LShlf, Band, HShlf Deter…",
-    dspSteps: 110,
+    summary: "3-Band (M) provides three bands of double-precision parametric EQ.",
+    dspSteps: 90,
     availableIn: {
       eq: 3
     },
@@ -745,6 +805,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -755,6 +816,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -764,7 +826,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -774,7 +837,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -784,7 +848,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -794,7 +859,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -804,7 +870,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -814,7 +881,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -824,7 +892,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -834,7 +903,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -844,7 +914,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -854,7 +925,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -864,7 +936,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -874,7 +947,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -884,8 +958,8 @@ export const GENERATED_ALGORITHMS = {
     id: "4-band-m",
     name: "4-Band (M)",
     modelName: "4-Band (M)",
-    summary: "Distortion Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Looper 1-Band (D)…",
-    dspSteps: 0,
+    summary: "4-Band (M) provides four bands of double-precision parametric EQ.",
+    dspSteps: 110,
     manualSection: "7-2",
     availableIn: {
       eq: 4
@@ -903,7 +977,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -913,7 +988,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -923,7 +999,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -933,7 +1010,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -943,7 +1021,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -953,7 +1032,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -963,7 +1043,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -973,7 +1054,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -983,7 +1065,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -993,7 +1076,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -1003,7 +1087,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1013,7 +1098,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -1023,7 +1109,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -1033,7 +1120,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       },
       {
@@ -1043,7 +1131,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Boost/cut gain of filter(s)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1053,7 +1142,8 @@ export const GENERATED_ALGORITHMS = {
         min: 20,
         max: 20000,
         default: 10010,
-        description: "TODO",
+        description: "Center or corner frequency of filter(s)",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -1063,7 +1153,8 @@ export const GENERATED_ALGORITHMS = {
         min: 1,
         max: 100,
         default: 51,
-        description: "TODO",
+        description: "Q of filter(s)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -1073,7 +1164,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 2,
         default: 0,
-        description: "TODO",
+        description: "Determines EQ type(s)",
+        bytes: 1,
         displayUnits: 47
       }
     ],
@@ -1083,7 +1175,7 @@ export const GENERATED_ALGORITHMS = {
     id: "aerosol",
     name: "Aerosol",
     modelName: "Aerosol",
-    summary: "Aerosol is a true stereo chorus/ flanger with dual rate, depth and resonance controls.",
+    summary: "Aerosol is a true stereo chorus/flanger with dual rate, depth and resonance controls.",
     dspSteps: 59,
     manualSection: "7-24",
     availableIn: {
@@ -1103,6 +1195,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1113,6 +1206,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1123,6 +1217,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Left Mod rate or period ratio.",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1133,6 +1229,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left Mod pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1143,6 +1240,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left Mod depth (tremolo)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1153,6 +1251,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Right Mod rate or period ratio.",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1163,6 +1263,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right Mod pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1173,6 +1274,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right Mod depth (tremolo)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1183,6 +1285,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Cross resonance",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1193,6 +1296,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -1221,7 +1325,7 @@ export const GENERATED_ALGORITHMS = {
         min: -25,
         max: 25,
         default: 0,
-        description: "TODO",
+        description: "Low frequency boost/cut",
         displayUnits: 3
       },
       {
@@ -1231,7 +1335,7 @@ export const GENERATED_ALGORITHMS = {
         min: -25,
         max: 25,
         default: 0,
-        description: "TODO",
+        description: "Mid frequency boost/cut",
         displayUnits: 3
       },
       {
@@ -1241,7 +1345,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 50,
         default: 0,
-        description: "TODO",
+        description: "High frequency boost",
         displayUnits: 1
       },
       {
@@ -1251,7 +1355,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 50,
         default: 0,
-        description: "TODO",
+        description: "Pre-Drive low frequency roll off",
         displayUnits: 1
       },
       {
@@ -1261,7 +1365,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 64,
         default: 0,
-        description: "TODO",
+        description: "Overdrive dynamics",
         displayUnits: 1
       },
       {
@@ -1271,7 +1375,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 64,
         default: 0,
-        description: "TODO",
+        description: "Amount of overdrive",
         displayUnits: 1
       },
       {
@@ -1281,7 +1385,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 35,
         default: 0,
-        description: "TODO",
+        description: "High frequency roll-off",
         displayUnits: 1
       },
       {
@@ -1291,7 +1395,7 @@ export const GENERATED_ALGORITHMS = {
         min: -25,
         max: 25,
         default: 0,
-        description: "TODO",
+        description: "Post-Drive bass control",
         displayUnits: 3
       },
       {
@@ -1301,7 +1405,7 @@ export const GENERATED_ALGORITHMS = {
         min: -25,
         max: 25,
         default: 0,
-        description: "TODO",
+        description: "Post-Drive treble control",
         displayUnits: 3
       },
       {
@@ -1311,7 +1415,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 64,
         default: 0,
-        description: "TODO",
+        description: "Output level",
         displayUnits: 1
       },
       {
@@ -1321,7 +1425,7 @@ export const GENERATED_ALGORITHMS = {
         min: -64,
         max: 0,
         default: 0,
-        description: "TODO",
+        description: "Clean path volume / input trim",
         displayUnits: 3
       },
       {
@@ -1331,7 +1435,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Guitar tone path enable",
         displayUnits: 78
       },
       {
@@ -1341,7 +1445,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Clean tone path enable",
         displayUnits: 78
       },
       {
@@ -1351,7 +1455,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Gain enable",
         displayUnits: 79
       },
       {
@@ -1361,7 +1465,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Compressor bypass",
         displayUnits: 80
       },
       {
@@ -1371,7 +1475,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Effects send enable",
         displayUnits: 82
       },
       {
@@ -1381,7 +1485,7 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 3,
         default: 0,
-        description: "TODO",
+        description: "Input type",
         displayUnits: 100
       }
     ],
@@ -1391,7 +1495,7 @@ export const GENERATED_ALGORITHMS = {
     id: "ambience",
     name: "Ambience",
     modelName: "Ambience",
-    summary: "The Ambience effect gives warmth, spaciousness and depth to a performance without coloring the direct sound, and is commonly used to add a room sound to recorded music or speech.",
+    summary: "The Ambience effect gives warmth, spaciousness and depth to a performance without coloring the direct sound, and is commonly used to add a room sound to…",
     dspSteps: 0,
     manualSection: "7-36",
     availableIn: {
@@ -1411,6 +1515,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1421,6 +1526,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1431,6 +1537,7 @@ export const GENERATED_ALGORITHMS = {
         max: 144,
         default: 0,
         description: "Length of room",
+        bytes: 1,
         displayUnits: 53
       },
       {
@@ -1441,6 +1548,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Scales DTime with Size",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -1451,6 +1559,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Increase of initial echo density over time",
+        bytes: 1,
         displayUnits: 58
       },
       {
@@ -1461,6 +1570,7 @@ export const GENERATED_ALGORITHMS = {
         max: 250,
         default: 0,
         description: "Delay inserted before the onset of reverberation",
+        bytes: 1,
         displayUnits: 72
       },
       {
@@ -1471,6 +1581,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1481,6 +1592,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Level of the ambience tail",
+        bytes: 1,
         displayUnits: 63
       },
       {
@@ -1491,6 +1603,7 @@ export const GENERATED_ALGORITHMS = {
         max: 14,
         default: 0,
         description: "High frequency content of DTime",
+        bytes: 1,
         displayUnits: 66
       }
     ],
@@ -1521,6 +1634,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1531,6 +1645,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1541,6 +1656,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Pan rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1551,6 +1668,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1561,6 +1679,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Pan depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1571,6 +1690,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3,
         default: 0,
         description: "Phase difference between right and left pan",
+        bytes: 1,
         displayUnits: 71
       }
     ],
@@ -1580,8 +1700,8 @@ export const GENERATED_ALGORITHMS = {
     id: "blue-comp",
     name: "Blue Comp",
     modelName: "Blue Comp",
-    summary: "Blue Comp is a recreation of another popular Threshold (Thrsh), Gain, Attack (ATime) and Release (RTime) parameters.",
-    dspSteps: 56,
+    summary: "Blue Comp is a recreation of another popular compression pedal, the CS-3.",
+    dspSteps: 49,
     availableIn: {
       fx1: 17
     },
@@ -1599,6 +1719,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1608,7 +1729,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1619,6 +1741,7 @@ export const GENERATED_ALGORITHMS = {
         max: 24,
         default: 0,
         description: "Sensitivity (Pre-Compressor level)",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -1629,6 +1752,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Gain reduction threshold",
+        bytes: 1,
         displayUnits: 9
       },
       {
@@ -1639,6 +1763,7 @@ export const GENERATED_ALGORITHMS = {
         max: 24,
         default: 0,
         description: "Post-Compressor level",
+        bytes: 1,
         displayUnits: 10
       },
       {
@@ -1649,6 +1774,7 @@ export const GENERATED_ALGORITHMS = {
         max: 2000,
         default: 0,
         description: "Attack time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -1659,6 +1785,7 @@ export const GENERATED_ALGORITHMS = {
         max: 2000,
         default: 0,
         description: "Release time",
+        bytes: 2,
         displayUnits: 59
       }
     ],
@@ -1688,6 +1815,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1698,6 +1826,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1708,6 +1837,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Left Mod and Pan rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1718,6 +1849,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left Mod and Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1728,6 +1860,7 @@ export const GENERATED_ALGORITHMS = {
         max: 120,
         default: 0,
         description: "Phase difference between left LFO Mod and Pan",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1738,6 +1871,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left Mod and Pan depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1748,6 +1882,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Right Mod and Pan rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1758,6 +1894,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right Mod and Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1767,7 +1904,8 @@ export const GENERATED_ALGORITHMS = {
         min: -120,
         max: 120,
         default: 0,
-        description: "TODO",
+        description: "Phase difference between right LFO Mod and Pan",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1778,6 +1916,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right Mod and Pan depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1788,6 +1927,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       }
     ],
@@ -1798,7 +1938,7 @@ export const GENERATED_ALGORITHMS = {
     name: "Centrifuge2",
     modelName: "Centrifuge2",
     summary: "The Centrifuge effects have a pair of modulated left and right delays routed into a single auto panner.",
-    dspSteps: 0,
+    dspSteps: 35,
     manualSection: "7-25",
     availableIn: {
       chorus: 10
@@ -1817,6 +1957,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1827,6 +1968,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1837,6 +1979,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Mod/pan rate",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1846,7 +1990,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Left Mod and Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1856,7 +2001,8 @@ export const GENERATED_ALGORITHMS = {
         min: -120,
         max: 120,
         default: 0,
-        description: "TODO",
+        description: "Phase difference between left LFO Mod and Pan",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1867,6 +2013,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Mod/pan depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1877,6 +2024,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Secondary rate",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -1886,7 +2035,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Right Mod and Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1896,7 +2046,8 @@ export const GENERATED_ALGORITHMS = {
         min: -120,
         max: 120,
         default: 0,
-        description: "TODO",
+        description: "Phase difference between right LFO Mod and Pan",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1907,6 +2058,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Secondary depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -1916,7 +2068,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       }
     ],
@@ -1945,6 +2098,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1955,6 +2109,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -1965,6 +2120,7 @@ export const GENERATED_ALGORITHMS = {
         max: 62,
         default: 0,
         description: "Length of Chamber",
+        bytes: 1,
         displayUnits: 53
       },
       {
@@ -1975,6 +2131,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Scales Decay and Spred with Size",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -1985,6 +2142,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Increase of initial echo density over time",
+        bytes: 1,
         displayUnits: 58
       },
       {
@@ -1995,6 +2153,7 @@ export const GENERATED_ALGORITHMS = {
         max: 250,
         default: 0,
         description: "Delay inserted before the onset of reverberation",
+        bytes: 1,
         displayUnits: 72
       },
       {
@@ -2005,6 +2164,7 @@ export const GENERATED_ALGORITHMS = {
         max: 9,
         default: 0,
         description: "Reverb time for low frequency signals",
+        bytes: 1,
         displayUnits: 55
       },
       {
@@ -2015,6 +2175,7 @@ export const GENERATED_ALGORITHMS = {
         max: 63,
         default: 0,
         description: "Reverb time for mid frequency signals",
+        bytes: 1,
         displayUnits: 57
       },
       {
@@ -2024,7 +2185,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 60,
         default: 0,
-        description: "TODO",
+        description: "Frequency of transition from Decay to Bass",
+        bytes: 1,
         displayUnits: 56
       },
       {
@@ -2035,6 +2197,7 @@ export const GENERATED_ALGORITHMS = {
         max: 48,
         default: 0,
         description: "High frequency content of Decay",
+        bytes: 1,
         displayUnits: 54
       },
       {
@@ -2045,6 +2208,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Contour of the reverberation envelope",
+        bytes: 1,
         displayUnits: 61
       },
       {
@@ -2055,6 +2219,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Sustain of reverberation after initial build up",
+        bytes: 1,
         displayUnits: 60
       }
     ],
@@ -2081,6 +2246,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Click ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2090,7 +2256,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of Click in processsed signal",
+        description: "Amount of Click in the processed signal",
+        bytes: 1,
         displayUnits: 0
       }
     ],
@@ -2120,6 +2287,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2130,6 +2298,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2140,6 +2309,7 @@ export const GENERATED_ALGORITHMS = {
         max: 10000,
         default: 5050,
         description: "Corner frequency of the low cut filter",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -2150,6 +2320,7 @@ export const GENERATED_ALGORITHMS = {
         max: 10000,
         default: 5050,
         description: "Corner frequency of the high cut filter",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -2160,6 +2331,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "and High pass filters are included",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -2170,6 +2342,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Increases the audibility of the notch",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -2179,8 +2352,8 @@ export const GENERATED_ALGORITHMS = {
     id: "comb-2",
     name: "Comb 2",
     modelName: "Comb 2",
-    summary: "Volume (S) CustomVybe PedalVol OctaBuzz Click Volume (M) Volume (D) Phaser ExtPedalVol Volume (S) PedalVol ExtPedalVol RedComp Click PedalVol BlueComp ExtPedalVol Lighted effect b…",
-    dspSteps: 0,
+    summary: "The Comb effects work by combining the original input signal with a micro-delayed version.",
+    dspSteps: 35,
     manualSection: "7-2",
     availableIn: {
       chorus: 12
@@ -2198,7 +2371,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2209,6 +2383,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2219,6 +2394,7 @@ export const GENERATED_ALGORITHMS = {
         max: 10000,
         default: 5050,
         description: "Clean low frequency boost/cut",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -2228,7 +2404,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2238,7 +2415,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Increases the audibility of the notch",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2248,7 +2426,9 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 5000,
         default: 0,
-        description: "TODO",
+        description: "Mod rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -2258,7 +2438,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Mod pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2268,7 +2449,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Mod depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2278,7 +2460,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2288,7 +2471,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 3,
         default: 0,
-        description: "TODO",
+        description: "Phase difference between the right and left Mod",
+        bytes: 1,
         displayUnits: 71
       }
     ],
@@ -2316,6 +2500,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2326,6 +2511,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2336,6 +2522,7 @@ export const GENERATED_ALGORITHMS = {
         max: 10000,
         default: 5050,
         description: "Crossover frequency",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -2346,6 +2533,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Relative level of the low and high band",
+        bytes: 1,
         displayUnits: 8
       }
     ],
@@ -2375,6 +2563,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Low frequency Drive",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2385,6 +2574,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Mid frequency Drive",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2395,6 +2585,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "High frequency Drive",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -2405,6 +2596,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Input level (Drive sensitivity)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2415,6 +2607,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -2444,6 +2637,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2453,7 +2647,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2464,6 +2659,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Custom Vybe rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -2474,6 +2671,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Custom Vybe pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -2484,6 +2682,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Custom Vybe depth",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -2493,7 +2692,7 @@ export const GENERATED_ALGORITHMS = {
     id: "delay-d",
     name: "Delay (D)",
     modelName: "Delay (D)",
-    summary: "1:24-24:1echo/beat, (in stereo and dual versions, 0-10,000ms, 0-11300ft, 0-22600 ft, 0-6880 M 0-3440 M) (Time Units) Selects ms, note, feet, meters, or Tap ms (Fbk insert) Effect1…",
+    summary: "Delay (D) is a dual delay with feedback, crossfeedback, independent output level adjusts, and panners.",
     dspSteps: 17,
     availableIn: {
       delay: 3
@@ -2512,6 +2711,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2522,6 +2722,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2532,6 +2733,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3440,
         default: 0,
         description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -2542,6 +2744,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3440,
         default: 0,
         description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -2552,6 +2755,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "In Delay (D), controls left delay output level",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2562,6 +2766,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "In Delay (D), controls right delay output level",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2572,6 +2777,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "In Delay (D), controls left delay output panner",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -2582,6 +2788,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "In Delay (D), controls right delay output panner",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -2592,6 +2799,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2601,7 +2809,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Right feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2611,7 +2820,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Level from left feedback source to right delay",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2621,7 +2831,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Level from right feedback source to left delay",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2631,7 +2842,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -2641,7 +2853,7 @@ export const GENERATED_ALGORITHMS = {
     id: "delay-m",
     name: "Delay (M)",
     modelName: "Delay (M)",
-    summary: "Delay (S) lay with feedback.",
+    summary: "Delay (M) is a simple mono delay with feedback.",
     dspSteps: 23,
     availableIn: {
       delay: 1
@@ -2658,7 +2870,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2668,7 +2881,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2678,7 +2892,8 @@ export const GENERATED_ALGORITHMS = {
         min: 257,
         max: 6168,
         default: 3213,
-        description: "TODO",
+        description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -2689,6 +2904,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2699,6 +2915,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -2708,8 +2925,8 @@ export const GENERATED_ALGORITHMS = {
     id: "delay-s",
     name: "Delay (S)",
     modelName: "Delay (S)",
-    summary: "left delay in",
-    dspSteps: 0,
+    summary: "Delay (S) is a simple stereo delay with feedback.",
+    dspSteps: 40,
     availableIn: {
       delay: 2
     },
@@ -2725,7 +2942,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2735,7 +2953,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2745,7 +2964,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 3440,
         default: 0,
-        description: "TODO",
+        description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -2755,7 +2975,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -2766,6 +2987,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -2775,8 +2997,8 @@ export const GENERATED_ALGORITHMS = {
     id: "detune-d",
     name: "Detune (D)",
     modelName: "Detune (D)",
-    summary: "by the chorus rate.",
-    dspSteps: 29,
+    summary: "Detune effects are useful for thickening up sounds by adding delayed/pitch-shifted versions of the original source.",
+    dspSteps: 43,
     availableIn: {
       fx1: 3
     },
@@ -2794,6 +3016,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2804,6 +3027,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2813,7 +3037,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Pitch shift",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -2823,7 +3048,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Pitch shift",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -2834,6 +3060,7 @@ export const GENERATED_ALGORITHMS = {
         max: 70,
         default: 0,
         description: "Amount of delay before the onset of the effect",
+        bytes: 1,
         displayUnits: 72
       }
     ],
@@ -2843,7 +3070,7 @@ export const GENERATED_ALGORITHMS = {
     id: "detune-m",
     name: "Detune (M)",
     modelName: "Detune (M)",
-    summary: "Detune effects are useful for thickening up sounds by adding delayed/pitch shifted versions of the original source.",
+    summary: "Detune effects are useful for thickening up sounds by adding delayed/pitch-shifted versions of the original source.",
     dspSteps: 29,
     manualSection: "7-22",
     availableIn: {
@@ -2863,6 +3090,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2873,6 +3101,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2883,6 +3112,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Pitch shift",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -2893,6 +3123,7 @@ export const GENERATED_ALGORITHMS = {
         max: 70,
         default: 0,
         description: "Amount of delay before the onset of the effect",
+        bytes: 1,
         displayUnits: 72
       }
     ],
@@ -2902,8 +3133,8 @@ export const GENERATED_ALGORITHMS = {
     id: "detune-s",
     name: "Detune (S)",
     modelName: "Detune (S)",
-    summary: "thickening up sounds by adding delayed/pitch shifted versions of the original source.",
-    dspSteps: 0,
+    summary: "Detune effects are useful for thickening up sounds by adding delayed/pitch-shifted versions of the original source.",
+    dspSteps: 34,
     availableIn: {
       fx1: 2
     },
@@ -2919,7 +3150,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2929,7 +3161,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2939,7 +3172,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Pitch shift",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -2949,7 +3183,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 25,
         default: 0,
-        description: "TODO",
+        description: "Amount of delay in the tuner",
+        bytes: 1,
         displayUnits: 72
       }
     ],
@@ -2979,6 +3214,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2989,6 +3225,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -2999,6 +3236,7 @@ export const GENERATED_ALGORITHMS = {
         max: 11,
         default: 0,
         description: "Pitch root of scale",
+        bytes: 1,
         displayUnits: 96
       },
       {
@@ -3008,7 +3246,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Type of scale",
+        bytes: 1,
         displayUnits: 97
       },
       {
@@ -3019,6 +3258,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Harmony Interval",
+        bytes: 1,
         displayUnits: 98
       },
       {
@@ -3029,6 +3269,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Sets the level above which the pitch detector tracks",
+        bytes: 1,
         displayUnits: 9
       }
     ],
@@ -3038,7 +3279,7 @@ export const GENERATED_ALGORITHMS = {
     id: "digidrive1",
     name: "DigiDrive1",
     modelName: "DigiDrive1",
-    summary: "Panner SweepFilter Chorus Delay (M) Chamber 1-Band (M) Crunch Detune (S) Detune (M) Delay (S) Detune (D) OctaBuzz Tremolo (M) Wah 1 Flanger (M) Delay (D) Shift (M) SweepFilter Tre…",
+    summary: "DigiDrive1 and DigiDrive2 combine digital distortion with 3-band tone controls.",
     dspSteps: 53,
     availableIn: {
       fx1: 18,
@@ -3057,7 +3298,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3067,7 +3309,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3077,7 +3320,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Amount of digital distortion",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3087,7 +3331,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Pre-Drive low frequency cut/boost",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3097,7 +3342,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Pre-Drive mid frequency cut/boost",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3107,7 +3353,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Pre-Drive high frequency cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -3117,8 +3364,8 @@ export const GENERATED_ALGORITHMS = {
     id: "digidrive2",
     name: "DigiDrive2",
     modelName: "DigiDrive2",
-    summary: "===== PAGE 107 ===== OctaBuzz, Can produce ring modulator-like Lexicon MPX G2 specification",
-    dspSteps: 0,
+    summary: "DigiDrive1 and DigiDrive2 combine digital distortion with 3-band tone controls.",
+    dspSteps: 56,
     manualSection: "7-15",
     availableIn: {
       fx1: 19,
@@ -3137,7 +3384,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3147,7 +3395,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3157,7 +3406,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Amount of digital distortion",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3167,7 +3417,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Post-Drive low frequency cut/boost",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3177,7 +3428,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Post-Drive mid frequency cut/boost",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3187,7 +3439,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Post-Drive high frequency cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -3197,7 +3450,7 @@ export const GENERATED_ALGORITHMS = {
     id: "distortion",
     name: "Distortion",
     modelName: "Distortion",
-    summary: "Need more thanjust Overdrive?",
+    summary: "Need more than just Overdrive?",
     dspSteps: 0,
     manualSection: "7-7",
     availableIn: {
@@ -3217,6 +3470,7 @@ export const GENERATED_ALGORITHMS = {
         max: 18,
         default: 0,
         description: "Low frequency Drive",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3227,6 +3481,7 @@ export const GENERATED_ALGORITHMS = {
         max: 18,
         default: 0,
         description: "Mid frequency Drive",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3237,6 +3492,7 @@ export const GENERATED_ALGORITHMS = {
         max: 18,
         default: 0,
         description: "High frequency Drive",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3247,6 +3503,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Amount of distortion",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3257,6 +3514,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "High frequency roll-off",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3267,6 +3525,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Post-Drive bass control",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3277,6 +3536,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Post-Drive treble control",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3287,6 +3547,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -3316,6 +3577,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3326,6 +3588,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3336,6 +3599,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6168,
         default: 3213,
         description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -3346,6 +3610,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3356,6 +3621,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Amount of ducking",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3366,6 +3632,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Envelope release time constant",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3376,6 +3643,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -3385,8 +3653,8 @@ export const GENERATED_ALGORITHMS = {
     id: "echo-d",
     name: "Echo (D)",
     modelName: "Echo (D)",
-    summary: "1:24-24:1echo/beat, 0-22600 ft, 0-6880 M (Time Units) Selects ms, note, feet, meters, or Tap ms 1:24-24:1echo/beat, 0-11,300 ft, 0-3440 M (Time1 Units) Selects ms, note, feet, met…",
-    dspSteps: 31,
+    summary: "The Echo effects are similar to the Delay effects, except the feedback inputs are sent through 1-pole low-pass filters.",
+    dspSteps: 40,
     manualSection: "7-31",
     availableIn: {
       delay: 6
@@ -3405,6 +3673,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3415,6 +3684,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3425,6 +3695,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3440,
         default: 0,
         description: "Delay time in mono version",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -3435,6 +3706,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3440,
         default: 0,
         description: "Delay time in mono version",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -3445,6 +3717,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "In Echo (D) controls left delay output level",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3455,6 +3728,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "In Echo (D) controls right delay output level",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3465,6 +3739,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3475,6 +3750,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3485,6 +3761,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Cutoff frequency of low-pass filter in left feedback path",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3495,6 +3772,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Cutoff frequency of low-pass filter in right feedback path",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3505,6 +3783,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -3514,7 +3793,7 @@ export const GENERATED_ALGORITHMS = {
     id: "echo-m",
     name: "Echo (M)",
     modelName: "Echo (M)",
-    summary: "The Echo effects are similar to the Delay effects, except the feedback inputs are sent through 1pole low-pass filters.",
+    summary: "The Echo effects are similar to the Delay effects, except the feedback inputs are sent through 1-pole low-pass filters.",
     dspSteps: 21,
     availableIn: {
       delay: 4
@@ -3533,6 +3812,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3543,6 +3823,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3553,6 +3834,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6168,
         default: 3213,
         description: "Delay time in mono version",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -3563,6 +3845,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3573,6 +3856,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Cutoff frequency of low-pass filter in left feedback path",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3583,6 +3867,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -3592,8 +3877,8 @@ export const GENERATED_ALGORITHMS = {
     id: "echo-s",
     name: "Echo (S)",
     modelName: "Echo (S)",
-    summary: "Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Looper 1-Band (D) Volume (S) Orbits Pedal Wah2 RedComp Volu…",
-    dspSteps: 0,
+    summary: "The Echo effects are similar to the Delay effects, except the feedback inputs are sent through 1-pole low-pass filters.",
+    dspSteps: 31,
     manualSection: "7-2",
     availableIn: {
       delay: 5
@@ -3611,7 +3896,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3621,7 +3907,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3631,7 +3918,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 3440,
         default: 0,
-        description: "TODO",
+        description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -3641,7 +3929,8 @@ export const GENERATED_ALGORITHMS = {
         min: -100,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Feedback level",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3651,7 +3940,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Cutoff frequency of low-pass filter in feedback path",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3661,7 +3951,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -3671,8 +3962,8 @@ export const GENERATED_ALGORITHMS = {
     id: "extpedalvol",
     name: "ExtPedalVol",
     modelName: "ExtPedalVol",
-    summary: "Lighted effect buttons indicate which effect blocks are active and turned on in the currently loaded program.",
-    dspSteps: 0,
+    summary: "ExtPedalVol is hardwired to the External Pedal input of the MPX R1, allowing you to easily create programs with both a Volume and Wah pedal available…",
+    dspSteps: 13,
     manualSection: "7-2",
     availableIn: {
       fx1: 31,
@@ -3689,7 +3980,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3699,7 +3991,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       }
     ],
@@ -3709,7 +4002,7 @@ export const GENERATED_ALGORITHMS = {
     id: "fc-splitter",
     name: "Fc Splitter",
     modelName: "Fc Splitter",
-    summary: "The Fc Splitter effect splits a mono input into a low-passed output on the left channel and a highpassed output on the right, with independent control of the corner frequencies of…",
+    summary: "The Fc Splitter effect splits a mono input into a low-passed output on the left channel and a high-passed output on the right, with independent control of the…",
     dspSteps: 55,
     manualSection: "7-41",
     availableIn: {
@@ -3729,6 +4022,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3739,6 +4033,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3749,6 +4044,7 @@ export const GENERATED_ALGORITHMS = {
         max: 10000,
         default: 5050,
         description: "Corner frequency for the low cut (highpass)band",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -3759,6 +4055,7 @@ export const GENERATED_ALGORITHMS = {
         max: 10000,
         default: 5050,
         description: "Corner frequency for the high cut (lowpass) band",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -3769,6 +4066,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Relative level of the low and high band",
+        bytes: 1,
         displayUnits: 8
       }
     ],
@@ -3778,8 +4076,8 @@ export const GENERATED_ALGORITHMS = {
     id: "flange24-m",
     name: "Flange24(M)",
     modelName: "Flange24(M)",
-    summary: "Flanger (S) ===== PAGE 115 ===== Rotary Cab This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair on the rotatin…",
-    dspSteps: 76,
+    summary: "Flanger24 (M) is a higher precision (32-bit) flanger with identical parameters to Flanger (M).",
+    dspSteps: 47,
     manualSection: "7-23",
     availableIn: {
       chorus: 4
@@ -3798,6 +4096,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3808,6 +4107,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3817,7 +4117,9 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 5000,
         default: 0,
-        description: "Drum rate or period ratio",
+        description: "Flange rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -3827,7 +4129,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "Left Mod pulse width",
+        description: "Flange pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3837,7 +4140,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "Drum depth (tremolo)",
+        description: "Flange depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3848,6 +4152,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3857,7 +4162,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Flange glide amount",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -3867,7 +4173,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Amount of fixed tape mixed with moving tape",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -3877,8 +4184,8 @@ export const GENERATED_ALGORITHMS = {
     id: "flanger-m",
     name: "Flanger (M)",
     modelName: "Flanger (M)",
-    summary: "Flanger24 (M) Flanger (S) ===== PAGE 115 ===== Rotary Cab This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair…",
-    dspSteps: 76,
+    summary: "Originally, flanging effects were created by simultaneously playing two identical programs on two tape recorders, then using hand pressure against the flange…",
+    dspSteps: 42,
     manualSection: "7-23",
     availableIn: {
       chorus: 3
@@ -3897,6 +4204,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3907,6 +4215,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3916,7 +4225,9 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 5000,
         default: 0,
-        description: "Drum rate or period ratio",
+        description: "Flange rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -3926,7 +4237,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "Left Mod pulse width",
+        description: "Flange pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3936,7 +4248,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "Drum depth (tremolo)",
+        description: "Flange depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -3947,6 +4260,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -3956,7 +4270,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Amount of fixed tape mixed with moving tape",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -3966,7 +4281,7 @@ export const GENERATED_ALGORITHMS = {
     id: "flanger-s",
     name: "Flanger (S)",
     modelName: "Flanger (S)",
-    summary: "Originally, flanging effects were created by simultaneously playing two identical programs on two tape recorders, then using hand pressure against the flange of the tape reels to…",
+    summary: "Originally, flanging effects were created by simultaneously playing two identical programs on two tape recorders, then using hand pressure against the flange…",
     dspSteps: 29,
     availableIn: {
       chorus: 5
@@ -3985,6 +4300,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -3995,6 +4311,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4005,6 +4322,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Flange rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -4015,6 +4334,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4025,6 +4345,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Flange depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4035,6 +4356,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3,
         default: 0,
         description: "In Flanger (S) sets the phase difference between the right",
+        bytes: 1,
         displayUnits: 71
       },
       {
@@ -4045,6 +4367,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -4055,6 +4378,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Amount of fixed tape mixed with moving tape",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -4065,7 +4389,7 @@ export const GENERATED_ALGORITHMS = {
     name: "Gate",
     modelName: "Gate",
     summary: "Gate is a reverb effect with a fairly constant sound and no decay until the reverb is cut off abruptly.",
-    dspSteps: 50,
+    dspSteps: 0,
     manualSection: "7-39",
     availableIn: {
       reverb: 5
@@ -4084,6 +4408,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4094,6 +4419,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4104,6 +4430,7 @@ export const GENERATED_ALGORITHMS = {
         max: 112,
         default: 0,
         description: "Reverb time for mid and low frequency signals",
+        bytes: 1,
         displayUnits: 64
       },
       {
@@ -4114,6 +4441,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Scales Spred with Size",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4124,6 +4452,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Increase of initial echo density over time",
+        bytes: 1,
         displayUnits: 58
       },
       {
@@ -4134,6 +4463,7 @@ export const GENERATED_ALGORITHMS = {
         max: 250,
         default: 0,
         description: "Delay inserted before the onset of reverberation",
+        bytes: 1,
         displayUnits: 72
       },
       {
@@ -4144,6 +4474,7 @@ export const GENERATED_ALGORITHMS = {
         max: 32,
         default: 0,
         description: "Determines low frequency envelope shape",
+        bytes: 1,
         displayUnits: 62
       },
       {
@@ -4154,6 +4485,7 @@ export const GENERATED_ALGORITHMS = {
         max: 32,
         default: 0,
         description: "Determines mid and high frequency envelope shape",
+        bytes: 1,
         displayUnits: 62
       },
       {
@@ -4163,7 +4495,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 60,
         default: 0,
-        description: "TODO",
+        description: "Frequency of transition from LoSlp to Slope",
+        bytes: 1,
         displayUnits: 56
       },
       {
@@ -4174,6 +4507,7 @@ export const GENERATED_ALGORITHMS = {
         max: 48,
         default: 0,
         description: "High frequency content of Slope",
+        bytes: 1,
         displayUnits: 54
       },
       {
@@ -4184,6 +4518,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Contour of the reverberation envelope",
+        bytes: 1,
         displayUnits: 61
       },
       {
@@ -4194,6 +4529,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Sustain of reverberation after initial build up",
+        bytes: 1,
         displayUnits: 60
       }
     ],
@@ -4223,6 +4559,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4233,6 +4570,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4243,6 +4581,7 @@ export const GENERATED_ALGORITHMS = {
         max: 144,
         default: 88,
         description: "Length of Hall",
+        bytes: 1,
         displayUnits: 53
       },
       {
@@ -4253,6 +4592,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Scales Decay and Spred with Size",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4263,6 +4603,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Increase of initial echo density over time",
+        bytes: 1,
         displayUnits: 58
       },
       {
@@ -4273,6 +4614,7 @@ export const GENERATED_ALGORITHMS = {
         max: 250,
         default: 0,
         description: "Delay inserted before the onset of reverberation",
+        bytes: 1,
         displayUnits: 72
       },
       {
@@ -4283,6 +4625,7 @@ export const GENERATED_ALGORITHMS = {
         max: 9,
         default: 0,
         description: "Reverb time for low frequency signals",
+        bytes: 1,
         displayUnits: 55
       },
       {
@@ -4293,6 +4636,7 @@ export const GENERATED_ALGORITHMS = {
         max: 63,
         default: 0,
         description: "Length of the reverb tail",
+        bytes: 1,
         displayUnits: 57
       },
       {
@@ -4302,7 +4646,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 60,
         default: 0,
-        description: "TODO",
+        description: "Frequency of transition from Decay to Bass",
+        bytes: 1,
         displayUnits: 56
       },
       {
@@ -4313,6 +4658,7 @@ export const GENERATED_ALGORITHMS = {
         max: 48,
         default: 0,
         description: "High frequency content of Decay",
+        bytes: 1,
         displayUnits: 54
       },
       {
@@ -4323,6 +4669,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Contour of the reverberation envelope",
+        bytes: 1,
         displayUnits: 61
       },
       {
@@ -4333,6 +4680,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Sustain of reverberation after initial build up",
+        bytes: 1,
         displayUnits: 60
       }
     ],
@@ -4342,7 +4690,7 @@ export const GENERATED_ALGORITHMS = {
     id: "jamman",
     name: "JamMan",
     modelName: "JamMan",
-    summary: "incorporates many of the features of the original Lexicon JamMan.",
+    summary: "JamMan is an automatic phrase sampler that incorporates many of the features of the original Lexicon JamMan.",
     dspSteps: 25,
     manualSection: "7-33",
     availableIn: {
@@ -4362,6 +4710,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4371,7 +4720,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4382,6 +4732,7 @@ export const GENERATED_ALGORITHMS = {
         max: 20000,
         default: 0,
         description: "Loop size in ms (display only, this is set by pressing Tap)",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -4392,6 +4743,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Feedback level (defaults to 100% while looping)",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -4402,6 +4754,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Mutes and resets the loop when On",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4412,6 +4765,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Adds new material on top of loop while On",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4422,6 +4776,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Replaces existing loop with new material while On",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4432,6 +4787,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Turns looper into mono delay while On",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4442,6 +4798,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Mutes loop while On, restarts from beginning when Off",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -4471,6 +4828,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4481,6 +4839,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4491,6 +4850,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6168,
         default: 3213,
         description: "Delay time",
+        bytes: 2,
         displayUnits: 59
       },
       {
@@ -4501,6 +4861,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Ratio of input to feedback going into the delay",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4511,6 +4872,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Sensitivity of InMix to input amplitude",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4521,6 +4883,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Output panner",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4531,6 +4894,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Envelope release time constant",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4541,6 +4905,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Envelope attack time constant",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4551,6 +4916,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "When On, mutes and resets the delay",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -4577,6 +4943,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4586,7 +4953,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       }
     ],
@@ -4614,6 +4982,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4623,7 +4992,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4634,6 +5004,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "OrangePhase rate",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -4643,7 +5014,7 @@ export const GENERATED_ALGORITHMS = {
     id: "orbits",
     name: "Orbits",
     modelName: "Orbits",
-    summary: "1:24-24:1 cycles/beat (Rate 1 Units) Selects frequency or cycles/beat 1:24-24:1 cycles/beat (Rate 2 Units) Selects frequency or cycles/beat Orbits processes the left and right inp…",
+    summary: "Orbits processes the left and right inputs independently with a pair of modulated delay/auto panners.",
     dspSteps: 57,
     manualSection: "7-25",
     availableIn: {
@@ -4663,6 +5034,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4673,6 +5045,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4683,6 +5056,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Left Mod and Pan rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -4693,6 +5068,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left Mod and Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4703,6 +5079,7 @@ export const GENERATED_ALGORITHMS = {
         max: 120,
         default: 0,
         description: "Phase difference between left LFO Mod and Pan",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4713,6 +5090,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left Mod and Pan depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4723,6 +5101,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Right Mod and Pan rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -4733,6 +5113,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right Mod and Pan pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4743,6 +5124,7 @@ export const GENERATED_ALGORITHMS = {
         max: 120,
         default: 0,
         description: "Phase difference between right LFO Mod and Pan",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4753,6 +5135,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right Mod and Pan depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4763,6 +5146,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -4773,6 +5157,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Panning width",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -4782,7 +5167,7 @@ export const GENERATED_ALGORITHMS = {
     id: "overdrive",
     name: "Overdrive",
     modelName: "Overdrive",
-    summary: "A more aggressive overdrive effect than Screamer, Overdrive is designed to be used as a stomp box — to push a clean amp channel into bluesy overdrive, or to take a high-gain amp c…",
+    summary: "A more aggressive overdrive effect than Screamer, Overdrive is designed to be used as a stomp box — to push a clean amp channel into bluesy overdrive, or to…",
     dspSteps: 0,
     manualSection: "7-5",
     availableIn: {
@@ -4802,6 +5187,7 @@ export const GENERATED_ALGORITHMS = {
         max: 15,
         default: 0,
         description: "Low frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4812,6 +5198,7 @@ export const GENERATED_ALGORITHMS = {
         max: 15,
         default: 0,
         description: "Mid frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4822,6 +5209,7 @@ export const GENERATED_ALGORITHMS = {
         max: 15,
         default: 0,
         description: "High frequency boost",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4832,6 +5220,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Input level (Drive sensitivity)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -4842,6 +5231,7 @@ export const GENERATED_ALGORITHMS = {
         max: 20,
         default: 0,
         description: "Low frequency boost/cut",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4852,6 +5242,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Overdrive dynamics",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4862,6 +5253,7 @@ export const GENERATED_ALGORITHMS = {
         max: 40,
         default: 0,
         description: "Amount of overdrive",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4872,6 +5264,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "High frequency roll-off (Post-Overdrive)",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -4882,6 +5275,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -4910,6 +5304,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4920,6 +5315,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4930,6 +5326,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Left input panner",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -4940,6 +5337,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Right input panner",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -4949,8 +5347,8 @@ export const GENERATED_ALGORITHMS = {
     id: "pedal-vol",
     name: "Pedal Vol",
     modelName: "Pedal Vol",
-    summary: "Centrifuge2 Crossover Tremolo (S) Volume (S) DigiDrive1 UniVybe Volume (D) DigiDrive2 CustomVybe PedalVol OctaBuzz Click Volume (M) Volume (D) Phaser ExtPedalVol Volume (S) PedalV…",
-    dspSteps: 0,
+    summary: "PedalVol is the same as Volume (S), except the Vol parameter is hardwired to the Foot Pedal input on the MPX G2.",
+    dspSteps: 13,
     manualSection: "7-2",
     availableIn: {
       fx1: 30,
@@ -4967,7 +5365,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -4978,6 +5377,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 0
       }
     ],
@@ -4987,8 +5387,8 @@ export const GENERATED_ALGORITHMS = {
     id: "pedal-wah-1",
     name: "Pedal Wah 1",
     modelName: "Pedal Wah 1",
-    summary: "Flanger (S) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Looper 1-Band (D) Volume (S) Orbits Pe…",
-    dspSteps: 0,
+    summary: "PedalWah1 is identical to Wah 1 except the Sweep parameter is hard-wired to the Foot Pedal input on the MPX G2 rear panel.",
+    dspSteps: 41,
     manualSection: "7-2",
     availableIn: {
       fx1: 25,
@@ -5007,7 +5407,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5017,7 +5418,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5027,7 +5429,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Adds low frequency boost to the wah",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5037,7 +5440,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Responsiveness to changes in sweep",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5047,7 +5451,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "Tone is a set of analog Tone",
+        description: "Post-Wah cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -5057,8 +5462,8 @@ export const GENERATED_ALGORITHMS = {
     id: "pedal-wah-2",
     name: "Pedal Wah 2",
     modelName: "Pedal Wah 2",
-    summary: "Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Looper 1-Band (D) Volume (S) Orbits Pedal Wah2 RedComp Volume (D) Centrifuge1 Ducker Fc Spli…",
-    dspSteps: 0,
+    summary: "PedalWah2 is identical to Wah 2 except the Sweep parameter is hard-wired to the Foot Pedal input on the MPX G2 rear panel.",
+    dspSteps: 71,
     manualSection: "7-2",
     availableIn: {
       fx1: 26,
@@ -5077,7 +5482,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5087,7 +5493,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5097,7 +5504,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Adds low frequency boost to the wah",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5107,7 +5515,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Responsiveness to changes in sweep",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5117,7 +5526,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "Tone is a set of analog Tone",
+        description: "Post-Wah cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -5148,6 +5558,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5158,6 +5569,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5168,6 +5580,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Phaser rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -5178,6 +5592,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Phaser pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5188,6 +5603,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5198,6 +5614,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Amount of feedback from output of filters to inputs",
+        bytes: 1,
         displayUnits: 2
       }
     ],
@@ -5207,7 +5624,7 @@ export const GENERATED_ALGORITHMS = {
     id: "plate",
     name: "Plate",
     modelName: "Plate",
-    summary: "Plate effects were originally generatedby large,thin sheets of metal suspended upright under tension on springs.",
+    summary: "Plate effects were originally generated by large, thin sheets of metal suspended upright under tension on springs.",
     dspSteps: 0,
     availableIn: {
       reverb: 3
@@ -5226,6 +5643,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5236,6 +5654,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5246,6 +5665,7 @@ export const GENERATED_ALGORITHMS = {
         max: 144,
         default: 0,
         description: "Length of room",
+        bytes: 1,
         displayUnits: 53
       },
       {
@@ -5256,6 +5676,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Scales Decay and Spred with Size",
+        bytes: 1,
         displayUnits: 4
       },
       {
@@ -5266,6 +5687,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Increase of initial echo density over time",
+        bytes: 1,
         displayUnits: 58
       },
       {
@@ -5276,6 +5698,7 @@ export const GENERATED_ALGORITHMS = {
         max: 250,
         default: 0,
         description: "Delay inserted before the onset of reverberation",
+        bytes: 1,
         displayUnits: 72
       },
       {
@@ -5286,6 +5709,7 @@ export const GENERATED_ALGORITHMS = {
         max: 9,
         default: 0,
         description: "Reverb time for low frequency signals",
+        bytes: 1,
         displayUnits: 55
       },
       {
@@ -5296,6 +5720,7 @@ export const GENERATED_ALGORITHMS = {
         max: 63,
         default: 0,
         description: "Length of the reverb tail",
+        bytes: 1,
         displayUnits: 57
       },
       {
@@ -5305,7 +5730,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 60,
         default: 0,
-        description: "TODO",
+        description: "Frequency of transition from Decay to Bass",
+        bytes: 1,
         displayUnits: 56
       },
       {
@@ -5316,6 +5742,7 @@ export const GENERATED_ALGORITHMS = {
         max: 48,
         default: 0,
         description: "High frequency content of Decay",
+        bytes: 1,
         displayUnits: 54
       },
       {
@@ -5326,6 +5753,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Contour of the reverberation envelope",
+        bytes: 1,
         displayUnits: 61
       },
       {
@@ -5336,6 +5764,7 @@ export const GENERATED_ALGORITHMS = {
         max: 255,
         default: 0,
         description: "Sustain of reverberation after initial build up",
+        bytes: 1,
         displayUnits: 60
       }
     ],
@@ -5345,7 +5774,7 @@ export const GENERATED_ALGORITHMS = {
     id: "preamp",
     name: "Preamp",
     modelName: "Amp model",
-    summary: "Unlike the other MPX G2 Gain effects, Preamp was not designed to function as a stomp box to use in front of your amp.",
+    summary: "Unlike the other MPX G2 Gain effects, Preamp was not designed to function as a stomp box to use in front of your amplifier.",
     dspSteps: 0,
     manualSection: "7-6",
     availableIn: {
@@ -5365,6 +5794,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Low frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5375,6 +5805,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Mid frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5385,6 +5816,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "High frequency boost",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5395,6 +5827,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Input level (Drive sensitivity)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5405,6 +5838,7 @@ export const GENERATED_ALGORITHMS = {
         max: 20,
         default: 0,
         description: "Pre-Drive low frequency roll off",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5415,6 +5849,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Overdrive dynamics",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5425,6 +5860,7 @@ export const GENERATED_ALGORITHMS = {
         max: 60,
         default: 0,
         description: "Amount of overdrive",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5435,6 +5871,7 @@ export const GENERATED_ALGORITHMS = {
         max: 35,
         default: 0,
         description: "High frequency roll-off",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5445,6 +5882,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Post-Drive bass control",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5455,6 +5893,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Post-Drive treble control",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5465,6 +5904,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -5493,6 +5933,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5502,7 +5943,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5513,6 +5955,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Sensitivity (Pre-Compressor level)",
+        bytes: 1,
         displayUnits: 10
       }
     ],
@@ -5541,6 +5984,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5551,6 +5995,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5561,6 +6006,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Drum rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -5571,6 +6018,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Drum depth (tremolo)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5580,7 +6028,9 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 5000,
         default: 0,
-        description: "TODO",
+        description: "Horn rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -5591,6 +6041,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Horn depth (tremolo)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5601,6 +6052,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Resonance",
+        bytes: 1,
         displayUnits: 2
       },
       {
@@ -5611,6 +6063,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Panning width for horn and drum",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5621,6 +6074,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Relative level of horn and drum",
+        bytes: 1,
         displayUnits: 8
       }
     ],
@@ -5630,7 +6084,7 @@ export const GENERATED_ALGORITHMS = {
     id: "shift-d",
     name: "Shift (D)",
     modelName: "Shift (D)",
-    summary: "range.",
+    summary: "The pitch shift effects are designed to provide both fine (1 cent resolution) and coarse (semitone resolution) pitch shift effects.",
     dspSteps: 67,
     availableIn: {
       fx1: 6
@@ -5649,6 +6103,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5659,6 +6114,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5669,6 +6125,8 @@ export const GENERATED_ALGORITHMS = {
         max: 1900,
         default: 0,
         description: "Pitch shift",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 1
       },
       {
@@ -5679,6 +6137,8 @@ export const GENERATED_ALGORITHMS = {
         max: 1900,
         default: 0,
         description: "Pitch shift",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 1
       },
       {
@@ -5689,6 +6149,7 @@ export const GENERATED_ALGORITHMS = {
         max: 1,
         default: 0,
         description: "Coarse, fine resolution of pitch shift",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -5698,8 +6159,8 @@ export const GENERATED_ALGORITHMS = {
     id: "shift-m",
     name: "Shift (M)",
     modelName: "Shift (M)",
-    summary: "SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2 Phaser Volume (M) Aerosol Loope…",
-    dspSteps: 0,
+    summary: "The pitch shift effects are designed to provide both fine (1 cent resolution) and coarse (semitone resolution) pitch shift effects.",
+    dspSteps: 73,
     manualSection: "7-1",
     availableIn: {
       fx1: 4
@@ -5716,7 +6177,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5726,7 +6188,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5736,7 +6199,9 @@ export const GENERATED_ALGORITHMS = {
         min: -4800,
         max: 1900,
         default: 0,
-        description: "TODO",
+        description: "Pitch shift",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 1
       },
       {
@@ -5746,7 +6211,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Coarse, fine resolution of pitch shift",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -5757,7 +6223,7 @@ export const GENERATED_ALGORITHMS = {
     name: "Shift (S)",
     modelName: "Shift (S)",
     summary: "The pitch shift effects are designed to provide both fine (1 cent resolution) and coarse (semitone resolution) pitch shift effects.",
-    dspSteps: 0,
+    dspSteps: 96,
     availableIn: {
       fx1: 5
     },
@@ -5773,7 +6239,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5783,7 +6250,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5793,7 +6261,9 @@ export const GENERATED_ALGORITHMS = {
         min: -4800,
         max: 1900,
         default: 0,
-        description: "TODO",
+        description: "Pitch shift",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 1
       },
       {
@@ -5803,7 +6273,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 1,
         default: 0,
-        description: "TODO",
+        description: "Coarse, fine resolution of pitch shift",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -5813,7 +6284,7 @@ export const GENERATED_ALGORITHMS = {
     id: "splitpreamp",
     name: "SplitPreamp",
     modelName: "Dual preamp",
-    summary: "SplitPreamp is the same analog effect as Preamp, with a built-in parallel path that feeds dry signal around the drive section for parallel distortion textures.",
+    summary: "SplitPreamp is the same analog effect as Preamp, except that it has a built-in parallel path that feeds the direct, clean guitar to the MPX G2’s post-gain…",
     dspSteps: 0,
     manualSection: "7-7",
     availableIn: {
@@ -5833,6 +6304,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Clean low frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5843,6 +6315,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Clean mid frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5853,6 +6326,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Clean high frequency boost/cut",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5863,6 +6337,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Input level (Drive sensitivity)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5873,6 +6348,7 @@ export const GENERATED_ALGORITHMS = {
         max: 20,
         default: 0,
         description: "Clean low frequency boost/cut",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5883,6 +6359,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Overdrive dynamics",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5893,6 +6370,7 @@ export const GENERATED_ALGORITHMS = {
         max: 60,
         default: 0,
         description: "Amount of overdrive",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5903,6 +6381,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "High frequency roll-off",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -5913,6 +6392,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Post-Drive bass control",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5923,6 +6403,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Post-Drive treble control",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -5933,6 +6414,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -5942,7 +6424,7 @@ export const GENERATED_ALGORITHMS = {
     id: "stereo-chorus",
     name: "Chorus",
     modelName: "Stereo chorus",
-    summary: "True stereo multi-voice chorus with dual 2-tap modulators and cross resonance.",
+    summary: "This is a true stereo, multi-voice chorus.",
     dspSteps: 60,
     manualSection: "7-21",
     availableIn: {
@@ -5962,6 +6444,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5972,6 +6455,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -5982,6 +6466,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Left and right A rate",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -5992,6 +6478,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left and right A pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6002,6 +6489,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left and right A depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6012,6 +6500,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Left and right B rate",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -6022,6 +6512,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left and right B pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6032,6 +6523,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left and right B depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6042,6 +6534,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Left to right resonance",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6052,6 +6545,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Right to left resonance",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6061,8 +6555,8 @@ export const GENERATED_ALGORITHMS = {
     id: "sweepfilter",
     name: "SweepFilter",
     modelName: "SweepFilter",
-    summary: "SweepFilter simulates a Moogtype resonant low-pass filter.",
-    dspSteps: 50,
+    summary: "SweepFilter simulates a Moog-type resonant low-pass filter.",
+    dspSteps: 92,
     manualSection: "7-17",
     availableIn: {
       fx1: 21,
@@ -6082,6 +6576,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6092,6 +6587,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6102,6 +6598,7 @@ export const GENERATED_ALGORITHMS = {
         max: 20000,
         default: 10010,
         description: "Corner frequency offset of filter",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -6112,6 +6609,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 51,
         description: "Filter resonance: 7=a maximally flat filter",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6122,6 +6620,7 @@ export const GENERATED_ALGORITHMS = {
         max: 20000,
         default: 10010,
         description: "added to corner frequency offset to produce corner frequency",
+        bytes: 2,
         displayUnits: 9
       },
       {
@@ -6132,6 +6631,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "scales Mod",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6142,6 +6642,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Left/right pan control",
+        bytes: 1,
         displayUnits: 4
       }
     ],
@@ -6151,7 +6652,7 @@ export const GENERATED_ALGORITHMS = {
     id: "test-tone",
     name: "Test Tone",
     modelName: "Test Tone",
-    summary: "Test Tone is an audio sine wave generator with its output quantized to correspond with the pitches of a chromatic scale (A = 440 Hz) over anine-and-one-half octave range.",
+    summary: "Test Tone is an audio sine wave generator with its output quantized to correspond with the pitches of a chromatic scale (A = 440 Hz) over a nine-and-one-half…",
     dspSteps: 33,
     availableIn: {
       fx1: 32,
@@ -6170,6 +6671,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6180,6 +6682,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6190,6 +6693,7 @@ export const GENERATED_ALGORITHMS = {
         max: 127,
         default: 0,
         description: "Sine wave pitch, expressed as MIDI notes",
+        bytes: 1,
         displayUnits: 65
       },
       {
@@ -6200,6 +6704,7 @@ export const GENERATED_ALGORITHMS = {
         max: 50,
         default: 0,
         description: "Relative level of left and right output attenuation",
+        bytes: 1,
         displayUnits: 8
       }
     ],
@@ -6209,7 +6714,7 @@ export const GENERATED_ALGORITHMS = {
     id: "tone",
     name: "Tone",
     modelName: "Tone",
-    summary: "Tone is a set of analog Tone controls which can be used as a clean-boost stomp box in front of your amp, or as a simple clean preamp when the MPX G2 is used without an external gu…",
+    summary: "Tone is a set of analog Tone controls which can be used as a clean-boost stomp box in front of your amp, or as a simple clean preamp when the MPX G2 is used…",
     dspSteps: 0,
     availableIn: {
       gain: 1
@@ -6228,6 +6733,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Clean low frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6238,6 +6744,7 @@ export const GENERATED_ALGORITHMS = {
         max: 12,
         default: 0,
         description: "Clean mid frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6248,6 +6755,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "Clean high frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6258,6 +6766,7 @@ export const GENERATED_ALGORITHMS = {
         max: 0,
         default: 0,
         description: "Input level (headroom)",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6267,7 +6776,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       }
     ],
@@ -6277,8 +6787,8 @@ export const GENERATED_ALGORITHMS = {
     id: "tremolo-m",
     name: "Tremolo (M)",
     modelName: "Tremolo (M)",
-    summary: "Wah 1 Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy…",
-    dspSteps: 0,
+    summary: "In Tremolo (M), the left and right inputs are mixed together, then a local sinewave generator modulates the volume.",
+    dspSteps: 13,
     manualSection: "7-1",
     availableIn: {
       fx1: 10,
@@ -6297,7 +6807,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6307,7 +6818,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6317,7 +6829,9 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 5000,
         default: 0,
-        description: "TODO",
+        description: "Tremolo rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -6327,7 +6841,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Tremolo pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6337,7 +6852,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Tremolo depth",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6347,8 +6863,8 @@ export const GENERATED_ALGORITHMS = {
     id: "tremolo-s",
     name: "Tremolo (S)",
     modelName: "Tremolo (S)",
-    summary: "inputs are mixed together, then a local sinewave generator modulates the volume.",
-    dspSteps: 13,
+    summary: "In Tremolo (S) the left input is modulated by a local sinewave generator before going to the left output.",
+    dspSteps: 17,
     availableIn: {
       fx1: 11,
       fx2: 4
@@ -6367,6 +6883,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6377,6 +6894,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6387,6 +6905,8 @@ export const GENERATED_ALGORITHMS = {
         max: 5000,
         default: 0,
         description: "Tremolo rate or period ratio",
+        bytes: 2,
+        optionBytes: 1,
         displayUnits: 23
       },
       {
@@ -6397,6 +6917,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Tremolo pulse width",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6407,6 +6928,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Tremolo depth",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6417,6 +6939,7 @@ export const GENERATED_ALGORITHMS = {
         max: 3,
         default: 0,
         description: "In Tremolo (S), controls the phase difference between the",
+        bytes: 1,
         displayUnits: 71
       }
     ],
@@ -6426,7 +6949,7 @@ export const GENERATED_ALGORITHMS = {
     id: "tube-screamer",
     name: "Screamer",
     modelName: "Tube Screamer",
-    summary: "Analog model of a vintage Tube Screamer overdrive with extended Lo / Mid / Hi tone controls.",
+    summary: "Screamer is an analog model of a vintage Tube Screamer overdrive (powered by a fresh carbon-zinc battery).",
     dspSteps: 0,
     manualSection: "7-4",
     availableIn: {
@@ -6446,6 +6969,7 @@ export const GENERATED_ALGORITHMS = {
         max: 5,
         default: 0,
         description: "Low frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6456,6 +6980,7 @@ export const GENERATED_ALGORITHMS = {
         max: 5,
         default: 0,
         description: "Mid frequency boost/cut",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6466,6 +6991,7 @@ export const GENERATED_ALGORITHMS = {
         max: 5,
         default: 0,
         description: "High frequency boost",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6476,6 +7002,7 @@ export const GENERATED_ALGORITHMS = {
         max: 40,
         default: 0,
         description: "Amount of overdrive",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6486,6 +7013,7 @@ export const GENERATED_ALGORITHMS = {
         max: 25,
         default: 0,
         description: "High frequency roll-off",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6496,6 +7024,7 @@ export const GENERATED_ALGORITHMS = {
         max: 64,
         default: 0,
         description: "Output level",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -6524,6 +7053,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6533,7 +7063,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6544,6 +7075,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Univybe rate",
+        bytes: 1,
         displayUnits: 1
       }
     ],
@@ -6553,8 +7085,8 @@ export const GENERATED_ALGORITHMS = {
     id: "volume-d",
     name: "Volume (D)",
     modelName: "Volume (D)",
-    summary: "effect), stereo to mono mixer, cross fade controls, volume pedal, etc.",
-    dspSteps: 13,
+    summary: "The Volume effects can be placed in front of, or behind, other effect blocks to provide smooth level control through a 95dB range.",
+    dspSteps: 18,
     manualSection: "7-29",
     availableIn: {
       fx1: 29,
@@ -6575,6 +7107,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6585,6 +7118,7 @@ export const GENERATED_ALGORITHMS = {
         max: 6,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6595,6 +7129,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 3
       },
       {
@@ -6605,6 +7140,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6614,8 +7150,8 @@ export const GENERATED_ALGORITHMS = {
     id: "volume-m",
     name: "Volume (M)",
     modelName: "Volume (M)",
-    summary: "Aerosol Looper 1-Band (D) Volume (S) Orbits Pedal Wah2 RedComp Volume (D) Centrifuge1 Ducker Fc Splitter Tremolo (M) Volume (M) BlueComp Tremolo (S) Volume (S) DigiDrive1 UniVybe…",
-    dspSteps: 0,
+    summary: "The Volume effects can be placed in front of, or behind, other effect blocks to provide smooth level control through a 95dB range.",
+    dspSteps: 17,
     manualSection: "7-2",
     availableIn: {
       fx1: 27,
@@ -6634,7 +7170,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6644,7 +7181,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6654,7 +7192,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Volume level",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6664,7 +7203,7 @@ export const GENERATED_ALGORITHMS = {
     id: "volume-s",
     name: "Volume (S)",
     modelName: "Volume (S)",
-    summary: "Voume (D) PedalVol and ExtPedalVol PedalVol is the same as Volume (S), except the Vol parameter is hardwired to the Foot Pedal input on the MPX G2.",
+    summary: "The Volume effects can be placed in front of, or behind, other effect blocks to provide smooth level control through a 95dB range.",
     dspSteps: 13,
     manualSection: "7-29",
     availableIn: {
@@ -6685,6 +7224,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6694,7 +7234,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6704,7 +7245,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Volume level",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6714,8 +7256,8 @@ export const GENERATED_ALGORITHMS = {
     id: "wah-1-2",
     name: "Wah 1",
     modelName: "Wah 1",
-    summary: "Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2…",
-    dspSteps: 0,
+    summary: "Wah is a mono wah filter modeled after two classic wah-wah pedals.",
+    dspSteps: 41,
     manualSection: "7-1",
     availableIn: {
       fx2: 16
@@ -6733,7 +7275,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6743,7 +7286,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6753,7 +7297,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Wah center frequency",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6763,7 +7308,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Adds low frequency boost to the wah",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6773,7 +7319,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Responsiveness to changes in sweep",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6783,7 +7330,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Post-Wah cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6793,8 +7341,8 @@ export const GENERATED_ALGORITHMS = {
     id: "wah-1",
     name: "Wah  1",
     modelName: "Wah  1",
-    summary: "Flanger (M) Delay (D) Shift (M) SweepFilter Tremolo (S) Shift (S) 1-Band (M) Echo (S) Gate 1-Band (S) Preamp Shift (D) Rotary Cab Echo (D) 2-Band (S) SplitPreamp DiatonicHmy Wah 2…",
-    dspSteps: 0,
+    summary: "Wah is a mono wah filter modeled after two classic wah-wah pedals.",
+    dspSteps: 41,
     manualSection: "7-1",
     availableIn: {
       fx1: 23
@@ -6812,7 +7360,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6822,7 +7371,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "TODO",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6832,7 +7382,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Wah center frequency",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6842,7 +7393,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Adds low frequency boost to the wah",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6852,7 +7404,8 @@ export const GENERATED_ALGORITHMS = {
         min: 0,
         max: 100,
         default: 0,
-        description: "TODO",
+        description: "Responsiveness to changes in sweep",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6862,7 +7415,8 @@ export const GENERATED_ALGORITHMS = {
         min: -72,
         max: 24,
         default: 0,
-        description: "TODO",
+        description: "Post-Wah cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],
@@ -6872,7 +7426,7 @@ export const GENERATED_ALGORITHMS = {
     id: "wah-2",
     name: "Wah  2",
     modelName: "Wah  2",
-    summary: "pedals.",
+    summary: "Wah 2 uses the same vintage wahs as Wah 1 with a built-in compressor following the wah.",
     dspSteps: 71,
     manualSection: "7-18",
     availableIn: {
@@ -6893,6 +7447,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Dry/Wet ratio",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6902,7 +7457,8 @@ export const GENERATED_ALGORITHMS = {
         min: -90,
         max: 6,
         default: 0,
-        description: "Amount of effect in processsed signal",
+        description: "Amount of effect in the processed signal",
+        bytes: 1,
         displayUnits: 0
       },
       {
@@ -6913,6 +7469,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Wah center frequency (available only in Wah 1 & Wah 2)",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6923,6 +7480,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Adds low frequency boost to the wah",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6933,6 +7491,7 @@ export const GENERATED_ALGORITHMS = {
         max: 100,
         default: 0,
         description: "Responsiveness to changes in sweep",
+        bytes: 1,
         displayUnits: 1
       },
       {
@@ -6943,6 +7502,7 @@ export const GENERATED_ALGORITHMS = {
         max: 24,
         default: 0,
         description: "Post-Wah cut/boost",
+        bytes: 1,
         displayUnits: 3
       }
     ],

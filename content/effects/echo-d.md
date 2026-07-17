@@ -2,8 +2,8 @@
 name: "Echo (D)"
 modelName: "Echo (D)"
 color: "#f59e0b"
-summary: "1:24-24:1echo/beat, 0-22600 ft, 0-6880 M (Time Units) Selects ms, note, feet, meters, or Tap ms 1:24-24:1echo/beat, 0-11,300 ft, 0-3440 M (Time1 Units) Selects ms, note, feet, met\u2026"
-dspSteps: 31
+summary: "The Echo effects are similar to the Delay effects, except the feedback inputs are sent through 1-pole low-pass filters."
+dspSteps: 40
 manualSection: 7-31
 availableIn:
   delay: 6
@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: time1
@@ -34,6 +36,7 @@ params:
     min: 0
     max: 3440
     default: 0
+    bytes: 2
     displayUnits: 59
     description: "Delay time in mono version"
   - id: time2
@@ -42,6 +45,7 @@ params:
     min: 0
     max: 3440
     default: 0
+    bytes: 2
     displayUnits: 59
     description: "Delay time in mono version"
   - id: lvl1
@@ -50,6 +54,7 @@ params:
     min: -96
     max: 0
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "In Echo (D) controls left delay output level"
   - id: lvl2
@@ -58,6 +63,7 @@ params:
     min: -96
     max: 0
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "In Echo (D) controls right delay output level"
   - id: fbk1
@@ -66,6 +72,7 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 2
     description: "Left feedback level"
   - id: fbk2
@@ -74,6 +81,7 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 2
     description: "Right feedback level"
   - id: damp1
@@ -82,6 +90,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Cutoff frequency of low-pass filter in left feedback path"
   - id: damp2
@@ -90,6 +99,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Cutoff frequency of low-pass filter in right feedback path"
   - id: clear
@@ -98,11 +108,10 @@ params:
     min: 0
     max: 1
     default: 0
+    bytes: 1
     displayUnits: 4
     description: "When On, mutes and resets the delay"
 ---
-Echo (D) effect from the MPX G2 manual. Parameter layout harvested from the unit via MIDI.
+The Echo effects are similar to the Delay effects, except the feedback inputs are sent through 1-pole low-pass filters. Damp provides control over the cutoff frequency of the filter. (Increasing Damp lowers cutoff frequency.) Echo (D) is the dual version with independent left/right paths.
 
 ![Echo (D) signal flow](/effects/echo-d.png)
-
-This effect uses **31 of 190** processing steps.

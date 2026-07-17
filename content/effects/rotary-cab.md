@@ -17,6 +17,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -25,6 +26,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate1
@@ -33,6 +35,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Drum rate or period ratio"
   - id: dpth1
@@ -41,6 +45,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Drum depth (tremolo)"
   - id: rate2
@@ -49,14 +54,17 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
-    description: TODO
+    description: "Horn rate or period ratio"
   - id: dpth2
     index: 5
     label: Dpth2
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Horn depth (tremolo)"
   - id: res
@@ -65,6 +73,7 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 2
     description: Resonance
   - id: width
@@ -73,6 +82,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Panning width for horn and drum"
   - id: bal
@@ -81,11 +91,10 @@ params:
     min: -50
     max: 50
     default: 0
+    bytes: 1
     displayUnits: 8
     description: "Relative level of horn and drum"
 ---
-This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair on the rotating high-frequency horn. Bal sets the relative mix of Drum and Horn mics. Width controls the stereo spread of both pairs of mics. Rate and Depth 1 control the speed and depth of the rotating low-frequency drum. Rate 2 and Depth 2 control the speed and depth of the rotating high-frequency horn. The preset, Rotary Cab, is set up so that A/B switches the speed from fast to 1:24-24:1 cycles/beat (Rate1 Units) Selects frequency or cycles/beat of drum slow. Different A and B rates are used to simulate the inertia of the Horn rate or period ratio 1:24-24:1 cycles/beat (Rate2 Units) Selects frequency or cycles/beat of horn
+This effect simulates a Leslie speaker with one pair of stereo mics on the rotating low-frequency drum, and another pair on the rotating high-frequency horn. Bal sets the relative mix of Drum and Horn mics. Width controls the stereo spread of both pairs of mics. Rate and Depth 1 control the speed and depth of the rotating low-frequency drum. Rate 2 and Depth 2 control the speed and depth of the rotating high-frequency horn. The preset, Rotary Cab, is set up so that A/B switches the speed from fast to slow. Different A and B rates are used to simulate the inertia of the mechanical system.
 
 ![Rotary Cab signal flow](/effects/rotary-cab.png)
-
-This effect uses **76 of 190** processing steps.

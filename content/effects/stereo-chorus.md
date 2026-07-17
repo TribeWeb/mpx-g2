@@ -2,7 +2,7 @@
 name: Chorus
 modelName: "Stereo chorus"
 color: "#0ea5e9"
-summary: "True stereo multi-voice chorus with dual 2-tap modulators and cross resonance."
+summary: "This is a true stereo, multi-voice chorus."
 dspSteps: 60
 manualSection: 7-21
 availableIn:
@@ -18,6 +18,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Dry/Wet ratio"
   - id: level
@@ -26,6 +27,7 @@ params:
     min: -90
     max: 6
     default: 0
+    bytes: 1
     displayUnits: 0
     description: "Amount of effect in the processed signal"
   - id: rate1
@@ -34,6 +36,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Left and right A rate"
   - id: pw1
@@ -42,6 +46,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left and right A pulse width"
   - id: dpth1
@@ -50,6 +55,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left and right A depth"
   - id: rate2
@@ -58,6 +64,8 @@ params:
     min: 0
     max: 5000
     default: 0
+    bytes: 2
+    optionBytes: 1
     displayUnits: 23
     description: "Left and right B rate"
   - id: pw2
@@ -66,6 +74,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left and right B pulse width"
   - id: dpth2
@@ -74,6 +83,7 @@ params:
     min: 0
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left and right B depth"
   - id: res1
@@ -82,6 +92,7 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Left to right resonance"
   - id: res2
@@ -90,11 +101,10 @@ params:
     min: -100
     max: 100
     default: 0
+    bytes: 1
     displayUnits: 3
     description: "Right to left resonance"
 ---
 This is a true stereo, multi-voice chorus. Use it to enrich guitars, keyboards, etc. It has Dual 2-tap modulators with cross resonance. The Pulse Width controls allow independent adjustment of the waveshape. (At 0, the sinewave becomes a sawtooth with a fast rise and slow fall.) The Depth controls provide adjustment of the chorus from 0-100%.
 
 ![Chorus signal flow](/effects/stereo-chorus.png)
-
-Rate parameters can be set in Hz (0–50) or as cycles/beat (1:24–24:1) via the Rate Units options. Depth parameters are interpolated for smooth dynamic control.
